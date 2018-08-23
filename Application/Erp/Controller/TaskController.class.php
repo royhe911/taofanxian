@@ -378,7 +378,7 @@ class TaskController extends BaseController {
                 if ($cost == 0) {
                     $cost = cost($task_info['price']);
                 }
-                $cha = $actual_price + cost($task_info['price']) - $cost- $task_info['price'];
+                $cha = $actual_price + cost($actual_price) - $cost- $task_info['price'];
                 if(f_round($cha) > 0 ){
                     $balances_status=save_available($task_info['user_id'],abs($cha),$id,8,1);
                 }elseif(f_round($cha) < 0){
