@@ -1,0 +1,151 @@
+<extend name="Layout:layout" />
+<block name="content">
+	<!--<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">添加专题  </h1>
+		</div>
+	</div>-->
+	<nav class="breadcrumb" style="padding: 0px 15px; line-height: 37px; border-radius: 0; border-bottom: 1px solid #ddd; position: absolute;top: 0;left: 0;width: 100%;"><i class="fa fa-home"></i> 首页 <span class="c-gray en">&gt;</span> 专题管理 <span class="c-gray en">&gt;</span> 添加专题 <a class="btn btn-success radius r" style="margin-top:1px;float: right;padding: 6px 20px;" href="javascript:location.replace(location.href);" title="刷新" ><i class="fa fa-refresh"></i></a><div style="clear: both;"></div></nav>
+	<div style="height: 50px; width: 100%;"></div>
+
+	<form role="form" action="" method="post" id="form" enctype="multipart/form-data">
+		<input class="form-control"  name="id" type="hidden"  value="{$product.id}">
+		<input class="form-control"  name="content" type="hidden"  id="content" value="">
+		<div class="row">
+			<div class="form-group col-lg-4">
+				<label>专题名称</label>
+				<input  class="form-control" placeholder="名称"  name="name" type="text" value="">
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-4">
+				<label>显示位置</label>
+				<input class="form-control" placeholder="数字代表显示位置" name="seat_id" type='text' onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-4">
+                  <label><span><b>主图：</b>
+                  <input type="file" name="subj_img" style="margin:10px 0;"></span></label>
+            </div>
+        </div>
+        
+        <div class="row">
+					<div class="form-group col-lg-4">
+                    <label><span><b>专题广告图：<button id="AddMoreFileBox" type="button" style="border:0;padding:5px 25px;;color:#fff; text-align:center;background: #5cb85c; border-radius: 5px;cursor: pointer;">添加</button></b>
+                    <div id="InputsWrapper"><input type="file" name="banner_img[]" style="margin-top:10px;"></div>
+                    </span></label>
+                    </div> 
+        </div>
+		<div class="row">
+			<div class="col-lg-4">
+				<botton class="btn btn-lg btn-success btn-block ">提交</botton>
+			</div>
+		</div>
+		
+		<!--<div class="row cl">
+			<label class="form-label">专题名称：</label>
+			<input  class="form-control" placeholder="名称"  name="name" type="text" value="" style="display: inline-block; width: 300px;">
+		</div>
+		<div class="row cl">
+			<label class="form-label">显示位置：</label>
+			<input class="form-control" placeholder="数字代表显示位置" name="seat_id" type='text' onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" style="display: inline-block; width: 300px;"/>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label">主图：</label>
+			<input  class="form-control" placeholder="名称"  name="name" type="text" value="" style="display: inline-block; width: 300px;">
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">允许评论：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				<div class="check-box">
+					<input type="checkbox" id="checkbox-1">
+					<label for="checkbox-1">&nbsp;</label>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">图片作者：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="0" placeholder="" id="" name="">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">图片来源：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="0" placeholder="" id="" name="">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">关键词：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="0" placeholder="" id="" name="">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">图片摘要：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,200)"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>-->
+
+	</form>
+
+
+	<script type="text/javascript">
+	
+		$(document).ready(function() {  
+			  
+			var MaxInputs       = 8; //maximum input boxes allowed  
+			var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID  
+			var AddButton       = $("#AddMoreFileBox"); //Add button ID  
+			  
+			var x = InputsWrapper.length; //initlal text box count  
+			var FieldCount=1; //to keep track of text box added  
+			  
+			$(AddButton).click(function (e)  //on add input button click  
+			{  
+			        if(x <= MaxInputs) //max input box allowed  
+			        {  
+			            FieldCount++; //text box added increment  
+			            //add input box  
+			            $(InputsWrapper).append('<input type="file" name="banner_img[]" >');  
+			            x++; //text box increment  
+			        }  
+			return false;  
+			});  
+			  
+			$("body").on("click",".removeclass", function(e){ //user click on remove text  
+			        if( x > 1 ) {  
+			                $(this).parent('div').remove(); //remove text box  
+			                x--; //decrement textbox  
+			        }  
+			return false;  
+			})   
+			  
+			});  
+
+	
+		$(function(){
+			$('.btn-success').click(function(){
+				var str = $("*[name='name']").val(); 
+				var str1 = $("*[name='seat_id']").val(); 
+				if(str && str1){
+					$('#form').submit();
+				}else if(str1){
+					alert('名称不能为空！');
+					return false;
+				}else if(str){
+					alert('位置不能为空！');
+					return false;
+				}else{
+					alert('名称和位置不能为空！');
+					return false;
+				}
+			})
+		})
+	</script>
+</block>

@@ -1,0 +1,263 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+                <!-- 订单管理 -->
+                <div id="my_main" class="content left" style="background-color: rgb(255, 255, 255); min-height: 889px;">
+                    <div class="activity_manage">
+                        <h1 class="title">订单管理</h1>
+                        <!--所有订单的状态种类-->
+                        <div class="order_status">
+                            <ul>
+                                <li class="order" data-type="wait"><a class="personal_active" href="javascript:void(0);">商家待处理（<span>{$tallcount_wait}</span>）</a><b>|</b>
+                                </li>
+                                <li class="order" data-type="progress"><a href="javascript:void(0);" class="">试客进行中（<span>{$tallcount_going}</span>）</a><b>|</b>
+                                </li>
+                                <li class="order" data-type="end"><a href="javascript:void(0);" class=""> 订单已结束（<span>{$total_orderend}</span>）</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="task_specification" id="wait" style="display: block;">
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">试客已下单，待发货：</p>
+                                    <ul class="shop_list clearfix">
+
+                                      <volist name="shop_list" id="vo">
+                                        <a target="_blank" href="{:U('Order/orderlist')}&type=10&shop_id={$vo.id}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}                                                                                     <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                </p>
+
+                                                <p class="shop_order">待处理：（<b>{$vo.count10}</b>）</p>
+                                            </li>
+                                        </a>
+                                      </volist>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <div class="task_list">
+                                <div class="task">
+                                       <p class="task_title">试客已在领吧评价，待审核评价：</p>
+
+                                    <ul class="shop_list clearfix">
+                                     <volist name="shop_list" id="vo">
+                                        <a target="_blank" href="{:U('Order/orderlistcheck')}&type=20&shop_id={$vo.id}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}                                                                                      <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                </p>
+
+                                                <p class="shop_order">待处理：（<b>{$vo.count20}</b>）</p>
+                                            </li>
+                                        </a>
+                                      </volist>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">试客已在淘宝评价，待确认评价：</p>
+                                    <ul class="shop_list clearfix">
+                                      <volist name="shop_list" id="vo">
+                                        <a target="_blank" href="{:U('Order/orderlistsure')}&type=30&shop_id={$vo.id}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}                                                                                      <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                </p>
+
+                                                <p class="shop_order">待处理：（<b>{$vo.count30}</b>）</p>
+                                            </li>
+                                        </a>
+                                      </volist>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+              <!--
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">试客已在淘宝追评，待确认追评：</p>
+                                    <ul class="shop_list clearfix">
+                                            <a target="_blank" href="{:U('Actcenter/orderlistadd')}">
+                                                <li class="shop actived left">
+                                                    <p class="shop_name">鼎诚金芝麻专卖店                                                                                                    <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                        </p>
+
+                                                    <p class="shop_order">待处理：（<b>0</b>）</p>
+                                                </li>
+                                            </a>
+                                        <a target="_blank" href="{:U('Actcenter/orderlistadd')}">
+                                                <li class="shop actived left">
+                                                    <p class="shop_name">礼洛数码配件专营店                                                                                                    <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                        </p>
+
+                                                    <p class="shop_order">待处理：（<b>0</b>）</p>
+                                                </li>
+                                            </a>
+                                        <a target="_blank" href="{:U('Actcenter/orderlistadd')}">
+                                                <li class="shop actived left">
+                                                    <p class="shop_name">恒通伟数码                                                                                                    <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                        </p>
+
+                                                    <p class="shop_order">待处理：（<b>0</b>）</p>
+                                                </li>
+                                            </a>
+
+                                    </ul>
+                                </div>
+                            </div>-->
+                        </div>
+
+                        <div class="task_specification" id="progress" style="display: none;">
+
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">商品已开奖，待试客领取下单：</p>
+                                    <ul class="shop_list clearfix">
+                                       <volist name="shop_list" id="vo">
+                                            <a target="_blank" href="{:U('Order/orderlistwaitget')}&type=0&shop_id={$vo.id}&type1=1">
+                                                <li class="shop actived left">
+                                                    <p class="shop_name">{$vo.shopname}                                                                                                     <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                        </p>
+
+                                                    <p class="shop_order">待处理：（<b>{$vo.count0}</b>）</p>
+                                                </li>
+                                            </a>
+                                        </volist>
+                                   </ul>
+                                </div>
+                            </div>
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">商品已发货，待试客收货评价：</p>
+                                    <ul class="shop_list clearfix">
+                                        <volist name="shop_list" id="vo">
+                                            <a target="_blank" href="{:U('Order/orderlistwaiteva')}&type=11&shop_id={$vo.id}">
+                                                <li class="shop actived left">
+                                                    <p class="shop_name">{$vo.shopname}                                                                          <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                    </p>
+
+                                                    <p class="shop_order">待处理：（<b>{$vo.count11}</b>）</p>
+                                                </li>
+                                            </a>
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">在领吧的评价已审核通过，待试客去淘宝评价：</p>
+                                    <ul class="shop_list clearfix">
+                                        <volist name="shop_list" id="vo">
+                                            <a target="_blank" href="{:U('Order/orderlistwaitcopy')}&type=21&shop_id={$vo.id}">
+                                                <li class="shop actived left">
+                                                    <p class="shop_name">{$vo.shopname}                                                                          <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                    </p>
+
+                                                    <p class="shop_order">待处理：（<b>{$vo.count21}</b>）</p>
+                                                </li>
+                                            </a>
+                                        </volist>
+
+                                    </ul>
+                                </div>
+                            </div>
+<!--
+                            <div class="task_list">
+
+
+                                <div class="task">
+                                    <p class="task_title">在淘宝的评价已确认通过，待试客去淘宝追评：</p>
+                                    <ul class="shop_list clearfix">
+                                        <volist name="shop_list" id="vo">
+                                            <a target="_blank" href="{:U('Actcenter/orderlistwaitget')}">
+                                                <li class="shop actived left">
+                                                    <p class="shop_name">{$vo.shopname}                                                                         <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                   </p>
+
+                                                    <p class="shop_order">待处理：（<b>0</b>）</p>
+                                                </li>
+                                            </a>
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="task_specification" id="end" style="display: none;">
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">试客超时未领取，已取消：</p>
+                                    <ul class="shop_list clearfix">
+                                        <volist name="shop_list" id="vo">
+                                            <a target="_blank" href="{:U('Order/orderlistcancel')}&type=0&shop_id={$vo.id}&type1=2">
+                                                <li class="shop actived left">
+                                                    <p class="shop_name">{$vo.shopname}                                                                       <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                    </p>
+
+                                                    <p class="shop_order">待处理：（<b>{$vo.order_overdue}</b>）</p>
+                                                </li>
+                                            </a>
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">订单已完成，已返款给试客：</p>
+                                    <ul class="shop_list clearfix">
+                                            <volist name="shop_list" id="vo">
+                                            <a target="_blank" href="{:U('Order/orderlistcomp')}&type=31&shop_id={$vo.id}">
+                                                <li class="shop actived left">
+                                                    <p class="shop_name">{$vo.shopname}                                                                       <img src="__PUBLIC__/maoke/images//merchant/bg_tb_default.png" alt="">
+                                                    </p>
+
+                                                    <p class="shop_order">待处理：（<b>{$vo.order_finish}</b>）</p>
+                                                </li>
+                                            </a>
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+		<!-- page-wrapper end -->
+</div>
+		<!-- wrapper -->
+</div>
+    <script>
+        $(function(){
+            $(".order_status>ul>.order").click(function(){
+
+                switch($(this).attr("data-type"))
+                {
+                    case 'wait':
+                        $(this).siblings("li").children("a").removeClass("personal_active");
+                        $(this).children("a").addClass("personal_active");
+                        $(".task_specification").hide();
+                        $("#wait").show();
+                        break;
+                    case 'progress':
+                        $(this).siblings("li").children("a").removeClass("personal_active");
+                        $(this).children("a").addClass("personal_active");
+                        $(".task_specification").hide();
+                        $("#progress").show();
+                        break;
+                    case 'end':
+                        $(this).siblings("li").children("a").removeClass("personal_active");
+                        $(this).children("a").addClass("personal_active");
+                        $(".task_specification").hide();
+                        $("#end").show();
+                        break;
+                }
+            });
+        })
+    </script>
+	<include file="Layout:foot" />

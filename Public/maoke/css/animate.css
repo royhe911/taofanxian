@@ -1,0 +1,53 @@
+
+.progress.blue .progress-right .progress-bar{
+      animation: loading-2 1.5s linear forwards;
+  }
+  .progress.yellow .progress-right .progress-bar{
+      animation: loading-3 1.5s linear forwards;
+  }
+  .progress.pink .progress-right .progress-bar{
+      animation: loading-4 1.5s linear forwards;
+  }
+  .progress.green .progress-right .progress-bar{
+      animation: loading-5 1.5s linear forwards;
+  }
+  @keyframes loading-2{
+      0%{
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+      }
+      100%{
+          -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+      }
+  }
+  @keyframes loading-3{
+      0%{
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+      }
+      100%{
+          -webkit-transform: rotate(144deg);
+          transform: rotate(144deg);
+      }
+  }
+  @keyframes loading-4{
+      0%{
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+      }
+      100%{
+          -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+      }
+  }
+  @keyframes loading-5{
+      0%{
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+      }
+      100%{
+          -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+      }
+  }

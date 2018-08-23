@@ -1,0 +1,341 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">商家管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">商家列表</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action=" " method="get" onsubmit="return checkSearch()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="business">
+				<input type="hidden" name="a" value="index">
+				<div class="text-c" style="margin-bottom: 10px;">
+					<input type="text" class="input-text " style="width:250px" placeholder="店铺名" id="" name="shopname" value="{$shopname}"> 或
+					<input type="text" class="input-text " style="width:250px" placeholder="手机号搜索" id="" name="phone" value="{$phone}"> 或
+					<input type="text" class="input-text " style="width:250px" placeholder="旺旺号搜索" id="" name="wangwang" value="{$wangwang}">
+
+					<button type="submit" class="btn btn-success" id="" name="">
+						<i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+					<if condition="$_SESSION['user']['role'] == 1">
+						<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+							<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+					</if>
+
+				</span>
+				<span class="r">共有数据：
+					<strong>{$count}</strong> 条</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<if condition="$_SESSION['user']['role'] == 1">
+									<th>
+										<input type="checkbox" name="" value="">
+									</th>
+								</if>
+								<th>id</th>
+								<th>店铺名称</th>
+								<th>旺旺</th>
+								<th>手机</th>
+								<th>QQ/微信</th>
+								<th>微信备注</th>
+								<th>所在地</th>
+								<th>加入时间</th>
+								<th>余额</th>
+								<th>透支额度</th>
+								<!--<th>已透支</th>-->
+								<th>透支额度状态</th>
+								<if condition="$_SESSION['user']['role'] != 6">
+									<th>服务导师</th>
+								</if>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<volist name="data" id="vo">
+								<tr class="text-c">
+									<if condition="$_SESSION['user']['role'] == 1">
+										<td>
+											<input type="checkbox" value="{$vo.id}" name="ids[]">
+										</td>
+									</if>
+									<td>{$vo.id}</td>
+									<td>
+										<if condition="$vo.url != ''">
+											<a href="{$vo.url}" title="点击查看" target="_blank">
+												<label class="label <if condition='$vo.msg eq 1'>label-success<else />label-warning</if> radius" style="cursor: pointer; font-size: 14px; font-weight: 100;">
+													<if condition="$vo.shopname == ''">{$vo.wangwang}
+														<else />{$vo.shopname}</if>
+												</label>
+											</a>
+											<if condition="$vo.msg eq 1">
+												<!--审核通过显示 -->
+												<!-- <span class="label label-success radius">已通过</span>-->
+												<elseif condition="$vo.msg eq 2" />
+												<span class="label radius" style="font-weight: 100; cursor: pointer;">未通过</span>
+												<elseif condition="$vo.msg eq 0" />
+												<span class="label radius" style="background: #ffc107;font-weight: 100; cursor: pointer;" onclick="shopCheck(this,{$vo.id})">去审核</span>
+												<!--未提交店铺地址显示-->
+												<!--<span class="label label-warning radius">未绑定</span>-->
+											</if>
+											<else />待认证
+										</if>
+									</td>
+									<td>
+										{$vo.wangwang}
+									</td>
+									<td>{$vo.iphone}</td>
+									<td>{$vo.qq}</td>
+									<td class="order-input wechat-remarks">{$vo.remarks}</td>
+									<td>{$vo.address}</td>
+									<td>{$vo.addtime|date="j/n H:i",###}</td>
+									<td>
+										<b style="font-size: 11px;">¥ </b>{$vo.money}</td>
+									<td>
+										<b style="font-size: 11px;">¥ </b>{$vo.credit_money}</td>
+									<!--<td><b style="font-size: 11px;">¥ </b>{$vo.exp_credit}</td>-->
+									<td>
+										<eq name="vo.credit_status" value="3">
+											<span class="label label-danger radius">已拒绝</span>
+											<br> 拒绝理由{$vo.reason}
+										</eq>
+										<eq name="vo.credit_status" value="1">
+											<span class="label label-warning radius">待审核</span>
+										</eq>
+										<eq name="vo.credit_status" value="2">
+											<span class="label label-success radius">已通过</span>
+										</eq>
+									</td>
+									<if condition="$_SESSION['user']['role'] != 6">
+										<td class="td-status">{$vo.info}</td>
+									</if>
+									<td class="td-manage">
+
+										<a title="已发布任务" href="javascript:;" onclick="showUserTask('商家已发布的商品','{:U('business/tasklist','id='.$vo['uid'])}','1400')"
+										    class="order-a" style="text-decoration:none">查看任务</a>
+
+										<if condition="$vo.status == 1">
+											<a title="冻结" href="javascript:;" onclick="member_del(this,{$vo.id},0)" class="order-a" style="text-decoration:none">冻结账号</a>
+											<else />
+											<a title="解冻" href="javascript:;" onclick="member_del(this,{$vo.id},1)" class="order-a" style="text-decoration:none">解冻账号</a>
+										</if>
+
+
+										<if condition="$vo.remarks == ''">
+											<a title="添加微信备注" href="javascript:;" style="text-decoration:none" class="order-a" onclick="wechatRemarks(this,{$vo.id},0)">添加备注</a>
+											<else />
+											<a title="修改微信备注" href="javascript:;" style="text-decoration:none" class="order-a" onclick="wechatRemarks(this,{$vo.id},1)">修改备注</a>
+										</if>
+
+										<a title="确定" href="javascript:;" style="text-decoration:none; display: none;" class="sure-a" onclick="wechatSure(this,{$vo.id})">确定</a>
+										<a title="取消" href="javascript:;" style="text-decoration:none;display: none;" class="cancel-a" onclick="wechatCancel(this)">取消</a>
+										<if condition="$_SESSION['user']['role'] == 6">
+											<a title="透支额度" href="javascript:;" onclick="setOverDraft({$vo.id})">透支额度</a>
+											<a title="设置服务费" href="javascript:;" onclick="setService({$vo.id})">设置服务费</a>
+										</if>		
+									</td>
+								</tr>
+							</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript" src="__PUBLIC__/ERP/lib/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('.table-sort tbody').on('click', 'tr', function () {
+				if ($(this).hasClass('selected')) {
+					$(this).removeClass('selected');
+				} else {
+					$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+				}
+			});
+		});
+
+		/*用户-暂停*/
+		function member_del(obj, id, type) {
+			var tishi = type == 0 ? '确认要冻结吗？' : '确认要解冻吗？';
+			layer.confirm(tishi, function (index) {
+				$.post("{:U('Business/del')}", {
+					id: id,
+					type: type
+				}, function (data) {
+					if (1 == data.msg) {
+						//$(obj).parents("tr").remove();
+						layer.msg(data.info, {
+							icon: 1,
+							time: 1000
+						});
+						setTimeout(function () {
+							window.location.reload();
+						}, 1000);
+					} else {
+						layer.msg(data.info, {
+							icon: 2,
+							time: 1000
+						});
+						setTimeout(function () {
+							window.location.reload();
+						}, 1000);
+					}
+				}, 'json');
+			});
+		}
+
+		//店铺审核
+		function shopCheck(obj, id) {
+			window.location.href = "{:U('business/shopcheck')}";
+		}
+
+		/*批量删除*/
+		function datadel() {
+			var lenght = $("td input[type='checkbox']:checked").length; //勾选个数
+			if (lenght > 0) {
+				var arr = [];
+				$("td input[type='checkbox']:checked").each(function () {
+					if (!isNaN(this.value)) {
+						arr.push(this.value);
+					}
+				});
+
+				$.post("{:U('Business/delAll')}", {
+					arr: arr
+				}, function (data) {
+					if (1 == data.msg) {
+						layer.msg(data.info, {
+							icon: 1,
+							time: 1000
+						}, function () {
+							window.location.reload();
+						});
+					} else {
+						layer.msg(data.info, {
+							icon: 2,
+							time: 1000
+						});
+					}
+				});
+			} else {
+				layer.alert('请勾选数据');
+			}
+		}
+		/*商家已发布任务展示*/
+		function showUserTask(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+		//微信备注
+		function wechatRemarks(el, id, type) {
+			if (!type) {
+				$(el).parent().siblings('.wechat-remarks').html(
+					'<input type="text" class="wang" value="" placeholder="请输入微信备注" onfocusin="removeErr(this)">');
+				$(el).hide().siblings(".order-a").hide().siblings(".sure-a,.cancel-a").show();
+			} else {
+				//管理员修改权限
+				if ({$_SESSION['user']['role']} == 1) {
+					var wechat_remarks = $(el).parent().siblings('.wechat-remarks').text();
+					$(el).parent().siblings('.wechat-remarks').html('<input type="text" value="' + wechat_remarks +
+						'" placeholder="请输入微信备注" class="ordernum" onfocusin="removeErr(this)">');
+					$(el).hide().siblings(".order-a").hide().siblings(".sure-a,.cancel-a").show();
+				} else {
+					layer.msg('请联系管理员修改', {
+						icon: 2,
+						time: 1000
+					});
+				}
+			}
+		}
+		//提交
+		function wechatSure(el, id, type) {
+			var wechatRemarks = $.trim($(el).parent().siblings('.wechat-remarks').find('input').val()); //微信备注
+			if (!wechatRemarks) {
+				$(el).parent().siblings('.wechat-remarks').find('input').addClass('error-input');
+				return;
+			}
+			//提交表单
+			$.post("{:U('business/wechat')}", {
+				id: id,
+				remarks: wechatRemarks,
+				type: type
+			}, function (data) {
+				if (1 == data.msg) {
+					layer.msg(data.info, {
+						icon: 1,
+						time: 1000
+					});
+					setTimeout(function () {
+						window.location.reload()
+					}, 1000)
+				} else {
+					layer.msg(data.info, {
+						icon: 2,
+						time: 1000
+					});
+					//setTimeout(function(){window.location.reload()},1000)
+				}
+			}, 'json');
+		}
+		//取消
+		function wechatCancel(el) {
+			window.location.reload();
+		}
+
+		function removeErr(el) {
+			$(el).removeClass('error-input');
+		}
+		//透支额度
+		function setOverDraft(id) {
+			layer.open({
+				type: 1,
+				title: '设置透支额度',
+				area: ['300px', '150px'], //宽高
+				content: '<div style="padding: 10px;box-sizing: border-box;"><select class="select select-box" id="overdraft"><option value="1">8000</option><option value="2">15000</option><option value="3">30000</option><option value="4">50000</option><option value="5">100000</option><option value="0">清零</option></select></div><div style="text-align:right; padding:0 10px;"><a class="btn btn-success radius" style="margin-right:20px" onclick="sureOverDraft(' +
+					id + ')">确定</a><a class="btn btn-info radius" onclick="cancel()">取消</a></div>'
+			});
+		}
+		
+		function sureOverDraft(id) {
+			var value = $("#overdraft").val();
+			$.post("{:U('business/set_overdraft')}", {
+				id: id,
+				overdraft: value
+			}, function (data) {
+				if (1 == data.msg) {
+					layer.msg(data.info, {
+						icon: 1,
+						time: 1000
+					}, function () {
+						window.location.reload()
+					})
+				} else {
+					layer.msg(data.info, {
+						icon: 2,
+						time: 1000
+					}, function () {
+						window.location.reload()
+					});
+				}
+			})
+		}
+
+		function cancel() {
+			layer.closeAll();
+		}
+		//服务费
+		function setService(id){
+			layer_show('设置服务费',"{:U('Business/setservice')}&id="+id,400,420);
+		}
+	</script>
+</block>

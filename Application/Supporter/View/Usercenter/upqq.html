@@ -1,0 +1,53 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+
+					<!--修改QQ-->
+					<div id="my_main" class="basic_setup left" style="min-height: 732px;">
+                        <h1 class="title">修改QQ</h1>
+                        <form class="revamp_content" method="post" onsubmit="return checkForm();" action="{:U('Usercenter/upqq')}">
+                            <label for="qq">新的QQ号：</label>
+                            <input id="qq" type="text" maxlength="12" onblur="check_qq();" name="qq">
+                            <br>
+                            <p><span id="qq_errors"></span></p>
+            
+                            <p class="btns">
+                                <input type="submit" value="确定">
+                                <input type="button" value="取消" onclick="location.href='{:U(\'Usercenter/basicset\')}'">
+                            </p>
+                        </form>
+                    </div>
+					<!-- my_main end -->
+				</div>
+			</section>
+		<!-- page-wrapper end -->
+		</div>
+		<!-- wrapper -->
+    </div>
+    <script>
+        function checkForm(){
+            if(check_qq()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        function check_qq(){
+            var bisqq =$.trim($("#qq").val());
+            var reg = /[1-9][0-9]{4,9}/;
+            if(bisqq!=''){
+                if(!reg.test(bisqq)){
+                    $("#qq_errors").html("<font>请填写有效的QQ号码！</font>");
+                    return false;
+                }else{
+                    $("#qq_errors").html("");
+                    return true;
+                }
+            }else{
+                $("#qq_errors").html("<font>请填写QQ号码！</font>");
+                return false;
+            }
+        }
+    </script>
+	<include file="Layout:foot" />

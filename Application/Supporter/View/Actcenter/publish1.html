@@ -1,0 +1,245 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style>
+    input[name="platform_id"]{ vertical-align: bottom; width: 16px; height: 16px; margin-right: 5px;}
+    .platform{ margin-right: 15px;}
+    .shop_name{ margin-right: 20px;}
+    /* 新增样式代码 */
+    .po-style-re { position: relative;}
+    .po-style-re .tip-no-shop { position: absolute; left: 100px;  display: none; color: #f25f55; }
+    .po-style-re .tip-no-shop a {color: #e8363c; text-decoration: underline; }
+    /* .shop_name_active{ border: 1px solid #f25f55;}
+    .shop_name_active .shopName{border-right: 1px dashed #f25f55;} */
+</style>
+    <div class="left" style="width: 1040px;overflow: hidden;background-color: #ffffff;margin: 0 0 8px 10px;">
+        <img src="__PUBLIC__/maoke/images/merchant/release_header_show.png" alt="">
+    </div>
+                <!-- 发布试用1 -->
+                <div class="store_content left">
+                        <h1 class="title">发布试用</h1>
+                        <!--进度条-->
+            <!--            <div class="progress_bar">-->
+            <!--                <img src="__PUBLIC__/maoke/images/merchant/sj_fbsy_bg_jdt_01_default.png" alt="">-->
+            <!--            </div>-->
+                        <!--当店铺管理已经绑定了店铺--选择发布试用内容的样式-->
+                        <div class="have_bindingShops">
+                            <h2 class="title">1.选择店铺、确定平台</h2>
+                            <h3 class="title">1.选择平台和店铺</h3>
+                            <!--选择平台和店铺-->
+                            <!--已绑定和未绑定店铺-->
+                            <div class="bounded_and_unbounded">
+                                <p style="margin-bottom:10px;">
+                                    <span style="font-size:14px;margin-right:10px;">平台来源：</span>
+                                    <span class="platform"><input type="radio" name="platform_id" <if condition='($type eq 1)'>checked</if> value="1" onchange="change();">淘宝</span>
+                                    <span class="platform"><input type="radio" name="platform_id" <if condition='($type eq 2)'>checked</if> value="2" onchange="change();">天猫</span>
+                                    <span class="platform"><input type="radio" name="platform_id" disabled value="3">京东</span>
+                                    <span class="platform"><input type="radio" name="platform_id" disabled>阿里巴巴</span>
+                                    <span class="platform"><input type="radio" name="platform_id" disabled>拼多多</span>
+                                    <span class="platform"><input type="radio" name="platform_id" disabled>蘑菇街</span>
+                                    <span class="platform"><input type="radio" name="platform_id" disabled>美丽说</span>
+                                    <span class="platform"><input type="radio" name="platform_id" disabled>一号店</span>
+                                </p>
+                                <!--已经绑定店铺——————选择店铺-->
+                                <div class="bounded_select_shop po-style-re">
+                                    <!--店铺类型淘宝-->
+                                    <div class="tip-no-shop">您当前没有绑定相关店铺 <a href="{:U('Usercenter/bindshop')}"> 去绑定</a></div>
+                                    <span style="font-size:14px;margin-right:10px; float:left;">店铺名称：</span>
+                                    <div class="left shopType_tmall" style="padding:0; width:auto;">
+                                       <volist name="data" id="msg">
+                                        <div class="left shop_name <eq name='goods.sid' value='$msg.id'>shop_name_active</eq> <if condition='($msg.type eq 1)'>taobao <if condition='($type neq 1)'>hided</if><elseif condition='$msg.type eq 2'/>tmall <if condition='($type neq 2)'>hided</if></if>" id="myshop_{$msg.id}" data-sid="{$msg.id}">
+                                            <div class="left shopName">
+                                                <p><b>{$msg.shopname}</b></p>
+                                                <p>来源：<span>
+                                                         <if condition="($msg.type eq 1)">淘宝
+                                                           <elseif condition="$msg.type eq 2"/>天猫
+                                                         </if>
+                                                        </span>
+                                                </p>
+                                            </div>
+                                            <p class="left select_btn">
+                                            </p>
+                                        </div>
+                                       </volist>
+                                    </div>
+                                </div>
+
+                               <!--未绑定店铺——————选择店铺-->
+                               <div class="unbounded_select_shop" style="padding-left:83px; display:none;">
+                                <!-- <p><img src="../..__PUBLIC__/maoke/images/merchant/release_icon_mark_default.png" /></p> -->
+                                <p style="padding:5px 0; font-size:14px;"><b>您还未绑定过店铺</b></p>
+                                <p style="padding:5px 0; font-size:14px;">请先去<a href="{:U('Usercenter/bindshop')}" style="color:#005ea7">店铺管理</a>进行店铺绑定！</p>
+                               </div>
+                            </div>
+                            <h3 class="title">2.选择试用类型</h3>
+                            <div class="select_tryType">
+                                <div class="select_title">
+                                    <a class="try <if condition='($goods.type eq 1)'>a_active</if>" data-type="1" href="javascript:void(0);"><span>爆款打造/维护</span></a>
+                                    <a class="try <if condition='($goods.type eq 2)'>a_active</if>" data-type="2" href="javascript:void(0);"><span>新品提升综合权重</span></a>
+
+                                </div>
+                                <div class="tryType_content">
+                                    <!--爆款打造/维护-->
+                                    <div class="try_content highPopularity_try " <if condition='($goods.type neq 1)'>style="display:none;"</if>>
+                                        <table>
+                                            <tbody><tr>
+                                                <th>适合店铺类型</th>
+                                                <th>试用商品类型</th>
+                                                <th>建议投放份数</th>
+                                                <th>建议投放频率</th>
+                                                <th>建议发布时间</th>
+                                                <th>试用抽奖时间</th>
+                                            </tr>
+                                            <tr>
+                                                <td>所有类型店铺</td>
+                                                <td>所有商品</td>
+                                                <td>10件起</td>
+                                                <td>每款商品连续投放3-7次</td>
+                                                <td>新品上架后即可</td>
+                                                <td>使用发布后次日10点开奖</td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                        <p>
+                                            <span>试客申请流程：</span>
+                                            试客申请-商家审核资质-通过的试客按照下单流程去店铺，收藏关注，加够聊天，购买-试客在平台提交订单号-商家审核订单-试客提交好评截图-商家审核-结束。
+                                        </p>
+                                        <p>
+                                            <span>特点：</span>能快速提高销量，大量完成搜索，关注收藏，加够聊天等，适合补单维护，增加层级销量，爆款，做人群标签等。
+                                        </p>
+                                        <p>
+                                            <span>优势：</span>速度快，量大可做，可以按照自己要求挑选审核试客，做标签话人群方便快捷。
+                                        </p>
+                                        <p>
+                                        	<span>缺点：</span>不中奖模式，不能做搜索流量任务。
+
+                                        </p>
+                                    </div>
+
+                                    <!--商品综合优化试用-->
+                                    <div class="try_content highSynthesize_try " <if condition='($goods.type eq 2)'>style="display:block;"</if>>
+
+                                        <table>
+                                            <tbody><tr>
+                                                <th>适合店铺类型</th>
+                                                <th>试用商品类型</th>
+                                                <th>建议投放份数</th>
+                                                <th>建议投放频率</th>
+                                                <th>建议发布时间</th>
+                                                <th>试用抽奖时间</th>
+                                            </tr>
+                                            <tr>
+                                                <td>所有类型店铺</td>
+                                                <td>新品</td>
+                                                <td>10-25件起</td>
+                                                <td>每款商品连续投放4-6次</td>
+                                                <td>新品淘宝上架后即可</td>
+                                                <td>每天12、16、20点开奖</td>
+                                            </tr>
+                                        </tbody></table>
+                                        <p><span>商家发布试用时间提醒：</span></p>
+                                        <p>每日12:00前发布的试用活动审核通过后将于当天上线展示，并当天开奖，有试客来下单。</p>
+                                        <p>每日12:00后发布的试用活动审核通过后将于次日上线展示，并当天开奖，有试客来下单。</p>
+                                        <p><span>试用特点：</span></p>
+                                        <p>拥有自定义的每日自定义转化率控制，平台将控制每日成功申请人数，当天分时间段开奖，并保证及时有节奏的成交转化，</p>
+                                        <p>试客依然拥有1~3天进店浏览、收藏、加购等回访操作拥有中奖资格。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--底部下一步按钮-->
+                            <div class="nextStep_btn">
+                             <form action="{:U('Actcenter/publish1')}" method="POST" id="myform" />
+                              <input type="hidden" id="sid" name="sid" value="{$goods.sid|default='0'}" />
+                              <input type="hidden" id="type" name="type" value="{$type|default='1'}" />
+                              <input type="hidden" id="id" name="id" value="{$id|default='0'}" />
+                              <input onclick="next_step();" type="button" value="下一步">
+                             </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+		<!-- page-wrapper end -->
+</div>
+		<!-- wrapper -->
+</div>
+
+    <script type="text/javascript">
+        $(function(){
+        	<empty name="goods">
+        	 $("input[name=platform_id]").eq(0).attr("checked",'checked');//默认选择项
+        	 $('.taobao').show();
+        	 $('.taobao').eq(0).addClass('shop_name_active');//默认选择项(店铺)
+        	 $('#sid').val($('.taobao').eq(0).attr('data-sid'));//默认店铺ID
+        	 $(".select_title .try").eq(0).addClass("a_active");
+        	 $(".try_content").eq(0).show();
+        	</empty>
+
+            $(".select_title .try").click(function() {
+                $(this).siblings("a").removeClass("a_active");
+                $(this).addClass("a_active");
+                $(".try_content").hide();
+                $(".try_content").eq($(this).attr("data-type")-1).show();
+                $('#type').val($(this).attr('data-type'));// 选中的类型
+            });
+
+        	$('.left .shop_name').click(function(){
+        		$('.left .shop_name').removeClass('shop_name_active');
+        		$(this).addClass('shop_name_active');
+        		$('#sid').val($(this).attr('data-sid'));// 选中的店铺
+        	});
+
+            var type = $('input:radio[name=platform_id]:checked').val();
+            if (1 == type) {
+                $(".taobao").show();
+                $(".tmall").hide();
+                $(".tip-no-shop").hide();
+                if (!$(".taobao").length) {
+                    $(".tip-no-shop").show();
+                    $('#sid').val(0);
+                }
+            }
+        })
+
+
+
+        function change(){
+        	var type = $('input:radio[name=platform_id]:checked').val();
+            $('.left .shop_name').removeClass('shop_name_active');
+            if (1 == type) {
+                $(".taobao").show();
+                $(".tmall").hide();
+                $(".tip-no-shop").hide();
+                if (!$(".taobao").length) {
+                    $(".tip-no-shop").show();
+                    $('#sid').val(0);
+                }
+            } else if (2 == type) {
+                $(".tmall").show();
+                $(".taobao").hide();
+                $(".tip-no-shop").hide();
+                if (!$(".tmall").length) {
+                    $(".tip-no-shop").show();
+                    $('#sid').val(0);
+                }
+            }
+        }
+
+        function next_step() {
+        	var sid = $('#sid').val();//店铺ID
+        	var type = $('#type').val();//试用类型
+            if(sid == 0){
+                alert('请选择您要发布试用的店铺');
+            }else{
+            	<empty name="id">
+            	  var url = "{:U('Actcenter/publish2')}&sid="+sid+"&type="+type;
+            	 <else />
+            	  $('#myform').submit();//提交
+            	</empty>
+        	    window.location.href=url;
+            }
+
+        }
+    </script>
+	<include file="Layout:foot" />

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>商家注册</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/CSS/reg.css"/>
+	<script type="text/javascript" src="__PUBLIC__/JS/jquery.min.js"></script>
+</head>
+<body>
+	<div class="zs_nav">
+		<div class="zs_center">
+			<a href="" style="float:left;margin-top:18px;" target="_blank"><img src="__PUBLIC__/Images/shike-logo.png"></a>
+		</div>
+	</div>
+	<div class="merc_content">
+		<div class="mert_main">
+			<div class="mer_top">
+				<img src="__PUBLIC__/Images/st_zc1.jpg" />
+			</div>
+			<!--mer_top-->
+			<div class="mer_center" style="top: 70px;">
+				<form action="{:U('regist')}" id="einfo_form" class="einfo_form" method="post" onsubmit="return checkForm();">
+					<div class="mer_pc">
+						<span class="nat_px">用户名：</span>
+						<input name="adminname" type="text"  id="adminname" value="" onblur="checkname()" class="nat_ttv" />
+						<span class="Validform_checktip"></span>
+					</div>
+					<div class="mer_pc">
+						<span class="nat_px">QQ号：</span>
+						<input name="qq" type="text" id="bisqq" class="nat_ttv" />
+						<span class="Validform_checktip"></span>
+					</div>
+					<div class="mer_pc">
+						<span class="nat_px">微信号：</span>
+						<input name="wechat" type="text" id="biswx" class="nat_ttv" />
+						<span class="Validform_checktip"></span>
+					</div>
+					<div class="mer_pc">
+						<span class="nat_px">手机号：</span>
+						<input name="tel" type="text"  id="tel" value="" onblur="checktel()" class="nat_ttv" />
+						<span class="Validform_checktip"></span>
+					</div>
+					<div class="mina_ti">
+						<button type="button" id="btn" class="nav_but"  onclick="getcode()" >获取验证码</button>
+						<input type="number" class="nat_ttv_code" name="code" id="code" placeholder="验证码"  >
+					</div>
+					<!--mer_pc-->
+					<div class="mer_pc">
+						<span class="nat_px">登录密码：</span>
+						<input name="adminpass" id="psw" type="password" type="text"  class="nat_ttv" />
+						<span class="Validform_checktip"></span>
+					</div>
+					<!--mer_pc-->
+					<div class="mina_ti">
+						密码长度6-16位。
+					</div>
+					<!--mina_ti-->
+					<div class="mer_pc">
+						<span class="nat_px">确认密码：</span>
+						<input name="repassword" type="password" id="cpsw" onblur="checkpsw()" type="text" class="nat_ttv" />
+						<span class="Validform_checktip"></span>
+					</div>
+
+					<!--mer_pc-->
+					<div class="mer_psc">
+						<input id="protocol" type="checkbox"  class="merchant-protocol" value="11" />我已仔细阅读并同意接受
+						<a href="" target="_blank">《用户使用协议》</a>
+					</div>
+					<!--mer_psc-->
+					<div class="mer_pct" style="margin-top: 0;">
+						<input id="submit" type="submit" name="eReg_subimt" value="立即注册" class="qu_pxc" />
+						<p style="margin-top:14px; color: #777;font-size: 13px; ">
+							我已注册，现在就
+							<a href="{:U('Index/login')}" class="reg">登录</a>
+						</p>
+					</div>
+					<!--mer_pc-->
+				</form>
+			</div>
+			<div class="online_service">
+				<img src="__PUBLIC__/Images/zhuce_zixun.jpg" />
+				<a id="zixun_qq" href="" target="_blank" title="在线咨询">
+					<span>在线咨询</span>
+				</a>
+				<p>周一至周五 9:00至18:00<p>
+				<img class="img-tab" src="__PUBLIC__/Images/bis-reTab.png" />
+			</div>
+			<!--mer_center-->
+		</div>
+		<!--mert_main-->
+	</div>
+</body>
+<script>
+    var InterValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+
+    flag1=true;
+	flag2=true;
+	flag3=true;
+	flag4=true;
+	function checkname() {
+        var name = $.trim($("#adminname").val());
+        if (name != '') {
+            $.post(
+                "{:U('AjaxCheckname')}",
+                {adminname: name},
+                function (data) {
+                    console.log(data);
+                    if (data.code == 1) {
+                        $("#adminname").next().html(data.msg) ;
+                        $("#adminname").next('span').attr("class", "Validform_checktip");
+                        flag1 = true;
+                    } else {
+                        $("#adminname").next().html(data.msg);
+                        $("#adminname").next('span').attr("class", "Validform_checktip_1");
+                        flag1 = false;
+                    }
+                }
+            )
+        }
+    }
+		function  checktel() {
+           var  tel =$.trim($("#tel").val());
+            if (tel !=''){
+                $.post(
+                    "{:U('AjaxChecktel')}",
+                    {tel:tel},
+                    function (res) {
+                        if (res.code==1){
+                            $("#tel").next('span').html(res.msg);
+                            $("#tel").next('span').attr("class", "Validform_checktip");
+                            flag2=true;
+                        }else {
+                            $("#tel").next('span').html(res.msg);
+                            $("#tel").next('span').attr("class", "Validform_checktip_1");
+                            flag2=false;
+                        }
+                    }
+                )
+            }
+        }
+
+        function checkpsw() {
+            var  psw =$.trim($("#psw").val());
+            var  cpsw =$.trim($("#cpsw").val());
+            if (psw!='' && cpsw!=''){
+
+            if (psw!=cpsw){
+                $("#cpsw").next('span').html("密码前后不一致");
+                $("#cpsw").next('span').attr("class", "Validform_checktip_1");
+                flag3=false;
+			}else{
+                $("#cpsw").next('span').html("密码一致");
+                $("#cpsw").next('span').attr("class", "Validform_checktip");
+                flag3=true;
+			}
+
+            }
+        }
+
+        function getcode() {
+            var tel=$("#tel").val();
+            var myreg =/^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            if(!myreg.test(tel))
+            {
+                alert('请输入有效的手机号码！');
+                return false;
+            }else {
+                curCount = count;
+                //设置button效果，开始计时
+                $("#btn").attr("disabled", "true");
+                $("#btn").text(curCount + "秒内输入");
+                InterValObj = window.setInterval(SetRemainTime, 1000);
+                $.post(
+					"{:U('AjaxGetcode')}",
+					{tel:tel},
+					function (data) {
+						if(data.code==1){
+						    alert(data.msg);
+						}else{
+                            alert(data.msg);
+						}
+                    }
+				)
+			}
+        }
+
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btn").removeAttr("disabled");//启用按钮
+            $("#btn").text("重新发送");
+        }
+        else {
+            curCount--;
+            $("#btn").text(curCount + "秒内输入");
+        }
+    }
+
+    function checkForm() {
+
+        var psw=$("#psw").val();
+        //电话
+        var tel=$("#tel").val();
+        //复选框
+        var myreg =/^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        if(!myreg.test(tel))
+        {
+            alert('请输入有效的手机号码！');
+            return false;
+        }
+        if (psw.length>=6 && psw.length<=16){
+
+        }else{
+            alert("密码长度6-16位!");
+            return false;
+        }
+        if($("#protocol").attr("checked")){
+        }else {
+            alert("请认真读协议！");
+            return false;
+        }
+        $("input").each(function(i, obj) {
+            if(obj.value == "") {
+                alert('所有信息都是必填信息！');
+                flag4=false;
+                return false;
+            }
+        });
+        //密码
+	if (flag1 && flag2 && flag3 && flag4){
+            return true;
+	}else {
+	    return false
+	}
+    }
+
+</script>
+</html>

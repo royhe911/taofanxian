@@ -1,0 +1,132 @@
+<extend name="public/modal" />
+<block name="title"></block>
+<block name="menu">
+	<form action="{:U('User/recharge')}" method="POST" class="form form-horizontal" id="form-admin-add" style="margin-top: -25px;" >
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>充值金额：</label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<input type="number" step="0.01" min="50" class="input-text" value="" placeholder="最低充值金额50元" id="rechargenum" name="rechargenum" style="width: 90%;" required oninvalid="setCustomValidity('请输入充值金额，最低50元');" oninput="setCustomValidity('');">
+				<span style="display: inline-block;">元</span>
+				<div style="color: #f00;font-size: 12px;">警告：以下是平台业务唯一收款账号，其它人收款无效！</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>充值方式：</label>
+			<div class="formControls col-xs-9 col-sm-9" >
+				<div>
+					<span style="margin-right: 10px;"><input type="radio" value="1" checked name="method" style="width: 18px; height: 18px; margin-right: 5px;"/>支付宝</span>
+					<!--<span style="margin-right: 10px;"><input type="radio" value="wechat" name="method" style="width: 18px; height: 18px; margin-right: 5px;"/>微信</span>-->
+					<span><input type="radio" name="method" value="2" style="width: 18px; height: 18px; margin-right: 5px;"/>银行卡</span>
+				</div>
+				<div id="img_preview_one" class="qrcode-z" style="width: 150px; height: 150px;">
+					<img src="__PUBLIC__/ERP/static/h-ui.admin/images/zhifubao-bai.png" width="100%" height="100%" class="zhifubao">
+				</div>
+				<!--<div id="img_preview_one" class="qrcode-w" style="display: none;" >
+					<img src="__PUBLIC__/ERP/static/h-ui.admin/images/wechat-bai.png" width="100%" height="100%" class="wechat">
+				</div>-->
+				<div class="qrcode-c" style="display: none; padding-top: 10px;">
+					<ul>
+						<li>中国银行 <span style="font-weight: 700; color: red;">6217 887 6000 0038 8586</span> 吴志勇</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="row cl jiao-order">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>交易单号：</label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<input type="text" class="input-text" value="" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="" id="serialnum" name="serialnum" >
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>充值截图：</label>
+			<div class="formControls col-xs-9 col-sm-9 posi-rela">
+				<button class="btn btn-success radius">上传图片</button>
+				<input class="file-input fileToUpload" type="file" accept="image/*" name="fileToUpload" id="fileToUpload" onchange="uploadFile(this,'fileToUpload');" value="">
+				<br />
+				<div id="img_preview_one" style="width: 150px; height: 150px;">
+				    <input type="hidden" name="img" id="img" />
+					<img src="__PUBLIC__/ERP/static/h-ui.admin/images/thumbnail.png" id="thumb-preview">
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</block>
+<block name="js">
+<script src="__PUBLIC__/ajaxfileupload.js"></script>
+<script type="text/javascript">
+	var isFile = false,status = 1;
+	$(function(){
+		$("input[type=radio]").change(function(){
+			if(this.value == 1){
+				status = 1;
+				$(".qrcode-z").show();
+				$(".jiao-order").show();
+				$(".qrcode-w").hide();
+				$(".qrcode-c").hide();
+			}else if(this.value == 'wechat'){
+				status = 1;
+				$(".qrcode-z").hide();
+				$(".qrcode-w").show();
+				$(".jiao-order").show();
+				$(".qrcode-c").hide();
+			}else if(this.value == 2){
+				status = 0;
+				$(".qrcode-z").hide();
+				$(".qrcode-w").hide();
+				$(".jiao-order").hide();
+				$(".qrcode-c").show();
+			}
+		})
+	})
+	function uploadFile(el,file_id){
+		if(el.value){isFile = true;}
+        $.ajaxFileUpload({
+ 			url:"{:U('User/ajaxUpload')}",//上传图片处理文件
+ 			secureuri:false,
+ 			fileElementId:file_id,
+ 			dataType: 'text',
+ 			success: function (data){
+ 				var data= strToObj(data);
+ 				if(1 == data.status){
+ 					$('#img').val(data.name);
+ 					$('#thumb-preview').attr('src', '__ROOT__/upload/'+data.savepath+'/'+data.name);
+ 				} else {
+ 					layer.msg(data.msg,{icon:2,time:1000});
+ 				}
+ 			},
+ 			error: function (data){
+ 				layer.msg('上传失败!',{icon:2,time:1000});
+ 			}
+ 		});
+    }
+	function strToObj(str) {
+		return eval("(" + str + ")");
+	}
+	document.getElementById("form-admin-add").onsubmit = function(){
+		var reg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+		if(!reg.test($("#rechargenum").val())){
+			layer.msg('请填写正确的充值金额',{icon:2,time:1000});
+			return false;
+		}
+		if($("#rechargenum").val() < 50){
+			layer.msg('充值金额最低50元',{icon:2,time:1000});
+			return false;
+		}
+		if(status == 1 && !$.trim($("#serialnum").val())){
+			layer.msg('请填写交易单号',{icon:2,time:1000});
+			return false;
+		}
+		if(!isFile){
+			layer.msg('请上传充值截图',{icon:2,time:1000});
+			return false;
+		}
+
+		return true;
+	};
+</script>
+</block>

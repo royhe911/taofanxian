@@ -1,0 +1,50 @@
+<extend name="public/modal" />
+<block name="title"></block>
+<block name="menu">
+	<form action="" method="POST" class="form form-horizontal" id="form-admin-add">
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">
+				<eq name="info.abn" value="1">异常<else />退款</eq>类型：
+			</label>
+			<div class="formControls col-xs-9 col-sm-9" >
+				<div>
+					<eq name="info.abn" value="1">
+					订单号错误<else />
+					买家退货</eq>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><eq name="info.abn" value="1">异常<else />退款</eq>说明：</label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<textarea name="abn_info" rows="" cols="" class="textarea">{$info.abn_info}</textarea>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-3"><eq name="info.abn" value="1">异常<else />退款</eq>截图：</label>
+			<div class="formControls col-xs-9 col-sm-9 posi-rela">
+				<div id="img_preview_one">
+				    <input type="hidden" name="img" id="img" />
+					<img src="{$info.img}" id="thumb-preview" class="cm-preview" title="点击放大查看">
+				</div>
+				<div><span style="color: red;">（鼠标右键在新标签页打开原图）</span></div>
+			</div>
+		</div>
+	</form>
+</block>
+<block name="js">
+<script type="text/javascript">
+	$(function(){
+		$(".cm-preview").click(function(){
+			var img_url = $(this).attr('src');
+			layer.open({
+			  type: 1,
+			  title:'主图',
+			  area: ['100%','100%'], //宽高
+			  content: '<img width="600" src="'+img_url+'">'
+			});
+		})
+	})
+</script>
+
+</block>

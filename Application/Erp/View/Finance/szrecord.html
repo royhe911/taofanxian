@@ -1,0 +1,120 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">资金流水</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action="" method="post">
+				<div class="text-c" >
+					日期：
+					<input  type="text" id="datemin" name="time" class="input-text" placeholder="起始时间" style="width:160px;"> -
+					<input  type="text" id="datemax" name="time" class="input-text" placeholder="结束时间" style="width:160px;" >
+					<button type="submit" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+					我的账户余额：<b>{$money}</b> 元 &nbsp;
+					<a class="btn btn-success radius" onclick="applyCommisson()" href="javascript:;"> 申请佣金</a>
+				</span>
+				<span class="r" style="line-height: 30px;">
+					&nbsp;<b >xxx</b> 元
+				</span>
+				<span class="r">
+					<select name="" class="select select-box">
+						<option value="">收入</option>
+						<option value="">支出</option>
+					</select>
+				</span>
+
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr>
+								<th colspan="4">收支记录</th>
+							</tr>
+							<tr class="text-c">
+								<th>时间</th>
+								<th>项目</th>
+								<th>金额</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="text-c">
+								<td>{$vo.addtime|date="j/n H:i",###}</td>
+								<td>xxx店单+佣金</td>
+								<td><b style="color: red;">-175</b></td>
+							</tr>
+							<tr class="text-c">
+								<td>{$vo.addtime|date="j/n H:i",###}</td>
+								<td>入账</td>
+								<td><b style="color: green;">+5000</b></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			var start_time = "{$starttime}",end_time = "{$endtime}";
+			laydate.render({
+			  	elem: '#datemin',
+			   	min: '2018-01-01',
+			   	max: '',
+			   	done: function(value, date){
+					start_time = value;
+					if(new Date(value).getTime() > new Date(end_time).getTime()){
+						$("#datemax").val(value)
+					}
+			  	}
+			});
+			laydate.render({
+			  	elem: '#datemax',
+			  	value:"",
+			  	min: '2018-01-01',
+		   		max: '',
+			  	done: function(value, date){
+			  		end_time = value;
+					if(new Date(value).getTime() < new Date(start_time).getTime()){
+						$("#datemin").val(value)
+					}
+			  	}
+			});
+		})
+
+		function applyCommisson(){
+			var userId = "{$_SESSION['user']['id']}";
+			if ( "{$money}" >= 1000){
+				layer.msg("账户余额充足，不允许申请", {icon: 2, time: 1000}, function(){
+					window.location.reload();
+				});
+			}else{
+				layer.prompt({formType:0,value: '5000',title:'请输入佣金金额'},function (value,index,elem) {
+					var reg = /^[1-9]+(.[0-9]{1,2})?$/;
+					if(parseInt(value) > 5000){
+						layer.msg("每次最多申请5000元");
+						return false;
+					}else{
+						$.post("{:U('finance/applicationz')}",{id:userId,money:value},function(msg){
+							if (msg.msg == 1){
+								layer.msg(msg.info, {icon: 1, time: 3000}, function(){
+									window.location.reload();
+								});
+							}else{
+								layer.msg(msg.info, {icon: 2, time: 1000}, function(){
+									window.location.reload();
+								});
+							}
+						})
+					}
+				})
+			}
+		}
+	</script>
+</block>

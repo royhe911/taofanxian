@@ -1,0 +1,130 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style>
+#section .section_main .deposit_withdraw h2 {color: #323232;font-size: 16px;padding: 30px 0;}
+#section .section_main .deposit_withdraw .fillIn_money > div > b {display: inline-block; width: 100px;text-align: right; font-size: 14px;}
+#section .section_main .deposit_withdraw .fillIn_money > div > span { color: #e61e28; font-size: 20px;}
+#section .section_main .deposit_withdraw .fillIn_money > div span.error {font-size: 12px;margin-left: 5px;}
+#section .section_main .deposit_withdraw .fillIn_money > div > input { width: 200px; height: 28px; line-height: 28px; border: 1px solid #969696; border-radius: 5px; margin-top: 30px;padding-left: 5px;}
+#section .section_main .deposit_withdraw .fillIn_money > div > p { padding-left: 100px;}
+#section .section_main .deposit_withdraw .fillIn_money div.main_three p.one, #section .section_main .deposit_withdraw .fillIn_money .main_five p.one { color: #969696; padding: 8px 0 25px 100px;}
+#section .section_main .deposit_withdraw .fillIn_money div.main_three p.two, #section .section_main .deposit_withdraw .fillIn_money .main_five p.two {line-height: 28px;font-size: 14px;padding-bottom: 25px;}
+#section .section_main .deposit_withdraw .fillIn_money .main_five table {margin-top: 10px;}
+#section .section_main .deposit_withdraw .fillIn_money .main_five table td b {display: inline-block;width: 100px;text-align: right;font-size: 14px;}
+#section .section_main .deposit_withdraw .fillIn_money .main_five table td:not(:first-child) {width: 30px; height: 30px;}
+#section .section_main .deposit_withdraw .fillIn_money .main_five table td .passwd { border: 1px solid #969696;  border-radius: 5px;  height: 28px; width: 200px; padding-left: 5px;}
+#section .section_main .deposit_withdraw .confirm_btn { width: 100%; padding: 30px 0 50px 20px; border-bottom: 1px solid #f5f5f5;}
+#section .section_main .deposit_withdraw .confirm_btn input { width: 150px; height: 40px; line-height: 40px; border: 1px solid #f25f55; border-radius: 5px; font-size: 16px; background-color: #f25f55; color: #fff;}
+#section .section_main .deposit_withdraw .warm_prompt { padding-left: 20px; padding-bottom: 20px;}
+#section .section_main .deposit_withdraw .warm_prompt h1 { color: #323232; font-size: 14px; padding: 30px 0 10px 0;}
+#section .section_main .deposit_withdraw .warm_prompt p { padding-top: 10px;}
+#section .section_main .deposit_withdraw .warm_prompt p img { margin-top: -2px; cursor: pointer;}
+</style>
+                <!--押金提现-->
+                <div id="my_main" class="deposit_withdraw left" style="min-height: 732px;">
+                    <h1 class="title">押金提现</h1>
+                    <div id="isBind">
+                        <h2>填写提现金额</h2>
+                            <!--填写金额先关的信息-->
+                        <form action="{:U('Merchant/draw')}" method="post" onsubmit="return checkForm()">
+                            <div class="fillIn_money">
+                                <div class="main_one">
+                                    <b>可用余额：</b>
+                                    <span class="avail_deposit">¥<span id="amount-able">{$fund}</span></span>
+                                </div>
+                                <div class="main_three">
+                                    <b>提现金额：</b>
+                                    <input id="tixian" type="number" name="amount" onblur="getAct()" style="margin-right:5px;" >元
+                                    <span class="error" id="tixianerror"></span>
+                                    <br>
+                                    <p class="one">单次最少提现50元，提现操作平台将收取1%的手续费</p>
+                                    <p class="two">预计2个工作日内（国家法定节假日和双休日顺延）平台完成提现操作。<br>
+                                        到账时间以各大银行为准，预计3-5个工作日左右。</p>
+                                </div>
+                                <div class="main_four">
+                                    <b>实际到账金额：</b>
+                                    <span id="daozhang">￥<span class="daozhang">0</span></span>
+                                </div>
+                                <!--<div class="main_five">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td><b>提现密码：</b></td>
+                                                <td><input class="passwd" type="password" name="passwd" id="passwd" maxlength="20"></td>
+                                                <td style="width:auto;"><span class="error" id="pwderror"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span class="error" id="pwderror"></span>
+                                </div>
+                            --></div>
+                            <p class="confirm_btn">
+                                <input id="confirm_withdraw" type="submit" value="确认提现">
+                            </p>
+                        </form>
+                        <div class="warm_prompt">
+                            <h1>温馨提示：</h1>
+                            <!-- <p>1、信用卡支付时银行会自动提示风险安全提醒，可继续支付，请勿担心；</p>
+                            <p>2、请注意您的银行卡充值限制，以便造成不便；</p> -->
+                            <p>1、禁止洗钱、虚假交易等行为，一经发现并确认，将终止该账号的试用；</p>
+                            <p>2、如果充值金额没有及时到账，请联系客服。</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- my_main end -->
+            </div>
+        </section>
+    <!-- page-wrapper end -->
+    </div>
+    <!-- wrapper -->
+</div>
+<script>
+    function checkForm(){
+        if(getAct()){
+            // var txPass = $("#passwd").val();
+            // if(txPass != ''){
+            //     $.post(
+            //         "",
+            //         {},
+                    
+            //     );
+            //     return true;
+            // }else{
+            //     $("#pwderror").html("<font color='red'>*请输入提现密码</font>");
+            //     return false;
+            // }   
+            return true;
+        }else{ 
+            return false;
+        }
+    }
+    function getAct(){
+        var txAmount = $("#tixian").val();   //提现金额
+        var amountAble = $("#amount-able").text(); //可用余额
+        if(txAmount != ''){
+            if(Math.floor(txAmount)==txAmount){
+                if(parseInt(txAmount)<50){
+                    $("#tixianerror").html("<font color='red'>*提现金额不得低于50元</font>");
+                    return false;
+                }else if(parseInt(txAmount)>parseInt(amountAble)){
+                    $("#tixianerror").html("<font color='red'>*提现金额不得大于可用余额</font>");
+                    return false;
+                }else{
+                    var actVal = $("#tixian").val()*0.99; 
+                    $(".daozhang").text(actVal);
+                    $("#tixianerror").html("");
+                    return true;
+                }
+            }else{
+                $("#tixianerror").html("<font color='red'>*提现金额必须为整数</font>");
+                return false;
+            }
+        }else{
+            $("#tixianerror").html("<font color='red'>*请输入提现金额</font>");
+            return false;
+        } 
+    }
+</script>
+<include file="Layout:foot" />

@@ -1,0 +1,133 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<include file="Layout:nav" />
+<style type="text/css">
+	.delivery_status { margin-top: 20px; }
+	.delivery_status .title { height: 38px; line-height: 38px; overflow: hidden; background-color: #f5f5f5; }
+	.delivery_status .title div { font-size: 14px; height: 16px; }
+	.delivery_status .title div.left { padding-left: 20px; }
+	.delivery_status .title span { margin-right: 40px; }
+	.delivery_status .title div.left .order-num >b { color: #323232; }
+	.delivery_status .title div.left span:last-of-type { margin-right: 10px; vertical-align: middle; }
+	.taobao-icon { width: 15px; height: 15px; }
+	.delivery_status .title div.right { padding-right: 20px; }
+	.delivery_status .title div a { color: #005ea7; }
+	.delivery_status .detalis ul { height: 110px; border: 1px solid #f5f5f5; }
+	.delivery_status .detalis ul li { float: left; color: #323232; font-size: 14px; height: 110px; text-align: center; line-height: 110px; display: table; }
+	.delivery_status .detalis ul li:first-of-type img { width: 80px; height: 80px; margin-top: 15px; margin-left: 20px; }
+	.delivery_status .detalis ul li p { width: inherit; display: table-cell; vertical-align: middle; }
+	.delivery_status .detalis ul li:first-of-type .name { width: 180px; height: 32px; line-height: 32px; color: #323232; text-align: left; padding-right: 10px; padding-left: 10px; }
+	.delivery_status .detalis ul li + li { border-left: 1px solid #f5f5f5; }
+	.delivery_status .detalis ul li.member-bindTB p { width: 160px; display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+	.delivery_status .detalis ul li.order-num-TB p { width: 200px; display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+	.delivery_status .detalis ul li.pay p { width: 150px; display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+</style>
+                <!-- 订单查询 -->
+                <div id="my_main" class="funds_record left" style="min-height: 889px;">
+                    <div class="activity_manage">
+                        <h1 class="title">订单查询</h1>
+                        <!-- 筛选条件 -->
+                        <ul class="seachform" style="float:none;margin-bottom:0;">
+                            <li>
+                                <input id="taobao_id" type="text" value="{$tb_id}" placeholder="请输入试客淘宝号" >
+                                <input id="outer_orderid" type="text" value="{$tb_item}" placeholder="请输入淘宝订单号">
+                                <input type="button" id="search" onclick="search()" value="查询">
+                            </li>
+                        </ul>
+
+                        <div class="table-title">
+                            <ul>
+                                <li class="product-name">商品</li>
+                                <li class="member-bindTB">试客淘宝账号</li>
+                                <li class="order-num-TB">淘宝订单号</li>
+                                <li class="pay">状态</li>
+                            </ul>
+                        </div>                      
+                        <!--循环-->
+                        <volist name="data" id="vo">
+                            <div class="delivery_status">
+    		                    <div class="title">
+    		                        <div class="left">
+    		                            <span>{$vo.addtime}</span>
+    		                            <span class="order-num">订单编号：<b>{$vo.id}</b></span>
+    		                            <span>{$vo.shopname}</span>
+                                          <if condition="$vo['type'] eq 1">
+                                                <img class="taobao-icon" src="__PUBLIC__/maoke/images/merchant/bg_tb_default.png" alt="">
+                                          <else/>
+                                               <img class="taobao-icon" src="__PUBLIC__/maoke/images/merchant/bg_tm_default.png" alt="">
+                                          </if>
+                                    </div>
+    		                        <div class="right">
+    		                            <a target="_blank" href="{:U('Actcenter/orderInfo')}&id={$vo.id}">查看详情 &gt;&gt;</a>
+    		                        </div>
+    		
+    		                    </div>
+    		                    <div class="detalis" id="list">
+    		                        <ul>
+    		                            <li class="product-name">
+    		                                <img class="left" src="{$vo.image}" alt="商品图">
+    		                                <p class="name">{$vo.gname}<br><span style="color:#666666;font-size: 14px;"> 商品价格：{$vo.unit_price}元</span></p>
+    		                            </li>
+    		                            <li class="member-bindTB">
+    		                                <p>{$vo.tb_id}</p>
+    		                            </li>
+    		                            <li class="order-num-TB">
+    		                                <p>{$vo.tb_item}</p>
+    		                            </li>
+    		                            <li class="pay">
+    		                                <p>{$vo.comfirm_note}</p>
+    		                            </li>
+    		                        </ul>
+    		                    </div>
+    	                	</div>
+                        </volist>
+						<!--循环-->
+
+        <div class="row">
+            <div class="col-sm-12" >
+               <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+             </div>
+             <div class="col-sm-12">
+                <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;">
+                  <ul class="pagination" id="list-pagination"></ul>
+                </div>
+             </div>
+        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+		<!-- page-wrapper end -->
+</div>
+		<!-- wrapper -->
+</div>
+<script type="text/javascript">
+    $(function(){   
+        var paginationOptions= $.extend(true, {$pagination|json_encode} , 
+                            {
+                                    onPageClick: function (event, page) {
+                                        var options = $(this).data('twbsPagination').options;
+                                        options.baseUrl = options.baseUrl.replace('','');
+                                        options.getParams.page = page; 
+//                                      options.getParams.pagesize = options.getParams.pagesize;
+                                        var param = '';
+                                        for(var x in options.getParams ){
+                                                param += '&' + x + '=' + options.getParams[x];
+                                        }
+//                                      console.log(param);return;                                       
+                                        window.location.href =  options.baseUrl + param + '';
+                                    }
+                            });
+        $('#list-pagination').twbsPagination(paginationOptions);     
+    });
+
+
+    function search() {
+        var taobao_id = $("#taobao_id").val();
+        var outer_orderid = $("#outer_orderid").val();
+        window.location.href = "{:U('Order/orderquery')}&taobao_id=" + taobao_id + "&outer_orderid=" + outer_orderid;
+    }
+</script>
+    
+<include file="Layout:foot" />

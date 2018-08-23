@@ -1,0 +1,164 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+
+					<!--修改绑定手机号-->
+					<div id="my_main" class="basic_setup left" style="min-height: 732px;">
+                        <h1 class="title">修改绑定手机号</h1>
+                        <form class="revamp_content" method="post" onsubmit="return checkForm();" action="{:U('Usercenter/upphonenew')}">
+                            <label for="phone2">新手机号码：</label>
+                            <input id="phone2" type="text" class="phone2" onblur="checkPhone()" name='tel'>
+                            <p><span id="phone_error"></span></p>
+                            <label for="authCode">验证码：</label>
+                            <input id="authCode" type="text" name="code" onblur="check_code()">
+                            <input id="get_code" type="button" value="获取验证码" onclick="getcode()">
+                            <br>
+                            <p><span id="yzm_errors"></span></p> 
+                            <p class="btns">
+                                <input type="submit" type="button" value="确认">
+                                <input type="button" onclick="location.href='{:U(\'Usercenter/basicset\')}'" value="取消">
+                            </p>
+                        </form>
+                    </div>
+					<!-- my_main end -->
+				</div>
+			</section>
+		<!-- page-wrapper end -->
+		</div>
+		<!-- wrapper -->
+    </div>
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;background: rgba(0,0,0,0.5); display: none; z-index: 999;" class="zezhao"> </div>
+	<div style="position: fixed; top: 315px; left: 0;width: 100%; display: none; z-index: 1000;" class="zz-success">
+		<div style="margin: 0 auto; width: 370px; text-align: center; background: #fff; color: gray; line-height: 25px;border-radius: 15px; height: 180px; position: relative;">
+			<div style="width: 100%; border-bottom: 1px solid #E1E1E1; cursor: pointer;background: #f25f55; color: #fff;    border-radius: 10px 10px 0 0; height: 40px;" onclick="hideDan()"><span style="float: left;padding-left: 20px; margin-top: 7px;"><img src="__PUBLIC__/maoke/images/logo-admin.png"/></span><span style=" float: right;font-size: 20px; display: inline-block; width: 30px; text-align: center; cursor: pointer; margin-top: 4px;">x</span></div>
+			<!--<p style="margin-top: 10px; text-align: center;padding: 0 5px;" id="coderror">请输入图形验证码</p>-->
+			<div style="margin-top: 5px;" id="valicode">
+				<span style="font-size: 13px; width: 115px; display: inline-block; text-align: right;">图像验证码 :</span>
+				<span id="checkCode" style="width: 84px; display: inline-block; height: 35px; line-height: 35px;  text-align: center;background: #efe8e8; cursor: pointer;font-size: 16px;" title="点击更换验证码" onclick="createCode()"></span>
+			</div>
+			<div style="margin-top: 10px;">
+				<span style="font-size: 13px; width: 115px; display: inline-block; text-align: right;">请输入图形验证码 :</span>
+				<input type="text" id="inputCode" type="text"  style=" float: none; height: 35px; width: 85px;margin: 0;border: 1px solid #B7B7B7;padding-left: 5px;" />
+			</div>
+			<div style="width: 100%; border-bottom: 1px solid #E1E1E1; text-align: center; ;background: #fff;color: #fff; position: absolute;left: 0; bottom: -1px;border-radius:0 0 10px 10px ; height: 40px;" ><button style="display: inline-block; height: 38px; line-height: 38px; padding: 0 18px; background-color: #F3564D; color: #fff;white-space: nowrap;text-align: center; font-size: 14px; border: none; border-radius: 2px;cursor: pointer;" onclick="validateCode()">确定</button><button style="display: inline-block; height: 38px; line-height: 38px; padding: 0 18px; background-color: #F1F1F1; color: gray;white-space: nowrap;text-align: center; font-size: 14px; border: none; border-radius: 2px;cursor: pointer; margin-left: 20px;" onclick="hideDan()">取消</button></div>
+		</div>
+	</div>
+    <script>
+         createCode();
+        var InterValObj; 
+        var count = 60; 
+        var curCount;
+        function checkForm(){
+            if(checkPhone() && check_code()){
+                return true;
+            }else{
+                return false;
+            }
+        } 
+        function checkPhone(){
+            var regPhone =/^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            var phone = $.trim($("#phone2").val());
+            if(phone != ''){
+                if(!regPhone.test(phone))
+                {
+                    $("#phone_error").html('<font>请输入正确的手机号码！</font>');
+                    return false;
+                }else{
+                    $("#phone_error").html('<font color="green">手机号可用</font>');
+                    return true;
+                }
+            }else{
+                $("#phone_error").html('<font>请输入手机号码！</font>');
+                return false;
+            }
+        }
+        function check_code(){
+            if($("#authCode").val() == ''){
+                $("#yzm_errors").html("<font>请输入验证码</font>");
+                return false;
+            }else{
+                $("#yzm_errors").html("");
+                return true;
+            }
+        }
+        function hideDan(){
+            $(".zezhao").hide();
+            $(".zz-success").hide();
+        }
+        function showDan(){
+            $(".zezhao").show()
+            $(".zz-success").show();
+        }
+        function getcode() {
+           if(checkPhone()){
+                createCode();
+                showDan();
+           }
+        }
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#get_code").removeAttr("disabled");//启用按钮
+                $("#get_code").text("重新发送");
+            }
+            else {
+                curCount--;
+                $("#get_code").text(curCount + "秒重新发送");
+            }
+        }
+        var code;
+        function createCode() 
+        {
+            code = "";
+            var codeLength = 4; //验证码的长度
+            var checkCode = document.getElementById("checkCode");
+            var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+                'a','b','c','d','e','f','g','h','i','j','k','l','m','n','p','q','r','s','t','u','v','w','x','y','z',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //所有候选组成验证码的字符，当然也可以用中文的
+            for(var i = 0; i < codeLength; i++) 
+            {
+            var charNum = Math.floor(Math.random() * 52);
+            code += codeChars[charNum];
+            }
+            if(checkCode) 
+            {
+            checkCode.className = "code";
+            checkCode.innerHTML = code;
+            }
+        }
+        function validateCode() {
+            var tel=$("#phone2").val();
+            var inputCode=document.getElementById("inputCode").value;
+            if(inputCode.length <= 0) 
+            {
+                alert("请输入验证码！");	 
+                return false;
+            }
+            else if(inputCode.toUpperCase() != code.toUpperCase()) 
+            {
+                alert("验证码输入有误！");
+                createCode();
+                return false;
+            }else{
+                hideDan();
+                $.post(
+                    "{:U('AjaxGetcode')}",
+                    {tel:tel},
+                    function (data) {
+                        if(data.code==1){
+                            curCount = count;
+                            //设置button效果，开始计时
+                            $("#get_code").attr("disabled", "true");
+                            $("#get_code").text(curCount + "秒重新发送");
+                            InterValObj = window.setInterval(SetRemainTime, 1000);
+                            alert(data.msg);
+                        }else{
+                            alert(data.msg);
+                        }
+                    }
+                )
+            }
+                    
+        }
+    </script>
+	<include file="Layout:foot" />

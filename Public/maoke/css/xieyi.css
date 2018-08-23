@@ -1,0 +1,36 @@
+.contant {
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px 0;
+    min-height: 100px;
+    height: auto !important;
+    height: 100px;
+}
+.about_main {
+    border: 1px solid #dadada;
+    width: 960px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 200px;
+    height: auto !important;
+}
+.about_top {
+    border-bottom: 2px solid #d82c2c;
+    height: 60px;
+    line-height: 60px;
+    color: #3c3d45;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+.about_p {
+    width: 870px;
+    margin: 60px auto 0 auto;
+    color: #6c6c6c;
+    line-height: 30px;
+    font-size: 13px;
+}
+.air_two {
+    display: inline-block;
+    width: 26px;
+}

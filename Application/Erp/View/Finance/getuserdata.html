@@ -1,0 +1,35 @@
+<extend name="public/modal" />
+<block name="nav">
+	<span class="c-666">任务管理</span><span class="c-999 en">&gt;</span><span class="c-666">我的任务</span>
+</block>
+<block name="menu">
+
+	<table class="table table-border table-bordered table-bg table-hover table-sort">
+		<thead>
+			<tr>
+				<th colspan="3">
+					站点余额：<b style="font-size: 11px;">¥ {$allmoney}</b>
+				</th>
+			</tr>
+			<tr class="text-c">
+				<th>姓名</th>
+				<th>余额</th>
+				<th>银行卡</th>
+			</tr>
+		</thead>
+		<tbody>
+		<volist name="userdata" id="vo">
+			<tr class="text-c va-m">
+				<td>{$vo.realname}</td>
+				<td>{$vo.money|default=0}</td>
+				<td><?php $card = json_decode($vo['wechat'],true);echo $card[0]['card']?></td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+</block>
+<block name="js">
+<script type="text/javascript">
+
+</script>
+</block>

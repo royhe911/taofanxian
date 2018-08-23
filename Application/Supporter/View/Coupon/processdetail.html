@@ -1,0 +1,386 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<style>
+	#try_plan_table {
+		text-align: center;
+	}
+
+	#try_plan_table>li {
+		float: left;
+	}
+
+	#try_plan_table::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	#try_plan_table>li ul li {
+		height: 50px;
+		vertical-align: middle;
+		text-align: center;
+		font-size: 14px;
+		padding: 6px 0;
+	}
+
+	#try_plan_table>li ul li:first-of-type {
+		background: #f5f5f5;
+	}
+</style>
+<!-- 进展详情 -->
+<section id="section">
+
+	<div class="activity_details">
+		<!--所在位置-->
+		<div class="location_title">
+			<ul>
+				<li>你所在的位置：</li>
+				<li class="order">
+					<a class="" href="#">首页</a>
+				</li>
+				<li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+				<li class="order">
+					<a class="" href="{:U('Usercenter/index')}">商家中心</a>
+				</li>
+				<li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+				<li class="order">
+					<a class="" href="{:U('Coupon/index')}">优惠券管理</a>
+				</li>
+				<li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+				<li class="order">
+						<if condition="($t eq 1)">活动详情
+							<elseif condition="$t eq 2" />申请进展
+							<elseif condition="$t eq 3" />活动进展
+							<elseif condition="$t eq 4" />费用信息
+						</if>
+				</li>
+				<!--li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li-->
+				<!--li class="order">  进展详情</li-->
+			</ul>
+		</div>
+
+		<!--商品发货状态-->
+		<div class="commodity_information">
+			<h1>优惠券活动信息：</h1>
+			<div class="title">
+				<p class="left">
+					<span>发布时间：<if condition='($info.confirm eq 2)'>{$info.addtime}<else/>未发布</if></span>
+					<span>活动订单号：{$info.id}</span>
+				</p>
+			</div>
+			<div class="details" id="details">
+				<ul>
+					<li><img style="width: 80px;height: 80px" src="../{$info.img}" />
+					</li>
+					<li>
+						<div>
+							<p>店铺名称：<span>{$info.shopname}</span></p>
+							<p>平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台：<span><if condition="($info.laiyuan eq 1)">淘宝<elseif condition="$info.laiyuan eq 2"/>天猫</if></span></p>
+						</div>
+					</li>
+					<li>
+						<div>
+							<p>商品名称：<span>{$info.goods_name}</span></p>
+							<p>商品分类：<span>{$info.category}</span></p>
+							<p>商品链接：<span><a href="{$info.url}"  target="_blank" style="color: #f25f55; text-decoration: underline;">点击查看</a></span></p>
+						</div>
+					</li>
+					<li>
+						<div>
+							<p>单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：<span><b style="margin-right:10px;">¥{$info.real_price}</b>每单拍<b>1</b>件</span></p>
+							<p>优惠券金额：<span>¥{$info.red_price}</span></p>
+							<p>发&nbsp;放&nbsp;份&nbsp;数：<b>{$info.kucun}份</b></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="evolve_dateil">
+				<div class="evolve_dateil_tab">
+					<ul>
+						<a href="{:U('Coupon/processdetail', array('id' => $info['id'], 't' => 1))}">
+							<li id="pro_1" class="bg_active">活动详情</li>
+						</a>
+						<a href="{:U('Coupon/processdetail', array('id' => $info['id'], 't' => 2))}">
+							<li id="pro_2">申请进展</li>
+						</a>
+						<a href="{:U('Coupon/processdetail', array('id' => $info['id'], 't' => 3))}">
+							<li id="pro_3">活动进展</li>
+						</a>
+						<a href="{:U('Coupon/processdetail', array('id' => $info['id'], 't' => 4))}">
+							<li id="pro_4">费用信息</li>
+						</a>
+					</ul>
+				</div>
+				<script>
+					$(function() {
+						var type = "{$t}";
+						$('.evolve_dateil_tab li').removeClass('bg_active');
+						$('#pro_' + type).addClass('bg_active');
+						$('.try_content').css('display', 'none');
+						$('#try_' + type).css('display', 'block');
+					});
+				</script>
+
+				<div class="try_state">
+					<!-- 使用详情 -->
+					<div style="display: block;" class="try_content try_details" id="try_1">
+						<div class="details_content">
+							<div class="left left_information">
+								<ul>
+									<li>
+										<p>
+											<span>总共发放优惠券：<b><i>{$info.kucun}</i> 份</b></span>
+										</p>
+										<p>
+											<span>已申请试用：<b><i>{$data.sq|default="0"}</i>人</b></span>
+											<span>已通过试用资格：<b><i>{$data.tg|default="0"}</i>人
+                                                (<i>{$data.xd|default="0"}</i>人下单，
+                                                 <if condition="($data.etime ELT date('Y-m-d H:i:s', time()))"><i>0</i>人待下单，<i>{$data['tg'] - $data['xd']}</i>人取消
+                                                  <else/><i>{$data['tg'] - $data['xd']}</i>人待下单，<i>0</i>人取消
+                                                 </if>
+                                                )</b>
+                                                </span>
+										</p>
+									</li>
+									<li>
+										<h2>优惠券发放方式</h2>
+										<notempty name="info.keyword">
+											<p><if condition="($info.qudao EQ 1)">手机淘宝关键字<elseif condition="$info.qudao EQ 2" />手机淘宝淘口令</if>：{$info.keyword}</p>
+										</notempty>
+									</li>
+									<li>
+										<p>押金合计：<b><i>{$info['real_price']*$info['kucun'] + $info['red_price']*$info['kucun'] + $info['kucun']|number_format=2} </i>元</b></p>
+									</li>
+									<li>
+										<p>任务编号：<b>{$info.id}</b></p>
+										<p>店铺名：<b>{$info.shopname}</b></p>
+									</li>
+								</ul>
+
+							</div>
+							<div class="left right_state">
+								<!--右侧状态提示-->
+								<div class="status_alert">
+									<!--已结束-->
+
+									<div class="status_content">
+										<if condition="($info.state eq 2)">
+											<h3>试用活动未编辑完毕，待完善活动信息并提交</h3>
+											<p>您的活动信息未填写完毕，请继续完善之后点击提交
+												<a style="color:#005ea7 " href="{:U(\'Coupon/publish2\',array(\'id\' => $info['id']))}">前去提交试用活动</a>
+											</p>
+											<elseif condition="$info.state eq 7" />
+											<h3>试用活动未支付</h3>
+											<p>您的试用尚未支付
+												<a style="color:#005ea7 " href="{:U(\'Coupon/publish4\',array(\'id\' => $info['id']))}">前去活动支付</a>
+											</p>
+											<elseif condition="$info.state eq 10" />
+											<h3>试用活动待发布</h3>
+											<elseif condition="$info.state eq 11" />
+											<h3>试用活动进行中</h3>
+											<elseif condition="$info.state eq 20" />
+											<h3>试用活动已开奖商品已结束</h3>
+											<p>您的试用活动已结束
+												<!--a style="color:#005ea7 " href="{:U(\'Coupon/publish7\',array(\'id\' => $info['id']))}">前去活动支付</a-->
+										</if>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 试用进展 -->
+					<div class="try_content try_evolve" id="try_2" style="display: none;">
+						<h1 class="title">申请优惠券活动进展，您可以实时掌握各试客试用的进度</h1>
+						<form action="" method="GET">
+							<ul class="seachform">
+								<li>
+									<input placeholder="请输入试客账号" name="tb_id" type="text" class="scinput1" value="{$tb_id}" />
+								</li>
+								<li>
+									<label>
+                                        <input type="hidden" name="t" value="2">
+                                        <input type="hidden" name="id" value="{$info.id}">
+                                        <input type="hidden" name="m" value="Supporter" />
+                                        <input type="hidden" name="c" value="Coupon" />
+                                        <input type="hidden" name="a" value="processdetail" />
+                                    </label>
+									<input type="submit" class="scbtn" value="查询">
+								</li>
+							</ul>
+						</form>
+						<div id="first">
+							<table id="list2">
+								<tbody>
+									<tr>
+										<th>申请时间</th>
+										<th>试客</th>
+										<th>领取方式</th>
+										<th>申请编号</th>
+										<th>申请状态</th>
+									</tr>
+									<!-- 循环 状态有3种 待审核，待下单 ， 已驳回 -->
+									<volist name="data" id="vo">
+									<tr>
+										<td>{$vo.addtime}</td>
+										<td>{$vo.tb_id}</td>
+										<td>手机淘宝进店</td>
+										<td>{$vo.id}</td>
+										<td>
+										 <if condition="($vo.state eq 1)">待审核
+							                <elseif condition="$vo.state eq 2" />已驳回
+							                <elseif condition="$vo.state eq 3" />待下单
+							                <elseif condition="$vo.state eq 0" />已终止
+						                 </if>
+										</td>
+									</tr>
+                                    </volist>
+								</tbody>
+							</table>
+						</div>
+						<div id="next">
+							<div style="text-align:center;">
+								<!------分页-------->
+								<notempty name="data">
+									<if condition="($pagination.totalPages gt 1)">
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;">
+													<ul class="pagination" id="list-pagination"></ul>
+												</div>
+											</div>
+										</div>
+									</if>
+								</notempty>
+								<!------end----------->
+							</div>
+						</div>
+					</div>
+					<!-- 中奖进展 -->
+					<div class="try_content try_evolve" id="try_3" style="display: none;">
+						<h1 class="title title3">试客申请成功后进展，您可以实时掌握各试客试用的进度</h1>
+						<form action="" method="get">
+							<ul class="seachform">
+								<!--li style="margin-right: 20px;border: 1px solid #f5f5f5;">
+									<select name="order">
+										<option value="apply_time" <eq name="Think.get.order" value="apply_time">selected</eq>>默认排序</option>
+										<option value="id" <eq name="Think.get.order" value="id">selected</eq>>下单时间从新到旧排序</option>
+									</select>
+								</li-->
+								<li>
+									<div class="vocation">
+										<select class="select2" name="search_type">
+											<option value="tb_item" <eq name="search_type" value="tb_item">selected</eq>>淘宝订单号</option>
+											<option value="tb_id" <eq name="search_type" value="tb_id">selected</eq>>淘宝账号</option>
+										</select>
+									</div>
+								</li>
+								<li>
+									<input name="search_content" value="{$search_content}" placeholder="请输入搜索内容" type="text" class="scinput1">
+								</li>
+								<li>
+									<label>
+		                                        <input type="hidden" name="t" value="3">
+		                                        <input type="hidden" name="id" value="{$info.id}">
+		                                        <input type="hidden" name="m" value="Supporter" />
+		                                        <input type="hidden" name="c" value="Coupon" />
+		                                        <input type="hidden" name="a" value="processdetail" />
+                                            </label>
+									<input type="submit" class="scbtn" value="查询">
+								</li>
+							</ul>
+						</form>
+						<div id="first">
+							<table id="list">
+								<tbody>
+									<tr>
+										<th>下单时间</th>
+										<th>试客</th>
+										<th>领取方式</th>
+										<th>中奖编号</th>
+										<th>中奖时间</th>
+										<th>淘宝订单号</th>
+										<th>状态</th>
+										<th>付款金额</th>
+										<th>详情</th>
+									</tr>
+									<!-- 循环 状态有4种 已终止 ，已下单待审，待收货好评 ，已晒评待审核返款-->
+									<volist name="data" id="vo">
+									<tr>
+										<td>{$vo.addtime}</td>
+										<td>{$vo.tb_id}</td>
+										<td>手机淘宝进店</td>
+										<td>{$vo.id}</td>
+										<td>{$vo.subcondate}</td>
+										<td>{$vo.tb_item}</td>
+										<td>
+										 <if condition="($etime ELT time())">
+										     <eq name="vo.state" value="10">已完成<else/>已取消</eq>
+										  <else />
+										   <if condition="($vo.state eq 4)">已下单
+							                 <elseif condition="$vo.state eq 5" />已下单
+							                 <elseif condition="$vo.state eq 6" />待评价
+							                 <elseif condition="$vo.state eq 7" />已评价
+							                 <elseif condition="$vo.state eq 8" />已评价
+							                 <elseif condition="$vo.state eq 9" />待返款
+							                 <elseif condition="$vo.state eq 10" />已完成
+						                   </if>
+						                 </if>
+										</td>
+										<td>{$vo.real_price}</td>
+										<td><a href="{:U('Coupon/orderInfo', array('id' => $vo['id']))}">查看详情</a></td>
+									</tr>
+									</volist>
+								</tbody>
+							</table>
+						</div>
+						<div id="next">
+							<div style="text-align:center;">
+								<!------分页-------->
+								<notempty name="msg">
+									<if condition="($pagination.totalPages gt 1)">
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;">
+													<ul class="pagination" id="list-pagination"></ul>
+												</div>
+											</div>
+										</div>
+									</if>
+								</notempty>
+								<!------end----------->
+							</div>
+						</div>
+					</div>
+					<!-- 费用详情 -->
+					<div class="try_content cost_information" id="try_4" style="display: block;">
+						<p class="total" style="text-align: center;">押金合计：<span>{$info.kucun}份(发放份数)</span>&nbsp;x&nbsp;<span>(下单金额{$info['real_price']}元+ 优惠券金额 {$info['red_price']}元+ 手续费1元)</span>&nbsp;=&nbsp;<span>{$info['real_price']*$info['kucun'] + $info['red_price']*$info['kucun'] + $info['kucun']|number_format=2}元</span></p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+	$(function() {
+		var paginationOptions = $.extend(true, {$pagination|json_encode
+		}, {
+			onPageClick: function(event, page) {
+				var options = $(this).data('twbsPagination').options;
+				options.baseUrl = options.baseUrl.replace('', '');
+				options.getParams.page = page;
+				//options.getParams.pagesize = options.getParams.pagesize;
+				var param = '';
+				for(var x in options.getParams) {
+					param += '&' + x + '=' + options.getParams[x];
+				}
+				//console.log(param);return;
+				window.location.href = options.baseUrl + param + '';
+			}
+		});
+		$('#list-pagination').twbsPagination(paginationOptions);
+
+	});
+</script>
+<include file="Layout:foot" />

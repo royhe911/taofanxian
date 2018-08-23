@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="__PUBLIC__/JS/jquery.min.js"></script>
+<body>
+<button onclick="send()">开始群发消息</button>
+<div id="chage"></div>
+</body>
+<script>
+    function send() {
+        $.post(
+            "{:U('chatOne')}",
+            {statu:2},
+            function (data) {
+                if(data.code==1){
+                    console.log(data);
+                  request(0);
+                }
+            }
+        )
+    }
+
+    function request(page) {
+            $.post(
+                "{:U('Ajaxhttp')}",
+                {num:page},
+                function (data) {
+                    if (data.code==1){
+                        page=data.num+1;
+                        $("#chage").html('已经发送'+data.num+'名用户');
+                        request(page);
+                    }else{
+                        console.log(data);
+                        return false;
+                    }
+                }
+            )
+
+
+
+    }
+
+</script>
+</html>
+

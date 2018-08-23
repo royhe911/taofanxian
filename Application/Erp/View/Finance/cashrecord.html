@@ -1,0 +1,76 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">提现记录</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+					<a href="javascript:;" class="btn btn-secondary radius" onclick="cash()">提现</a>
+				</span>
+				<span class="r">共有数据：<strong>{$count}</strong> 条</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th>提现时间</th>
+								<th>提现金额</th>
+								<th>银行卡号</th>
+								<th>持卡姓名</th>
+								<th>提现结果</th>
+								<th>手续费</th>
+								<th>状态</th>
+							</tr>
+						</thead>
+						<tbody>
+						 <volist name="data" id="vo">
+							<tr class="text-c">
+								<td>{$vo.addtime|date="j/n H:i",###}</td>
+								<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+								<td>{$vo.card}</td>
+								<td>{$vo.name}</td>
+								<td><if condition="$vo.status ==1">
+									<img src="{$vo.money_pic}" alt="" width="100px" height="100px">
+									</if>
+									<if condition="$vo.status == 2 or $vo.status == 3">
+										拒绝原因:{$vo.reason}
+									</if>
+								</td>
+								<td><b style="font-size: 11px;">¥</b> {$vo.cost}</td>
+
+								<td class="td-status">
+									<eq name="vo.status" value="0">
+										<span class="label label-warning radius">待审核</span>
+									</eq>
+									<eq name="vo.status" value="1">
+										<span class="label label-success radius">已通过</span>
+									</eq>
+									<eq name="vo.status" value="2">
+										<span class="label label-danger radius">已拒绝</span>
+									</eq>
+									<eq name="vo.status" value="3">
+										<span class="label label-danger radius">已拒绝</span>
+									</eq>
+									<eq name="vo.status" value="4">
+										<span class="label label-warning radius">待审核</span>
+									</eq>
+
+								</td>
+							</tr>
+						 </volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+		//充值
+		function cash(){
+			layer_show('申请提现', "{:U('User/cash')}", '500', '260');
+		}
+	</script>
+</block>

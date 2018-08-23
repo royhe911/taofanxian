@@ -1,0 +1,68 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style>
+#section .section_main .message_notification table { margin-top: 30px; width: 980px;}
+#section .section_main .message_notification table tr { height: 50px;}
+#section .section_main .message_notification table tr:nth-child(odd) {  background-color: #f5f5f5;}
+#section .section_main .message_notification table tr td { font-size: 14px; color: #323232; text-align: center;}
+#section .section_main .message_notification table tr td:not(:nth-of-type(2)) {  padding: 0 100px;}
+#section .section_main .message_notification table tr td a { color: #005ea7;}
+</style>
+					<!--活动明细-->
+					<div id="my_main" class="message_notification left" style="min-height: 1067px;">
+						<h1 class="title">消息通知</h1>
+						<table>
+							<tbody>
+								<foreach name="data" item="vo">
+								<tr>
+									<td>{$vo.addtime|date="Y-m-d H:i:s",###}</td>
+									<td>{$vo.title}</td>
+									<td><a target="_blank" href="{:U('Message/news_detail',array('id'=>$vo['id']))}">查看详情</a></td>
+								</tr>
+								</foreach>
+							</tbody>
+						</table>
+						<div style="text-align:center;"></div> 
+						<div class="row">
+                            <div class="col-sm-12" >
+                                <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;">
+                                    <ul class="pagination" id="list-pagination">
+                                    </ul>
+                                </div>
+                            </div>
+				        </div>    
+					</div>
+					<!-- my_main end -->
+				</div>
+			</section>
+		<!-- page-wrapper end -->
+		</div>
+		<!-- wrapper -->
+	</div>
+<script>
+	$(function(){	
+		var paginationOptions= $.extend(true, {$pagination|json_encode} , 
+							{
+									onPageClick: function (event, page) {
+										var options = $(this).data('twbsPagination').options;
+								        options.baseUrl = options.baseUrl.replace('','');
+								        options.getParams.page = page; 
+//								        options.getParams.pagesize = options.getParams.pagesize;
+                                        var param = '';
+										for(var x in options.getParams ){
+								        		param += '&' + x + '=' + options.getParams[x];
+								        }
+//										console.log(param);return;
+										
+								        window.location.href =  options.baseUrl + param + '';
+								    }
+							});
+		$('#list-pagination').twbsPagination(paginationOptions);
+		
+	});
+	</script>	
+	<include file="Layout:foot" />

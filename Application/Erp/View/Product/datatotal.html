@@ -1,0 +1,288 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">任务管理</span>
+	<span class="c-999 en">&gt;</span>
+	<span class="c-666">数据汇总</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				<div class="text-c" style="margin-bottom: 10px;">
+					<form action="{:U('product/datatotal')}" method="post" style="display: inline-block;">
+						日期：
+						<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" value="{$time|date='Y-m-d',###}" placeholder="起始时间" >
+						<if condition="$_SESSION['user']['role'] != 6">
+						或
+						<select name="yw" class="select select-box" style="width: 160px">
+							<option value="">请选择业务员</option>
+							<volist name="yewu" id="vo">
+								<option value="{$vo.id}" <eq name="yw" value="$vo.id">selected</eq> >{$vo.info}</option>
+							</volist>
+						</select>
+						</if>
+						<button type="submit" class="btn btn-success">
+							<i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+					</form>
+					<form action="{:U('product/datatotal')}" method="post" style="display: inline-block;">
+						<input type="hidden" name="type" value="all" />
+						<button type="submit" class="btn btn-primary radius">
+							<i class="Hui-iconfont">&#xe665;</i> 查看全部</button>
+					</form>
+				</div>
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+								<tr>
+									<th scope="col" colspan="11">大额单汇总</th>
+								</tr>
+								<tr class="text-c">
+									<th width="18%">时间</th>
+									<th width="18%">大额单数量</th>
+									<th width="18%">已领取数量</th>
+									<th width="18%">已完成数量</th>
+									<th width="18%">未完成数量</th>
+									<if condition="$_SESSION['user']['role'] == 1">
+										<th width="10%">操作</th>
+									</if>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-c va-m">
+									<td>
+										<if condition="$str == 1">全部
+											<else/>{$time|date="Y/m/d",###}</if>
+									</td>
+									<td>{$count_l}</td>
+									<td>{$count_yl}</td>
+									<td>{$count_ylo}</td>
+									<td>
+										<?php echo $count_l-$count_ylo;?>
+									</td>
+									<if condition="$_SESSION['user']['role'] == 1">
+										<td>
+											<a href="javascript:;" onclick="showdetail('大额单完成详情','{:U('product/bigorder')}','600','500')">查看详情</a>
+										</td>
+									</if>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+                <div class="mt-20">
+                    <div class="dataTables_wrapper">
+                        <table class="table table-border table-bordered table-bg table-hover table-sort">
+                            <thead>
+                            <tr>
+                                <th scope="col" colspan="11">中额单汇总</th>
+                            </tr>
+                            <tr class="text-c">
+                                <th width="18%">时间</th>
+                                <th width="18%">中额单数量</th>
+                                <th width="18%">已领取数量</th>
+                                <th width="18%">已完成数量</th>
+                                <th width="18%">未完成数量</th>
+                                <if condition="$_SESSION['user']['role'] == 1">
+                                    <th width="10%">操作</th>
+                                </if>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="text-c va-m">
+                                <td>
+                                    <if condition="$str == 1">全部
+                                        <else/>{$time|date="Y/m/d",###}</if>
+                                </td>
+                                <td>{$count_m}</td>
+                                <td>{$count_ym}</td>
+                                <td>{$count_ymo}</td>
+                                <td>
+                                    <?php echo $count_m-$count_ymo;?>
+                                </td>
+                                <if condition="$_SESSION['user']['role'] == 1">
+                                    <td>
+                                        <a href="javascript:;" onclick="showdetail('中额单完成详情','{:U('product/middorder')}','600','500')">查看详情</a>
+                                    </td>
+                                </if>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+								<tr>
+									<th scope="col" colspan="11">小额单汇总</th>
+								</tr>
+								<tr class="text-c">
+									<th width="18%">时间</th>
+									<th width="18%">小额单数量</th>
+									<th width="18%">已领取数量</th>
+									<th width="18%">已完成数量</th>
+									<th width="18%">未完成数量</th>
+									<if condition="$_SESSION['user']['role'] == 1">
+										<th width="10%">操作</th>
+									</if>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-c va-m">
+									<td>
+										<if condition="$str == 1">全部
+											<else/>{$time|date="Y/m/d",###}</if>
+									</td>
+									<td>{$count_s}</td>
+									<td>{$count_ys}</td>
+									<td>{$count_yso}</td>
+									<td>
+										<?php echo $count_s-$count_yso;?>
+									</td>
+									<if condition="$_SESSION['user']['role'] == 1">
+										<td>
+											<a href="javascript:;" onclick="showdetail('小额单完成详情','{:U('product/smorder')}','600','500')">查看详情</a>
+										</td>
+									</if>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+								<tr>
+									<th scope="col" colspan="11">全部任务汇总</th>
+								</tr>
+								<tr class="text-c">
+									<th width="18%">时间</th>
+									<th width="18%">全部任务数量</th>
+									<th width="18%">已领取数量</th>
+									<th width="18%">已完成数量</th>
+									<th width="18%">未完成数量</th>
+									<if condition="$_SESSION['user']['role'] == 1">
+										<th width="10%">操作</th>
+									</if>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-c va-m">
+									<td>
+										<if condition="$str == 1">全部
+											<else/>{$time|date="Y/m/d",###}</if>
+									</td>
+									<td>{$count}</td>
+									<td>{$count_ya}</td>
+									<td>{$count_yao}</td>
+									<td>
+										<?php echo $count-$count_yao;?>
+									</td>
+									<if condition="$_SESSION['user']['role'] == 1">
+										<td>
+											<a href="javascript:;" onclick="showdetail('全部任务完成详情','{:U('product/allorder')}','600','500')">查看详情</a>
+										</td>
+									</if>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<if condition="$_SESSION['user']['role']==1">
+					<div class="fl" style="margin-top: 20px">
+						全部任务：已领取量：<span style="color: red">{$get_percentum}%</span> &nbsp;&nbsp;已完成量：<span style="color: red">{$finished_percentum}%</span> &nbsp;&nbsp;未完成量：<span style="color: red">{$unfinished_percentum}%</span>
+					</div>
+				<div class="fr" style="margin-top: 20px">
+
+					<label class="form-label fl text-r" >小额单领取人数：</label>
+					<div class="formControls fl" style="margin-right: 10px">
+						<input type="text" class="input-text" id="brusher-s" value="{$res.num|default=0}" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:80px"/>
+					</div>
+					<label class="form-label fl text-r" >中额单领取人数：</label>
+					<div class="formControls fl" style="margin-right: 10px">
+						<input type="text" class="input-text" id="brusher-m" value="{$res.m_num|default=0}" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:80px"/>
+					</div>
+					<label class="form-label fl text-r" >大额单领取人数：</label>
+					<div class="formControls fl" style="margin-right: 10px">
+						<input type="text" class="input-text" id="brusher-l" value="{$res.l_num|default=0}" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:80px"/>
+					</div>
+					<div class="formControls fl">
+						<button type="button" class="btn btn-secondary radius" onclick="setNum()">提交</button>
+					</div>
+				</div>
+				</if>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function () {
+			// var start_time ,end_time;
+			laydate.render({
+			  	elem: '#datemin',
+			   	min: '2018-01-01',
+			   	max: '',
+			   	done: function(value, date){
+					// start_time = value;
+					// if(new Date(value).getTime() > new Date(end_time).getTime()){
+					// 	layer.msg('结束时间不得小于起始时间',{icon:2,time:1000},function(){window.location.reload()});
+					// }
+			  	}
+			});
+			// laydate.render({
+			//   	elem: '#datemax',
+			//   	min: '2018-01-01',
+		   	// 	max: '',
+			//   	done: function(value, date){
+			//   		end_time = value;
+			// 		if(new Date(value).getTime() < new Date(start_time).getTime()){
+			// 			layer.msg('结束时间不得小于起始时间',{icon:2,time:1000},function(){window.location.reload()});
+			// 		}
+			//   	}
+			// });
+		})
+
+		function showdetail(title, url, w, h) {
+			var type = "{$str}";
+			var time = timestampToTime("{$time}");
+			if (type == 1) {
+				urlp = url + "&type=all&yw={$yw}";
+			} else {
+				urlp = url + "&time=" + time + "&yw="+"{$yw}";
+			}
+			layer_show(title, urlp, w, h);
+		}
+
+		function timestampToTime(timestamp) {
+			var date = new Date(timestamp * 1000);
+			var Y = date.getFullYear() + '-';
+			var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+			var D = date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate();
+			var h = date.getHours() + ':';
+			var m = date.getMinutes() + ':';
+			var s = date.getSeconds();
+			return Y + M + D;
+		}
+		function setNum() {
+			var brusher_s = $.trim($("#brusher-s").val());
+			var brusher_m = $.trim($("#brusher-m").val());
+			var brusher_l = $.trim($("#brusher-l").val());
+			if(brusher_s <= 0 || brusher_m <= 0 || brusher_l <= 0){
+				layer.msg('请输入正确的人数');
+			}else{
+				$.post("{:U('product/user_config')}",{brusher_s:brusher_s,brusher_m:brusher_m,brusher_l:brusher_l},function (data) {
+					if(data.msg == 1){
+						layer.msg(data.info,{icon:1,time:1000})
+					}else{
+						layer.msg(data.info,{icon:2,time:1000})
+					}
+				})
+			}
+			
+		}
+	</script>
+</block>

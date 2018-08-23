@@ -1,0 +1,228 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">刷单员管理</span><span class="c-999 en">&gt;</span><span class="c-666">刷单员列表</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action="" method="get" onsubmit="return checkSearch()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="brush">
+				<input type="hidden" name="a" value="index">
+				<input type="hidden" name="id" value="{$Think.get.id}">
+				<div class="text-c" style="margin-bottom: 10px;">
+					<if condition="$_SESSION['user']['role'] != 3">
+					<select name="zhanz" class="select select-box" style="width:160px;">
+						<option value="0">请选择站长</option>
+						<volist name="zz" id="vo">
+							<option value="{$vo.id}" <eq name="Think.get.zhanz" value="$vo.id">selected="selected"</eq> >{$vo.realname}</option>
+						</volist>
+					</select>
+					</if>
+					<input type="text"  name="sd_realname" class="input-text" style="width:150px;" placeholder="刷单员搜索" value="{$sd_realname}">
+					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+					<if condition="$_SESSION['user']['role'] == 1">
+						<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+						<a href="javascript:;" onclick="allocationS('分配每日小额单数量','{:U('brush/allots')}','600','600')" class="btn btn-primary radius">分配小额单</a>
+						<a href="javascript:;" onclick="allocationS('分配每日中额单数量','{:U('brush/allotm')}','600','600')" class="btn btn-primary radius">分配中额单</a>
+						<a href="javascript:;" onclick="allocationS('分配每日大额单数量','{:U('brush/allotl')}','600','600')" class="btn btn-success radius">分配大额单</a>
+					</if>
+					</eq>
+					<if condition="$_SESSION['user']['role'] eq 3">
+				 <a href="javascript:;" onclick="admin_add('添加刷单员','{:U('Brush/add')}','800','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加刷单员</a>
+					</if>
+				</span>
+				<span class="r">刷单员：<strong>{$count}</strong> 人</span>
+			</div>
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-bg">
+					<thead>
+						<tr>
+							<th scope="col" colspan="17">
+								<if condition="$_SESSION['user']['role'] == 3">今日小额单总量：<font color="red">{$num}</font>单/剩余分配量：{$num_f}/剩余：{$num_s} &nbsp;&nbsp;|&nbsp;&nbsp;今日中额单总量：<font color="red">{$m_num}</font>单/剩余分配量：{$mum_f}/剩余：{$mum_s}&nbsp;&nbsp;|&nbsp;&nbsp;今日大额单总量：<font color="red">{$l_num}</font>单/剩余分配量：{$lum_f}/剩余：{$l_num_s}</if>
+								<if condition="$_SESSION['user']['role'] == 1">
+									刷单员列表
+								</if>
+							</th>
+						</tr>
+						<tr class="text-c">
+							<th><input type="checkbox" name="" value=""></th>
+							<th>id</th>
+							<if condition="$_SESSION['user']['id'] == 1">
+							<th>站长</th>
+							</if>
+							<th>QQ</th>
+							<th>姓名</th>
+							<th>手机号</th>
+							<th>微信/昵称/银行卡/姓名</th>
+							<th>余额</th>
+							<th>备注</th>
+							<if condition="$_SESSION['user']['role'] == 3">
+								<th>今日小额单</th>
+								<th>已领小额单</th>
+								<th>今日中额单</th>
+								<th>已领中额单</th>
+								<th>今日大额单</th>
+								<th>已领大额单</th>
+							</if>
+							<th>加入时间</th>
+							<th>是否已启用</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<volist name="info" id="vo">
+					  	<tr class="text-c">
+					 		<td><input type="checkbox" value="{$vo.id}" name="ids[]" /></td>
+					 		<td>{$vo.id}</td>
+							<if condition="$_SESSION['user']['id'] == 1">
+					 		<td>{$vo.user_name|default='无'}</td>
+							</if>
+					 		<td>{$vo.qq}</td>
+					 		<td>{$vo.realname}
+								<switch name="vo.check">
+									<case value="0">
+					 			<span class="label label-warning radius" style="cursor: pointer;" title="审核" onclick="admin_shenhe({$vo.id})">待审核</span>
+									</case>
+										<case value="1">
+					 			<span class="label label-success radius">已通过</span>
+										</case>
+											<case value="2">
+					 			<span class="label label-danger radius">已拒绝</span>
+											</case>
+								</switch>
+					 		</td>
+					 		<td>{$vo.name}</td>
+					 		<td><volist name="vo.wechat" id="v">{$v.num} / {$v.nick} / {$v.card} / {$v.username|default='无'}<br /></volist></td>
+					 		<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+					 		<td>{$vo.info|default="无"}</td>
+					 		<if condition="$_SESSION['user']['role'] == 3">
+						 		<td>
+						 			<span class="allot-num order-input"><input type="text" value="{$vo.num}" style="width: 50px;" disabled="disabled" /></span>
+									<if condition="$vo.msg eq 0 and $vo.check eq 1">
+					 				<a href="javascript:;" onclick="orderNum(this,0)" class="order-a"><i class="Hui-iconfont">分配</i></a>
+
+									<a href="javascript:;" onclick="orderSure(this,{$vo.id},0)" class="sure-a" style="display: none;"><i class="Hui-iconfont">确定</i></a>
+									<a href="javascript:;" onclick="orderCancel()" class="cancel-a" style="display: none;"><i class="Hui-iconfont" >取消</a>
+									</if>
+						 		</td>
+						 		<td>{$vo.nex_num}</td>
+						 		<td>
+						 			<span class="allot-num order-input"><input type="text" value="{$vo.m_num}" style="width: 50px;" disabled="disabled" /></span>
+									<if condition="$vo.msg eq 0 and $vo.check eq 1">
+					 				<a href="javascript:;" onclick="orderNum(this,0)" class="order-a"><i class="Hui-iconfont">分配</i></a>
+									<a href="javascript:;" onclick="orderSure(this,{$vo.id},2)" class="sure-a" style="display: none;"><i class="Hui-iconfont">确定</i></a>
+									<a href="javascript:;" onclick="orderCancel()" class="cancel-a" style="display: none;"><i class="Hui-iconfont" >取消</i></a>
+									</if>
+						 		</td>
+						 		<td>{$vo.mex_num}</td>
+						 		<td>
+						 			<span class="allot-num order-input"><input type="text" value="{$vo.l_num}" style="width: 50px;" disabled="disabled" /></span>
+									<if condition="$vo.msg eq 0 and $vo.check eq 1">
+					 				<a href="javascript:;" onclick="orderNum(this,0)" class="order-a"><i class="Hui-iconfont">分配</i></a>
+									<a href="javascript:;" onclick="orderSure(this,{$vo.id},1)" class="sure-a" style="display: none;"><i class="Hui-iconfont">确定</i></a>
+									<a href="javascript:;" onclick="orderCancel()" class="cancel-a" style="display: none;"><i class="Hui-iconfont" >取消</i></a>
+									</if>
+						 		</td>
+						 		<td>{$vo.lex_num}</td>
+					 		</if>
+					 		<td>{$vo.addtime|date="j/n H:i",###}</td>
+					 		<td class="td-status">
+					 		 <eq name="vo.msg" value="0">
+					 		   <span class="label label-success radius">已启用</span>
+					 		  <else/>
+					 		   <span class="label radius">已禁用</span>
+					 		 </eq>
+					 		</td>
+					 		<td class="td-manage">
+								<if condition="$_SESSION['user']['role'] neq 4">
+								<if condition="$vo.msg == 0">
+					 		<a style="text-decoration:none" onClick="admin_op(this,{$vo.id},1)" href="javascript:;"><i class="Hui-iconfont state">禁用</i></a><else />
+								<a style="text-decoration:none" onClick="admin_op(this,{$vo.id},0)" href="javascript:;"><i class="Hui-iconfont state">启用</i></a>
+								</if>
+								</if>
+								<if condition="$vo.check == 1">
+							<a title="刷单记录" href="javascript:;" onclick="admin_edit('刷单记录','{:U('Brush/brushtotal',array('id' => $vo['id']))}',1,'1300')"  style="text-decoration:none"><i class="Hui-iconfont">刷单记录</i></a>
+
+								</if>
+								<if condition="$_SESSION['user']['role'] neq 4">
+					 		<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{:U('Brush/edit',array('id' => $vo['id']))}',1,'800','500')"  style="text-decoration:none"><i class="Hui-iconfont">编辑</i></a>
+								<if condition="$_SESSION['user'][role] == 1">
+					 		<a title="删除" href="javascript:;" onclick="admin_del(this,{$vo.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">删除</i></a>
+								</if>
+								</if>
+
+					 		</td>
+					 	</tr>
+					</volist>
+					</tbody>
+				</table>
+			</div>
+
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+		var roleval = "{$_SESSION['user']['role']}",url1="{:U('brush/del')}",url2="{:U('brush/state')}",url3="{:U('brush/shenhe')}",url4="{:U('manager/delAll')}";
+		function allocationS(title,url,w,h){
+				layer_show(title,url,w,h);
+			}
+			function orderNum(el,type){
+
+				var limit_num = $(el).siblings('.allot-num').find('input').val();
+				$(el).siblings('.allot-num').html('<input type="text" class="ordernum" value="'+limit_num+'" onfocusin="removeErr(this)" style="width:120px;" onkeyup="value=value.replace(/[^\\d]/g,\'\')">');
+
+
+			$(el).hide().siblings(".sure-a,.cancel-a").show();
+		}
+		function orderSure(el,id,type){
+			if(type == 0){
+				var limits =$.trim($(el).siblings('.allot-num').find('input').val()); //小额度
+				if(limits < 0){
+					$(el).siblings('.allot-num').find('input').addClass('error-input').attr('placeholder','请填写小额单数量');
+					return ;
+				}
+				var urls = "{:U('Brush/allots_nex')}";
+				var obj = {id:id,limit:limits};
+			}else if(type == 1){
+				var limitl =$.trim($(el).siblings('.allot-num').find('input').val()); //大额度
+				if(limitl < 0){
+					$(el).siblings('.allot-num').find('input').addClass('error-input').attr('placeholder','请填写大额单数量');
+					return ;
+				}
+				var urls = "{:U('Brush/allotl_nex')}";
+				var obj= {id:id,limit:limitl};
+			}else if(type == 2){
+				var limitm =$.trim($(el).siblings('.allot-num').find('input').val()); //中额度
+				if(limitm < 0){
+					$(el).siblings('.allot-num').find('input').addClass('error-input').attr('placeholder','请填写中额单数量');
+					return ;
+				}
+				var urls = "{:U('Brush/allotm_nex')}";
+				var obj= {id:id,limit:limitm};
+			}
+	        $.post(urls, obj, function(data) {
+	        	if (1 == data.msg){
+	        		layer.msg(data.info,{icon:1,time:1000},function(){
+	        			window.location.reload()
+	        		})
+	        	} else {
+	        		layer.msg(data.info,{icon:2,time:1000},function(){
+	        			window.location.reload()
+	        		});
+	        	}
+	        },'json');
+		}
+		//取消
+		function orderCancel(){
+			window.location.reload();
+		}
+		function removeErr(el){
+			$(el).removeClass('error-input');
+		}
+	</script>
+	<script src="__PUBLIC__/ERP/lib/custom/brush.js" type="text/javascript" charset="utf-8"></script>
+</block>

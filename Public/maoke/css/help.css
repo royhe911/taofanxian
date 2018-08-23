@@ -1,0 +1,492 @@
+/*.contant {
+	padding: 10px 0;
+}
+.contant {
+	width: 100%;
+	margin: 0 auto;
+	background: #f7f7f7;
+	min-height: 100px;
+	height: auto !important;
+}*/
+.mian_her {
+	height: 22px;
+	line-height: 22px;
+	color: #525252;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+.mian_her a {
+	color: #525252;
+	text-decoration: underline;
+}
+.mian_her span {
+	margin: 0px 5px;
+}
+.mian_left {
+	float: left;
+	width: 198px;
+	border: 1px solid #dcdcdc;
+	background: #fff;
+}
+.clearfix {
+	zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+	content: ".";
+	display: block;
+	visibility: hidden;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+}
+.mi_ler {
+	height: 43px;
+}
+.mi_ler a {
+	float: left;
+	display: block;
+	width: 98px;
+	height: 43px;
+	line-height: 43px;
+	text-align: center;
+	color: #9d9d9d;
+	font-size: 14px;
+	background: url(../images/help/et_l.jpg) left center repeat-x;
+}
+.mi_ler a.seled {
+	color: #404040;
+	font-weight: bold;
+	background: #fff;
+}
+.left_tpa {
+	color: #404040;
+	border-bottom: 1px dashed #e4e4e4;
+	padding: 14px;
+}
+.left_tpa strong {
+	background: url(../images/help/t_pg.jpg) left center no-repeat;
+	padding-left: 17px;
+	font-size: 14px;
+}
+.left_ree ul {
+	width: 197px;
+}
+.left_ree ul li {
+	border-bottom: 1px dashed #e4e4e4;
+	padding: 8px 14px;
+}
+.left_ree ul li a {
+	background: url(../images/help/r_p.jpg) left center no-repeat;
+	padding-left: 13px;
+	color: #505050;
+	font-size: 12px;
+}
+.left_ree ul li a:hover {
+	background: url(../images/help/r_pt.jpg) left center no-repeat;
+	color: #c31b1b;
+	font-size: 12px;
+	font-weight: bold;
+}
+.left_ree ul li a.rtf {
+	background: url(../images/help/r_pt.jpg) left center no-repeat;
+	color: #c31b1b;
+	font-size: 12px;
+	font-weight: bold;
+}
+.left_tps {
+	color: #404040;
+	border-bottom: 1px dashed #e4e4e4;
+	padding: 14px;
+}
+.left_tps a {
+	color: #404040;
+}
+.left_tps strong {
+	padding-left: 17px;
+	font-size: 14px;
+}
+.imgloli {
+	width: 189px;
+	height: 49px;
+	position: fixed;
+	right: 55px;
+}
+.fork {
+	width: 12px;
+	height: 12px;
+	position: absolute;
+	top: -14px;
+	right: -5px;
+	font-size: 14px;
+	color: #000000;
+}
+.mian_right {
+	float: right;
+	width: 862px;
+}
+.zhu_ces {
+	border: 1px solid #efefef;
+	height: 605px;
+	min-height: 605px;
+	height: auto !important;
+	background: #fff;
+	padding-bottom: 50px;
+}
+.rh_z {
+	height: 43px;
+	background: #efefef;
+	line-height: 43px;
+	color: #dc493f;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: 17px;
+}
+.rh_z i {
+	background: url(../images/help/jiant.png)no-repeat;
+	width: 5px;
+	height: 10px;
+	margin-right: 10px;
+}
+.rt_yhd {
+	margin-left: 17px;
+}
+.yh_vb {
+	margin-left: 20px;
+}
+.yh_vb {
+	color: #505050;
+	font-size: 14px;
+	line-height: 40px;
+}
+.yh_vb span {
+	background: url(../images/help/e_vg.jpg) left center no-repeat;
+	padding-left: 17px;
+}
+.fb_srt {
+    color: #c31b1b;
+    font-size: 16px;
+    line-height: 35px;
+    margin-top: 20px;
+}
+.fb_srt p {
+	font: bold 20px 微软雅黑;
+	color: #ff4c48;
+	line-height: 60px;
+}
+.t_yh_vb>p,
+.yh_vb_chu {
+	color: #666;
+	font: 14px 微软雅黑;
+	line-height: 30px;
+}
+.t_yh_vb>p:nth-child(1),.yh_vb_zai {
+	color: #333;
+	font-weight: bold;
+}
+.yh_vbs {
+	line-height: 30px;
+	color: #505050;
+	font-size: 14px;
+}
+.yh_vbs .help_jhleft {
+	color: #505050;
+	margin-left: 0;
+	font-size: 14px;
+	display: inline-block;
+	width: 60px;
+	height: 30px;
+	float: left;
+}
+.yh_vbs .help_jhright {
+	color: #505050;
+	margin-left: 0;
+	font-size: 14px;
+	display: inline-block;
+	width: 760px;
+}
+.gs_to {
+	color: #505050;
+	font-size: 14px;
+	line-height: 30px;
+	margin-bottom: 6px;
+}
+.gsc_pw {
+	margin-left: 18px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	line-height: 28px;
+	color: #505050;
+}
+.gcx_tr {
+	display: inline-block;
+	color: #505050;
+	font-size: 12px;
+}
+.gcx_tr span {
+	float: left;
+	line-height: 26px;
+}
+.gcs_right {
+	float: left;
+	margin-left: 12px;
+	width: 799px;
+	line-height: 26px;
+}
+.gr_wq {
+	color: #ff0000;
+}
+.vip-text h3,
+.vip-text h4,
+.vip-text p {
+	text-align: justify;
+	text-justify: distribute-all-lines;
+}
+.vip-text h3 {
+	font-size: 14px;
+	line-height: 25px;
+}
+.vip-text p {
+	line-height: 22px;
+	padding-right: 20px;
+}
+.yh_vbs strong {
+	color: #505050;
+	font-size: 12px;
+	margin-left: 15px;
+}
+.yh_vbs span {
+	color: #505050;
+	margin-left: 15px;
+	font-size: 12px;
+}
+.zhu_ce {
+	border: 1px solid #dcdcdc;
+	height: 430px;
+	background: #fff;
+	margin-bottom: 10px;
+}
+.rh_z {
+	height: 43px;
+	background: #efefef;
+	line-height: 43px;
+	color: #dc493f;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: 17px;
+}
+.er_g a {
+	margin-right: 20px;
+}
+.left_ts {
+	color: #404040;
+	padding: 14px;
+}
+.left_ts span {
+	background: url(../images/help/t_pg.jpg) left center no-repeat;
+	padding-left: 25px;
+	font-size: 18px;
+	font-family: "微软雅黑";
+}
+.rt_yhd li {
+    float: left;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.yh_zcf ul li {
+	float: left;
+	width: 240px;
+	float: left;
+	line-height: 24px;
+	margin: 5px 0px 5px 42px;
+}
+.yh_zcf ul li a {
+	background: url(../images/help/e_vg.jpg) left center no-repeat;
+	padding-left: 21px;
+	color: #505050;
+	font-size: 14px;
+}
+.rt_yhd .fa_b {
+	background: url(../images/help/image_l.png) no-repeat;
+	width: 96px;
+	height: 57px;
+	text-align: center;
+	line-height: 57px;
+	margin-left: 17px;
+	font-weight: bold;
+	color: #737477;
+	margin-bottom: 20px;
+}
+.rt_yhd .fa_b:hover {
+	background: url(../images/help/image.png) no-repeat;
+	width: 96px;
+	height: 57px;
+	color: #fff;
+}
+.rt_yhd .fa_c {
+	line-height: 18px;
+}
+.rt_yhd .fa_c a {
+	position: relative;
+	top: 9px;
+}
+.rt_yhd .ly {
+	margin-right: 136px;
+	line-height: 18px;
+}
+.mian_topt {
+	border: 1px solid #dcdcdc;
+	height: 180px;
+	margin-bottom: 10px;
+	background: #fff;
+}
+.mtt_pt,
+.mtt_pts {
+	margin-left: 14px;
+	height: 82px;
+}
+.mtt_pt dt {
+	float: left;
+	color: #e62a2a;
+	font-size: 14px;
+	font-weight: bold;
+	margin-right: 15px;
+	line-height: 64px;
+	margin-top: 15px;
+}
+.mtt_pt dl dd {
+	float: left;
+}
+.mtt_pt dl dd ol {
+	position: relative;
+	z-index: 10;
+	height: 79px;
+	margin-bottom: -63px;
+}
+.mtt_pt dl dd ol li {
+	float: left;
+	width: 103px;
+	cursor: pointer !important;
+	height: 65px;
+	text-align: center;
+	display: block;
+}
+.mtt_pt dl dd ol li a {
+	color: #fff;
+	display: block;
+	height: 65px;
+}
+.mtt_plt {
+	background: url(../images/help/er_pm.jpg) left center no-repeat;
+	width: 0px;
+	height: 63px;
+}
+.mit_pl {
+	background: url(../images/help/nb_ty.jpg) left center no-repeat;
+	width: 622px;
+	height: 63px;
+	position: relative;
+	z-index: 1;
+}
+.sat0 {
+	background: url(../images/help/er_pm.jpg) left center no-repeat;
+	width: 102px;
+	height: 63px;
+}
+.sat1 {
+	background: url(../images/help/er_pm.jpg) left center no-repeat;
+	width: 206px;
+	height: 63px;
+}
+.sat2 {
+	background: url(../images/help/er_pm.jpg) left center no-repeat;
+	width: 310px;
+	height: 63px;
+}
+.sat3 {
+	background: url(../images/help/er_pm.jpg) left center no-repeat;
+	width: 414px;
+	height: 63px;
+}
+.sat4 {
+	background: url(../images/help/er_pm.jpg) left center no-repeat;
+	width: 518px;
+	height: 63px;
+}
+.sat5 {
+	background: url(../images/help/er_pm.jpg) left center no-repeat;
+	width: 622px;
+	height: 63px;
+}
+.mtt_pts dt {
+	float: left;
+	color: #40aec6;
+	font-size: 14px;
+	font-weight: bold;
+	margin-right: 15px;
+	line-height: 63px;
+	margin-top: 15px;
+}
+.mtt_pts dl dd {
+	float: left;
+}
+.mtt_pts dl dd ol {
+	position: relative;
+	z-index: 10;
+	height: 79px;
+	margin-bottom: -63px;
+}
+.mtt_pts dl dd ol li {
+	float: left;
+	width: 103px;
+	cursor: pointer !important;
+	height: 65px;
+	text-align: center;
+}
+.mtt_pts dl dd ol li a {
+	color: #fff;
+	display: block;
+	height: 65px;
+}
+.mit_pls {
+	background: url(../images/help/tr_lv.jpg) left center no-repeat;
+	width: 622px;
+	height: 63px;
+	position: relative;
+	z-index: 1;
+}
+.mtt_plts {
+	background: url(../images/help/et_pc.jpg) left center no-repeat;
+	width: 0px;
+	height: 63px;
+}
+.sats0 {
+	background: url(../images/help/et_pc.jpg) left center no-repeat;
+	width: 102px;
+	height: 63px;
+}
+.sats1 {
+	background: url(../images/help/et_pc.jpg) left center no-repeat;
+	width: 206px;
+	height: 63px;
+}
+.sats2 {
+	background: url(../images/help/et_pc.jpg) left center no-repeat;
+	width: 310px;
+	height: 63px;
+}
+.sats3 {
+	background: url(../images/help/et_pc.jpg) left center no-repeat;
+	width: 414px;
+	height: 63px;
+}
+.sats4 {
+	background: url(../images/help/et_pc.jpg) left center no-repeat;
+	width: 518px;
+	height: 63px;
+}
+.sats5 {
+	background: url(../images/help/et_pc.jpg) left center no-repeat;
+	width: 622px;
+	height: 63px;
+}

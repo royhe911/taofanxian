@@ -1,0 +1,115 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+                <!-- 试用管理 -->
+                <div id="my_main" class="content left" style="background-color: rgb(255, 255, 255); min-height: 889px;">
+                    <div class="activity_manage">
+                        <h1 class="title">优惠券活动回收站</h1>
+                        <!--查询和回收站-->
+                        <div class="inquire_recycleBin clearfix">
+                            <!--查询搜索框-->
+                            <div class="left inquire_box">
+                              <form action="" method="GET" id="myform" />
+                                <ul class="clearfix">
+                                    <li class="goods_name">商品名称：</li>
+                                    <li class="input_box"><input type="text" id="gname" name="gname" placeholder="请输入商品名称" value="{$gname}"></li>
+                                    <li class="inquire_btn">
+                                     <input type="hidden" name="m" value="Supporter" />
+                                     <input type="hidden" name="c" value="Coupon" />
+                                     <input type="hidden" name="a" value="trash" />
+                                     <input type="submit" value="查询" />
+                                    </li>
+                                </ul>
+                              </form>
+                            </div>
+                        </div>
+                        <!--商品发货状态-->
+                        <volist name="data" id="vo">
+                        <div class="delivery_status">
+                            <div class="title">
+                                <p class="left">
+                                    <span>发布时间：还未发布</span>
+                                    <span>活动编号：{$vo.id}</span>
+                                    <span>押金合计：<b>{$vo['real_price']*$vo['kucun'] + $vo['red_price']*$vo['kucun'] + $vo['kucun']|number_format=2}</b></span>
+                                    <!--span>金币合计：<b>0.00</b></span-->
+                                </p>
+                                <p class="right">
+                                    <a href="{:U('Coupon/processdetail')}" target="_blank">进展详情</a>
+                                </p>
+                            </div>
+                            <div class="detalis">
+                                <ul>
+                                    <li><img style="width:80px;height:80px" src="../{$vo.img}"></li>
+                                    <li>
+                                        <p>商品名称：<span>{$vo.goods_name}</span></p>
+                                        <p>店铺名称：<span>{$vo.shopname}</span></p>
+                                        <p>商品来源：<span><if condition="($vo.laiyuan eq 1)">淘宝<elseif condition="$vo.laiyuan eq 2"/>天猫</if></span></p>
+                                        <p>商品分类：<span>{$category[$vo[cid]]}</span></p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <if condition="($vo.confirm eq 99)"><span>待付款</span>
+                                             <elseif condition="$vo.confirm eq 100"/><span>待完善</span>
+                                             <elseif condition="$vo.confirm eq 0"/><span>待审核</span>
+                                             <elseif condition="$vo.confirm eq 1"/><span>已驳回</span>
+                                             <elseif condition="$vo.confirm eq 2"/>
+                                             <if condition="($vo.etime ELT date('Y-m-d H:i:s', time()))"><span>已结束</span>
+                                              <else /><span>活动进行中</span>
+                                             </if>
+                                            </if>
+                        				</p>
+                                    </li>
+                                    <li><div class="table_cell"><p class="status"><span><a href="{:U(\'Coupon/trash\',array(\'id\' => $vo['id']))}">还原该试用</a></span></p></div></li>
+                                </ul>
+                                <p class="tryNum_detail">
+                                    <span>总库存：<b>{$vo.kucun|default="0"}份</b></span>
+                                    <span>申请人数：<b>0人</b></span>
+                                    <span>已领取：<b>0 份</b></span>
+                                    <notin name="vo.state" value="11,20">
+                                     <!--span class="right into_recycleBin" onclick="show_into_recycle_bin(11791)">放入回收站</span-->
+                                    </notin>
+                                </p>
+                                <!--新添 end 第三期-->
+                            </div>
+                        </div>
+                        </volist>
+                    </div>
+                    <!------分页-------->
+                    <notempty name="pagination.totalCount">
+                    <if condition="($pagination.totalPages gt 1)">
+                     <div class="row">
+                      <div class="col-sm-12">
+                       <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;"><ul class="pagination" id="list-pagination"></ul></div>
+                      </div>
+				     </div>
+				    </if>
+				    </notempty>
+				    <!------end----------->
+				</div>
+			</section>
+		<!-- page-wrapper end -->
+		</div>
+		<!-- wrapper -->
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		var paginationOptions= $.extend(true, {$pagination|json_encode} ,
+		{
+			onPageClick: function (event, page) {
+				var options = $(this).data('twbsPagination').options;
+				options.baseUrl = options.baseUrl.replace('','');
+				options.getParams.page = page;
+				//options.getParams.pagesize = options.getParams.pagesize;
+				var param = '';
+				for(var x in options.getParams ){
+					param += '&' + x + '=' + options.getParams[x];
+				}
+				//console.log(param);return;
+				window.location.href =  options.baseUrl + param + '';
+			}
+		});
+		$('#list-pagination').twbsPagination(paginationOptions);
+
+	});
+	</script>
+	<include file="Layout:foot" />

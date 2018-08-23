@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/shop-index.css"/>
+	<script src="__PUBLIC__/maoke/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<title>有奖邀请</title>
+	<style type="text/css">
+		.footer{ margin-top: 0;}
+	</style>
+</head>
+<body>
+	<!--                        顶部登录注册  start                      -->
+	<div style="background: #F2F2F2; width: 100%; height: 35px; border-bottom: 1px solid #e2e2e2;">
+		<a name="top1"></a>
+	    <div class="header_top" style="margin-left: auto; margin-right: auto;">
+	        <div class="header_leftt">
+	            <div class="top_mb">
+	                <!--<a href="javascript:"  style="color: #f25f55">QQ登录</a>
+	                <span class="color_fg">|</span>
+	                <a href="javascript:"  style="color: #f25f55;">用户登录</a>
+	                <span class="color_fg">|</span>-->
+	                <a href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" style="color:#888">商家注册</a>
+	                <span class="color_fg">|</span>
+	                <a href="http://www.taofanxian.com/admin.php?m=Home&c=Index&a=login" style="color: #f25f55;">商家登录</a>
+	            </div>
+	            <div class="top_left">
+	                <a href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true" target="_blank" class="on-service">在线客服</a>
+	            </div>
+	            <div class="shou_btn" id="addcollect">
+	                <em>&nbsp;&nbsp;收藏</em>
+	                <div class="shou_toggle"><span>Ctrl</span>或<span>Cmd+D</span>收藏本站</div>
+	            </div>
+	        </div>
+	        
+	        <div class="header_right">
+	        	<a href="{:U('Index/index')}" title="领吧首页">领吧首页</a><span class="color_fg">|</span>
+	        	<a href="javascript:;" class="wx">
+	        		<i class="top-icon-ph"></i>微信公众号
+	        		<div class="wx-img"> 
+            			<img src="__PUBLIC__/maoke/images/erweima.jpg" width="150px"/>
+            		</div>
+	        	</a>
+	        	<!--<span class="color_fg">|</span>
+	        	<a href="javascript:;" target="_blank">邀请好友<span style="color: #f25f55; font-weight: bold;">送80元</span></a>-->
+	        	<!--<span class="color_fg">|</span>
+	        	<a href="javascript:">做问卷送金币</a>-->
+	        	<span class="color_fg">|</span>
+	        	<a href="" target="_blank">帮助中心</a><span class="color_fg">|</span>
+	        	<span class="wzdh">
+                    <a href="" target="_blank" class="sbdjx" id="naviatetext" style="width: 70px;">网站导航</a>
+                    <div class="oneto" id="naviate">
+                        <div class="onetoa">
+                            <p class="tcbt">
+                                <a href="">免费试用</a>
+                            </p>
+                            <p>
+                                <a href="" target="_blank">试用专区</a>&nbsp;&nbsp;<a href="" target="_blank">试用报告</a>
+                            </p>
+                        </div>
+                        <div class="onetoa">
+                            <p class="tcbt">
+                                <a href="">有奖竞猜</a>
+                            </p>
+                            <p>
+                                <a href="" target="_blank">有奖竞猜</a>
+                            </p>
+                        </div>
+                        <div class="onetoa">
+                            <p class="tcbt">
+                                <a href="">站内活动</a>
+                            </p>
+                            <p>
+                                <a href="" target="_blank">邀请有奖</a>&nbsp;&nbsp;<a href="" target="_blank">金币抽奖</a>
+                            </p>
+                        </div>
+                        <div class="onetoa">
+                            <p style="padding-top: 8px;">
+                                <a href="" target="_blank">商家报名</a>&nbsp;&nbsp;
+                                <a href="" target="_blank">意见反馈</a>
+                            </p>
+                        </div>
+                    </div>
+                </span>
+	        
+	        </div>
+    	</div>
+	</div>
+	<!--                        顶部登录注册  end                               -->
+<!--                        邀请好友  start                   -->
+	<div class="" style="background:url(__PUBLIC__/maoke/images/img_02.png) no-repeat center; width: 100%; position: relative; height: 2387px;">
+		<div style="text-align: center; top:22px; position: absolute; font-size: 16px; width: 100%;">
+			领吧网累计已发放奖励<span style="color: #F25F55;">28080</span>元
+		</div>
+		<div style="position: relative;top: 720px;width: 100%;">
+			<div style="width: 965px; height: 410px; margin: 0 auto; ">
+				<div style="width: 430px; float: left;">
+					<p style="width: 100%; text-align: center;font-size: 16px;padding-top: 60px; color: #666;">
+						扫描以下二维码关注微信公众号就能看到邀请记录啦
+					</p>
+					<a href="javascript:;" style="width: 330px;height:200px; border: 0;background: url(Public/maoke/images/erweima.jpg) center no-repeat;background-size: 50%; display: block;	margin: 0 auto; margin-top: 50px;"></a>
+				</div>
+				<div style="float: right; margin-right: 18px; width: 430px; height: 100%;  font-size: 16px;">
+					<table border="0" width="100%" style="color: #666;border-collapse:separate; border-spacing:0px 10px;">
+						<tr>
+							<th width="8%" style="text-align:left;">排名</th>
+							<th>用户昵称</th>
+							<th width="25%">累计奖励(元)</th>
+							
+						</tr>
+						<tr>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;">lad***</td>
+							<td style="text-align: center;">2999.00</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">2</td>
+							<td style="text-align: center;">吴绵*</td>
+							<td style="text-align: center;">2769.00</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">3</td>
+							<td style="text-align: center;">海棠**</td>
+							<td style="text-align: center;">2586.00</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">4</td>
+							<td style="text-align: center;">顾欢*</td>
+							<td style="text-align: center;">2532.00</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">5</td>
+							<td style="text-align: center;">迈*</td>
+							<td style="text-align: center;">2382.00</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">6</td>
+							<td style="text-align: center;">一个空***</td>
+							<td style="text-align: center;">2151.00</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">7</td>
+							<td style="text-align: center;">李**</td>
+							<td style="text-align: center;">1995.00</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">8</td>
+							<td style="text-align: center;">田恬***</td>
+							<td style="text-align: center;">1875.00</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+<!--                        邀请好友  end                   -->
+
+
+
+<include file="Layout:foot" />

@@ -1,0 +1,98 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">商家管理</span><span class="c-999 en">&gt;</span><span class="c-666">店铺审核</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action=" " method="get" onsubmit="return checkSearch()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="business">
+				<input type="hidden" name="a" value="shopcheck">
+				<div class="text-c" style="margin-bottom: 10px;">
+					<input type="text" class="input-text " style="width:250px"  id="" name="shopname" value="{$shopname}" placeholder="店铺名搜索" />
+					<input type="text" class="input-text " style="width:250px"  id="" name="main_shop" value="{$main_shop}" placeholder="商家名搜索" />
+
+					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th>店铺名称</th>
+								<th>旺旺</th>
+								<th>商家名称</th>
+								<th>店铺网址</th>
+								<th>状态</th>
+								<th width="100">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<volist name="data" id="info">
+							<tr class="text-c">
+								<td>{$info.shopname}</td>
+								<td>{$info.wangwang}</td>
+								<td>{$info.b_shopname}</td>
+								<td><a href="{$info.url}" title="点击查看" target="_blank">点击查看</a></td>
+								<td>
+									<if condition="$info.status eq 2"><span class="label label-success radius">已审核</span></if>
+									<if condition="$info.status eq 0"><span class="label label-warning radius">待审核</span></if>
+									<if condition="$info.status eq 1"><span class="label label-danger radius">已拒绝</span></if>
+								</td>
+								<td class="td-manage">
+									<a title="审核店铺" href="javascript:;"  onclick="shopCheck('{$info.id}')" style="text-decoration:none"><i class="Hui-iconfont">审核</i></a>
+								</td>
+							</tr>
+							</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	function shopCheck(id) {
+		layer.confirm('店铺审核？', {
+			btn: ['通过', '不通过', '取消'],
+			shade: false,
+			closeBtn: 0
+		}, function(index) {
+	        $.post("{:U('Business/shopcheck')}", {id:id,type:2}, function(data) {
+	        	if (1 == data.msg){
+        			layer.msg('已通过', {icon:6,time: 1000},function(){
+        				window.location.reload()
+        			});
+	        	} else {
+	    			layer.msg('审核失败',{icon: 5,time:1000},function(){
+        				window.location.reload()
+        			});
+	        	}
+	        },'json');
+		}, function(index) {
+	        layer.prompt({
+			  	formType: 2,
+			  	title: '请输入驳回原因'
+			}, function(value, index, elem){
+				layer.close(index);
+			  	$.post("{:U('Business/shopcheck')}", {id:id,type:1,reject:value}, function(data) {
+		        	if (1 == data.msg){
+	        			layer.msg('已通过', {icon:6,time: 1000},function(){
+	        				window.location.reload()
+	        			});
+		        	} else {
+		    			layer.msg('审核失败',{icon: 5,time:1000},function(){
+	        				window.location.reload()
+	        			});
+		        	}
+		        },'json');
+			});
+		});
+	}
+</script>
+</block>
+

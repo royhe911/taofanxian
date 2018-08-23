@@ -1,0 +1,192 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">管理员管理</span><span class="c-999 en">&gt;</span><span class="c-666">管理员列表</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action=" " method="get" onsubmit="return checkSearch()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="manager">
+				<input type="hidden" name="a" value="index">
+				<input type="hidden" name="status" value="{$status}">
+				<div class="text-c" style="margin-bottom: 10px;">
+					<input type="text" class="input-text phone" style="width:250px" placeholder="手机号搜索" id="" name="phone" value="{$phone}" >
+					或
+					<input type="text" class="input-text qq" style="width:250px" placeholder="QQ号搜索" id="" name="qq" value="{$qq}">
+					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+				 <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+				 <a href="javascript:;" onclick="admin_add('添加管理员','{:U('Manager/add')}','800','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+				</span>
+				<span class="r">共有数据：<strong>{$count}</strong> 条</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<div class="dataTables_length" id="DataTables_Table_0_length">
+						<label>显示
+							<select name="" class="select" onchange="javascript:location.href=this.value;">
+								<option value="{:U('manager/index','status=0')}" <eq name="Think.get.status" value="0">selected="selected"</eq>>全部</option>
+								<volist name="role" id="vo">
+								<option value="{:U('manager/index','status='.$vo['id'])}" <eq name="Think.get.status" value="$vo.id">selected="selected"</eq>>{$vo.name}</option>
+								</volist>
+							</select>
+
+						</label>
+					</div>
+				</div>
+				<table class="table table-border table-bordered table-bg">
+					<thead>
+						<tr>
+							<th scope="col" colspan="11">员工列表</th>
+						</tr>
+						<tr class="text-c">
+							<th><input type="checkbox" name="" value=""></th>
+							<th>ID</th>
+							<th>QQ</th>
+							<th>姓名</th>
+							<th>手机号</th>
+							<th>微信/昵称/银行卡</th>
+							<th>角色</th>
+							<th>备注</th>
+							<th>加入时间</th>
+							<th>是否已启用</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					 <volist name="data" id="vo">
+					  	<tr class="text-c">
+					 		<td><input type="checkbox" value="{$vo.id}" name="ids[]" /></td>
+					 		<td>{$vo.id}</td>
+					 		<td>{$vo.qq}</td>
+					 		<td>{$vo.realname}</td>
+					 		<td>{$vo.name}</td>
+					 		<td><volist name="vo.wechat" id="v">
+								{$v.num} / {$v.nick} / {$v.card} <br>
+							</volist></td>
+					 		<td>{$vo.role}</td>
+					 		<td>{$vo.info|default="无"}</td>
+					 		<td>{$vo.addtime|date="Y-m-d H:i:s",###}</td>
+					 		<td class="td-status">
+					 		 <eq name="vo.msg" value="0">
+					 		   <span class="label label-success radius">已启用</span>
+					 		  <else/>
+					 		   <span class="label radius">已禁用</span>
+					 		 </eq>
+					 		</td>
+					 		<td class="td-manage">
+								<if condition="$vo.msg == 0">
+									<a style="text-decoration:none" onClick="admin_op(this,{$vo.id},1)" href="javascript:;"><i class="Hui-iconfont state">禁用</i></a><else />
+									<a style="text-decoration:none" onClick="admin_op(this,{$vo.id},0)" href="javascript:;"><i class="Hui-iconfont state">启用</i></a>
+
+								</if>
+					 		 <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','{:U('Manager/edit',array('id' => $vo['id']))}',1,'800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">编辑</i></a>
+								</if>
+					 		 <a title="删除" href="javascript:;" onclick="admin_del(this,{$vo.id})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">删除</i></a>
+					 		</td>
+					 	</tr>
+					 </volist>
+					</tbody>
+				</table>
+			</div>
+
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+	/*
+		参数解释：
+		title	标题
+		url		请求的url
+		id		需要操作的数据id
+		w		弹出层宽度（缺省调默认值）
+		h		弹出层高度（缺省调默认值）
+	*/
+	/*管理员-增加*/
+	function admin_add(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+
+	/*管理员-编辑*/
+	function admin_edit(title,url,id,w,h){
+		layer_show(title,url,w,h);
+	}
+
+	/*管理员-删除*/
+	function admin_del(obj,id){
+		layer.confirm('确认要删除吗？',{
+			  btn: ['确定','取消'] //按钮
+			},function(index){
+				layer.close(index);
+		        $.post("{:U('manager/del')}", {id:id}, function(data) {
+		        	if (1 == data.msg){
+		    			$(obj).parents("tr").remove();
+		    			layer.msg(data.info,{icon:1,time:1000});
+		        	} else {
+		        		layer.msg(data.info,{icon:2,time:1000});
+		        	}
+		        },'json');
+			},function(index){
+				layer.close(index);
+			}
+		);
+	}
+
+
+    //禁用/启用刷单员
+    function admin_op(obj,id,type){
+        layer.confirm('确认此操作？',{
+                btn: ['确定','取消'] //按钮
+            },function(index){
+                layer.close(index);
+                $.post("{:U('manager/state')}", {id:id,type:type}, function(data) {
+                    console.log(data);
+                    if(data.msg == 1){
+                        layer.msg(data.info,{icon: 1,time:1000});
+                        setTimeout(function () {
+                            window.location.reload();
+                        },1000);
+                    }
+
+                },'json');
+            },function(index){
+                layer.close(index);
+            }
+        );
+    }
+
+
+    /*批量删除*/
+	function datadel(){
+		var lenght = $("td input[type='checkbox']:checked").length;//勾选个数
+		if (lenght > 0){
+			var arr=[];
+		       $("td input[type='checkbox']:checked").each(function(){
+		          	if(!isNaN(this.value)){
+		          		arr.push(this.value);
+		          	}
+		       });
+
+	       	   $.post("{:U('manager/delAll')}", {arr:arr},function(data){
+	       		    if (1 == data.msg){
+	       		    	layer.msg(data.info,{icon:1,time:1000}, function(){window.location.reload();});
+	       		    } else {
+	       		    	layer.msg(data.info,{icon:2,time:1000});
+	       		    }
+	           });
+		} else {
+			layer.alert('请勾选数据');
+		}
+	}
+	function checkSearch(){
+		if(!$.trim($(".phone").val()) && !$.trim($(".qq").val())){
+			layer.msg('请至少输入一个搜索项！');
+			return false;
+		}
+		return true;
+	}
+	</script>
+</block>

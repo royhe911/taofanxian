@@ -1,0 +1,298 @@
+
+	<include file="Layout:head" />
+	<include file="Layout:nav" />
+	<!--                        申请流程  start                        -->
+<div class="jp-hd">
+    <div class="w1195">
+        <div class="flow-f">
+            <div>
+                <b>精选试用</b> 申请流程
+            </div>
+        </div>
+        <ul>
+            <li>
+                <i class="iconfont icon-hart"><img src="__PUBLIC__/maoke/images/goods/img_06.png"/></i>
+                <div>
+                    <b>1.免费申请</b>
+                    选择喜爱的宝贝完成申请
+                </div>
+            </li>
+            <li>
+                <i class="iconfont icon-time"><img src="__PUBLIC__/maoke/images/goods/img_08.png"/></i>
+                <div>
+                    <b>2.等待审核</b>
+                    商家进行审核
+                </div>
+            </li>
+            <li>
+                <i class="iconfont icon-recharge"><img src="__PUBLIC__/maoke/images/goods/img_10.png"/></i>
+                <div>
+                    <b>3.下单付款</b>
+                    按照流程操作并提交订单号
+                </div>
+            </li>
+            <li>
+                <i class="iconfont icon-text"><img src="__PUBLIC__/maoke/images/goods/img_03.png"/></i>
+                <div>
+                    <b>4.提交试用报告</b>
+                    提交真实客观的试用报告
+                </div>
+            </li>
+            <li>
+                <i class="iconfont icon-monery"><img src="__PUBLIC__/maoke/images/goods/img_13.png"/></i>
+                <div>
+                    <b>5.返还试用金</b>
+                    试用报告通过后返还试用金，提现
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--                        申请流程  end                        -->
+
+<div class="bg-content">
+	<div class="w1190">
+		<!--                        推荐精选试用  start                   -->
+		<div class="jp-groom">
+			<div class="titler mginbot dixbju" id="divtodayshop">
+				<em class="cbazuo"><b style="color: #F25F55; font-size: 18px;">1F</b> 推荐精选试用</em>
+				<em class="jxi jxionngt" style="left: 140px">&nbsp;&nbsp;&nbsp;每天有惊喜！</em>
+			</div>
+			<div class="picScroll-left">
+				<!--<div class="hd">
+					<ul>
+						<li class="">1</li>
+						<li class="on">2</li>
+					</ul>
+				</div>-->
+				<div class="titler_one bd">
+					<div class="tempWrap">
+						<ul>
+						<foreach name="tuijian" item="vo">
+							<li style="margin-left: 0px;">
+								<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>" target="_blank">
+									<?php if($vo['model'] == 3 || $vo['model'] == 4) {?>
+									<img class="tryimg lazy" src="../{$vo['img2']}"  alt="{$vo['goods_name']}" data-original="../{$vo['img2']}">
+									<?php }else{?>
+										<img class="tryimg lazy" src="../{$vo['img']}"  alt="{$vo['goods_name']}" data-original="../{$vo['img']}">
+									<?php }?>
+								</a>
+								<h4 class="yhuahs">
+									<div id="">
+										<img src="__PUBLIC__/maoke/images/t_03.png" alt="" />
+
+										<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>" target="_blank">{$vo['goods_name']}</a>
+									</div>
+                                    <div class="clear"></div>
+                                </h4>
+								<div class="yhdp">
+									<span class="price"><b style="font-size: 14px;">￥<?php echo sprintf("%01.2f",$vo['real_price']);?></b></span>
+									<span class="r">申请{$vo.id|apply_num=###}人</span>
+									<span class="r mr-4">限<?php echo $vo['kucun']+$vo['sell_number'];?>份</span>
+								</div>
+								<div class="progress">
+									<span style="width: <?php echo ceil(stock_num($vo['id'])/($vo['kucun']+$vo['sell_number'])*100) ;?>%;"></span>
+									<div class="clear"></div>
+								</div>
+								<div class="shenq">
+									<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>" target="_blank" class="ontrial"><?php if($vo['model'] == 1){echo "免费申请";}else{echo "试用领红包";}?></a>
+								</div>
+							</li>
+						</foreach>
+							<div class="clear"></div>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--                        推荐精选试用  end                   -->
+
+		<!--                        商品导航  start                   -->
+		<div class="jp-groom" style="margin-top: 30px;">
+			<div class="prd_cz">
+	            <div class="zq_sxu">
+	                <div class="list-hd">
+	                    <div class="lh50 r">
+	                        当前位置：<a href="{:U('Index/index')}">首页</a> >
+	                        <a><?=$category[$cid]?></a>
+	                    </div>
+	                </div>
+	                <div class="clear"></div>
+	                <div class="goods-selector" style="clear: both">
+	                    <div class="all-goods-kinds">
+	                        <ul>
+	                            <li class="<?php if(empty($cid) || $cid==10016){echo 'kinded-li';}?>">
+	                                <a href="{:U('Classlist/index')}" gid="0" target="_parent">
+	                                    <div class="sort-item sort_0 sort_on_0"></div>
+	                                    <span id="seleted_0">全部宝贝</span>
+	                                </a>
+	                            </li>
+                                <li class="kinds-li1 <?php if(in_array($cid,array(10001,10002,10005))){echo 'kinded-li';}?>">
+                                    <a href="<?php echo U('Classlist/index' , array('cid'=>10001) );?>" gid="1" target="_parent">
+                                        <div class="sort-item sort_1"></div>
+                                        <span id="seleted_1">服装精选</span>
+                                    </a>
+                                </li>
+                                <li class="kinds-li2 <?php if(in_array($cid,array(10007,10013,10012,10014))){echo 'kinded-li';}?>">
+                                    <a href="<?php echo U('Classlist/index' , array('cid'=>10007) );?>" gid="2" target="_parent">
+                                        <div class="sort-item sort_2"></div>
+                                        <span id="seleted_2">数码家电</span>
+                                    </a>
+                                </li>
+
+                                <li class="kinds-li4 <?php if(in_array($cid,array(10009,10011))){echo 'kinded-li';}?>">
+                                    <a href="<?php echo U('Classlist/index' , array('cid'=>10009) );?>" gid="4" target="_parent">
+                                        <div class="sort-item sort_4"></div>
+                                        <span id="seleted_4">美妆配饰</span>
+                                    </a>
+                                </li>
+                                <li class="kinds-li5 <?php if(in_array($cid,array(10004))){echo 'kinded-li';}?>">
+                                    <a href="<?php echo U('Classlist/index' , array('cid'=>10004) );?>" gid="5" target="_parent">
+                                        <div class="sort-item sort_5"></div>
+                                        <span id="seleted_5">母婴用品</span>
+                                    </a>
+                                </li>
+
+                                <li class="kinds-li7 <?php if(in_array($cid,array(10006))){echo 'kinded-li';}?>">
+                                    <a href="<?php echo U('Classlist/index' , array('cid'=>10006) );?>" gid="7" target="_parent">
+                                        <div class="sort-item sort_7"></div>
+                                        <span id="seleted_7">美食特产</span>
+                                    </a>
+                                </li>
+                                <li class="kinds-li8 <?php if(in_array($cid,array(10003,10010))){echo 'kinded-li';}?>">
+                                    <a href="<?php echo U('Classlist/index' , array('cid'=>10003) );?>" gid="8" target="_parent">
+                                        <div class="sort-item sort_8"></div>
+                                        <span id="seleted_8">鞋帽箱包</span>
+                                    </a>
+                                </li>
+
+                                <li class="kinds-li10 <?php if(in_array($cid,array(10008,10015))){echo 'kinded-li';}?>">
+                                    <a href="<?php echo U('Classlist/index' , array('cid'=>10008) );?>" gid="10" target="_parent">
+                                        <div class="sort-item sort_10"></div>
+                                        <span id="seleted_10">家居日用</span>
+                                    </a>
+                                </li>
+	                        </ul>
+	                    </div>
+	                    <div class="all-goods-select">
+	                        <ul>
+	                            <li class="sel-li1 <?php if($code=='new') echo 'seled-li'?>">
+	                                <a href="<?php echo U('Classlist/index' , array('code'=>'new','cid'=>$cid,'keywords'=>$keywords) );?>" gid="1" target="_parent" class="jiazhi">
+	                                	<span class="seleted_10">最新</span>
+	                                </a>
+
+	                            </li>
+	                            <li class="sel-li2 <?php if($code=='price') echo 'seled-li'?>">
+	                                <a href="<?php echo U('Classlist/index' , array('code'=>'price','cid'=>$cid,'keywords'=>$keywords) );?>"  gid="2" target="_parent" class="jiazhi">
+	                                    <span class="seleted_11" class="sorrow">价值</span>
+	                                </a>
+	                            </li>
+	                            <li class="sel-li3 <?php if($code=='seller') echo 'seled-li'?>">
+	                                <a href="<?php echo U('Classlist/index' , array('code'=>'seller','cid'=>$cid,'keywords'=>$keywords) );?>" gid="4" target="_parent" class="jiazhi">
+	                                    <span class="seleted_13"  class="sorrow">人气</span>
+	                                </a>
+	                            </li>
+
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+			</div>
+		</div>
+		<!--                        商品导航  end                   -->
+		<!--                        商品展示  start                   -->
+		<div class="jp-groom" style="margin-top: 0;">
+			<div class="picScroll-left">
+				<div class="titler_one bd">
+					<div class="tempWrap">
+						<ul>
+							<foreach name="data" item="vo" key="k">
+							<li style="margin-left: 0px;">
+								<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>" target="_blank">
+
+									<img class="tryimg lazy" src="../{$vo['img2']}"  alt="{$vo['goods_name']}" data-original="../{$vo['img']}">
+
+								</a>
+								<h4 class="yhuahs">
+									<div id="">
+										<img src="__PUBLIC__/maoke/images/t_03.png" alt="" />
+
+										<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>" target="_blank">{$vo['goods_name']}</a>
+									</div>
+                                    <div class="clear"></div>
+                                </h4>
+								<div class="yhdp">
+									<span class="price"><b style="font-size: 14px;">￥<?php echo sprintf("%01.2f",$vo['real_price']);?></b></span>
+									<span class="r">申请{$vo.id|apply_num=###}人</span>
+									<span class="r mr-4">限<?php echo $vo['kucun']+$vo['sell_number'];?>份</span>
+								</div>
+								<div class="progress">
+									<span style="width: <?php echo ceil(stock_num($vo['id'])/($vo['kucun']+$vo['sell_number'])*100) ;?>%;"></span>
+									<div class="clear"></div>
+								</div>
+								<div class="shenq">
+									<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>" target="_blank" class="ontrial"><?php if($vo['model'] == 1){echo "免费申请";}else{echo "试用领红包";}?></a>
+								</div>
+							</li>
+							</foreach>
+							<?php if(($k+1)%5==0){?><div class="clear"><?php }?></div>
+							<?php if(empty($data)){?>
+							<p style="text-align: center;font-size: 18px;padding-top: 60px;color: #666;">没有搜索到此商品</p>
+							<?php }?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--                        商品展示  start                   -->
+		<div class="pagination" style="margin:30px 3px 0px 3px;">
+			{$page}
+        	<span id="clickme" style="width: 74px; height: 70px;position: relative;margin: 0 6px 0 0;">
+        		<img src="__PUBLIC__/maoke/images/goods/dwyjx.png" style="position: absolute;left: -3px; top: 6px; cursor: pointer;"/>
+        	</span>
+        	<form class="pagination_font_color" method="get" action="{:U('Classlist/index')}">
+        		<input type="hidden" name='m' value='Home' />
+                <input type="hidden" name='c' value='Classlist' />
+                <input type="hidden" name='a' value='index' />
+                <input type="hidden" name='code' value='{$code}' />
+                <input type="hidden" name='keywords' value='{$keywords}' />
+                <input type="hidden" name='cid' value='{$cid}' />
+                <input type="hidden" name='nowpage' value='' class="now_page" />
+        		&nbsp;&nbsp;跳至&nbsp;
+        		<input onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" type="text" class="p" name="p" value="<?php if($nowpage) {echo $nowpage;}?>" id="pageIndex"/>
+        		&nbsp;页&nbsp;&nbsp;
+        		<input style="width: 55px;height: 35px;background: #fff; border: 1px solid rgb(217,217,217); color: rgb(51,51,51);" type='button' class="next onsubmit" value="确定">
+        	</form>
+		</div>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$(".close-qq").click(function(){
+			$("#fixed_QQ2").css('display','none');
+		});
+		$(".onsubmit").click(function(){
+			if($(".p").val()== "" || $(".p").val() == undefined || $(".p").val() == null){
+				return false;
+			}else{
+				$(".now_page").val($(".p").val());
+				$(".pagination_font_color").submit();
+			}
+		});
+		$("img.lazy").lazyload({
+		    effect : "fadeIn"
+		});
+		$(".pagination>a>span").css('color','#7a7a7a');
+		$(".pagination>a>span").css('background','transparent');
+		$(".pagination>a").hover(function(){
+			$(this).children('span').css('color','#fff');
+		},function(){
+			$(this).children('span').css('color','#7a7a7a');
+		})
+	})
+
+</script>
+<include file="Layout:foot" />

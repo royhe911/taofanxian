@@ -1,0 +1,148 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">刷单员管理</span><span class="c-999 en">&gt;</span><span class="c-666">刷单汇总</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action="" method="get" onsubmit="return checkForm()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="brush">
+				<input type="hidden" name="a" value="ordertotal">
+				<input type="hidden" name="type" value="all">
+				<div class="text-c">
+					<if condition="$_SESSION['user']['role'] neq 2">
+						<if condition="$_SESSION['user']['role'] eq 1 or $_SESSION['user']['role'] eq 4">
+						站长：
+						<select name="zhanz" class="select select-box" style="width:160px;">
+							<option value="0">请选择</option>
+							<volist name="zhanz" id="vo">
+								<option value="{$vo.id}" <eq name="Think.get.zhanz" value="$vo.id">selected="selected"</eq> >{$vo.realname}</option>
+							</volist>
+						</select>
+						</if>
+					日期：
+					<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" placeholder="起始时间">
+					<input type="text" id="datemax" name="endtime" class="input-text" style="width:150px;" placeholder="结束时间">
+					<input type="text" class="input-text brushname" style="width:150px" placeholder="输入刷单员姓名" id="" name="brushname" value="{$brushname}"> 或
+					</if>
+					<if condition="$_SESSION['user']['role'] eq 4 or $_SESSION['user']['role'] eq 1">
+						<select name="choiceyw" class="select select-box " style="width: 150px;">
+							<option value="">请选择业务员</option>
+							<volist name="yw" id="vo">
+								<option value="{$vo.id}" <eq name="Think.get.choiceyw" value="$vo.id">selected="selected"</eq>>{$vo.info}</option>
+							</volist>
+						</select> 或
+					</if>
+					<input type="text" class="input-text brushname" style="width:200px" placeholder="输入旺旺号" id="" name="wangwang" value="{$wangwang}">
+					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<if condition="$_SESSION['user']['role'] neq 2">
+				<span class="l">
+					<a class="btn btn-success radius" onclick="downExecl()" href="javascript:;"><i class="Hui-iconfont">&#xe644;</i> 下载EXECL</a>
+					<!--<a class="btn btn-success radius" onclick="" href="{:U('Brush/excelall')}"><i class="Hui-iconfont">&#xe644;</i> 下载所有EXECL</a>-->
+				</span>
+				</if>
+				<span class="r">
+					<if condition="$_SESSION['user']['role'] !=2">
+						资金总额：<font color="red">{$money|default=0}</font>，付出本金：<font color="red">{$capital|default=0}</font>，佣金：<font color="red">{$comm|default=0}</font>，红包：<font color="red">{$redbag|default=0}</font>，今日支出红包总额：<font color="red">{$redbag_b|default=0}</font>。
+					</if>
+					共有数据：<strong>{$count|default=0}</strong> 条</span>
+			</div>
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-bg">
+					<thead>
+						<tr class="text-c">
+							<th>id</th>
+							<th>发布时间</th>
+							<th>完成时间</th>
+							<th>刷单员</th>
+							<if condition="$_SESSION['user']['role'] neq 3">
+							<th>站长</th>
+							</if>
+							<th width="8%">店铺名称</th>
+							<th width="12%">宝贝详情</th>
+							<th width="12%">关键词</th>
+							<!-- <th width="12%">备注</th> -->
+							<th>单价</th>
+							<th>下单价</th>
+							<th>红包</th>
+							<th>订单号</th>
+							<th width="6%">旺旺</th>
+							<th>佣金</th>
+						</tr>
+					</thead>
+					<tbody>
+					<volist name="data" id="vo">
+						<tr class="text-c">
+							<td>{$vo.id}</td>
+							<td>{$vo.addtime|date="j/n ",###}</td>
+							<td>{$vo.edittime|date="j/n H:i",###}</td>
+							<td>{$vo.realname}</td>
+							<if condition="$_SESSION['user']['role'] neq 3">
+							<td>{$vo.zz_realname}</td>
+							</if>
+							<td>{$vo.shopname}</td>
+							<td><a href="{$vo.goods_url}" target="_blank">{$vo.goods_title}</a></td>
+							<td>{$vo.keyword}</td>
+							<!-- <td>{$vo.sku|default='无'}</td> -->
+							<td><b style="font-size: 11px;">¥ {$vo.price}</b></td>
+							<td><span style="color: red;"><b style="font-size: 11px;">¥ {$vo.actual_price}</b></span></td>
+							<td><b style="font-size: 11px;">¥ </b> {$vo.redbag}</td>
+							<td><span class="<if condition='$vo.abn neq null'>label label-danger radius</if>">{$vo.tb_item}</span></td>
+							<td>{$vo.wangwang}</td>
+							<td>{$vo.commision}</td>
+						</tr>
+					</volist>
+					</tbody>
+				</table>
+			</div>
+
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			var start_time = "{$starttime}",end_time = "{$endtime}";
+			laydate.render({
+			  	elem: '#datemin',
+			   	min: '2018-01-01',
+				value:"{$starttime}",
+			   	max: '',
+			   	done: function(value, date){
+					start_time = value;
+					if(new Date(value).getTime() > new Date(end_time).getTime()){
+						$("#datemax").val(value)
+						// layer.msg('结束时间不得小于起始时间',{icon:2,time:1000},function(){window.location.reload()});
+					}
+			  	}
+			});
+			laydate.render({
+			  	elem: '#datemax',
+			  	min: '2018-01-01',
+                value:"{$endtime}",
+		   		max: '',
+			  	done: function(value, date){
+			  		end_time = value;
+					if(new Date(value).getTime() < new Date(start_time).getTime()){
+						// layer.msg('结束时间不得小于起始时间',{icon:2,time:1000},function(){window.location.reload()});
+						$("#datemin").val(value)
+					}
+			  	}
+			});
+		})
+		function checkForm(){
+			return true;
+		}
+		 //下载
+	    function downExecl(){
+			if($("tbody tr").length <= 0){
+				layer.msg('无数据，请重新搜索！');
+			}else{
+				window.location.href = "{:U('Brush/excel')}&time={$starttime}&endtime={$endtime}&brushname={$brushname}&wangwang={$wangwang}&zhanz={$Think.get.zhanz}";
+			}
+	    }
+	</script>
+</block>

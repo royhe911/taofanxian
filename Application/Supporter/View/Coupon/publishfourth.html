@@ -1,0 +1,73 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<!-- 新增样式代码 -->
+<style>
+    .text-red {
+        color: #e71e28;
+        padding-bottom: 0 !important;
+    }
+
+    .text-red span {
+        color: #646464;
+    }
+</style>
+<div class="left" style="width: 1040px;overflow: hidden;background-color: #ffffff;margin: 0 0 8px 10px;">
+    <img src="__PUBLIC__/maoke/images/merchant/release_header_show.png" alt="">
+</div>
+<!-- 发布优惠券 -->
+<div id="my_main" class="store_content left" style="min-height: 1067px;">
+    <h1 class="title">发布试用</h1>
+    <div class="confirm_payment">
+        <h2 class="title">5.订单确认支付</h2>
+        <div class="payment_content text-red">
+            <span>押金合计: </span>3份（发放份数）
+            <span>x </span>（下单金额10元 + 优惠卷金额10元 + 手续费1元）
+            <span> =</span> 30元 </div>
+        <div class="payment_content">
+            <p class="deposit">
+                <b>¥{$money|number_format=2}</b>使用余额支付&nbsp; &nbsp; 可用余额：
+                <span>¥{$info.fund|number_format=2}</span>
+            </p>
+            <if condition='($msg eq 0)'>
+                <p class="recharge" id="error1">可用余额不足，请先
+                    <a target="_blank" href="{:U('Merchant/finance')}">充值 </a>
+            </if>
+            </p>
+        </div>
+        <p>
+            <span class="error" id="pwderror"></span>
+        </p>
+        <div class="nextStep_btn">
+            <input type="hidden" name="msg" id="msg" value="{$msg}" />
+            <input onclick="location.href='{:U(\'Coupon/publishthird\',array(\'id\' => $id))}'" type="button" value="上一步">
+            <input id="confirm_payment" type="button" value="确认付款" onclick="next_step();" />
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+<!-- page-wrapper end -->
+</div>
+<!-- wrapper -->
+</div>
+<script type="text/javascript">
+    function next_step() {
+        var msg = $('#msg').val(); //判断是否需要充值
+        if (0 == msg) {
+            layer.alert('余额不足，请充值');
+        } else {
+
+            layer.confirm('是否确认付款？', {
+                btn: ['确定', '取消'] //按钮
+            }, function() {
+                window.location.href = "{:U('Actcenter/payment', array('id' => $id))}";
+            }, function() {
+                layer.closeAll();
+            });
+
+        }
+    }
+</script>
+<include file="Layout:foot" />

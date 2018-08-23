@@ -1,0 +1,96 @@
+<extend name="public/modal" />
+<block name="title"></block>
+<block name="menu">
+	<form action="" method="POST" class="form form-horizontal" id="form-admin-add">
+		<input type="hidden" name="id" value="{$Think.get.id}">
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>操作：</label>
+			<div class="formControls col-xs-9 col-sm-9" >
+				<div class="cash-select">
+					<span style="margin-right: 10px;"><input type="radio" value="1" checked name="status" style="width: 18px; height: 18px; margin-right: 5px;"/>通过</span>
+					<span style="margin-right: 10px;"><input type="radio" value="2" name="status" style="width: 18px; height: 18px; margin-right: 5px;"/>不通过</span>
+				</div>
+			</div>
+		</div>
+		<div class="row cl cashresult">
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>打款截图：</label>
+			<div class="formControls col-xs-9 col-sm-9 posi-rela">
+				<button class="btn btn-success radius" type="button">上传图片</button>
+				<input class="file-input fileToUpload" type="file" accept="image/*" name="fileToUpload" id="fileToUpload" onchange="uploadFile(this,'fileToUpload');" value="">
+				<br />
+				<div id="img_preview_one">
+				    <input type="hidden" name="img" id="img" />
+					<img src="__PUBLIC__/ERP/static/h-ui.admin/images/thumbnail.png" id="thumb-preview">
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</block>
+<block name="js">
+<script src="__PUBLIC__/ajaxfileupload.js"></script>
+<script type="text/javascript">
+	var status = 1;
+	$(function(){
+		$(".cash-select input[type=radio]").change(function(){
+			if(this.value == 1){
+				status = 1;
+				var html = '<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>打款截图：</label>'+
+							'<div class="formControls col-xs-9 col-sm-9 posi-rela">'+
+							'<button class="btn btn-success radius" type="button">上传图片</button>'+
+							'<input class="file-input fileToUpload" type="file" accept="image/*" name="fileToUpload" id="fileToUpload" onchange="uploadFile(this,\'fileToUpload\');" >'+
+							'<br />'+
+							'<div id="img_preview_one">'+
+							    '<input type="hidden" name="img" id="img" />'+
+								'<img src="__PUBLIC__/ERP/static/h-ui.admin/images/thumbnail.png" id="thumb-preview">'+
+							'</div>'+
+						'</div>';
+			}else if(this.value == 2){
+				status = 0;
+				var html = '<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>拒绝原因：</label>'+
+							'<div class="formControls col-xs-9 col-sm-9">'+
+								'<textarea name="reason" rows="" cols="" class="textarea" required></textarea>'+
+							'</div>';
+			}
+			$(".cashresult").html(html);
+		})
+	})
+	var isFile = false;
+	function uploadFile(el,file_id){
+		if(el.value){isFile = true;}
+        $.ajaxFileUpload({
+ 			url:"{:U('Welcome/ajaxUpload')}",//上传图片处理文件
+ 			secureuri:false,
+ 			fileElementId:file_id,
+ 			dataType: 'text',
+ 			success: function (data){
+ 				var data= strToObj(data);
+ 				if(1 == data.status){
+ 					$('#img').val(data.name);
+ 					$('#thumb-preview').attr('src', '__ROOT__/upload/'+data.savepath+'/'+data.name);
+ 				} else {
+ 					layer.msg(data.msg,{icon:2,time:1000});
+ 				}
+ 			},
+ 			error: function (data){
+ 				layer.msg('上传失败!',{icon:2,time:1000});
+ 			}
+ 		});
+    }
+	function strToObj(str) {
+		return eval("(" + str + ")");
+	}
+	document.getElementById("form-admin-add").onsubmit = function(){
+		if(status == 1 && !isFile){
+			layer.msg('请上传打款截图',{icon:2,time:1000});
+			return false;
+		}
+		return true;
+	};
+</script>
+
+</block>

@@ -1,0 +1,84 @@
+<extend name="public/modal" />
+<block name="title">累计修正金额</block>
+<block name="menu">
+	<div class="Hui-article" style="top: -10px;">
+		<div class="dataTables_wrapper">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th>id</th>
+						<th>主店铺名称</th>
+						<th>修正金额</th>
+						<th>操作时间</th>
+						<th>理由</th>
+					</tr>
+				</thead>
+				<tbody>
+				<volist name="data" id="vo">
+					<tr class="text-c va-m">
+						<td>{$vo.id}</td>
+						<td>{$vo.shopname}</td>
+						<td>{$vo.money}</td>
+						<td>{$vo.addtime|date="j/n H:i",###}</td>
+						<td>{$vo.reason}</td>
+
+					</tr>
+				</volist>
+				</tbody>
+			</table>
+			<div class="clearfix pd-20">
+				<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+				<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+					<ul class="pagination" id="list-pagination"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="__PUBLIC__/bootstrapplugin/pagination/jquery.twbsPagination.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// var start_time = "{$starttime}",end_time = "{$endtime}";
+		// laydate.render({
+		// 	elem: '#datemin',
+		// 	min: '2018-01-01',
+		// 	max: +1,
+		// 	done: function(value, date){
+		// 		start_time = value;
+		// 		if(new Date(value).getTime() > new Date(end_time).getTime()){
+		// 			$("#datemax").val(value)
+		// 		}
+		// 	}
+		// });
+		// laydate.render({
+		// 	elem: '#datemax',
+		// 	min: '2018-01-01',
+		// 	max: +1,
+		// 	done: function(value, date){
+		// 		end_time = value;
+		// 		if(new Date(value).getTime() < new Date(start_time).getTime()){
+		// 			$("#datemin").val(value)
+		// 		}
+		// 	}
+		// });
+	})
+	function showTaskDetail(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+    var paginationOptions= $.extend(true, {$pagination|json_encode} ,{
+        onPageClick: function (event, page) {
+            var options = $(this).data('twbsPagination').options;
+            options.baseUrl = options.baseUrl.replace('.html','');
+            options.getParams.page = page;
+            var param = '';
+            for(var x in options.getParams ){
+                param += '&' + x + '=' + options.getParams[x];
+            }
+            window.location.href =  options.baseUrl + param + '.html';
+        }
+    });
+    $('#list-pagination').twbsPagination(paginationOptions);
+</script>
+</block>

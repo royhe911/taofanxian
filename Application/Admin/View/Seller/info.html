@@ -1,0 +1,180 @@
+<extend name="Layout:layout" />
+<block name="content">
+	<!--<div class="row">
+		<div class="col-lg-12">
+            <h1 class="page-header">商户提现  </h1>
+	    </div>
+	</div>-->
+	<nav class="breadcrumb" style="padding: 0px 15px; line-height: 37px; border-radius: 0; border-bottom: 1px solid #ddd; position: absolute;top: 0;left: 0;width: 100%;"><i class="fa fa-home"></i> 首页 <span class="c-gray en">&gt;</span> 商家管理 <span class="c-gray en">&gt;</span> <a href="{:U('Seller/index')}">商家列表</a> <span class="c-gray en">&gt;</span>试用商品<a class="btn btn-success radius r" style="margin-top:1px;float: right;padding: 6px 20px;" href="javascript:location.replace(location.href);" title="刷新" ><i class="fa fa-refresh"></i></a><div style="clear: both;"></div></nav>
+	<div style="height: 50px; width: 100%;"></div>
+	<div>
+		<p>商家名：<span style="color: #337ab7;">{$seller.adminname}</span> &nbsp;&nbsp;&nbsp;手机号：<span style="color: #337ab7;">{$seller.tel}</span></p>
+	</div>
+	
+	<div class="panel panel-default">
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+			<div>
+				<ul class="nav nav-tabs">
+				    <li class="active"><a href="#">商品详情</a></li>
+					<li><a href="{:U('Seller/goods',array('id'=>$id))}">试用商品</a></li>
+				</ul>
+			</div>
+			<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+				<div class="row">
+					<div class="col-sm-12">
+						<table role="grid" class="table table-bordered " style="margin-bottom: 0;">
+							<thead>
+								<tr>
+									<th width="5%">ID</th>
+									<th width="5%">分类</th>
+									<th width="30%">商品信息</th>
+									<th width="10%">试用任务(分配比例)</th>
+									<th width="10%">平台展示图</th>
+									<th width="10%">淘宝搜索图</th>
+									<th width="10%">活动时间</th>
+									<th width="8%">押金（元）</th>
+									<th width="15%">增值任务</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td >{$info.id}</td>
+									<td >{$category}</td>
+									<td>
+										<ul style="list-style: none; padding-left: 0;">
+											<li><p>平台展示名称：<span id="gname_info">{$info.gname}</span>&nbsp;<a href="javascript:;" data-toggle="modal" data-id="{$info.id}" data-msg="gname">修改</a></p></li>
+											<li><p>淘宝商品标题：<span id="title_info">{$info.title}</span>&nbsp;<a href="javascript:;" data-toggle="modal" data-id="{$info.id}" data-msg="title">修改</a></p></li>
+											<li><p>试客下单价格：{$info.unit_price|number_format=2}(元)</p></li>
+											<li><p>淘宝搜索价格：<notempty name="info.format.iphone_unit_price">{$info.format.iphone_unit_price|number_format=2}<else/>0</notempty>(元)</p></li>
+											<li><p>试客每单拍：{$info.buy_sum|default="1"}(件)</p></li>
+											<li><p>商品规格：{$info.format.thecolor}</p></li>
+											<li><p>商品运费：<if condition="($info.scosts eq 0)">全国包邮<else />{$info.scosts|number_format=2}</if></p></li>
+										</ul>
+									</td>
+									<td>客服聊天：{$info['task']['chat']*100}%</td>
+									<td style="text-align: center;"><img src="..{$info.image}" style="width: 80px; height: 80px;"/></td>
+									<td style="text-align: center;"><img src="..{$info.tag.app.img}" style="width: 80px; height: 80px;"/></td>
+									<td style="text-align: center;">
+										<notempty name="info.starttime">{$info.starttime|date="Y-m-d",###}</notempty>
+										<br />
+										至
+										<br />
+										<notempty name="info.endtime">{$info.endtime|date="Y-m-d",###}</notempty>
+									</td>
+									<td>{$info.money|number_format=2}</td>
+									<td>
+									  <notempty name="info.reward">
+									   <p><font color="green">试用红包加赏</font>：<font color="red">{$info.reward}</font>(元/单)</p>
+									  </notempty> 
+									  <!--notempty name="info.service.good">
+									   <p><font color="green">晒图好评</font>：<font color="red">{$info.service.good}</font>(单)</p>
+									  </notempty-->
+									  <!--<notempty name="info.service.good_num">
+									   <p><font color="green">好评关键词单数</font>：<font color="red">{$info.service.good_num}</font>(单)</p>
+									  </notempty> 
+									  <notempty name="info.service.safe_day">
+									   <p><font color="green">禁止老用户中奖</font>：<font color="red">{$info.service.safe_day}</font>(天)</p>
+									  </notempty>
+									  <notempty name="info.service.people">
+									   <p><font color="green">精准投放</font>：<font color="red">20(元)</font></p>
+									  </notempty>
+									  <notempty name="info.service.good_num">
+									   <p>
+									    <font color="green">好评关键词</font>：
+									    <volist name="info.service.keyword" id="w"><notempty name="w">{$w};</notempty></volist>
+									   </p>
+									  </notempty>-->
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table role="grid" class="table table-bordered">
+						 <tbody style="text-align: center;">
+						  <tr><th style="text-align: center;" colspan="7">试用分数发放计划（总计单数：<font color="red">{$info.num|default="0"}单</font>）</th></tr>
+						   <notempty name="info.days">
+                               <for start="0" end="myPage($info['days'],7)">
+	                            <tr>
+	                             <volist name="info.days" id="d" key="k" offset="$i*7" length='7'>
+	                              <td>第{$k+$i*7|integerToch}天</td>
+	                             </volist>
+	                            </tr>
+	                            <tr>
+	                             <volist name="info.days" id="d" key="k" offset="$i*7" length='7'>
+	                              <td><strong><font color="green">{$d.num|default="0"}</font></strong>份(无转化率)</td>
+	                             </volist>
+	                            </tr>
+	                           </for> 
+	                      </notempty>     
+						 </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- /.table-responsive -->
+
+		</div>
+		<!-- /.panel-body -->
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				 <h4 class="modal-title" id="myModalLabel">修改</h4>
+				</div>
+				<div class="modal-body"><input type="text" id="name" name="name" class="form-control" data-container="body" data-toggle="popover" data-placement="top" data-content="请输入内容" /></div>
+				<div class="modal-footer">
+				 <input type="hidden" id="id" name="id" />
+				 <input type="hidden" id="msg" name="msg" />
+				 <button type="button" class="btn btn-primary" onclick="message();">确定</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+<script type="text/javascript">
+ $(function(){ 
+    $("[data-toggle='modal']").click(function(){
+    	var id = $(this).attr('data-id');//商品ID
+    	var msg = $(this).attr('data-msg');//商品标识
+    	
+		$('#id').val(id);
+		$('#msg').val(msg);
+
+		if('gname' == msg){
+		 	$('#name').attr('placeholder','请输入平台展示名称');
+		} else if('title' == msg){
+		 	$('#name').attr('placeholder','请输入淘宝商品标题');
+		}
+    	
+    	$('#myModal').modal('show'); 
+    	$('#myModal').on('hide.bs.modal', function (){
+    	});
+    })
+ });
+ 
+ function message(){
+	 var id = $('#id').val();
+	 var msg = $('#msg').val();
+	 var name = $('#name').val();
+	  
+	 if(name){
+         $.ajax({type:"POST",url:"{:U('Seller/change')}",data: {id:id,msg:msg,name:name},success:function(data){back(data)}});
+	 } else {
+		 $('#name').popover('toggle'); 
+	 }
+ }
+ 
+ function back(data){
+	 if(1 == data.msg){
+		 alert('修改成功');
+	 } else {
+		 alert('修改失败');
+	 }
+	 
+	 $('#name').val('');//清空
+	 $('#'+data.name+'_info').html(data.info);
+	 $('#myModal').modal('hide');
+ }
+</script>
+</block>

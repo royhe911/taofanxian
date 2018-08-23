@@ -1,0 +1,120 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">商家管理</span><span class="c-999 en">&gt;</span><span class="c-666">商家余额</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action=" " method="get" onsubmit="return checkSearch()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="business">
+				<input type="hidden" name="a" value="outstanding">
+				<input type="hidden" name="status" value="{$status}">
+				<div class="text-c" style="margin-bottom: 10px;"> 
+					<input type="text" class="input-text " style="width:200px" placeholder="店铺名搜索" id="" name="shopname" value="{$shopname}" >
+					<input type="text" class="input-text " style="width:200px" placeholder="手机号搜索" id="" name="phone" value="{$phone}">
+					<input type="text" class="input-text " style="width:200px" placeholder="旺旺号搜索" id="" name="wangwang" value="{$wangwang}">
+					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+					<if condition="$_SESSION['user']['role'] eq 4">
+					<a class="btn btn-success radius" onclick="" href="{:U('business/down_shop')}&shopname={$shopname}&phone={$phone}&wangwang={$wangwang}&status={$status}"><i class="Hui-iconfont">&#xe644;</i> 下载EXECL</a>
+					</if>
+				</div>
+			</form>
+			<div class="cl bg-1 bk-gray mt-20"  style="height: 34px; line-height: 34px;">
+					<ul class="l comm-ul" style="display: flex;">
+						<li class="<if condition="$_GET['status'] != 1">current</if>"><a href="{:U('business/outstanding','status=0')}">欠账商家</a></li>
+						<li class="<if condition="$_GET['status'] == 1">current</if>"><a href="{:U('business/outstanding','status=1')}">商家余额</a></li>
+					</ul>
+					<span class="r">
+						<if condition="$Think.get.status eq 0">商家总欠款：<strong>{$totalmoney}</strong> 元。</strong></if>
+						<if condition="$Think.get.status eq 1">商家总余额：<strong>{$totalmoney}</strong> 元。</strong></if>
+						共有数据：<strong>{$count}</strong> 条</span> </div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th>id</th>
+								<th>店铺名称</th>
+								<th>旺旺</th>
+								<th>手机</th>
+								<th>QQ/微信</th>
+								<th>所在地</th>
+								<th>加入时间</th>
+								<if condition="$_SESSION['user']['role'] == 1 or $_SESSION['user']['role'] == 4">
+								<th >业务员（QQ）</th>
+								<th >业务员</th>
+								</if>
+								<if condition="$Think.get.status eq 0">
+								<th>欠款</th>
+								</if>
+								<if condition="$Think.get.status eq 1">
+									<th>余额</th>
+								</if>
+								<th >操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						 <volist name="data" id="vo">
+							<tr class="text-c">
+								<td>{$vo.id}</td>
+								<td >
+									<if condition="$vo.url != ''">
+										<a href="{$vo.url}" title="点击查看" target="_blank"><label class="label <if condition='$vo.msg eq 1'>label-success<else />label-warning</if> radius" style="cursor: pointer; font-size: 14px; font-weight: 100;"><if condition="$vo.shopname == ''">{$vo.wangwang}<else />{$vo.shopname}</if></label></a>
+											<if condition="$vo.msg eq 1">
+											   <!--审核通过显示 -->
+											  <!-- <span class="label label-success radius">已通过</span>-->
+											  <elseif condition="$vo.msg eq 2"/>
+											   <span class="label radius" style="font-weight: 100; cursor: pointer;">未通过</span>
+											  <elseif condition="$vo.msg eq 0"/>
+											   <span class="label radius" style="background: #ffc107;font-weight: 100; cursor: pointer;" onclick="shopCheck(this,{$vo.id})">去审核</span>
+											   <!--未提交店铺地址显示-->
+											   <!--<span class="label label-warning radius">未绑定</span>-->
+											 </if>
+										<else />待认证
+									</if>
+								</td>
+								<td>
+									{$vo.wangwang}
+								</td>
+								<td>{$vo.iphone}</td>
+								<td>{$vo.qq}</td>
+								<td>{$vo.address}</td>
+								<td>{$vo.addtime|date="j/n H:i",###}</td>
+								<if condition="$_SESSION['user']['role'] == 1 or $_SESSION['user']['role'] == 4">
+								<td class="td-status"><a href="tencent://message/?uin={$vo.tutor}&Site=&menu=yes">{$vo.tutor}</a></td>
+								<td>{$vo.yw_info}</td>
+								</if>
+
+
+								<td><b style="font-size: 11px;">¥ </b>{$vo.a}</td>
+								<td class="td-manage">
+									<a title="已发布任务"  href="javascript:;" onclick="showUserTask('商家已发布的商品','{:U('business/tasklist','id='.$vo['uid'])}','1400')" class="order-a" style="text-decoration:none">查看任务</a>
+								</td>
+							</tr>
+						 </volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript" src="__PUBLIC__/ERP/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('.table-sort tbody').on('click', 'tr', function() {
+			if($(this).hasClass('selected')) {
+				$(this).removeClass('selected');
+			} else {
+				$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		});
+	});
+	function showUserTask(title, url, w, h) {
+		layer_show(title, url, w, h);
+	}
+</script>
+</block>

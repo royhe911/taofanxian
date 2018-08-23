@@ -1,0 +1,54 @@
+<extend name="Layout:layout" />
+<block name="content">
+	<!--<div class="row">
+		<div class="col-lg-12">
+	        <h1 class="page-header">商品专题修改  </h1>
+	    </div>
+	</div>-->
+	<nav class="breadcrumb" style="padding: 0px 15px; line-height: 37px; border-radius: 0; border-bottom: 1px solid #ddd; position: absolute;top: 0;left: 0;width: 100%;"><i class="fa fa-home"></i> 首页 <span class="c-gray en">&gt;</span> 专题管理 <span class="c-gray en">&gt;</span> 商品专题修改 <a class="btn btn-success radius r" style="margin-top:1px;float: right;padding: 6px 20px;" href="javascript:location.replace(location.href);" title="刷新" ><i class="fa fa-refresh"></i></a><div style="clear: both;"></div></nav>
+	<div style="height: 50px; width: 100%;"></div>
+
+     <form role="form" action="" method="post" id="form">
+		<input class="form-control"  name="id" type="hidden"  value="{$goods.id}">
+		
+		<div class="row">
+			<div class="form-group col-lg-4">
+				<label>商品：</label>
+				<label >{$goods.title}</label>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="form-group col-lg-4">
+				<img style="width:100px" alt="{$goods.subj_id}" src="{$goods.img}">
+			</div>
+		</div>
+		
+        <div class="row">
+        	<div class="form-group col-lg-4">
+				<label>专题名称</label>
+				<select class="form-control" name="subjid" id="subjid">
+					<option value="" >选择专题</option>
+						<foreach name="subj" item="vo" key="k">
+							<option value="{$vo.id}" <?php if($vo['id']==$goods['subj_id']) echo 'selected';?> >{$vo.name}</option>
+						</foreach>
+					</select>
+			</div>
+  		</div>
+		
+		<div class="row">
+			<div class="form-group col-lg-4">
+				<label>显示排序</label>
+				<input value="<?php if($goods['subj_seat']) echo $goods['subj_seat'];?>" class="form-control" placeholder="请输入数字，数字越大越靠前" name="subj_seat" type='text' onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" />
+			</div>
+		</div>
+		
+        <div class="row">
+        	<div class="col-lg-4">
+				<input type="submit" class="btn btn-lg btn-success btn-block " value="提交">
+        	</div>
+        </div>
+	</form>
+
+
+</block>

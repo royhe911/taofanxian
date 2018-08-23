@@ -1,0 +1,27 @@
+<extend name="Layout:layout" />
+<block name="content">
+	<!--<div class="row">
+		<div class="col-lg-12">
+	                    <h1 class="page-header">淘宝客订单导入 </h1>
+	    </div>
+	</div>-->
+	<nav class="breadcrumb" style="padding: 0px 15px; line-height: 37px; border-radius: 0; border-bottom: 1px solid #ddd; position: absolute;top: 0;left: 0;width: 100%;"><i class="fa fa-home"></i> 首页 <span class="c-gray en">&gt;</span> 淘宝客订单管理 <span class="c-gray en">&gt;</span> 淘宝客订单上传 <a class="btn btn-success radius r" style="margin-top:1px;float: right;padding: 6px 20px;" href="javascript:location.replace(location.href);" title="刷新" ><i class="fa fa-refresh"></i></a><div style="clear: both;"></div></nav>
+	<div style="height: 50px; width: 100%;"></div>
+	<form role="form" action="" method="post" id="form" enctype="multipart/form-data">
+	
+		<div class="row">
+			<div class="form-group col-lg-4">
+                  <label><span><b>导入淘宝客订单Excel表：</b>
+                  <input type="file" name="file_stu" style="margin:10px 0;"></span></label>
+            </div>
+        </div>
+	
+		<div class="row">
+			<div class="col-lg-4">
+			 	<input class="btn btn-lg btn-success btn-block " type="submit"  value="导入" />
+			</div>
+		</div>
+	</form>
+
+
+</block>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <title>领吧-商家报名</title>
+    <link rel="stylesheet" rev="stylesheet" href="__PUBLIC__/maoke/css/iconfont.css" type="text/css" media="all" />
+    <link rel="stylesheet" rev="stylesheet" href="__PUBLIC__/maoke/css/fullpage.css"  />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/sell.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/style.css"/>
+	<script src="__PUBLIC__/maoke/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PUBLIC__/maoke/js/jq-ui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PUBLIC__/maoke/js/fullPage.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(document).ready(function() {
+			$.fn.fullpage({
+				slidesColor: ['', '#fff', '#FDF6E1', '#fff', '#F3F3F3', '#fff'],
+				anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6'],
+				menu: '#menu',
+				slidesNavPosition: 'bottom',
+				slidesNavigation: false,
+				controlArrow: false,
+				afterRender: function() {
+	
+				},
+				afterLoad: function(anchorLink, index) {},
+				afterSlideLoad: function(anchorLink, index, slideIndex, direction) {
+					$(".try_type .fullPage-slidesNav").attr("rel", 'v' + slideIndex);
+				}
+			});
+			$(window).resize();
+		});
+	</script>
+	<style type="text/css">
+		.fullPage-slidesNav[rel=v0] { background-position: 0px bottom; }
+		.weight_box{ margin:30px auto; height: 1000px; width: 970px;  color: black; margin-top: 88px;}
+		.adv-title{ text-align: center; font-size: 30px;  width: 100%;  padding: 10px 0;} 
+		.title-p{ color: #23A6D0; padding: 5px 0; font-size: 30px; padding-bottom: 0;}
+		.title-en{ color: #C0C0C0; padding: 5px 0; font-size: 16px;}
+		.adv-detail{ background: #fff; width: 100%; margin-bottom: 20px;  padding: 15px; text-align: left; border-radius: 15px;box-sizing: border-box;box-shadow: 0px 0px 10px rgba(0,0,0,0.2);}
+		.detail-title{ color:#23A6D0; padding: 5px 0; font-size: 18px;}
+		.detail-p{ font-size: 16px; line-height: 26px;}
+		@media only screen and (max-width: 1679px) {
+			.adv-detail{ margin-bottom: 15px;}
+			.detail-p{ line-height: 24px;}
+			.detail-title{ font-size: 16px;}
+			.detail-p{ font-size: 14px;}
+		}
+		@media only screen and (max-width: 1366px) {
+			.adv-detail{ margin-bottom: 15px;}
+			.detail-p{ line-height: 21px;}
+			.detail-title{ font-size: 16px;}
+			.detail-p{ font-size: 14px;}
+		}
+	</style>
+</head>
+<body>
+	<div class="header" style="position:absolute;">
+		<div class="float-box fixed-box">
+			<div class="content">
+				<h1 class="zs-logo"><a href=""><img src="__PUBLIC__/maoke/images/lingke-logo.png"></a></h1>
+				<div class="nav fr">
+					<ul id="menu">
+						<li data-menuanchor="page1" class="active">
+							<a href="#page1">首页</a>
+						</li>
+						<li data-menuanchor="page3">
+							<a href="#page3">模式原理</a>
+						</li>
+						<li data-menuanchor="page4">
+							<a href="#page4">试用流程</a>
+						</li>
+						<li data-menuanchor="page5">
+							<a href="#page5">选择领吧</a>
+						</li>
+						<li data-menuanchor="page6">
+							<a href="#page6">入驻标准</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="section section1">
+		<div class="screen-main">
+			<div class="s1_bg2"></div>
+			<h1></h1>
+			<div class="s1_ss">
+				<!--<div class="s1_sy"></div>
+				<div class="s1_zk"></div>
+				<div class="s1_yp"></div>-->
+				<p style="background: #DF1914 ; height: 100%; line-height: 36px;">免费试用-综合权重优化</p>
+			</div>
+			<div class="s1_t2"></div>
+	
+			<div class="s1_colud"></div>
+		</div>
+	</div>
+	
+	<div class="section">
+		<div class="science-inner inner">
+			<div class="s2_line"></div>
+			<div class="s1_pc"></div>
+			<h2 class="s2_tit">店铺的困惑<em>Operating Confused</em></h2>
+			<div class="s2_list">
+				<a><i></i><b>关键词没有排名</b></a>
+				<a><i></i><b>宝贝转化率太低</b></a>
+				<a><i></i><b>没流量，没展现</b></a>
+				<a><i></i><b>新品无从下手</b></a>
+			</div>
+			<a href="/zhaoshang/register" class="s2_btn  ">加入领吧网，帮您解决所有困惑。</a>
+		</div>
+	</div>
+	<div class="section try_type">
+		<div class="fullPage-slidesNav top li1">
+			<ul>
+				<!--<li>
+					<a href="#" class="active">优品试用</a>
+				</li>
+				<li>
+					<a href="#" class="">折扣试用</a>
+				</li>-->
+				<li>
+					<a href="#" class="active">普通试用</a>
+				</li>
+			</ul>
+		</div>
+		<!--<div class="slide">
+			<div class="wide slide_info"> <img src="__PUBLIC__/maoke/images/shiyong/s3_t1.png" />
+				<p><b>优品优势：</b>高质量商品吸引大量优质会员，申请的会员需要先行搜索关键词进店，提交店铺地址平台自动审核商品正确否，再将商品加入购物车才可提交申请。一份 免费试用商品可以带来超过你想象的搜索、加购、双收藏的效果。<br/> <b>发布要求：</b>商品价值大于30元，所有的试客申请过程中必须先搜索，加购，收藏，分享（注：需要试客截图），连着三天申请，然后积累到一定申请量从中间抽取需求试客完成试用。</p>
+			</div>
+		</div>-->
+		<!--<div class="slide">
+			<div class="wide slide_info"> <img src="__PUBLIC__/maoke/images/shiyong/s3_t2.png" />
+				<p><b>折扣优势：</b>折扣试用商品价值高容易吸引试客来申请，因折扣试用需要试客花费一定的费用，所以这些是用户是比较有需求的精准客源。其次也减少商家提高信誉过程的成本。<br/> <b>发布要求：</b>商品价值大于30元，折扣范围（1-4折）。整个过程和免费试用一样的，试客以原价下单，而返还的金额为折扣价。</p>
+			</div>
+		</div>-->
+		<div class="slide">
+			<div class="wide slide_info"> <img src="__PUBLIC__/maoke/images/shiyong/s3_t2.png" />
+				<p><b>普通试用：</b>可以做赠品试用，在节约成本的同时可以大量的发布活动来快速提高销量。<br/> <b>发布要求：</b>单价不限制，商品价值不限制。最少发布3份起，商品标题和图片要清晰干净。</p>
+			</div>
+		</div>
+	</div>
+	<div class="section">
+		<div class="trial-inner inner">
+			<h2 class="s4_tit"><i></i><i></i>试用流程<em>Trial Process</em></h2>
+			<dl class="seller">
+				<dd>
+					<div><i></i><img src="__PUBLIC__/maoke/images/shiyong/s4_11.png" />发布试用上线</div>
+				</dd>
+				<dd>
+					<div><i></i><img src="__PUBLIC__/maoke/images/shiyong/s4_12.png" />筛选试客通过</div>
+				</dd>
+				<dd>
+					<div><i></i><img src="__PUBLIC__/maoke/images/shiyong/s4_13.png" />审核单号发货</div>
+				</dd>
+				<dd>
+					<div><i></i><img src="__PUBLIC__/maoke/images/shiyong/s4_14.png" />审核截图完成</div>
+				</dd> <dt><em>商家</em></dt> </dl>
+			<dl class="buyer"> <dt><em>试客</em></dt>
+				<dd>
+					<div><i></i><img src="__PUBLIC__/maoke/images/shiyong/s4_21.png" />试客申请提交</div>
+				</dd>
+				<dd>
+					<div><i></i><img src="__PUBLIC__/maoke/images/shiyong/s4_22.png" />按要求去下单</div>
+				</dd>
+				<dd>
+					<div><i></i><img src="__PUBLIC__/maoke/images/shiyong/s4_23.png" />收货评价截图</div>
+				</dd>
+				<dd>
+					<div><i></i><img src="__PUBLIC__/maoke/images/shiyong/s4_24.png" />返回试用金额</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	
+	<div class="section">
+		<div class="net-inner ">
+			<!--<p style="margin-top: 100px;">123</p>-->
+			<div class="weight_box" id="f4">
+				<div class="adv-title"><p class="title-p">领吧的优势</p><p class="title-en">The advantage of lingba</p></div>
+				<div class="adv-detail">
+					<p class="detail-title">优势一 : 一站式优化宝贝 , 提升宝贝综合权重</p>
+					<p class="detail-p">
+						可根据关键词指数和行业数据设置下单流程，避免重复刷同一关键词！根据行业数据制定转化率，杜绝转化率不合理！关键词入店，淘口令入店，直通车入店等多入口模式，避免入口单一。
+					</p>
+				</div>
+				<div class="adv-detail">
+					<p class="detail-title">优势二 : 多维度审核杜绝小号，用户身份安全</p>
+					<p class="detail-p">
+						<span style="color:#23A6D0 ;">1.淘气值制度：</span>不再采用老套的淘宝等级制度，等级制度的高低并没有任何权重的提升，可能是皇冠号，但是如果是刷手号，升级很快，反而打乱商家权重，淘气值是根据购物分，奖励分和基础分构成，多个维度产生的，杜绝刷手号，对店铺权重起到画龙点晴之用。
+					</p><p class="detail-p">
+						<span style="color: #23A6D0;">2.严格审核：</span>每个试客均通过平台严格审核（1人1号，信誉2心起，注册时长半年以上，支付宝、银行卡、身份证实名认证）所有用户均来自合作的微信媒体公众号，年龄大致都是17-40岁之间均为真实买家，一人一号一机一IP，完全等同真实交易。杜绝刷单小号，降低降权风险。平台担保，杜绝私自退款和安全隐患问题。
+					</p>
+				</div>
+				<div class="adv-detail">
+					<p class="detail-title">优势三 : 流程设计人性化贴合商家需求</p>
+					<p class="detail-p">
+						操作流程简单易懂，一站式解决宝贝基础销量、评价、权重，发布试用操作简单易懂，自助式审核用户好评，返款快速，极大的提高资金利用率。
+					</p>
+				</div>
+				<div class="adv-detail">
+					<p class="detail-title">优势四 : 自动审核订单</p>
+					<p class="detail-p">
+						帮助商家减少多个订单审核环节，通过多维度对试客提交订单进行审核确认，帮助商家节省处理订单耗费时间，提高订单处理效率。
+					</p>
+				</div>
+				<div class="adv-detail">
+					<p class="detail-title">优势五 : 人工智能AI人群标签系统</p>
+					<p class="detail-p">
+						依托领吧庞大的用户库,通过基本用户信息，位置信息,购物行为，购物频率以及购买价格等综合信息建模，构建包括用户年龄，性别，地区，消费水平，职业，兴趣爱好等用户画像数据，精准细分用户人群。
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="section">
+		<div class="net-inner inner buy">
+			<h2 class="s4_tit"><i></i><i></i>开通商家VIP<em>VIP Service</em></h2>
+			<div class="table-list">
+				<table>
+					<tbody>
+						<tr>
+							<th>服务项目</th>
+							<th>普通商家</th>
+							<th><i class="iconfont icon-crownfill"></i> 铂金VIP商家</th>
+							<th><i class="iconfont icon-vip"></i> 钻石VIP商家</th>
+						</tr>
+						<tr>
+							<td>收费标准</td>
+							<td> 免费开通</td>
+							<td>
+								￥268/月<br/> ￥688/季
+								<br/> ￥1880/年 </td>
+							<td>
+								￥428/月<br /> ￥988/季
+								<br /> ￥2680/年（送4个月）
+							</td>
+						</tr>
+						<tr>
+							<td>绑定店铺</td>
+							<td>1个</td>
+							<td>5个</td>
+							<td>15个</td>
+						</tr>
+						<tr>
+							<td>搜索关键词</td>
+							<td>2个</td>
+							<td>5个</td>
+							<td>8个</td>
+						</tr>
+						<tr>
+							<td> 免费试用</td>
+							<td>
+	
+								&nbsp;&nbsp;&nbsp;&nbsp;0-100元 2元/单 <br/> 101-500元 3元/单 <br/> 501~1000元&nbsp;&nbsp; 4元/单 <br/> 1001~以上&nbsp;&nbsp; 6元/单
+	
+							</td>
+							<td>
+								月费vip 5折手续费 <br/> 季费vip 5折手续费 <br/> 年费vip 免手续费&nbsp;&nbsp;
+							</td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+						</tr>
+						<tr>
+							<td>折扣试用</td>
+							<td>5% 手续费</td>
+							<td>2.5% 手续费</td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+						</tr>
+						<tr>
+							<td>优品试用</td>
+							<td>5% 手续费</td>
+							<td>2.5% 手续费</td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+						</tr>
+						<tr>
+							<td>流量任务</td>
+							<td>0.1元/个</td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+						</tr>
+						<tr>
+							<td>淘口令下单</td>
+							<td>0.5元 /单</td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+						</tr>
+						<tr>
+							<td>复制活动</td>
+							<td> <i class="iconfont icon-roundclosefill f-warning"></i> </td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+						</tr>
+						<tr>
+							<td>追加份数</td>
+							<td><i class="iconfont icon-roundcheckfill f-ok"></i></td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i></td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i> 免费</td>
+						</tr>
+						<tr>
+							<td>刷新活动</td>
+							<td>2元/活动/次</td>
+							<td>1次/活动/天</td>
+							<td>2次/活动/天</td>
+						</tr>
+						<tr>
+							<td>防IP地址重复</td>
+							<td> <i class="iconfont icon-roundclosefill f-warning"></i></td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i></td>
+							<td> <i class="iconfont icon-roundcheckfill f-ok"></i></td>
+						</tr>
+						<tr>
+							<td>提现免手续费</td>
+							<td>1% 手续费</td>
+							<td><i class="iconfont icon-roundcheckfill f-ok"></i></td>
+							<td><i class="iconfont icon-roundcheckfill f-ok"></i></td>
+						</tr>
+						<tr>
+							<td>首页广告展位</td>
+							<td>无</td>
+							<td>年费vip 送1期（每期3天）</td>
+							<td>年费vip 送3期（每期3天）</td>
+						</tr>
+						<tr>
+							<td>赠送金币</td>
+							<td><i class="iconfont icon-roundclosefill f-warning"></i></td>
+							<td>年费vip 送8000金币</td>
+							<td>年费vip 送18000金币</td>
+						</tr>
+					</tbody>
+				</table>
+	
+			</div>
+			<div class="btn-list">
+				<a href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" class="bc-warning"><i class="iconfont icon-shopfill"></i> 注册商家账号</a>
+				<a href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true" class="bc-alipay" target="_blank"><i class="iconfont icon-servicefill"></i> 联系商家客服</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

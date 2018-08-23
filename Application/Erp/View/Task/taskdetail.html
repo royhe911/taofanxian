@@ -1,0 +1,96 @@
+<extend name="public/modal" />
+<block name="title">任务分配详情</block>
+<block name="menu">
+	<div class="Hui-article" style="top: -10px;">
+		<div>
+			<div class="pd-20">
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+						<div class="dataTables_length" id="DataTables_Table_0_length">
+						</div>
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+								<tr class="text-c">
+									<th>业务员</th>
+									<th>关键词</th>
+									<th>SKU</th>
+									<th>单价</th>
+									<th>份数</th>
+									<th>完成时间</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-c va-m">
+									<th width="100">a</th>
+									<td class="text-l">关键词1</td>
+									<td class="text-l">abcd12</td>
+									<td class="text-l">10元</td>
+									<td class="text-l">1份</td>
+									<td class="text-l">进行中</td>
+									<td class="td-manage">
+										<a style="text-decoration:none"  onClick="showTask('进展详情','{:U('product/order', 'id='.$vo['id'])}','500','500')" href="javascript:;" title="进展详情">进展详情</a>
+									</td>
+								</tr>
+								<tr class="text-c va-m">
+									<th width="100">b</th>
+
+									<td class="text-l">关键词2</td>
+									<td class="text-l">abcd144</td>
+									<td class="text-l">10元</td>
+									<td class="text-l">10元</td>
+									<td class="text-l">未完成</td>
+									<td class="td-manage">
+										<a style="text-decoration:none"  onClick="showTask('进展详情','{:U('product/order', 'id='.$vo['id'])}','500','500')" href="javascript:;" title="进展详情">进展详情</a>
+									</td>
+								</tr>
+								<tr class="text-c va-m">
+									<th width="100">c</th>
+
+									<td class="text-l">关键词3</td>
+									<td class="text-l">abcd1444</td>
+									<td class="text-l">100元</td>
+									<td class="text-l">3份</td>
+									<td class="text-l">2018-04-08 15：00</td>
+									<td class="td-manage">
+										<a style="text-decoration:none"  onClick="showTask('进展详情','{:U('product/order', 'id='.$vo['id'])}','500','500')" href="javascript:;" title="进展详情">进展详情</a>
+									</td>
+								</tr>
+								<tr class="text-c va-m">
+									<th width="100">d</th>
+
+									<td class="text-l">关键词4</td>
+									<td class="text-l">abcd13123</td>
+									<td class="text-l">100元</td>
+									<td class="text-l">3份</td>
+									<td class="text-l">2018-04-08 15：00</td>
+									<td class="td-manage">
+										<a style="text-decoration:none"  onClick="showTask('进展详情','{:U('product/order', 'id='.$vo['id'])}','500','500')" href="javascript:;" title="进展详情">进展详情</a>
+									</td>
+								</tr>
+								<tr class="text-c va-m">
+									<th width="100">e</th>
+									<td class="text-l">关键词5</td>
+									<td class="text-l">abcd1dsd</td>
+									<td class="text-l">100元</td>
+									<td class="text-l">3份</td>
+									<td class="text-l">2018-04-08 15：00</td>
+									<td class="td-manage">
+										<a style="text-decoration:none"  onClick="showTask('进展详情','{:U('product/order', 'id='.$vo['id'])}','500','500')" href="javascript:;" title="进展详情">进展详情</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	function showTask(title, url, w, h) {
+		layer_show(title, url, w, h);
+	}
+</script>
+</block>

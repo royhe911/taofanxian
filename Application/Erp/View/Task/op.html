@@ -1,0 +1,143 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">任务管理</span><span class="c-999 en">&gt;</span><span class="c-666">分配任务</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="page-container">
+				<form action="{:U('Task/add')}" method="post" class="form form-horizontal" id="form-task" >
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>业务员：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<span class="select-box">
+								<select name="uid" id="uid" class="select">
+								  <volist name="data" id="vo">
+									<option value="{$vo.id}">{$vo.name}</option>
+								  </volist>
+								</select>
+							</span>
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>选择任务：</label>
+						<div class="formControls col-xs-8 col-sm-9 check-task">
+							<div class=" cl">
+								<!--循环-->
+								<volist name="goods" id="vo">
+								<div class="col-xs-12 col-sm-12 check-box">
+									<input type="radio" name="gid" id="gid" class="task-checkbox" value="{$vo.id}" />
+									<span class="goodsname">{$vo.goods_title}</span>
+									<!--指定关键词-->
+									<span class=" keyword" style="width: 240px;"></span>
+									<!--指定份数-->
+									<span class="select-num"></span>
+									<span class="maxnum" style="display: none;"></span>
+								</div>
+								</volist>
+								<!--循环-->
+								<div class="clearfix pd-0-20">
+									<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+									 <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+										<ul class="pagination" id="list-pagination"></ul>
+									</div>
+							   	</div>
+							</div>
+						</div>
+					</div>
+					<div class="row cl">
+						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+							<button onclick="taskCheck()" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 确认</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	$(function(){
+		//分页
+		var paginationOptions= $.extend(true, {$pagination|json_encode} ,{
+				onPageClick: function (event, page) {
+				var options = $(this).data('twbsPagination').options;
+		        options.baseUrl = options.baseUrl.replace('.html','');
+		        options.getParams.page = page;
+                var param = '';
+				for(var x in options.getParams ){
+		        		param += '&' + x + '=' + options.getParams[x];
+		       	}
+		        window.location.href =  options.baseUrl + param + '.html';
+		   		}
+			});
+		$('#list-pagination').twbsPagination(paginationOptions);
+
+		//选中获取数据
+		$('.task-checkbox').click(function(){
+			$('.select-num').empty();//清空垃圾
+			$('.keyword').removeClass("select-box").empty();//清空垃圾
+			var gid = $("input[type='radio']:checked").val();//选中项
+			if(gid){
+		        $.post("{:U('Task/keyword')}", {gid:gid}, function(data) {
+		        	if (1 == data.msg){
+		        		var msg = '';
+		        		var arr = JSON.parse(data.info);
+		                for(var i= 0;i<arr.length;i++){
+		                	msg += '<option value='+arr[i]['id']+'>';
+		                	msg += '关键词：'+arr[i]['k']+'';
+		                	if(arr[i]['s']){msg += ' --> SKU：'+arr[i]['s']+' ';}
+		                	msg += '</option>';
+		                	$("input[type='radio']:checked").siblings('.maxnum').append("<input type='hidden' value='"+arr[i]['n']+"'>")
+		                }
+		                msg = '<select name="sid" id="sid" class="select select-keyword"><option value="all">全部</optin>'+msg+'</select>';
+		                $("input[type='radio']:checked").siblings('.keyword').addClass('select-box').append(msg);
+
+		        	} else {
+		        		layer.msg('暂无相关信息!',{icon:2,time:1000});
+		        	}
+		        },'json');
+			}
+		});
+
+		//具体任务选择指定份数
+		$(".check-task").on("change",".select-keyword",function(){
+			if(this.value === 'all'){
+				$('.select-num').empty();//清空垃圾
+			} else {
+				let option_index = $(this).find("option:checked").index();
+				let maxnum = $(this).parents('.keyword').siblings(".maxnum").children("input").eq(option_index-1).val();
+				$(this).parents('.keyword').siblings(".select-num").html('<input type="number" name="num" id="num" step="1" min="1" max="'+maxnum+'" class="input-text" style="width: 100px;" placeholder="最多'+maxnum+'"/> 份').show();
+			}
+		})
+	});
+
+	function taskCheck(){
+		if($('input[type=radio]:checked').length == 0){
+			layer.alert('请至少选择一个任务');
+			return false;
+		}else{
+			layer.confirm('确认分配任务吗？', {
+			  btn: ['确定','取消'] //按钮
+			}, function(){
+				var uid = $("#uid").val();
+				var gid = $("#gid").val();
+				var sid = $("#sid").val();
+				var num = $("#num").val();
+				$.post("{:U('Task/add')}", {gid:gid,sid:sid,num:num,uid:uid}, function(data) {
+		        	if (1 == data.msg){
+		        		layer.msg(data.info,{icon:1,time:1000});
+		        		setTimeout(function(){
+		        			window.location.reload();
+		        		},1000);
+		        	} else {
+		        		layer.msg(data.info,{icon:2,time:1500});
+		        	}
+		        },'json');
+			}, function(index){
+			  layer.close(index);
+			});
+		}
+	}
+</script>
+</block>

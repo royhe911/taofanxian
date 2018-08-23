@@ -1,0 +1,279 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<link rel="stylesheet" href="__PUBLIC__/maoke/css/shikeba/orderdetail.css">
+<style type="text/css">
+	#section .order_details .apply_information .information_detail .progress_bar_yes .default_bar{
+		background: url(__PUBLIC__/maoke/images/merchant/progression_bg_no_start_default2.png) top center no-repeat;
+	}
+	#section .order_details .apply_information .information_detail .progress_bar_yes .selected_bar{
+		background: url(__PUBLIC__/maoke/images/merchant/progression_bg_no_end_default2.png) top center no-repeat;
+	}
+	.sj_btn{display: inline-block !important;width: 100px !important;height: 30px !important;line-height: 30px !important;border-radius: 5px !important; background: #fff ; font-size: 14px ; margin-left: 0 !important;}
+	.main-btn{ border:  1px solid #f25f55 !important; color: #f25f55 !important; }
+	.sub-btn{ border:  1px solid green !important; color: green !important;}
+	#section .order_details .apply_information .information_detail .progress_description .evaluate_content .caption_left{padding-top: 39px;}
+	#section .order_details .apply_information .information_detail .progress_description .evaluate_content .caption_right{ padding-top: 36px;}
+	#section .order_details .apply_information .information_detail .progress_description .try_rebate{padding-top: 77px;}
+</style>
+<!-- 订单详情 -->
+<section id="section">
+    <!--订单详情-->
+    <div class="order_details">
+        <!--所在位置-->
+        <div class="location_title">
+            <ul>
+                <li>你所在的位置：</li>
+                <li class="order">
+                    <a class="" href="#">首页</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Usercenter/index')}">商家中心</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Coupon/index')}">优惠券管理</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a href="{:U('Coupon/processdetail',array('id'=>$info['gid'], 't' => 3))}">活动进展</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">订单详情</li>
+            </ul>
+        </div>
+        <!--商品发货状态-->
+        <div class="commodity_information">
+            <h1>优惠券活动信息：</h1>
+            <div class="title">
+                <p class="left">
+                    <span>{$info.addtime}</span>
+                    <span>活动订单号：{$info.id}</span>
+                </p>
+            </div>
+            <div class="details">
+                <ul>
+                    <li><img style="width:80px;height:80px" src="../{$goods.img}" alt="">
+                    </li>
+                    <li>
+                        <p>商品名称：<span>{$goods.goods_name}</span></p>
+                        <p>商品分类：<span>{$goods.category}</span></p>
+                        <p>商品链接：<span>
+                        <a target="_blank" href="{$goods.url}">{$goods.url}</a></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p>店铺名称：<span>{$goods.shopname}</span></p>
+                        <p>优&nbsp;&nbsp;惠&nbsp;&nbsp;券：<span>{$goods.red_price}</span></p>
+                        <p>平&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;台：<span><if condition="($goods.type eq 1)">淘宝<else/>天猫</if></span></p>
+                    </li>
+                    <li>
+                        <p>单件：<span><b style="margin-right:10px;">¥{$goods.real_price}</b>每单拍<b>1</b>个</span></p>
+                        <p>试客：<span>{$info.tb_id}</span></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!--申请信息-->
+        <div class="apply_information">
+            <h1>申请信息：</h1>
+            <!--信息详情-->
+            <div class="information_detail clearfix">
+                <!--信息进度条-->
+                <div class="left progress_bar progress_bar_yes">
+                    <div class="default_bar"></div>
+                    <div class="selected_bar" id="myHeight"></div>
+                </div>
+                <!--进度条描述-->
+                <div class="left progress_description">
+                    <!--领取下单-->
+                    <div class="title placeOrder_titile">
+                        <p><span>领取下单</span></p>
+                        <p><i>{$info.addtime}</i></p>
+                    </div>
+                    <!--领取下单--步骤-->
+                    <div class="placeOrder">
+                        <div class="clearfix placeOrder_one">
+                            <p class="left left_title"><b>核对商品信息</b></p>
+                            <p class="left right_content">
+                            	<!--以下二选一 显示-->
+								<b class="collection_shop show_img">商品链接：<a href="{$goods.url}" target="_blank">查看链接</a></b>
+
+								<b class="collection_product show_img">店铺名称：{$goods.shopname}</b>
+                            </p>
+                        </div>
+                        <div class="clearfix  placeOrder_two">
+                            <p class="left left_title"><b>加入购物车</b></p>
+                            <div class="left right_content" style="padding-top: 85px;">
+                            	<!--a href="javascript:void(0);" onclick="showImg('{}')" >查看截图</a-->
+                            </div>
+                        </div>
+
+                         <div class="clearfix  placeOrder_three" >
+                            <p class="left left_title"><b>申请审核</b></p>
+                            <div class="left right_content" >
+                            	<!--申请审核 显示以下按钮-->
+                            	<eq name="info.state" value="1">
+                            	   <input class="sj_btn sub-btn" type="button" value="通过" onclick="agreed({$info.id}, {$info.state});" />
+                            	   <input class="sj_btn main-btn" type="button" value="驳回" onclick="refuse({$info.id}, {$info.state});" />
+                            	</eq>
+                            	<eq name="info.state" value="2"><b>商家已驳回申请</b></eq>
+                            	<egt name="info.state" value="3"><p class="left right_content"><b>商家已通过申请</b></p></egt>
+                            	<!--已通过 或 已驳回 显示以下状态-->
+                            	<!--商家已通过申请 或 商家已驳回申请-->
+                            </div>
+                         </div>
+                        <div class="clearfix  placeOrder_four">
+                            <p class="left left_title"><b>试客下单</b></p>
+                            <p class="left right_content">
+                            	<!--没下单显示 等待下单-->
+								<elt name="info.state" value="3"><b>等待试客下单</b></elt>
+								<eq name="info.state" value="4">
+								   <b>订单号：{$info.tb_item}</b>
+								   <input class="sj_btn sub-btn" type="button" value="通过" onclick="agreed({$info.id}, {$info.state});" />
+								   <input class="sj_btn main-btn" type="button" value="驳回" onclick="refuseShow({$info.id}, {$info.state});" />
+								</eq>
+								<eq name="info.state" value="5"><b>商家已驳回订单号</b></eq>
+								<egt name="info.state" value="6"><b><notempty name="info.tb_item">订单号：{$info.tb_item}</notempty> 商家已通过订单号</b></egt>
+								<!--通过申请后，6小时内还没下单出现关闭订单按钮-->
+                            	<!--<input class="sj_btn main-btn" data-context="640990" type="button" value="关闭订单" onclick="" />-->
+
+                            	<!--已下单显示订单号-->
+								<!--<b>订单号：{$info.tb_item}</b>
+								<input class="sj_btn sub-btn" data-context="640990" type="button" value="通过" onclick="" />
+                            	<input class="sj_btn main-btn" data-context="640990" type="button" value="驳回" onclick="" />-->
+
+								<!--已通过 或 已驳回显示 状态-->
+								<!--<b>订单号：31231 商家已确认订单号</b>-->
+                            </p>
+                        </div>
+                    </div>
+                    <!--收货评价-->
+                     <div class="title evaluate_content getEvaluate clearfix" id="one" data-height="115" style="margin-top: 18px;">
+                        <div class="left caption_left">
+                            <p><span>收货评价</span></p>
+                            <p><i>{$info.subcondate}</i></p>
+                        </div>
+                        <div class="left caption_right">
+                        	<!--等待试客提交评价截图 显示-->
+                        	<elt name="info.state" value="6"><b>等待试客提交评价截图</b></elt>
+                        	<!--已提交显示 查看截图-->
+                            <b>评价截图：<a class="pinjia" data-context="评价截图" href="javascript:void(0)" onclick="showImg('{$info.four_pic}')">查看截图<b style="height: 28px;line-height: 28px;" data-txt="" id="evaluation_goods"></b></a></b>
+                        </div>
+                     </div>
+
+                     <div class="title evaluate_content confirmEvaluate clearfix" id="four" data-height="305">
+                        <div class="left caption_left" style="padding-top: 70px;">
+                            <p><span>确认评价</span></p>
+                            <p><i>&nbsp;</i></p>
+                        </div>
+                        <div class="left caption_right" style="padding-top: 70px;">
+                        	<!--等待审核显示 按钮-->
+                        	<elt name="info.state" value="6"><b>等待试客提交评价</b></elt>
+                        	<eq name="info.state" value="7">
+                        	   <input class="sj_btn sub-btn" data-context="640990" type="button" value="通过" onclick="agreed({$info.id}, {$info.state});" />
+                    		   <input class="sj_btn main-btn" data-context="640990" type="button" value="驳回" onclick="refuse({$info.id}, {$info.state});" />
+                            </eq>
+                            <eq name="info.state" value="8"><b>商家已驳回评价</b></eq>
+                            <egt name="info.state" value="9"><b>商家已通过评价</b></egt>
+                    		<!--已审核 显示状态-->
+                    		<!--商家已通过 或 商家已驳回-->
+                        </div>
+                     </div>
+                     <div class="title try_rebate clearfix">
+                        <p class="left left_title"><span>试用返款</span></p>
+                        <p class="left right_content"><eq name="info.state" value="10"><b>已返款</b><else /><b>待返款</b></eq></p>
+                     </div>
+                     <div class="title evaluate_content carryOut clearfix">
+                        <div class="left caption_left" style="padding-top: 96px;">
+                            <p><span>已完成</span></p>
+                            <p><i>&nbsp;</i></p>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+ $(function(){
+	 var state = {$info.state};
+	 var myHeight = 379;//默认高度值
+	 if (5 >= state && 1 < state) myHeight += 83;
+	 if (6 == state) myHeight += 190;
+	 if (9 > state && 7 <= state) myHeight += 305;
+	 if (9 == state) myHeight += 422;
+	 if (10 <= state) myHeight += 530;
+	 $('#myHeight').css('height', myHeight+'px');
+ })
+
+ function hideLayer(){
+ 	layer.closeAll();
+ }
+
+ //查看截图
+ function showImg(src){
+	layer.open({
+        type: 1,
+        title:'点击屏幕阴影部分关闭图片',
+        shadeClose: true,
+        closeBtn: true,
+        area: ['375px','667px'], //宽高
+		content:'<img src="'+src+'" alt="加载失败" height="100%" width="100%"></img>'
+	});
+ }
+ 
+ //通过
+ function agreed(id, state){
+	layer.confirm('确认通过吗？', {icon: 3, title:'提示'}, function(){
+ 		  window.location.href = "{:U('Couponorder/agreed')}&state="+state+"&id="+id;
+ 	}, function(){ 		  
+ 		  layer.close();
+ 	});
+ }
+ 
+ //驳回
+ function refuse(id, state){
+ 	layer.confirm('确认驳回吗？', {icon: 3, title:'提示'}, function(){
+ 		  window.location.href = "{:U('Couponorder/refuse')}&state="+state+"&id="+id;
+ 	}, function(){
+ 		  layer.close();
+ 	});
+ }
+ 
+ //驳回输入框
+ function refuseShow(id, state){
+ 	layer.open({
+    type: 1,
+    title:false,
+    shadeClose: true,
+    closeBtn: false,
+    area: ['300px', '180px'], //宽高
+	content:'<div style="text-align:center; margin-top:10px;"><textarea placeholder="请填写驳回原因..." style="width:95%; height:100px;resize:none; border:1px solid #ddd; border-radius:3px; font-size:14px;" id="refuseText" ></textarea><div style="margin-top:10px;"><div id="refuseBtn"><button id="refuseSure" onclick="txtRefuse('+id+','+state+')">确定</button><button id="refuseCancel" onclick="hideLayer()">取消</button></div></div></div>'
+ 	});
+ }
+ 
+	//提交驳回原因
+	function txtRefuse(id, state){
+		var note = $("#refuseText").val(); //驳回原因
+	     var post_url = '{:U('Couponorder/ajaxRefuse')}';
+	     if(note != ''){
+	     	$.post(post_url, {id:id, note:note, state:state},function($data) {
+	             if($data.msg == 1){
+	                 layer.alert('操作成功！' , function(){
+	                 	window.location.reload();
+	                 });
+	             }else{
+	                 layer.alert('操作失败！' , function(){
+	                 	window.location.reload();
+	                 });
+	             }
+	         });
+	     }else{
+	     	alert("请填写驳回原因");
+	     }
+	} 
+</script>
+<include file="Layout:foot" />

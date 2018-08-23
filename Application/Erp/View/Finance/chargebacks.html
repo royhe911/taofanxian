@@ -1,0 +1,66 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">扣款记录</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" >
+		<div>
+			<div class="pd-20">
+				<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+								<tr class="text-c">
+									<th>完成时间</th>
+									<th width="80">主图</th>
+									<th width="12%">宝贝详情</th>
+									<th>本金总额|数量|服务费|其它</th>
+									<th>完成金额/数量/服务费|其它</th>
+									<th>未完金额/数量</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							<volist name="data" id="vo">
+									<tr class="text-c va-m">
+										<td>{$vo.addtime|date="j/n H:i",###}</td>
+										<td>
+											<a href="javascript:;" title="鼠标右键复制图片"><img width="80" class="product-thumb" src="{$vo.goods_pic}"></a>
+										</td>
+
+										<td>
+											<a href="{$vo.goods_url}" style="color: #06c;" target="_blank" title="点击查看详情">	{$vo.goods_title}</a>
+										</td>
+
+										<td><b style="font-size: 11px;">¥</b> {$vo.goods_totalprice} | {$vo.goods_totalnum}单 | <b style="font-size: 11px;">¥</b> {$vo.goods_totalcost} | <b style="font-size: 11px;">¥</b> {$vo.goods_order}</td>
+
+										<td><b style="font-size: 11px;">¥</b> {$vo.success_price}/ {$vo.count_a}单/<b style="font-size: 11px;">¥</b>{$vo.actual_cost} | <b style="font-size: 11px;">¥</b> {$vo.order}</td>
+										<td><b style="font-size: 11px;">¥</b> {$vo.error_price}/ {$vo.error_num}单</td>
+										<td class="td-manage">
+											<a style="text-decoration:none" onClick="showProDetail('商品详情','{:U(\'product/mytask\','id='.$vo['miid'])}','1200','600')" href="javascript:;" title="查看订单"><i class="Hui-iconfont">查看扣款</i></a>
+										</td>
+									</tr>
+						</volist>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</block>
+<block name="js">
+	<script type="text/javascript">
+		/*商家已发布任务展示*/
+		function showProDetail(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+		function showTaskPro(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+
+	</script>
+</block>

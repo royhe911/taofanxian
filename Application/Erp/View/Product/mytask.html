@@ -1,0 +1,369 @@
+<extend name="public/modal" />
+<block name="nav">
+	<span class="c-666">任务管理</span><span class="c-999 en">&gt;</span><span class="c-666">我的任务</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" >
+		<form action="" method="get" onsubmit="return checkSearch()">
+			<input type="hidden" name="m" value="Erp">
+			<input type="hidden" name="c" value="product">
+			<input type="hidden" name="a" value="mytask">
+			<input type="hidden" name="id" value="{$Think.get.id}">
+			<div class="text-c" style="margin-bottom: 10px;">
+				<!--<a class="btn btn-danger radius l batch" style="line-height:1.6em;margin-top:3px" href="javascript:;" onclick="datadel()" title="刷新"><i class="Hui-iconfont">&#xe6e2;</i>批量审核</a>-->
+				<input type="text" class="input-text ordernum" style="width:250px" placeholder="订单号搜索" id="" name="ordernum" value="{$ordernum}">
+				或
+				<input type="text" class="input-text wangwang" style="width:250px" placeholder="旺旺号搜索" id="" name="wangwang" value="{$wangwang}">
+				<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				<a class="btn btn-success radius" onclick="downExecl()" href="javascript:;"><i class="Hui-iconfont">&#xe644;</i> 下载EXECL</a>
+				<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+				<a class="btn btn-danger radius r" style="line-height:1.6em;margin-top:3px;margin-right: 5px;" href="javascript:;" title="下架" onclick="undercarriageAll({$goods_id})">批量下架</a>
+				<if condition="$_SESSION['user']['role'] == 6 or $_SESSION['user']['role'] == 1">
+				<a class="btn btn-secondary radius r" style="line-height:1.6em;margin-top:3px;margin-right: 5px;" href="javascript:;" title="审核" onclick="check_undercarriageAll({$goods_id})">批量审核</a>
+				</if>
+			</div>
+		</form>
+		<div class="dataTables_wrapper">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<!--<th width="45px"><input type="checkbox" />&nbsp;全选</th>-->
+						<th>id</th>
+						<th>完成时间</th>
+						<th width="10%">关键词</th>
+						<th width="10%">备注</th>
+						<th>单价</th>
+						<th>服务费</th>
+						<th>其它</th>
+						<th>下单价</th>
+						<th>订单号</th>
+						<th width="8%">旺旺号</th>
+						<if condition="$_SESSION['user']['role'] != 5">
+						<th>刷单员</th>
+						</if>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				<volist name="data" id="vo">
+					<tr class="text-c va-m">
+						<!--<td><input type="checkbox" name="" value="{$vo.id}"/></td>-->
+						<td>{$vo.id}</td>
+						<td>{$vo.edittime|default=''|date="j/n H:i",###}</td>
+						<td class="text-l">{$vo.keyword}</td>
+						<td class="text-l">{$vo.sku|default='无'}</td>
+						<td ><b style="font-size: 11px;">¥ </b>{$vo.price}</td>
+						<td class=" order-num order-input"><b style="font-size: 11px;">¥ </b>{$vo.cost}</td>
+						<td><b style="font-size: 11px;">¥</b> {$vo.empty_cost|default=0}</td>
+						<td style="color: red;"><b style="font-size: 11px;">¥ </b>{$vo.actual_price}</td>
+
+						<td class=" order-num order-input">
+							 <span class="<if condition='$vo.abn neq null'>label label-danger radius</if>">{$vo.tb_item}</span>
+						</td>
+						<td class=" order-wang order-input">{$vo.wangwang}</td>
+						<if condition="$_SESSION['user']['role'] != 5">
+						<td>{$vo.realname}</td>
+						</if>
+						<td>
+							<if condition="$_SESSION['user']['role'] eq 5 and $vo.tb_item neq null">
+								<if condition="$vo.abn neq null">
+									<a href="javascript:;" onclick="referAbn('异常订单信息','{:U('product/abninfo','id='.$vo['id'])}','500','500')">查看详情</a><br>									<if condition="$vo.reason neq null">
+									拒绝理由:{$vo.reason}</if>
+									<else />
+								</if>
+								<if condition="$vo.abn eq null">
+									<if condition="$vo.overdue eq 2">
+									<a href="javascript:;" title="此订单有误？申请处理！" onclick="referAbn('订单异常','{:U('product/abn','id='.$vo['id'])}','500','500')">提交异常</a>
+									</if>
+									<else />
+									<if condition="$vo.successtime eq null">
+										<a href="javascript:;" title="撤销" onclick="revoke({$vo.id})">撤销</a>
+										<else />退款成功
+									</if>
+								</if>
+							</if>
+							<if condition="$vo.tb_item eq null and $_SESSION['user']['role'] == 5">
+								<switch name="vo.xiajia">
+									<case value="0">
+										<if condition="$vo.uid eq null">
+										<a href="javascript:;" onclick="undercarriage({$vo.id})">下架</a>
+										</if>
+										<if condition="$vo.xiajiareason neq null">
+										<br>拒绝理由：{$vo.xiajiareason}
+										</if>
+									</case>
+									<case value="1">申请中</case>
+									<case value="2">下架成功，<br />该款项已返回至余额</case>
+									<case value="3">过期下架成功，<br />该款项已返回至余额</case>
+								</switch>
+							</if>
+							<if condition="$_SESSION['user']['role'] neq 5 and $vo.xiajia == 2">下架成功</if>
+							<if condition="$_SESSION['user']['role'] neq 5 and $vo.xiajia == 3">自动下架成功</if>
+							<if condition="$_SESSION['user']['role'] neq 5 and $vo.xiajiareason neq null">拒绝理由：{$vo.xiajiareason}</if>
+							<if condition="$_SESSION['user']['role'] neq 5 and $vo.abn_status eq 4">退款成功</if>
+							<if condition="$_SESSION['user']['role'] != 5 and $vo.xiajia == 1">
+								<a href="javascript:;" onclick="check_undercarriage({$vo.id})"><span class="label label-warning radius">下架审核</span></a>
+							</if>
+							<if condition="$_SESSION['user']['role'] eq 6 and !empty($finish)  and $vo.xiajia eq 0 and $vo.tb_item neq null">
+								<if condition="$vo.abn_status eq 2 or  $vo.abn eq 1 or $vo.abn_status eq 3 or $vo.abn_status eq 5 or $vo.abn_status eq null">
+									<if condition="$vo.remark eq null or $vo.del eq 1">
+								<a href="javascript:;" onclick="evaltask('{$vo.id}')"><span class="label label-secondary radius">发布评价任务</span></a></if>
+									<br>
+									<if condition="$vo.remark neq null and $vo.del eq 0">
+									<a href="javascript:;" onclick="editevaltask('{$vo.id}')"><span class="label label-secondary radius">修改评价</span></a>
+									</if>
+								</if>
+							</if>
+							<if condition="$vo.tb_item neq null and $vo.feedback eq null and $_SESSION['user']['role'] eq 6">
+								<if condition="$vo.abn_status eq 2 or $vo.abn eq 1 or $vo.abn_status eq 3 or $vo.abn_status eq 5 or $vo.abn_status eq null">
+							<a href="javascript:;" onclick="taskfeedback({$vo.id})"><span class="label label-primary radius">反馈</span></a>
+								</if>
+
+							</if>
+							<if condition="$vo.tb_item neq null and $vo.feedback neq null and $_SESSION['user']['role'] eq 6">已反馈</if>
+						</td>
+					</tr>
+				</for>
+				</volist>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	function checkSearch(){
+		if(!$.trim($(".ordernum").val()) && !$.trim($(".wangwang").val())){
+			layer.msg("请至少输入一个搜索项！");
+			return false;
+		}
+		return true;
+	}
+	var status = true;
+	function check_undercarriage(id){
+		if (status) {
+			status = false;
+			layer.confirm('确定审核通过吗？', {
+				btn: ['通过', '不通过', '取消']
+			}, function() {
+				$.ajax({
+					type:'post',
+					url:"{:U('product/check_undercarriage')}",
+					data:{id:id},
+					success:function (msg) {
+					    if(msg.msg == 1){
+					    	status = true;
+	                        layer.msg('已通过', {icon: 6, time: 1000},function () {
+	                        	window.location.reload();
+	                    	});
+						}
+	                }
+				});
+			}, function(index) {
+				layer.prompt({
+				  	formType: 2,
+				  	title: '请输入驳回原因'
+				}, function(value, index, elem){
+					layer.close(index);
+				  	$.ajax({
+	                    type:'post',
+	                    url:"{:U('product/jujuexiajia')}",
+	                    data:{id:id,reason:value},
+	                    success:function (msg) {
+	                        if(msg.msg == 1){
+	                        	status = true
+	                            layer.msg('操作成功', {icon: 1, time: 1000 },function(){
+	                            	 window.location.reload();
+	                            });
+	                        }
+	                    }
+	            	});
+				});
+			});
+		}else{
+			layer.msg('点击过频');
+		}
+	}
+	function check_undercarriageAll(id){
+		layer.confirm('确定批量审核通过吗？', {
+			btn: ['通过', '不通过', '取消']
+		}, function() {
+			$.ajax({
+				type:'post',
+				url:"{:U('product/check_undercarriage_all')}",
+				data:{goods_id:id},
+				success:function (msg) {
+				    if(msg.msg == 1){
+                        layer.msg(msg.info, {icon: 6, time: 1000},function () {
+                        	window.location.reload();
+                    	});
+					}else if(msg.msg == 0 ){
+                        layer.msg(msg.info, {icon: 2, time: 1000 },function(){
+                            window.location.reload();
+                        });
+					}
+                }
+			});
+		}, function(index) {
+			layer.prompt({
+			  	formType: 2,
+			  	title: '请输入驳回原因'
+			}, function(value, index, elem){
+				layer.close(index);
+			  	$.ajax({
+                    type:'post',
+                    url:"{:U('product/jujuexiajia_all')}",
+                    data:{goods_id:id,reason:value},
+                    success:function (msg) {
+                        if(msg.msg == 1){
+                            layer.msg(msg.info, {icon: 1, time: 1000 },function(){
+                            	 window.location.reload();
+                            });
+                        }else if(msg.msg == 0){
+                            layer.msg(msg.info, {icon: 1, time: 1000 },function(){
+                                window.location.reload();
+                            });
+						}
+                    }
+            	});
+			});
+		});
+	}
+	function undercarriage(id){
+		layer.confirm('下架前请和业务员联系确认，确定下架吗？', {
+			btn: ['确定','取消'],
+		}, function() {
+			$.ajax({
+				type:'post',
+				url:"{:U('product/xiajia')}",
+				data:{id:id},
+				success:function (msg) {
+				    if(msg.msg == 1){
+                        layer.msg('已提交申请', {icon: 6, time: 1000},function () {
+                        	window.location.reload();
+                    	});
+					}else{
+                        layer.msg(msg.info, {icon: 2, time: 3000},function () {
+                            window.location.reload();
+                        });
+					}
+                }
+			});
+		});
+	}
+	function undercarriageAll(id){
+	    var role ="{$_SESSION['user']['role']}",type;
+	    if(role == 5 ){
+	        type = 1;
+		}else if(role == 6){
+	        type = 2;
+		}
+		layer.confirm('确定下架吗？', {
+			btn: ['确定','取消'],
+		}, function() {
+			$.ajax({
+				type:'post',
+				url:"{:U('product/xiajia_all')}",
+				data:{goods_id:id,type:type},
+				success:function (msg) {
+				    if(msg.msg == 1){
+                        layer.msg(msg.info, {icon: 6, time: 1000},function () {
+                        	window.location.reload();
+                    	});
+					}else{
+                        layer.msg(msg.info, {icon: 2, time: 3000},function () {
+                            window.location.reload();
+                        });
+					}
+                }
+			});
+		});
+	}
+	function datadel(){
+		var lenght = $("td input[type='checkbox']:checked").length;//勾选个数
+		if (lenght > 0){
+			var arr=[];
+		       $("td input[type='checkbox']:checked").each(function(){
+		          	if(!isNaN(this.value)){
+		          		arr.push(this.value);
+		          	}
+		       });
+	       	   $.post("{}", {arr:arr},function(data){
+	       		    if (1 == data.msg){
+	       		    	layer.msg(data.info,{icon:1,time:1000}, function(){window.location.reload();});
+	       		    } else {
+	       		    	layer.msg(data.info,{icon:2,time:1000});
+	       		    }
+	           });
+		} else {
+			layer.alert('请勾选数据');
+		}
+	}
+	//异常提交
+    function referAbn(title, url, w, h){
+        layer_show(title, url, w, h);
+    }
+    function revoke(id){
+        $.post("{:U('product/revoke')}",{id:id},function(data){
+            if(data.msg == 1){
+                //成功
+                layer.msg(data.info, {icon: 1, time: 2000},function () {
+                    window.location.reload();
+                });
+            }else{
+                layer.msg(data.info, {icon: 2, time: 2000},function () {
+                    window.location.reload();
+                });
+            }
+        })
+    }
+    //下载
+    function downExecl(){
+		if($("tbody tr").length <= 0){
+			layer.msg('无数据，请重新搜索！');
+		}else{
+			window.location.href = "{:U('product/excel')}&id={$goods_id}";
+		}
+	}
+	//评价
+	function evaltask(id){
+		var num = "{$allow}";
+		// var count = "{$count_t}";
+		// var eval_now ="{$eval_now}";
+		if(num > 0){
+			layer_show('发布评价任务',"{:U('product/evalimg','id=')}"+id,'500','500');
+		}else{
+			layer.msg('此任务指定评价任务份数已用完！');
+		}
+	}
+	function editevaltask(id){
+		layer_show('修改评价任务',"{:U('product/editevalimg','id=')}"+id,'500','500');
+	}
+	//反馈
+	function taskfeedback(id){
+		layer_show('反馈任务',"{:U('product/feedback','id=')}"+id,'500','500');
+		// layer.prompt({
+		// 	formType: 2,
+		// 	title: '请输入反馈信息'
+		// }, function(value, index, elem){
+		// 	layer.close(index);
+		// 	$.ajax({
+		// 		type:'post',
+		// 		url:"{:U('product/feedback')}",
+		// 		data:{id:id,feedback:value},
+		// 		success:function (msg) {
+		// 			if(msg.msg == 1){
+		// 				layer.msg(msg.info, {icon: 1, time: 1000 },function(){
+		// 						window.location.reload();
+		// 				});
+		// 			}else if(msg.msg == 0){
+		// 				layer.msg(msg.info, {icon: 1, time: 1000 },function(){
+		// 					window.location.reload();
+		// 				});
+		// 			}
+		// 		}
+		// 	});
+		// });
+	}
+</script>
+</block>

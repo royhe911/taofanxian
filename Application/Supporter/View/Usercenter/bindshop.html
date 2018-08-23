@@ -1,0 +1,263 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style>
+    .modal_box {padding-bottom: 40px; position: fixed; z-index: 99;top: 50%;left: 50%; margin-left: -225px; margin-top: -132.5px; min-width: 450px; min-height: 265px; background-color: #fff; border-radius: 5px;text-align: center; }
+    .modal_box .modal_prompt { height: 30px;background-color: #f5f5f5;overflow: hidden;border-radius: 5px 5px 0 0;}
+    .modal_box .modal_prompt span, .modal_box .modal_prompt a {display: inline-block;}
+    .modal_box .modal_prompt span {line-height: 30px;float: left;color: #646464;font-size: 12px;padding-left: 10px; }
+    .modal_box .modal_prompt a {float: right;padding-right: 10px;padding-top: 6px;}
+</style>
+                    <div id="my_main" class="store_content left" style="min-height: 732px;">
+                        <h1 class="title">店铺管理</h1>
+                        <div class="binding_shops">
+                            <input id="binding_shops" type="button" onclick="check_binding_shop()" value="绑定新店铺">
+                            试用会员最多可以绑定1家店铺，如需换绑店铺请联系客服QQ:
+                        </div>
+                        <div class="shops_details">
+                            <div class="detalis">
+                                <!-- 店铺 循环输出 -->
+                                <?php foreach($rr as $v){?>
+								<ul class="shoplenth">
+                                    <li>
+                                        <img src="__PUBLIC__/maoke/images/merchant/sj_dpgl_bg_logo_default.png" alt="">
+                                    </li>
+                                    <li>
+                                        <p class="clothes_name"><span>店铺：</span><?=$v['shopname']?></p>
+                                        <p class="two" style="overflow:hidden; text-overflow: ellipsis;white-space:nowrap"><span>链接：</span><a href="<?=$v['shopurl']?>" target="_blank" title="点击跳转到您的店铺"><?=$v['shopurl']?></a></p>
+                                        <p><span>来源：</span><?php if($v['type']==1){echo '淘宝';}elseif($v['type']==2){echo '天猫';}?></p>
+                                    </li>
+                                    <li>
+                                        <p>QQ：<b><?=$v['qq']?></b></p>
+                                        <p class="two">微信：<b><?=$v['wechat']?></b></p>
+                                        <p>手机：<b><?=$v['phone']?></b></p>
+                                    </li>
+                                    <li>
+                                        <p><input class="modify_contact" onclick="show_modify_contact(<?=$v['id']?>)" type="button" value="修改联系方式"></p>
+                                    </li>
+                                    <li>
+                                            <?php if($v['confirm']==2){?>
+                                                <p>
+                                                绑定时间：<b><?=$v['addtime']?></b></p>
+                                                <?php }elseif($v['confirm']==3){?>
+                                                    <p style="line-height: 22px;margin-top: 6px;text-align:center;">
+                                                        审核不通过
+                                                        <br>
+                                                        (<?php echo $v['confirmnote'];?>)
+                                                        <br>
+                                                        <a href="javascript:;" onclick="editShop(<?=$v['id']?>);" style="    height: 25px;width: 50px;line-height: 25px;border-radius: 5px;border: 1px solid #f25f55; background-color: #fff; font-size: 12px;color: #f25f55; display:inline-block;text-align:center;">编辑</a>
+                                                    </p>
+                                                <?php }else{?>
+                                                    <p>等待审核</p>
+                                            <?php }?>
+                                    </li>
+                                </ul>
+                              <?php }?>
+                            </div>
+                        </div>
+                    </div>
+                    
+				</div>
+			</section>
+        <!-- page-wrapper end -->
+        
+        <!-- 绑定店铺 --> 
+        <div class="binding_modal modelcm" style="display: none;">
+            <div class="modal_box">
+                <div class="modal_prompt">
+                    <span>提示</span>
+                    <a class="close" href="javascript:void(0);">
+                        <img src="__PUBLIC__/maoke/images/merchant/sj_grzx_tc_off_default.png" alt="">
+                    </a>
+                </div>
+                <div class="modal_content">
+                    <p>试用会员最多只能绑定1家店铺</p>
+                    <!-- <p style="font-size:16px">购买正式会员可以增加店铺绑定数！</p> -->
+                </div>
+                <div class="modal_submit">
+                    <input class="confirm" type="button" value="确定" onclick="hideModel(this);">
+                </div>
+            </div>
+            <div class="mask_layer" style="height: 1401px;"></div>
+        </div>
+
+        <!-- 绑定新店铺 -->
+        <div class="bindingShops_modal modelcm" style="display: none;">
+            <div class="modal_box" style="margin-left:-340px;margin-top:-130px;">
+                <div class="modal_prompt">
+                    <span>绑定新店铺</span>
+                    <a class="close" href="javascript:void(0);">
+                        <img src="__PUBLIC__/maoke/images/merchant/sj_grzx_tc_off_default.png" alt="">
+                    </a>
+                </div>
+                <div class="modal_content">
+                    <!--绑定新店铺-->
+                    <form style="width:655px;padding-right: 15px;" class="shop_information" enctype="multipart/form-data" method="post" action="{:U('Usercenter/bindshop')}" onsubmit="return check_form(1)">
+                        <input type="hidden" name="action" value="1">
+                        <input type="hidden" name="id" value="" id="shopIdold">
+                        <label for="shop_url">店铺首页网址：</label>
+                        <input id="shop_url" name="shopurl" type="url" style="padding-left:10px;" required>
+                        <label for="shop_name">店铺名称：</label>
+                        <input id="shop_name" name="shopname" type="text" required>
+                        <!--第一行的错误提示-->
+                        <p>
+                        <span id="shop_url_error"></span>
+                        <span id="shop_name_error"></span>
+                        </p>
+                        <label for="wangwang">店铺主旺旺ID：</label>
+                        <input id="wangwang" name="zhanggui" type="text" required>
+                        <label for="principal_qq">负责人QQ：</label>
+                        <input id="principal_qq" name="qq" type="text" required onblur="check_qq(1)">
+                            <!--第二行的错误提示-->
+                        <p>
+                            <span id="wangwang_error"></span><span id="principal_qq_error"></span>
+                        </p>
+                        <label for="principal_weChat">负责人微信：</label>
+                        <input id="principal_weChat" name="wechat" type="text" required>
+                        <label for="principal_phone">负责人手机：</label>
+                        <input id="principal_phone" name="phone" type="text" required onblur="check_phone(1)">
+                        <!--第四行的错误提示-->
+                        <p>
+                            <span id="principal_weChat_error"></span>
+                        <span id="principal_phone_error"></span>
+                        </p>
+                        <div class="modal_submit">
+                            <input class="confirm" style="padding-left:0;" type="submit" value="确定">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="mask_layer" style="height: 1401px;"></div>
+        </div>
+
+        <!-- 修改联系方式 -->
+        <div class="modify_modal modelcm" style="display: none;">
+            <div class="modal_box">
+                <div class="modal_prompt">
+                    <span>修改联系方式</span>
+                    <a class="close" href="javascript:void(0);">
+                        <img src="__PUBLIC__/maoke/images/merchant/sj_grzx_tc_off_default.png" alt="">
+                    </a>
+                </div>
+                <div class="modal_content">
+                    <!--修改联系方式-->
+                    <form class="amend_box" action="{:U('Usercenter/editshop')}" method="post" onsubmit="return check_form(2)" >
+                        <!-- <input type="hidden" name="action" value="1"> -->
+                        <input type="hidden" name="id" value="" id="shopId">
+                        <label for="logistics">QQ</label>
+                        <input id="logistics" type="text" name="qq" onblur="check_qq(2)" required>
+                        <p><span id="qq_error"></span></p>
+                        <label for="WeChat">微信</label>
+                        <input id="WeChat" type="text" name="wechat" required>
+                        <p><span></span></p>
+                        <label for="mobile_phone">手机</label>
+                        <input id="mobile_phone" type="text" name="phone" onblur="check_phone(2)" required  >
+                        <p><span id="tel_error"></span></p>
+                        <div class="modal_submit">
+                            <input class="confirm" type="submit" value="确定">
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+            <div class="mask_layer" style="height: 1401px;"></div>
+        </div>
+	</div>
+	<!-- wrapper -->
+</div>
+<script>
+    $(function(){
+        $(".close").click(function(){
+            $(this).parents(".modelcm").hide();
+        });
+    })
+    function hideModel(that){
+        $(that).parents(".modelcm").hide();
+    }
+    function check_binding_shop(){
+        if($("ul.shoplenth").length >= 1){
+            $(".binding_modal").show();
+        }else{
+            $(".bindingShops_modal .modal_prompt span").text("绑定新店铺");
+            $(".bindingShops_modal").show();
+        }
+    }
+    //qq
+    function check_qq(flag) {
+        if(flag == 1){
+            var bisqq =$.trim($("#principal_qq").val());
+        }else if(flag == 2){
+            var bisqq =$.trim($("#logistics").val());
+        }
+		var reg = /[1-9][0-9]{4,9}/;
+		if(bisqq!=''){
+			if(!reg.test(bisqq)){
+                $("#principal_qq_error").text('请输入正确的QQ号码！');
+            	return false;
+			}else{
+                return true;
+            }
+		}
+    }
+    //手机号
+    function check_phone(flag) {
+        if(flag == 1){
+            var tel =$.trim($("#principal_phone").val());
+        }else if(flag == 2){
+            var tel =$.trim($("#mobile_phone").val());
+        }
+        
+        if (tel !=''){
+        	var myreg =/^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+	        if(!myreg.test(tel))
+	        {
+				$("#principal_phone_error").text('请输入有效的手机号码！');
+	            return false;
+	        } else{
+                return true;
+            }
+        }
+    }
+    //店铺信息提交
+    function check_form(flag) {
+        //qq
+        var qqStatus = check_qq(flag);
+        //手机号
+        var phoneStatus = check_phone(flag);
+        if(qqStatus && phoneStatus){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //修改店铺信息
+    function editShop(id){
+        $(".bindingShops_modal .modal_prompt span").text("修改店铺信息");
+        var shopurl = "<?=$v['shopurl']?>";
+        $("#shop_url").val(shopurl);
+        var shopname = "<?=$v['shopname']?>";
+        $("#shop_name").val(shopname);
+        var wangwang = "<?=$v['zhanggui']?>";
+        $("#wangwang").val(wangwang);
+        var qq = "<?=$v['qq']?>";
+        $("#principal_qq").val(qq);
+        var wechat = "<?=$v['wechat']?>";
+        $("#principal_weChat").val(wechat);
+        var phone = "<?=$v['phone']?>";
+        $("#principal_phone").val(phone);
+        $("#shopIdold").val(id);
+        $(".bindingShops_modal").show();
+    }
+    //修改联系方式
+    function show_modify_contact(id) {
+        var qq = "<?=$v['qq']?>";
+        var wechat = "<?=$v['wechat']?>";
+        var phone = "<?=$v['phone']?>";
+        $("#logistics").val(qq);
+        $("#WeChat").val(wechat);
+        $("#mobile_phone").val(phone);
+        $("#shopId").val(id);
+        $(".modify_modal").show();
+    }
+</script>
+<include file="Layout:foot" />

@@ -1,0 +1,18 @@
+<extend name="public/modal" />
+<block name="title"></block>
+<block name="menu">
+	<form action="" method="POST" class="form form-horizontal" id="form-admin-add">
+		<input type="hidden" name="id" value="">
+		<div class="row cl" style="color: red;margin-top:0;text-align: center">（注：选择图片点击鼠标右键可复制图片）</div>
+		<volist name="eval_pic" id="vo">
+		<div class="row cl" >
+			<div id="img_preview_one" style="margin:0 auto">
+				<img src="{$vo}" id="thumb-preview" class="thumb-preview-0" >
+			</div>
+		</div>
+		</volist>
+	</form>
+</block>
+<block name="js">
+
+</block>

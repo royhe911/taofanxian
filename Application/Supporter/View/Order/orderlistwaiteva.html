@@ -1,0 +1,219 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<style>
+    #section .section_main .store_content {width: 1200px;margin-left: 0; background-color: #fff; padding: 30px;}
+    #section .section_main .store_content .delivery_status {margin-top: 20px;}
+    #section .section_main .store_content .delivery_status .title { height: 38px; line-height: 38px;overflow: hidden; background-color: #f5f5f5;}
+    #section .section_main .store_content .delivery_status .title div {font-size: 14px;height: 16px;}
+    #section .section_main .store_content .delivery_status .title div.left {padding-left: 20px;}
+    #section .section_main .store_content p.checkbox {display: inline-block;vertical-align: middle;cursor: pointer;}
+    #section .section_main .store_content .delivery_status .title span { margin-right: 40px;}
+    #section .section_main .store_content .delivery_status .title div.left .order-num >b { color: #323232;}
+    #section .section_main .store_content .delivery_status .title div.left span:last-of-type { margin-right: 10px; vertical-align: middle;}
+    #section .section_main .store_content .delivery_status .title div.right {padding-right: 20px;}
+    #section .section_main .store_content .delivery_status .title div.right { margin-right: 10px;}
+    #section .section_main .store_content .delivery_status .title div a {color: #005ea7;}
+    #section .section_main .store_content .delivery_status .detalis ul {height: 110px; border: 1px solid #f5f5f5;}
+    .store_content .product-name { width: 420px;}
+    .store_content .member-bindTB { width: 240px;}
+    .store_content .order-num-TB {width: 240px;}
+    .store_content .pay { width: 238px;}
+    #section .section_main .store_content .delivery_status .detalis ul li {float: left;color: #323232;font-size: 14px;height: 110px;text-align: center;line-height: 110px;display: table;}
+    #section .section_main .store_content .delivery_status .detalis ul li:first-of-type img {  width: 80px;  height: 80px;  margin-top: 15px;  margin-left: 20px;}
+    #section .section_main .store_content .delivery_status .detalis ul li:first-of-type .name { width: 258px; height: 32px; line-height: 32px; color: #323232; text-align: left; padding-right: 10px;}
+    /* #section .section_main .store_content .delivery_status .detalis ul li + li { border-left: 1px solid #f5f5f5;} */
+    #section .section_main .store_content .delivery_status .detalis ul li p { width: inherit; display: table-cell; vertical-align: middle;}
+    #section .section_main .store_content .delivery_status .detalis ul li.member-bindTB p { width: 240px; display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+    #section .section_main .store_content .delivery_status .detalis ul li.order-num-TB p {  width: 240px;  display: inline-block;  white-space: nowrap;  text-overflow: ellipsis;  overflow: hidden;}
+    .detalis li:nth-of-type(5) {  width: 145px;  line-height: 0 !important;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic, #section .section_main .store_content .delivery_status .detalis ul li.operation { display: table;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic .link-pic, #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box {  display: table-cell;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic .link-pic a, #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box a { width: 100%;line-height: 2; display: block; color: #f25f55; cursor: pointer;}
+    #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box a.main_btn { display: block;  width: 100px;  height: 30px;  line-height: 30px;  border: 1px solid #f25f55;  border-radius: 5px;  background-color: #fff;  color: #f25f55;  font-size: 14px;  margin-left: 15%;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic .link-pic a, #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box .back_content {color: #005ea7; cursor: pointer;}
+    .taobao-icon {width: 15px; height: 15px;}
+</style>
+<!-- 待收货评价订单 -->
+<section id="section">
+        
+    <div class="section_main">
+        <!--所在位置-->
+        <div class="location_title">
+            <ul>
+                <li>你所在的位置：</li>
+                <li class="order">
+                    <a class="" href="#">首页</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Usercenter/index')}">商家中心</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a href="{:U('Order/ordermanage')}">试用订单管理</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">  待收货评价订单 </li>
+            </ul>
+        </div>
+
+        <!--任务说明-->
+        <div class="store_content">
+
+            <div class="title clearfix">
+                <h1 class="left">待收货评价订单</h1>
+
+                <span class="desc left">
+                        以下试用订单已经发货，待试客收货，并在领吧平台进行评价。</span>
+            </div>
+            <div class="filter clearfix">
+                <!-- 筛选店铺 -->
+                <ul class="choose-shop left">
+                    <li>店铺：</li>
+                    <li>
+                        <div class="vocation">
+                            <select class="select2" style="cursor: pointer" name="status" id="shop_id" onchange="search(this.value)">
+                                <option value="0" >全部店铺</option>
+                                <volist name="shop_list" id="vo">
+                                    <if condition="$vo['id'] eq $shop_id"> 
+                                        <option value="{$vo.id}" selected> {$vo.shopname}</option>
+                                    <else /> 
+                                        <option value="{$vo.id}"> {$vo.shopname}</option>
+                                    </if>
+                                </volist>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+                <!-- 筛选淘宝号 -->
+                <ul class="seachform left" style="margin-left:50px; overflow: hidden;">
+                    <li>
+                        <input placeholder="请输入试客淘宝号" id="taobao_id" type="text" class="scinput1" value="{$tb_id}">
+                    </li>
+                    <li>
+                        <input placeholder="请输入淘宝订单号" id="outer_id" type="text" class="scinput1" value="{$tb_item}">
+                    </li>
+                    <li>
+                        <label>&nbsp;</label>
+                        <input type="button" class="scbtn" value="查询" onclick="search2()">
+                    </li>
+                </ul>
+            </div>
+            <!--所有订单的状态种类-->
+            <div class="table-title">
+                <ul>
+                    
+                    <li class="product-name">商品</li>
+                    <li class="member-bindTB">试客淘宝账号</li>
+                    <li class="order-num-TB">淘宝订单号</li>
+                    <li class="pay">付款金额</li>
+                </ul>
+            </div>
+            <!--商品发货状态-->
+
+        <volist name="data" id="vo">  
+            <div class="delivery_status">
+                <div class="title">
+                    <div class="left">
+                       
+                        <span>{$vo.addtime}</span>
+                        <span class="order-num">订单编号：<b>{$vo.id}</b></span>
+                        <span>{$vo.shopname}  </span>
+                  <if condition="$vo['type'] eq 1">
+                        <img class="taobao-icon" src="__PUBLIC__/maoke/images/merchant/bg_tb_default.png" alt="">
+                  <else/>
+                       <img class="taobao-icon" src="__PUBLIC__/maoke/images/merchant/bg_tm_default.png" alt="">
+                  </if>
+                        
+                </div>
+                <div class="right">
+                    <a target="_blank" href="{:U('Actcenter/orderInfo')}&id={$vo.id}">查看详情 &gt;&gt;</a>
+                </div>
+
+                </div>
+                <div class="detalis" id="list">
+                    <ul>
+                        <li class="product-name">
+                            <img class="left" src="{$vo.image}" alt="">
+                            <p class="name">{$vo.gname}<br><span style="color:#666666;font-size: 14px;"> 商品价格：{$vo.unit_price}元</span>
+                            </p>
+                        </li>
+                        <li class="member-bindTB">
+                            <p>{$vo.tb_id}</p>
+                        </li>
+                        <li class="order-num-TB">{$vo.tb_item}</li>
+                        <li class="pay">{$vo.unit_price}元</li>
+                    </ul>
+                </div>
+            </div>
+</volist> 
+
+        <div class="row">
+            <div class="col-sm-12" >
+               <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+             </div>
+             <div class="col-sm-12">
+                <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;">
+                  <ul class="pagination" id="list-pagination"></ul>
+                </div>
+             </div>
+        </div>
+
+        </div>
+        <div id="first"></div>
+    </div>
+</section>  
+
+<script>
+    $(function(){   
+        var paginationOptions= $.extend(true, {$pagination|json_encode} , 
+                            {
+                                    onPageClick: function (event, page) {
+                                        var options = $(this).data('twbsPagination').options;
+                                        options.baseUrl = options.baseUrl.replace('','');
+                                        options.getParams.page = page; 
+//                                      options.getParams.pagesize = options.getParams.pagesize;
+                                        var param = '';
+                                        for(var x in options.getParams ){
+                                                param += '&' + x + '=' + options.getParams[x];
+                                        }
+//                                      console.log(param);return;
+                                        
+                                        window.location.href =  options.baseUrl + param + '';
+                                    }
+                            });
+        $('#list-pagination').twbsPagination(paginationOptions);
+        
+    });
+
+    function search(url) {
+        var type = {$type};
+        var shop_id = $("#shop_id").val();
+        window.location.href = "{:U('Order/orderlistwaiteva')}&type=" + type + "&shop_id=" + shop_id;
+    } 
+    //全选
+     $("#chk_all").click(function(){  　　
+     	// 使用prop则完美实现全选和反选  　　
+     	$("input[name='chk_list[]']").prop("checked", $(this).prop("checked"));
+     	var lenght = $("input[type='checkbox']:checked").length - 1; 
+    	if(lenght <= 0) lenght = 0;
+     	$("#lenght").text(lenght);　　　　
+    });
+	//单个勾选
+	$(".cb").click(function(){  
+		// 使用prop则完美实现全选和反选  　　
+     $(this).prop("checked", $(this).prop("checked"));　　
+     var lenght = $(".delivery_status input[type='checkbox']:checked").length; 
+     if(lenght <= 0) lenght = 0;
+     $("#lenght").text(lenght);　　　　
+    });
+  function search2() {
+        var outer_id = $("#outer_id").val();
+        var taobao_id = $("#taobao_id").val() ? $("#taobao_id").val() : '';
+        var type = {$type};
+        var shop_id = $("#shop_id").val();
+        window.location.href = "{:U('Order/orderlistwaiteva')}&type=" + type + "&shop_id=" + shop_id + "&taobao_id=" + taobao_id + "&outer_id=" + outer_id;
+    }
+</script> 
+
+<include file="Layout:foot" />

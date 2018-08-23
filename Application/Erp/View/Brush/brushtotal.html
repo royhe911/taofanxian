@@ -1,0 +1,128 @@
+<extend name="public/modal" />
+<block name="title">刷单记录</block>
+<block name="menu">
+	<div class="Hui-article" style="top: -10px;">
+		<form action="" method="get" onsubmit="return checkSearch()">
+			<input type="hidden" name="m" value="Erp">
+			<input type="hidden" name="c" value="brush">
+			<input type="hidden" name="a" value="brushtotal">
+			<input type="hidden" name="id" value="{$Think.get.id}">
+			<div class="text-c" style="margin-bottom: 10px;">
+				日期：<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" placeholder="起始时间" value="{$starttime}" >
+					<input type="text" id="datemax" name="endtime" class="input-text" style="width:150px;" placeholder="结束时间" value="{$endtime}">
+				<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+			</div>
+		</form>
+		<div class="cl pd-5 bg-1 bk-gray mt-20" style="height: 75px;margin-bottom: 20px;">
+			<div class="r" style="font-size: 12px;">
+				<table class="table table-border table-bordered">
+					<tr>
+						<td class="td-pd " width="150">任务完成总数：<font color="#ff9000">{$count|default=0}</font></td>
+						<td class="td-pd " width="150">小额单：<font color="#ff9000">{$count_s|default=0}</font></td>
+						<td class="td-pd " width="150">中额单：<font color="#ff9000">{$count_m|default=0}</font></td>
+						<td class="td-pd " width="150">大额单：<font color="#ff9000">{$count_l|default=0}</font></td>
+					</tr>
+					<tr>
+						<td class="td-pd " width="150">退款订单总数：<font color="#ff9000">{$count_refund|default=0}</font></td>
+						<td class="td-pd " width="150">小额单：<font color="#ff9000">{$count_refund_s|default=0}</font></td>
+						<td class="td-pd " width="150">中额单：<font color="#ff9000">{$count_refund_m|default=0}</font></td>
+						<td class="td-pd " width="150">大额单：<font color="#ff9000">{$count_refund_l|default=0}</font></td>
+					</tr>
+					<tr>
+						<td class="td-pd " width="150">异常订单总数：<font color="#ff9000">{$count_abn|default=0}</font></td>
+						<td class="td-pd " width="150">小额单：<font color="#ff9000">{$count_abn_s|default=0}</font></td>
+						<td class="td-pd " width="150">中额单：<font color="#ff9000">{$count_abn_m|default=0}</font></td>
+						<td class="td-pd " width="150">大额单：<font color="#ff9000">{$count_abn_l|default=0}</font></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<table class="table table-border table-bordered table-bg">
+			<thead>
+				<tr class="text-c">
+					<th>ID</th>
+					<th width="7%">完成时间</th>
+					<th>刷单员</th>
+					<th width="8%">店铺名称</th>
+					<th width="10%">宝贝详情</th>
+					<th width="10%">关键词</th>
+					<th>单价</th>
+					<th>下单价</th>
+					<th>其它</th>
+					<th>订单号</th>
+					<th width="6%">旺旺</th>
+					<th>佣金</th>
+				</tr>
+			</thead>
+			<tbody>
+			<volist name="data" id="vo">
+			  	<tr class="text-c">
+					<td>{$vo.id}</td>
+			 		<td>{$vo.edittime|date="j/n H:i",###}</td>
+			 		<td>{$vo.realname}</td>
+			 		<td>{$vo.shopname}</td>
+			 		<td><a href="{$vo.goods_url}" target="_blank">{$vo.goods_title}</a></td>
+			 		<td>{$vo.keyword}</td>
+					<td>{$vo.price}</td>
+			 		<td>{$vo.actual_price}</td>
+			 		<td><b style="font-size: 11px;">¥ </b> {$vo.order_cost|default=0}</td>
+			 		<td>{$vo.tb_item}</td>
+			 		<td>{$vo.wangwang}</td>
+			 		<td>{$vo.commision}</td>
+			 	</tr>
+			</volist>
+			</tbody>
+		</table>
+		<div class="clearfix pd-20">
+			<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+			<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+				<ul class="pagination" id="list-pagination"></ul>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="__PUBLIC__/bootstrapplugin/pagination/jquery.twbsPagination.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var start_time = "{$starttime}",end_time = "{$endtime}";
+		laydate.render({
+			elem: '#datemin',
+			min: '2018-01-01',
+			max: '' ,
+			done: function(value, date){
+				start_time = value;
+				if(new Date(value).getTime() > new Date(end_time).getTime()){
+					$("#datemax").val(value)
+				}
+			}
+		});
+		laydate.render({
+			elem: '#datemax',
+			min: '2018-01-01',
+			max: '',
+			done: function(value, date){
+				end_time = value;
+				if(new Date(value).getTime() < new Date(start_time).getTime()){
+					$("#datemin").val(value)
+				}
+			}
+		});
+	})
+    var paginationOptions= $.extend(true, {$pagination|json_encode} ,{
+        onPageClick: function (event, page) {
+            var options = $(this).data('twbsPagination').options;
+            options.baseUrl = options.baseUrl.replace('.html','');
+            options.getParams.page = page;
+            var param = '';
+            for(var x in options.getParams ){
+                param += '&' + x + '=' + options.getParams[x];
+            }
+            window.location.href =  options.baseUrl + param + '.html';
+        }
+    });
+    $('#list-pagination').twbsPagination(paginationOptions);
+</script>
+
+</block>

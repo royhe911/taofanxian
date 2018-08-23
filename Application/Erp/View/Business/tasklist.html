@@ -1,0 +1,116 @@
+<extend name="public/modal" />
+<block name="title">商家已发布的商品</block>
+<block name="menu">
+	<div class="Hui-article" style="top: -10px;">
+		<form action="" method="get" onsubmit="return checkSearch()">
+			<input type="hidden" name="m" value="Erp">
+			<input type="hidden" name="c" value="business">
+			<input type="hidden" name="a" value="tasklist">
+			<input type="hidden" name="id" value="{$Think.get.id}">
+			<div class="text-c" style="margin-bottom: 10px;">
+				日期：<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" placeholder="起始时间" value="{$starttime}" >
+					<input type="text" id="datemax" name="endtime" class="input-text" style="width:150px;" placeholder="结束时间" value="{$endtime}">
+				<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+			</div>
+		</form>
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+			<span class="r">完成任务总费用：<span style="color: red">{$total_cost|default=0}</span>元，共有数据：<strong>{$count_a}</strong> 条</span>
+		</div>
+		<div class="dataTables_wrapper" style="margin-top: 20px;">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th>发布时间</th>
+						<th width="80">主图</th>
+						<th>店铺名</th>
+						<th width="12%">宝贝详情</th>
+						<th>赠送礼品</th>
+						<th>任务本金/数量/预估服务费/其他</th>
+						<th>完成金额/数量/已扣服务费/其他</th>
+						<th>未完金额/数量</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				<volist name="data" id="vo">
+					<tr class="text-c va-m">
+						<td>{$vo.addtime|date="j/n H:i",###}</td>
+						<td>
+							<a href="javascript:;"><img width="80" class="product-thumb" src="{$vo.goods_pic}"></a>
+						</td>
+						<td>{$vo.shopname}</td>
+						<td class="text-l">
+							<a style="text-decoration:none" href="{$vo.goods_url}" target="_blank">{$vo.goods_title}</a>
+						</td>
+						<td>{$vo.goods_zeng|default='无'}</td>
+
+						<td><b style="font-size: 11px;">¥ </b>{$vo.goods_totalprice} |{$vo.goods_totalnum}单 |<b style="font-size: 11px;">¥ </b> {$vo.goods_totalcost} |<b style="font-size: 11px;">¥ </b> {$vo.goods_order}
+							<br>
+							预估总费用:<b style="font-size: 11px;">¥ </b>{$vo.goods_total}</td>
+						<td><b style="font-size: 11px;">¥ </b>{$vo.success_price} |{$vo.count|default='0'}单 |<b style="font-size: 11px;">¥ </b> {$vo.actual_cost} |<b style="font-size: 11px;">¥ </b> {$vo.order}
+							<br>
+							实际总费用:<b style="font-size: 11px;">¥ </b>{$vo.total}</td>
+						<td><b style="font-size: 11px;">¥ </b>{$vo.error_price}/{$vo.error_num}单</td>
+						<td class="text-l">
+							<a style="text-decoration:none;color: #06c;" class="ml-5" onClick="showTaskDetail('任务进展','{:U(\'Product/mytask\','id='.$vo['miid'])}','1200','600')" href="javascript:;" title="点击查看">查看订单</a>
+						</td>
+					</tr>
+				</volist>
+				</tbody>
+			</table>
+			<div class="clearfix pd-20">
+				<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+				<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+					<ul class="pagination" id="list-pagination"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="__PUBLIC__/bootstrapplugin/pagination/jquery.twbsPagination.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var start_time = "{$starttime}",end_time = "{$endtime}";
+		laydate.render({
+			elem: '#datemin',
+			min: '2018-01-01',
+			max: +1,
+			done: function(value, date){
+				start_time = value;
+				if(new Date(value).getTime() > new Date(end_time).getTime()){
+					$("#datemax").val(value)
+				}
+			}
+		});
+		laydate.render({
+			elem: '#datemax',
+			min: '2018-01-01',
+			max: +1,
+			done: function(value, date){
+				end_time = value;
+				if(new Date(value).getTime() < new Date(start_time).getTime()){
+					$("#datemin").val(value)
+				}
+			}
+		});
+	})
+	function showTaskDetail(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+    var paginationOptions= $.extend(true, {$pagination|json_encode} ,{
+        onPageClick: function (event, page) {
+            var options = $(this).data('twbsPagination').options;
+            options.baseUrl = options.baseUrl.replace('.html','');
+            options.getParams.page = page;
+            var param = '';
+            for(var x in options.getParams ){
+                param += '&' + x + '=' + options.getParams[x];
+            }
+            window.location.href =  options.baseUrl + param + '.html';
+        }
+    });
+    $('#list-pagination').twbsPagination(paginationOptions);
+</script>
+</block>

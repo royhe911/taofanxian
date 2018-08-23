@@ -1,0 +1,153 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">提现审核</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="r">共有数据：<strong>{$count}</strong> 条</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<div class="dataTables_length" id="DataTables_Table_0_length">
+						<label>显示
+							<select name="" class="select" onchange="javascript:location.href=this.value;">
+								<option value="{:U('finance/cashcheck','status=3')}" <eq name="Think.get.status" value="3">selected="selected"</eq>>全部</option>
+								<option value="{:U('finance/cashcheck','status=1')}" <eq name="Think.get.status" value="1">selected="selected"</eq>>已通过</option>
+								<option value="{:U('finance/cashcheck','status=0')}" <eq name="Think.get.status" value="0">selected="selected"</eq>>待审核</option>
+								<option value="{:U('finance/cashcheck','status=2')}" <eq name="Think.get.status" value="2">selected="selected"</eq>>已拒绝</option>
+							</select>
+						</label>
+					</div>
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th>提现时间</th>
+								<th>店铺名称</th>
+								<th>提现金额</th>
+								<th>银行卡号</th>
+								<th>持卡姓名</th>
+								<th>审核结果</th>
+								<if condition="$_SESSION['user']['role'] == 4 or $_SESSION['user']['role'] == 1">
+								<th>业务员</th>
+								</if>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						 <volist name="data" id="vo">
+							<tr class="text-c">
+								<td>{$vo.addtime|date="j/n H:i",###}</td>
+								<td>{$vo.shopname}</td>
+								<td><b style="font-size: 11px;">¥</b> {$vo.av_money}</td>
+								<td>{$vo.card}</td>
+								<td>{$vo.name}</td>
+								<td>
+									<if condition="$vo.status ==1">
+										<img src="{$vo.money_pic}" alt="" width="100px" height="100px">
+									</if>
+									<if condition="$vo.status == 2 or $vo.status == 3">
+										拒绝原因:{$vo.reason}
+									</if>
+
+								</td>
+
+								<if condition="$_SESSION['user']['role'] == 4 or $_SESSION['user']['role'] == 1">
+									<td>{$vo.yw_info}</td>
+								</if>
+								<td>
+									<!--业务员-->
+									<if condition="$_SESSION['user']['role'] == 6">
+										<eq name="vo.status" value="0">
+										<a href="javascript:;" title="审核" onclick="check({$vo.id})">审核</a>
+										</eq>
+										<eq name="vo.status" value="1">
+											<span class="label label-success radius">财务通过</span>
+										</eq>
+										<eq name="vo.status" value="2">
+											<span class="label label-danger radius">财务拒绝</span>
+										</eq>
+										<eq name="vo.status" value="3">
+											<span class="label label-danger radius">已拒绝</span>
+										</eq>
+										<eq name="vo.status" value="4">
+											<span class="label label-success radius">待财务审核</span>
+										</eq>
+									</if>
+									<!--0代表申请中，1代表财务通过，2代表业财务拒绝,3代表业务员拒绝 4代表业务员通过-->
+									<!--财务和管理员-->
+									<if condition="$_SESSION['user']['role'] == 1 or $_SESSION['user']['role'] == 4">
+										<eq name="vo.status" value="0">
+											<span class="label label-warning radius">待业务员审核</span>
+										</eq>
+										<eq name="vo.status" value="1"><span class="label label-success radius">已通过</span>
+										</eq>
+										<eq name="vo.status" value="2">
+											<span class="label label-warning radius">已拒绝</span>
+										</eq>
+										<eq name="vo.status" value="3">
+											<span class="label label-warning radius">业务员已拒绝</span>
+										</eq>
+										<eq name="vo.status" value="4">
+											<a href="javascript:;" title="审核" onclick="check({$vo.id})">审核</a>
+										</eq>
+									</if>
+								</td>
+							</tr>
+						 </volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+		//充值
+		function cash(){
+			layer_show('申请提现', "{:U('User/cash')}", '300', '200');
+		}
+		function check(id){
+			var role = '{$_SESSION['user']['role']}';
+			if(role == 6){
+				layer.confirm('确定通过吗？', {
+					btn: ['通过', '不通过','取消'],
+				}, function () {
+					$.post("{:U('finance/check')}", {id: id,msg: 1}, function (data) {
+						if (1 == data.msg) {
+							layer.msg(data.info, {icon: 1,time: 1000},function(){
+								window.location.reload();
+							});
+						} else {
+							layer.msg(data.info, {icon: 2,time: 1000},function(){
+								window.location.reload();
+							});
+						}
+					}, 'json');
+				},function(index){
+					layer.prompt({
+					  	formType: 2,
+					  	title: '请输入驳回原因'
+					}, function(value, index, elem){
+						$.post("{:U('finance/check')}", {id: id,msg: 2,reason:value}, function (data) {
+							if (1 == data.msg) {
+								layer.msg(data.info, {icon: 1,time: 1000},function(){
+									window.location.reload();
+								});
+							} else {
+								layer.msg(data.info, {icon: 2,time: 1000},function(){
+									window.location.reload();
+								});
+							}
+						}, 'json');
+					})
+
+				},function(index){
+					layer.close(index);
+				});
+			}else if(role == 1 || role == 4){
+				layer_show('提现审核', "{:U('Finance/cashenter')}&id="+id, '460', '480');
+			}
+		}
+	</script>
+</block>

@@ -1,0 +1,179 @@
+<extend name="Layout:layout" />
+<block name="content">
+	<!--<div class="row">
+		<div class="col-lg-12">
+            <h1 class="page-header">确认返款 </h1>
+	    </div>
+	</div>-->
+	<nav class="breadcrumb" style="padding: 0px 15px; line-height: 37px; border-radius: 0; border-bottom: 1px solid #ddd; position: absolute;top: 0;left: 0;width: 100%;"><i class="fa fa-home"></i> 首页 <span class="c-gray en">&gt;</span> 试用管理 <span class="c-gray en">&gt;</span> 人气、库存优化 <a class="btn btn-success radius r" style="margin-top:1px;float: right;padding: 6px 20px;" href="javascript:location.replace(location.href);" title="刷新" ><i class="fa fa-refresh"></i></a><div style="clear: both;"></div></nav>
+	<div style="height: 50px; width: 100%;"></div>
+	<div class="panel panel-default">
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+			<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+				<div class="row">
+					<div class="col-sm-12">
+						<table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;" width="100%">
+							<thead>
+								<tr role="row">
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 80px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">商品ID</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 80px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">商品主图</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 80px;" aria-label="Browser: activate to sort column ascending">赠品主图</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">试用标题</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 85px;" aria-label="Platform(s): activate to sort column ascending">上传时间</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 85px;" aria-label="Platform(s): activate to sort column ascending">到期时间</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">用户</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 80px;" aria-label="Platform(s): activate to sort column ascending">实际库存</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 80px;" aria-label="Platform(s): activate to sort column ascending">人气优化</th>
+									<!--<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 80px;" aria-label="Platform(s): activate to sort column ascending">优化库存</th>-->
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 80px;" aria-label="Platform(s): activate to sort column ascending">操作</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+									<foreach name="list" item="vo">
+									<tr>
+									<td class="sorting_1">{$vo.id}</td>
+									<td><img style="width: 80px;height: 80px;" src="{$vo.img2}" alt=""></td>
+									<td style="text-align: center;">
+										<?php if($vo['model'] == 3){?>
+											<img style="width: auto;height: 80px;" src="__PUBLIC__/maoke/images/red.png" alt="红包">
+										<?php }else{?>
+											<img style="width: 80px;height: 80px;" src="<?=$vo['img']?>" alt="">
+										<?php }?>
+									</td>
+									<td scope="col" style="word-break: break-all;">{$vo.goods_name}</td>
+									<td>{$vo.addtime}</td>
+									<td>{$vo.etime}</td>
+									<td>{$vo.adminname}</td>
+									<td class="kucun">{$vo.kucun}</td>
+									<td class="click_alter"><input type="text" value="{$vo.click_alter}" name="click_alter" style="width: 100%;" class="popularity"/></td>
+									<!--<td class="stock_alter"><input type="text" value="{$vo.stock_alter}" name="stock_alter" style="width: 100%;"/></td>-->
+									<td scope="col"><button onclick="back_sure()" class="postsub">提交</button></td>
+									</tr>
+									</foreach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+							<ul class="pagination" id="list-pagination">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.table-responsive -->
+
+		</div>
+		<!-- /.panel-body -->
+	</div>
+
+
+
+</block>
+<block name="otherfoot">
+	<script>
+	$(function(){
+		/**if($("input[name='click_alter']").val()==0){
+			$("input[name='click_alter']").val('');
+		}
+		if($("input[name='stock_alter']").val()==0){
+			$("input[name='stock_alter']").val('');
+		}*/
+		var paginationOptions= $.extend(true, {$pagination|json_encode} , 
+							{
+									onPageClick: function (event, page) {
+										var options = $(this).data('twbsPagination').options;
+								        options.baseUrl = options.baseUrl.replace('','');
+								        options.getParams.page = page; 
+//								        options.getParams.pagesize = options.getParams.pagesize;
+                                        var param = '';
+										for(var x in options.getParams ){
+								        		param += '&' + x + '=' + options.getParams[x];
+								        }
+//										console.log(param);return;
+										
+								        window.location.href =  options.baseUrl + param + '';
+								    }
+							});
+		$('#list-pagination').twbsPagination(paginationOptions);
+		$("input[name='click_alter']").keyup(function(){
+			 var reg=/^[1-9]{1}[0-9]*$/
+			 if(!reg.test($(this).val())){
+			 	$(this).val('');
+			 }
+		})
+//		$("input[name='stock_alter']").keyup(function(){
+//			 var reg=/^[1-9]{1}[0-9]*$/
+//			 if(!reg.test($(this).val())){
+//			 	$(this).val('');
+//			 }
+//		})
+//		$("input[name='stock_alter']").blur(function(){
+//			var kucun = $(this).parent('td').siblings('.kucun').text();   //实际库存
+//
+//			if(parseInt($(this).val())>parseInt(kucun)){
+//				$(this).val('');
+//				alert('优化库存不能大于实际库存');
+//			}else if($(this).val()<1){
+//				$(this).val('');
+//			}
+//		})
+	});
+
+	//确定返款
+//  function back_sure(id,that) {
+//  	var click_alter = $(that).parent('td').siblings('.click_alter').children('input').val();   //优化人气
+////  	var stock_alter = $(that).parent('td').siblings('.stock_alter').children('input').val();   //优化库存
+//  	if(click_alter == ''){
+//  		//alert('优化人气和优化库存不能同时为空');
+//  		return false;
+//  	}else{
+//		 	$.post(
+//		        "{:U('Ajaxalter_data')}",
+//				{id:id,click_alter:click_alter},
+//				function (data) {
+//					if(data.code==1){
+//                         alert(data.msg);
+//                         window.location.reload();
+//					}else{
+//					    alert(data.msg);
+//					}
+//                 }
+//			)
+//  	}
+//		   
+//  }
+    function back_sure(){
+//  	var popularity = $('.popularity');
+		var msg = '';
+    	for(var i = 0;i<$('.popularity').length;i++){
+    		var id = $('.popularity').eq(i).parent('td').siblings(".sorting_1").text();
+    		var click_alter = $('.popularity').eq(i).val();
+    		$.post(
+		        "{:U('Ajaxalter_data')}",
+				{id:id,click_alter:click_alter},
+				function (data) {
+					if(data.code==1){
+                        msg = data.msg;
+					}else{
+					    msg = data.msg;
+					}
+                   }
+			)
+    	}
+//  	window.location.reload();
+		alert('优化成功');
+    }
+	</script>
+	
+	
+	
+	
+</block>

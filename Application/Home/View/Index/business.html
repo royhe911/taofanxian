@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>领吧商家报名</title>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/seller.css"/>
+	<script src="__PUBLIC__/maoke/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+    $(function () {
+        var $active_M = $(".active-M"), $active_P = $(".active-P");
+        $active_M.hover(function () {
+            $active_P.removeClass('active').find('.server-icon').removeClass('active');
+            $(".active-P .merpy-tip, #active-P").css('display', 'none');
+            $(this).addClass('active').find('.server-icon').addClass('active');
+            $(".active-M .merpy-tip, #active-M").show();
+        });
+
+        $active_P.hover(function () {
+            $active_M.removeClass('active').find('.server-icon').removeClass('active');
+            $(".active-M .merpy-tip, #active-M").css('display', 'none');
+            $(this).addClass('active').find('.server-icon').addClass('active');
+            $(".active-P .merpy-tip, #active-P").show();
+        });
+		
+        var offset = $('.float-box').offset();
+        $(window).scroll(function () {
+            var scrollTop = $(window).scrollTop();
+            if (offset.top < scrollTop) {
+                $('.float-box').addClass('fixed-box');
+            }
+            else {
+                $('.float-box').removeClass('fixed-box');
+            }
+        });
+
+        var $nav_a = $(".nav.fr li a");
+        $nav_a.click(function () {
+            $nav_a.removeClass("highlight");
+            $(this).addClass("highlight");
+        })
+    })
+</script>
+<style type="text/css">
+.STYLE2 {color: #F25F55}
+.STYLE3 {color: #0000FF}
+.STYLE6 {color: #FF0000; font-weight: bold; }
+</style>
+</head>
+<body>
+	
+	<div class="header">
+		<div class="float-box">
+			<div class="content">
+				<h1 class="zs-logo">
+	                    <a href="{:U('Index/index')}"><img src="__PUBLIC__/maoke/images/lingke-logo.png"></a>
+	                </h1>
+				<div class="nav fr">
+					<ul>
+						<li>
+							<a href="#" class="highlight">首页</a>
+						</li>
+						<!-- <li>
+							<a id="M" href="#server" class="">价格优势</a>
+						</li> -->
+						<li>
+							<a id="P" href="#server" class="">平台优势</a>
+						</li>
+						<li>
+							<a href="#J_trail-process" class="">试用流程</a>
+						</li>
+						<li>
+							<a href="#J_mer-std" class="">入驻标准</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="J_banner" class="banner">
+		<ul id="J_banner-slide" class="banner-slide">
+			<li style="position: absolute; z-index: 9; display: list-item;">
+				<a href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" style="background: url(__PUBLIC__/maoke/images/seller/merpy_top.jpg) no-repeat center;"></a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class=" center_ys">
+		<div class="center_nry">
+			<div class="center_a">
+				<div class="center_b">
+					<h2>A发A试用报名</h2>
+					<p>① 免费发布商品A送商品A试用,<span style="color: #f25f55">免佣金</span>；　　　② 注册即可发布，发布无限制。　　　　　　 ③ 发布100份以上送首页固定位一个</p>
+				</div>
+	
+				<div class="center_c">
+					<!--<a target="_blank" href="http://www.51lingla.com/Try/index" class="center_ckan">查看所在位置 &gt;</a>-->
+					<a target="_blank" href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" class="center_zcbm">注册报名</a>
+				</div>
+			</div>
+			<div class="center_a">
+				<div class="center_b">
+					<h2>A发B试用报名</h2>
+					<p>① 免费发布商品A送商品B试用,<span style="color: #f25f55">1元佣金</span>；　　② 注册即可发布，发布无限制。　　　　　　　③ 发布100份以上送首页固定位一个</p>
+				</div>
+	
+				<div class="center_c">
+					<!--<a target="_blank" href="http://www.51lingla.com/Try/index" class="center_ckan">查看所在位置 &gt;</a>-->
+					<a target="_blank" href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" class="center_zcbm">注册报名</a>
+				</div>
+			</div>
+	
+			<div class="center_a">
+				<div class="center_b">
+					<h2>赚佣金报名</h2>
+					<p>① 免费发布商品,<span style="color: #f25f55">最低1元佣金</span>；　　　　　 　② 注册即可发布，发布无限制。　　　　　　　③ 发布100份以上送首页固定位一个</p>
+				</div>
+	
+				<div class="center_c">
+					<!--<a target="_blank" href="http://www.51lingla.com/Commission/index" class="center_ckan">查看所在位置 &gt;</a>-->
+					<a target="_blank" href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" class="center_zcbm">注册报名</a>
+				</div>
+	
+			</div>
+	
+			<div class="center_a">
+				<div class="center_b">
+					<h2>积分任务报名</h2>
+					<p>① 免费发布商品分享+收藏,10-20积分次；　　② 注册即可发布，发布无限制。　　　　　　　③ 发布100份以上送首页固定位一个</p>
+				</div>
+	
+				<div class="center_c">
+					<!--<a target="_blank" href="http://www.51lingla.com/Task/index" class="center_ckan">查看所在位置 &gt;</a>-->
+					<a target="_blank" href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" class="center_zcbm">注册报名</a>
+				</div>
+	
+			</div>
+	
+			<div class="center_a">
+				<div class="center_b">
+					<h2>全拖服务报名</h2>
+					<p>① 全程货比截图三张　　 　　　　　　　　　② 全程详情页浏览上中下截图　　　　　　 　③ 高质量会员，安全号做任务 </p>
+				</div>
+				<div class="center_c">
+					<a target="_blank" href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true" class="center_zcbm">联系专员</a>
+				</div>
+	
+			</div>
+			<div class="center_a">
+				<div class="center_b">
+					<h2>VIP精品试用报名</h2>
+					<!-- <p>VIP精品试用更有效，回访，收藏，浏览同店 千万流量免费获取</p> -->
+					<p>VIP精品试用更有效，回访，收藏，浏览同店 千万流量免费获取　　　　　　　　　　　　　　1.快速聚拢用户标签　　 　　　　　　　　　　2.快速提升关键词排名、搜索权重 </p>
+				</div>
+				<div class="center_c">
+					<!--<a target="_blank" href="http://www.51lingla.com/Jing/index" class="center_ckan">查看所在位置 &gt;</a>-->
+					<a target="_blank" href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" class="center_zcbm">注册报名</a>
+				</div>
+	
+			</div>
+	
+			<!-- <div class="center_a center_djth">
+	            <div class="center_b">
+	                <h2>领划算活动</h2>
+	                <p>领划算活动打折卖商品，真实物流更加安全有保障。有详情请咨询商家客服QQ:443175317</p>
+	            </div>
+	            <div class="center_c">
+	                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=443175317&site=qq&menu=yes" class="center_zcbm" style="background: #506a89">在线咨询</a>
+	            </div>
+	        </div> -->
+		</div>
+	</div>
+	
+	<div class="section">
+		<div class="advantage">
+			<div class="advantage-itme">
+				<h2>快速提升销量、累计评价</h2>
+				<p>消费者到店铺下单购买体验，快速奠定销量、评价、搜索排名等基础，缩短推广周期.</p>
+				<span class="advantage-itme-bg1"></span>
+			</div>
+	
+			<div class="advantage-itme">
+				<h2>快速增强购买体验</h2>
+				<p>
+					消费达人体验产品，分享到美丽说、蘑菇街、爱逛街等导购社区，奠定购买体验口碑传播.</p>
+				<span class="advantage-itme-bg2"></span>
+			</div>
+	
+			<div class="advantage-itme">
+				<h2>
+	                    快速提升转化率</h2>
+				<p>
+					通过大量分享见证增强消费者购买信心，引领购买，提升直通车、淘活动流量转化.</p>
+				<span class="advantage-itme-bg3"></span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="section" id="J_serve">
+		<div class="server-side" id="server">
+			<div class="serve-hd">
+				<ul id="J_serve-switcher">
+					<!-- <li>
+						<div class="active-M active">
+							<span class="server-icon active"></span>价格优势
+							<span class="merpy-tip" style="display: block;"></span>
+						</div>
+					</li> -->
+					<li style="width:100%;">
+						<div class="active-P active">
+							<span class="server-icon active"></span>平台优势
+							<span class="merpy-tip" style="display: block;"></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	
+		<div class="side bg-fc">
+			<div id="J_serve-slide" class="serve-bd">
+				<!-- <div id="active-M" class="serve-bd-item itme-bg1" style="position: absolute; z-index: 9; display: block;">
+					<img class="item-bg1-inner-bg" src="__PUBLIC__/maoke/images/seller/item1.png">
+					<img class="item-bg1-inner-l" src="__PUBLIC__/maoke/images/seller/data_two.gif">
+					<img class="item-bg1-inner-r" src="__PUBLIC__/maoke/images/seller/data_one.gif">
+					<p class="item-cont"><strong>
+	                    通过减少本站技术服务费方式,更大化的给商家带来利益,为商品赢得更长的市场销售成熟期，赢得营销价值最大化,并且让消费者免费体验，让利给消费者，快速建立信任感，快速积累消费见证（包含但不限于体验过程分享、销量基础、评价等），快速形成口碑传播</strong></p>
+				</div> -->
+	
+				<div id="active-P" class="serve-bd-item itme-bg2" style="position: absolute; z-index: 1;">
+					<img src="__PUBLIC__/maoke/images/seller/item2.png">
+				</div>
+			</div>
+		</div>
+	
+		<div id="J_trail-process">
+			<h3 id="trail_prc_h">试用活动流程</h3>
+			<div class="pr-img">
+			</div>
+		</div>
+	
+		<div id="J_mer-std" style="position: relative;">
+			<h3>领吧网商家入驻标准</h3>
+			<table>
+				<tbody>
+					<tr class="head">
+						<td width="280" style="font-weight: bold">至尊商家/年费</td>
+						<td width="280" style="font-weight: bold">vip商家/年费</td>
+						<td width="280" style="font-weight: bold">认证商家/年费</td>
+						<td width="280" style="font-weight: bold">单期服务</td>
+					</tr>
+	
+					<tr style="text-decoration: line-through;">
+						<td style=" padding: 11px;">原价：4980元 / 年</td>
+						<td>原价：3980元 / 年</td>
+						<td style=" padding: 8px;">原价：2980元 / 年</td>
+						<td>原价：80元/ 次 </td>
+					</tr>
+	
+					<tr>
+						<td>2980元 / 年</td>
+						<td>1980元 / 年</td>
+						<td>980/年</td>
+						<td style=" padding: 9px;"> <span class="STYLE3"><strong>免服务费，发布无限制 </strong></span></td>
+					</tr>
+					<tr>
+						<td>可发布闪电任务</td>
+						<td>可发布闪电任务</td>
+						<td>可发布闪电任务</td>
+						<td>可发布闪电任务</td>
+					</tr>
+	
+					<tr>
+						<td>可免费发布活动</td>
+						<td>可免费发布活动</td>
+						<td>可免费发布活动</td>
+						<td>可发布试用任务</td>
+					</tr>
+	
+					<tr>
+						<td>可发布搜索试用</td>
+						<td>可发布搜索试用</td>
+						<td>可发布搜索试用</td>
+						<td>可发布佣金任务</td>
+					</tr>
+	
+					<tr>
+	
+						<td>可发布试用及佣金活动</td>
+						<td>可发布试用及佣金活动</td>
+						<td>可发布试用及佣金活动</td>
+						<td>可发布免审佣金任务</td>
+					</tr>
+	
+					<tr>
+						<td>开放用户IP地址显示</td>
+						<td>开放用户IP地址显示</td>
+						<td>开放用户IP地址显示</td>
+						<td>开放用户IP地址显示</td>
+					</tr>
+					<tr>
+						<td>免费使用：多关键词、多流量入口、IP防重复</td>
+						<td>免费使用：多关键词、多流量入口、IP防重复</td>
+						<td>免费使用：多关键词、多流量入口、IP防重复</td>
+						<td>免费使用：多关键词、多流量入口、IP防重复</td>
+					</tr>
+	
+					<tr>
+						<td>单个账号可绑定20个店铺</td>
+						<td>单个账号可绑定15个店铺</td>
+						<td>单个账号可绑定10个店铺</td>
+						<td>可绑定5个店铺</td>
+					</tr>
+					<tr>
+						<td>小黑屋：拉黑恶意用户</td>
+						<td>小黑屋：拉黑恶意用户</td>
+						<td>小黑屋：拉黑恶意用户</td>
+						<td>小黑屋：拉黑恶意用户</td>
+					</tr>
+					<tr>
+						<td style="color: #f25f55">抽奖活动（至尊版）抽50元</td>
+						<td>抽奖活动（认证版）抽20元</td>
+						<td>抽奖活动（认证版）抽5元</td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td>全程货比截图<span class="STYLE2">（免费）</span></td>
+						<td>全程货比截图<span class="STYLE2">（免费）</span></td>
+						<td>全程货比截图<span class="STYLE2">（免费）</span></td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td>全程浏览截图<span class="STYLE2">（免费）</span></td>
+						<td>全程浏览截图<span class="STYLE2">（免费）</span></td>
+						<td>全程浏览截图<span class="STYLE2">（免费）</span></td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td>指定评价<span class="STYLE2">（免费）</span></td>
+						<td>指定评价<span class="STYLE2">（免费）</span></td>
+						<td>指定评价<span class="STYLE2">（免费）</span></td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td>加购车　<span class="STYLE2">（免费）</span></td>
+						<td>加购车　<span class="STYLE2">（免费）</span></td>
+						<td>/</td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td>晒图评价<span class="STYLE2">（免费）</span></td>
+						<td>/</td>
+						<td>/</td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td style="color: #f25f55">免费使用（日下单次数显示）</td>
+						<td>/</td>
+						<td>/</td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td style="color: #f25f55">积分商城兑换</td>
+						<td>积分商城兑换</td>
+						<td>积分商城兑换</td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td><span class="STYLE2">一对一客服服务</span></td>
+						<td><span class="STYLE2">一对一客服服务</span></td>
+						<td><span class="STYLE2">一对一客服服务</span></td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td><span class="STYLE3">100%赔付保障</span></td>
+						<td><span class="STYLE3">100%赔付保障</span></td>
+						<td><span class="STYLE3">100%赔付保障</span></td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td><span class="STYLE2">赠送10000积分(年费)</span></td>
+						<td><span class="STYLE2">赠送5000积分(年费)</span></td>
+						<td><span class="STYLE2">赠送2000积分(年费)</span></td>
+						<td>/</td>
+					</tr>
+					<tr>
+						<td>送1年 51空包网钻石vip</td>
+						<td>送1年 51空包网金牌vip</td>
+						<td>送1年 51空包网高级vip</td>
+						<!-- <td><span class="STYLE6"><a href="http://www.51kongbaoo.com/" target="_blank"></a></span></td> -->
+						<td>
+							<a style="display: inline-block; background: #f25f55; color: #fff; font-size: 14px; text-align: center; line-height: 30px; height: 30px; width: 80px;" href="http://www.51kongbaoo.com/User/index.html" target="_blank">查看详情</a>
+						</td>
+					</tr>
+					<tr>
+						<td>送1年 51领划算钻石vip 每天推广3个商品</td>
+						<td>送1年 51领划算黄金vip 每天推广2个商品</td>
+						<td>送1年 51领划算高级vip 每天推广1个商品</td>
+						<td>
+							<a style="display: inline-block; background: #f25f55; color: #fff; font-size: 14px; text-align: center; line-height: 30px; height: 30px; width: 80px;" href="http://sell.51linghuasuan.com/User/vipdh.html" target="_blank">查看详情</a>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="STYLE2">超值礼品大礼包赠送</span></td>
+						<td><span class="STYLE2">超值礼品大礼包赠送</span></td>
+						<td><span class="STYLE2">超值礼品大礼包赠送</span></td>
+						<td>/</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div style="position: absolute; width: 100%;left: 0; top:216px ;">
+				<div style=" text-align: center;   margin:  0 auto; width: 1200px; height: 1190px;">
+				<img src="__PUBLIC__/maoke/images/adnew.png" style="width: 100%;" id="adnew"/>
+				</div>
+			</div>
+			<div class="std-btn">
+				<a href="http://www.taofanxian.com/admin.php?m=Home&c=Index&a=login" target="_blank" class="contact-mer">商家免费体验</a>
+				<a href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true" target="_blank" class="rgt-shopissue">联系商家客服</a>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		$(function(){
+			$(window).scroll(function(){
+				var top = document.body.scrollTop;
+				if(top>=2445){
+					$("#adnew").css("marginTop",top-2445);
+				}else{
+					$("#adnew").css("marginTop",0);
+				}
+				if(top >= 3135){
+					$("#adnew").css("marginTop",690);
+				}
+			})
+			
+		})
+	</script>
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?eb77dfd2cb6feccdd36431a10b07e2d8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">刷单员管理</span><span class="c-999 en">&gt;</span><span class="c-666">短链接审核</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" style="position: absolute;">
+		<div>
+			<div class="pd-20">
+				<div class="cl pd-5 bg-1 bk-gray mt-20" style="line-height: 29px;">
+					<span class="r">共有数据：{$count}条</span>
+				</div>
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+								<tr class="text-c">
+									<th width="8%">店铺名称</th>
+									<th width="80">主图</th>
+									<th width="10%">宝贝详情</th>
+									<th>赠送礼品</th>
+									<th width="9%">关键词</th>
+									<th width="9%">备注</th>
+									<th>单价</th>
+									<th>其它</th>
+									<th>刷单员</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							<volist name="task" id="vo">
+								<tr class="text-c va-m">
+									<td>{$vo.shopname}</td>
+									<td>
+										<a href="javascript:;" title="鼠标右键复制图片"><img width="80" class="product-thumb" src="{$vo.goods_pic}"></a>
+									</td>
+									<td class="text-l">
+										<a style="text-decoration:none" href="{$vo.goods_url}" target="_blank"> <b class="text-success">{$vo.goods_title}</b></a>
+									</td>
+									<td>{$vo.goods_zeng}</td>
+									<td>{$vo.keyword}</td>
+									<td>{$vo.sku|default='无'}</td>
+									<td><b style="font-size: 11px;">¥ </b>{$vo.price}</td>
+									<td class="kong"><b style="font-size: 11px;">¥ </b> <span>{$vo.empty_cost|default=0}</span></td>
+									<td>{$vo.realname}</td>
+									<td>
+										<a onClick="applyLinkSure({$vo.id})" href="javascript:;" class="order-a" title="短链接" style="display: block;">
+											<span class="label label-warning radius">审核</span>
+										</a>
+									</td>
+								</tr>
+							</volist>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+		//短链接
+		function applyLinkSure(id){
+			layer.confirm('确认生成短链接吗？',{btn:['通过','不通过','取消']},
+				function(index){  //通过
+	                $.post("{:U('brush/is_sure')}",{task_id:id,type:1},function(msg){
+	                    if(msg.msg == 1){
+
+	                        layer.msg(msg.info,{icon:1,time:1000},function(){
+			                    	window.location.reload()
+			                    });
+	                    }else{
+	                        layer.msg(msg.msg,{icon:2,time:1000});
+	                    }
+	                });
+				},function(){   //拒绝
+					$.post("{:U('brush/is_sure')}",{task_id:id,type:2},function(msg){
+	                    if(msg.msg == 1){
+	                        layer.msg(msg.info,{icon:1,time:1000},function(){
+			                    	window.location.reload()
+			                    });
+	                    }else{
+	                        layer.msg(msg.msg,{icon:2,time:1000});
+	                    }
+	                });
+				}
+			);
+		}
+
+
+	</script>
+</block>

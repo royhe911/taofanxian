@@ -1,0 +1,417 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style>
+    input[name="platform_id"] {
+        vertical-align: bottom;
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+    }
+
+    .platform {
+        margin-right: 15px;
+    }
+
+    .shop_name {
+        margin-right: 20px;
+    }
+
+    .wide100-input {
+        width: 100px !important;
+        margin-right: 10px !important;
+        padding-left: 10px;
+    }
+
+    .label-cm {
+        display: inline-block;
+        width: 90px;
+        text-align: right;
+        font-size: 14px;
+        font-weight: normal;
+        color: #323232;
+        float: left;
+    }
+    /* 新增样式代码 */
+    .po-style-re { position: relative;}
+    .po-style-re .tip-no-shop { position: absolute; left: 100px;  display: none; color: #f25f55; }
+    .po-style-re .tip-no-shop a {color: #e8363c; text-decoration: underline; }
+</style>
+<div class="left" style="width: 1040px;overflow: hidden;background-color: #ffffff;margin: 0 0 8px 10px;">
+    <img src="__PUBLIC__/maoke/images/merchant/release_header_show.png" alt="">
+</div>
+<!-- 发布优惠券1 -->
+<div class="store_content left">
+    <form action="{:U('Coupon/publishfirst')}" method="POST" id="couponform" onsubmit="return checkCoupon();">
+        <h1 class="title">上传优惠券</h1>
+        <div class="have_bindingShops">
+            <h2 class="title">1.选择平台和店铺</h2>
+            <div class="bounded_and_unbounded" style="padding-bottom: 20px;">
+                <div style="margin-bottom:10px;">
+                    <span class="label-cm">平台来源：</span>
+                    <div class="left" style="padding-left: 10px;">
+                        <span class="platform"><input type="radio" name="platform_id" checked value="1" onchange="change();">淘宝</span>
+                        <span class="platform"><input type="radio" name="platform_id" value="2" onchange="change();">天猫</span>
+                        <span class="platform"><input type="radio" name="platform_id" disabled value="3">京东</span>
+                        <span class="platform"><input type="radio" name="platform_id" disabled>阿里巴巴</span>
+                        <span class="platform"><input type="radio" name="platform_id" disabled>拼多多</span>
+                        <span class="platform"><input type="radio" name="platform_id" disabled>蘑菇街</span>
+                        <span class="platform"><input type="radio" name="platform_id" disabled>美丽说</span>
+                        <span class="platform"><input type="radio" name="platform_id" disabled>一号店</span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!--已经绑定店铺——————选择店铺-->
+                <div class="bounded_select_shop po-style-re">
+                    <!--店铺类型淘宝-->
+                    <div class="tip-no-shop">您当前没有绑定相关店铺 <a href="{:U('Usercenter/bindshop')}"> 去绑定</a></div>
+                    <span class="label-cm">店铺名称：</span>
+                    <div class="left shopType_tmall" style="padding:0; width:auto; padding-left: 10px;">
+                        <div class="left shop_name  taobao hided shop_name_active" id="myshop_20" data-sid="20" style="display: block;">
+                            <div class="left shopName">
+                                <p><b>大家旺3C配件商城</b></p>
+                                <p>来源：<span>淘宝</span></p>
+                            </div>
+                            <p class="left select_btn">
+                            </p>
+                        </div>
+                        <div class="left shop_name  taobao hided" id="myshop_61" data-sid="61" style="display: block;">
+                            <div class="left shopName">
+                                <p><b>maoke商城</b></p>
+                                <p>来源：<span>淘宝</span></p>
+                            </div>
+                            <p class="left select_btn">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--填写商品信息-->
+            <div class="fill_information">
+                <h2 class="title">2.填写商品信息</h2>
+                <div class="shop_information">
+                    <div class="commodity_information">
+                        <i id="focus"></i>
+                        <label for="commodity_name"><span>*</span>平台展示名称：</label>
+                        <input id="commodity_name" name="commodity_name" type="text" value="">
+                        <span id="product_name_error"></span>
+                        <br>
+                        <p>
+                            请输入试用品名称，
+                            <a href="javascript:void(0);">不要和淘宝商品名称相同，</a> 防止试客直接搜索名称购买，请控制在20个字内
+                        </p>
+
+                        <label for="goods_name"><span>*</span>淘宝商品标题：</label>
+                        <input id="goods_name" name="goods_name" type="text" value="">
+                        <span id="goods_name_error"></span>
+                        <br>
+                        <p>
+                            请输入淘宝完整标题，
+                            <a href="javascript:void(0);">和淘宝商品标题完全相同，</a> 请将商品在淘宝显示的完整名称复制到此输入框，如果商品名称
+                            <br>中有空格，请连着空格一起复制粘贴。
+                            <a href="javascript:void(0);" style="color:#e61e28;font-weight:bold;font-style: normal">活动期间淘宝网上的商品标题不得更改！</a>
+                        </p>
+                        <label for="shop_url"><span>*</span>商品链接：</label>
+                        <input id="shop_url" name="shop_url" type="text" value="">
+                        <span class="error" id="product_link_error"></span>
+                        <br>
+                        <p>平台会根据您填写的商品链接抓取对应淘宝商品的宝贝描述，显示在试用详情页。</p>
+                        <label for="commodity_classify"><span>*</span>商品的分类：</label>
+                        <select id="commodity_classify" name="commodity_classify">
+							<option value="10001">女装</option>
+							<option value="10002">男装</option>
+							<option value="10003">鞋包</option>
+							<option value="10004">母婴</option>
+							<option value="10005">内衣</option>
+							<option value="10006">美食</option>
+							<option value="10007">数码</option>
+							<option value="10008">家居</option>
+							<option value="10009">美妆</option>
+							<option value="10010">户外</option>
+							<option value="10011">配饰</option>
+							<option value="10012">家装</option>
+							<option value="10013">家电</option>
+							<option value="10014">车用</option>
+							<option value="10015">图书</option>
+							<option value="10016">其他</option>
+						</select>
+                        <br>
+                        <div class="upload_image goods_picture">
+                            <label class="left"><span>*</span>平台展示图：</label>
+                            <div class="up_img left" onclick="upd_file(this,'fileToUpload');" style="margin-left: 8px;">
+                                <input type="file" name="fileToUpload" class="fileToUpload" id="fileToUpload" data-img=".." style="width:100px;height:100px;margin:0;" value="" accept="image/*">
+                                <input type="hidden" name="mypic" id="mypic" value="">
+                                <img id="picture_url" class="imgList img" src="__PUBLIC__/maoke/images/merchant/sk_zjgl_lqxd_icon_jiahao_default.png">
+                                <div class="displayValue" style="word-spacing: normal;word-wrap: break-word;"></div>
+                            </div>
+                            <i class="img_tips icon iconfont left" id="picture_url_error"></i>
+                        </div>
+
+                        <p class="upload_image_hint">
+                            上传的商品图将会展示在领吧平台，图片格式为：<b>jpg、png、jpeg、gif</b>，图片大小在<b>1M以内</b><br>
+                            <b>展示图要求：白底背景，必须是所送的商品，不能出现图片拼接、水印、logo、及其他文字。</b>
+                        </p>
+
+                        <div class="goods_standard">
+                            <!--<div class="left goods_standard_details">
+                                <div class="goods_standard_content" style="margin-top: 10px;">
+                                    <ul>
+                                        <li>
+                                            <p class="title"><span>*</span> 试客下单价格(元)</p>
+                                            <p class="price"><input type="text" id="unit_price" name="unit_price" value="" placeholder="请填写"></p>
+                                        </li>
+                                        <li>
+                                            <p class="title"><span>*</span> 淘宝搜索价格(元)</p>
+                                            <p class="price"><input type="text" id="iphone_unit_price" name="iphone_unit_price" value="" placeholder="请填写"></p>
+                                        </li>
+                                        <li>
+                                            <p class="title"><span>*</span> 试客每单拍(件)</p>
+                                            <p class="price"><input type="text" id="buy_sum" name="buy_sum" value="1" disabled="disabled" onkeypress="onlyNum()" placeholder="请填写"></p>
+                                        </li>
+                                        <li>
+                                            <p class="title">商品规格</p>
+                                            <p class="price"><input type="text" id="thecolor" name="thecolor" value="" placeholder="颜色、尺寸等"></p>
+                                        </li>
+                                    </ul>
+                                    <p>单品售价：需要试客实际下单付款的商品SKU价格；</p>
+                                    <p>商品搜索价格：商品在搜索结果页面显示的价格；</p>
+                                    <p>如需试客拍下指定规格，请务必填写商品规格信息，如不填写，默认买手可以拍下任意规格的商品；</p>
+                                    <p><span>鞋子服装类商品，不可限制产品的尺寸</span></p>
+                                    <p>
+                                        <span>如有疑问，请联系在线客服</span>
+                                    </p>
+                                </div>
+                                <p style="padding: 0;">
+                                    <span id="product_format_error"></span>
+                                </p>
+                            </div>-->
+                            <label for="unit_price"><span>*</span>试客下单价格：</label>
+	                        <input id="unit_price" name="unit_price" type="number" value="" style="width: 100px; margin-right: 10px;">元
+	                        <span class="error" id="unit_price_error"></span>
+                        </div>
+                        <!---->
+                    </div>
+                </div>
+                <div class="nextStep_btn">
+                    <input type="hidden" name="id" value="0">
+                    <input type="hidden" id="sid" name="sid" value="0">
+                    <input type="button" value="下一步" onclick="next_step({$platform.id});">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+</section>
+<!-- page-wrapper end -->
+</div>
+<!-- wrapper -->
+</div>
+<script src="__PUBLIC__/ajaxfileupload.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("input[name=platform_id]").eq(0).attr("checked", 'checked'); //默认选择项
+        $('.taobao').show();
+        $('.taobao').eq(0).addClass('shop_name_active'); //默认选择项(店铺)
+        $('#sid').val($('.taobao').eq(0).attr('data-sid')); //默认店铺ID
+        $(".select_title .try").eq(0).addClass("a_active");
+        $(".try_content").eq(0).show();
+        $(".select_title .try").click(function() {
+            $(this).siblings("a").removeClass("a_active");
+            $(this).addClass("a_active");
+            $(".try_content").hide();
+            $(".try_content").eq($(this).attr("data-type") - 1).show();
+            $('#type').val($(this).attr('data-type')); // 选中的类型
+        });
+        $('.left .shop_name').click(function() {
+            $('.left .shop_name').removeClass('shop_name_active');
+            $(this).addClass('shop_name_active');
+            $('#sid').val($(this).attr('data-sid')); // 选中的店铺
+        });
+
+        //进入页面判断是否纯在淘宝店铺信息
+        var type = $('input:radio[name=platform_id]:checked').val();
+        if (1 == type) {
+            $(".taobao").show();
+            $(".tmall").hide();
+            $(".tip-no-shop").hide();
+            if (!$(".taobao").length) {
+                $(".tip-no-shop").show();
+                $('#sid').val(0);
+            }
+        }
+
+    });
+
+    function change() {
+        var type = $('input:radio[name=platform_id]:checked').val();
+        $('.left .shop_name').removeClass('shop_name_active');
+        if (1 == type) {
+            $(".taobao").show();
+            $(".tmall").hide();
+            //增加店铺显示的判断
+            $(".tip-no-shop").hide();
+            if (!$(".taobao").length) {
+                $(".tip-no-shop").show();
+                $('#sid').val(0);
+            }
+        } else if (2 == type) {
+            $(".tmall").show();
+            $(".taobao").hide();
+            $(".tip-no-shop").hide();
+            if (!$(".tmall").length) {
+                $(".tip-no-shop").show();
+                $('#sid').val(0);
+            }
+        }
+    }
+
+    function strToObj(str) {
+        return eval("(" + str + ")");
+    }
+
+    function upd_file(obj, file_id) {
+        $("input[name='" + file_id + "']").bind("change", function() {
+            $.ajaxFileUpload({
+                url: "{:U('Actcenter/AjaxUpload')}", //上传图片处理文件
+                secureuri: false,
+                fileElementId: file_id,
+                dataType: 'text',
+                success: function(data) {
+                    var data = strToObj(data);
+                    if (1 == data.status) {
+                        $('#mypic').val(data.url);
+                        $('#picture_url').attr('src', '../' + data.url);
+                        $("#picture_url_error").removeClass('icon-cuowu error').addClass('icon-chenggong correct').text(data.msg);
+                    } else {
+                        $("#picture_url_error").removeClass('icon-cuowu error').addClass('icon-chenggong correct').html("<font color='#e61e28'>" + data.msg + "</font>");
+                    }
+                },
+                error: function(data) {
+                    var data = strToObj(data);
+                    $('#picture_url_error').html(data.msg);
+                    $('#picture_url_error').show();
+                }
+            });
+        });
+    }
+
+    // 新增验证逻辑代码
+    // onclick="window.location.href='{:U(\'publishsecond\')}'"
+
+    function showSearch(id) {
+        var oDiv = $("#" + id);
+        var t = document.createElement("input");
+        t.type = "text";
+        oDiv.prepend(t);
+        t.focus();
+        t.remove();
+    }
+
+    function next_step(platform_id) {
+
+        //增加店铺选择判断
+        var sid = $('#sid').val();//店铺ID
+        if(sid == 0){
+            alert('请选择您要发布试用的店铺');
+        }
+
+        var commodity_name = $("#commodity_name").val();
+        if (commodity_name == '') {
+            $("#product_name_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品名称不得为空");
+            showSearch('focus');
+            return;
+        }
+        if (commodity_name.length > 20) {
+            $("#product_name_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品名称请控制在20个字符以内");
+            showSearch('focus');
+            return;
+        } else {
+            $("#product_name_error").html("");
+        }
+
+        var goods_name = $("#goods_name").val();
+        if (goods_name == '') {
+            $("#goods_name_error").html("<span class='icon iconfont icon-cuowu'></span>" + "{$platform.name}商品完整标题不得为空");
+            showSearch('focus');
+            return;
+        }
+        if (goods_name.length > 100) {
+            $("#goods_name_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品完整标题请控制在100个字符以内");
+            showSearch('focus');
+            return;
+        } else {
+            $("#goods_name_error").html("");
+        }
+
+        var shop_url = $("#shop_url").val();
+        if (shop_url == '') {
+            $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品链接不得为空");
+            showSearch('focus');
+            return;
+        } else {
+            $("#product_link_error").html("");
+        }
+
+        var reg = /.*[\u4e00-\u9fa5]+.*$/;
+        if ((reg.test(shop_url))) {
+            $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品链接中不得出现中文");
+            showSearch('focus');
+            return;
+        } else {
+            $("#product_link_error").html("");
+        }
+
+
+        var iftmall = shop_url.indexOf("tmall");
+        // 药店的详情链接是  "detail.yao.95095.com"
+        var ifyao = shop_url.indexOf(".yao.");
+        var iftaobao = shop_url.indexOf("taobao");
+        if (((iftaobao < 0 || iftmall > 0) && platform_id == 1) || ((iftmall < 0 && ifyao < 0) && platform_id == 2)) {
+            $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品链接不匹配");
+            showSearch('focus');
+            return;
+        } else if (((iftmall < 0 && ifyao < 0) && iftaobao < 0)) {
+            $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>" + "请输入正确的商品链接");
+            showSearch('focus');
+            return;
+        } else if (!/(\?|\&)id=\d+/g.test(shop_url)) {
+            $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品链接不匹配");
+            showSearch('focus');
+            return;
+        } else {
+            $("#product_link_error").html("");
+        }
+
+        //	var picture_urls = document.getElementsByClassName('fileToUpload')[0].value;
+        var picture_urls = $("#picture_url").attr('src');
+        if (picture_urls.indexOf('maoke') > 0 && $('.fileToUpload').attr('data-img') == '..') {
+            $("#picture_url_error").removeClass('icon-chenggong correct').addClass('icon-cuowu error').text("请上传图片!");
+            showSearch("product_name_error");
+            return false;
+        }
+        if ($("#picture_url_error").hasClass('error')) {
+            return false;
+        }
+        // 验证试客下单价格
+        var unit_price = $("#unit_price").val();
+        if (unit_price == '' || unit_price <= 0) {
+            $("#unit_price_error").html("<span class='icon iconfont icon-cuowu'></span>" + "单品售价不得为空或者不大于0");
+            return;
+        } else {
+            $("#unit_price_error").html("");
+        }
+        var reg = /\d+\.\d{0,2}|\d$/;
+        if (!reg.test(unit_price)) {
+            $("#unit_price_error").html("<span class='icon iconfont icon-cuowu'></span>" + "单品售价格式错误");
+            return;
+        } else {
+            $("#unit_price_error").html("");
+
+        }
+            // $('#myform').submit();
+            window.location.href = '{:U(\'publishsecond\')}'
+    }
+</script>
+<include file="Layout:foot" />

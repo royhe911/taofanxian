@@ -1,0 +1,383 @@
+
+	<include file="Layout:head" />
+	<include file="Layout:nav" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/swiper.min.css"/>
+<script type="text/javascript">
+	function GetRTime(tiem){
+
+	  var EndTime = new Date(tiem.replace(/-/g, "/"));
+	  var NowTime = new Date();
+	  var t =EndTime.getTime() - NowTime.getTime();
+	  var h=0;
+	  var m=0;
+	  var s=0;
+	  if(t>=0){
+	  	d=Math.floor(t/1000/60/60/24)
+	      h=Math.floor(t/1000/60/60%24);
+	      m=Math.floor(t/1000/60%60);
+	      s=Math.floor(t/1000%60);
+	  }
+	  if(h<10){
+	      h="0"+h;
+	  }if(m<10){
+	      m="0"+m;
+	  }if(s<10){
+	      s="0"+s;
+	  }
+	  document.getElementById('time').innerHTML = "距离活动结束时间还剩 : <span>"+d + "</span> 天 <span>"  + h + "</span> 时 <span>" + m + "</span> 分 <span>" + s+"</span> 秒";
+	}
+	function sorttime() {
+	  GetRTime('<?=$goods['etime']?>');
+	  window.setInterval(function(){GetRTime('<?=$goods['etime']?>');}, 1000);
+	}
+</script>
+<!--                        商品详情  start                      -->
+<div class="info">
+    <input type="hidden" id="sk_id" value="10000">
+    <div class="position">
+        <a href="{:U('Index/index')}">首页</a>>
+        <a href="<?php echo U('Classlist/index' , array('cid'=>$goods['cid']) );?>"><?=$category[$goods['cid']]?></a>
+    </div>
+    <div class="con">
+        <!--<div class="swiper">
+            <input id="fromuserid" type="hidden" value="" />
+            <ul>
+                <li><img src="../{$goods.img}" /></li>
+                <li><img src="__PUBLIC__/maoke/images/poster.jpg"/></li>
+            </ul>
+        </div>-->
+		<div id="swiper" class="swiper-container" style="width: 340px; height: 340px;margin: 0; float: left;">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" style="text-align: center;margin-top: 3px;">
+
+						<img src="../<?=$goods['img2']?>" style="height: 330px; width: 330px;" />
+
+
+		        </div>
+		        <div class="swiper-slide" style="text-align: center;margin-top: 3px;">
+		           <img src="__PUBLIC__/maoke/images/poster.jpg" style="height: 330px; width: 330px;"/>
+		        </div>
+		   </div>
+		    <div class="swiper-pagination">
+		    	<span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+		    	<span class="swiper-pagination-bullet"></span>
+		    </div>
+		</div>
+        <div class="ml360">
+        	<div class="youchuo" style="right: 130px;"><img src="__PUBLIC__/maoke/images/pro-info/img_11.png"/></div>
+            <h4>{$goods.goods_name}</h4>
+            <ul>
+                <li>试用品份数：<span><?php echo $goods['kucun']+$goods['sell_number'];?></span> 份</li>
+                <?php if($goods['model'] == 3 || $goods['model'] == 4){?>
+                	<li>红包价值：<span><?php echo sprintf("%01.2f",$goods['red_price']);?></span> 元</li>
+                <?php }else{?>
+                	<li>商品价值：<span><?php echo sprintf("%01.2f",$goods['real_price']);?></span> 元</li>
+                <?php }?>
+
+                <li>下单金额：<span><?php echo sprintf("%01.2f",$goods['real_price']);?></span> 元 , 返还金额 : <span>
+                	<?php if($goods['model'] == 4){echo sprintf("%01.2f",$goods['red_price']);}else{echo sprintf("%01.2f",($goods['real_price']+$goods['red_price']));}?>
+                </span> 元<?php if($goods['model']!=1){?><span>（含红包<?=$goods['red_price']?>元）</span><?php }?></li>
+                <li>试用统计: 共 <span><?php echo $goods['kucun']+$goods['sell_number'];?></span> 件, <span>{$goods.id|apply_num=###}</span> 人已申请 , <span>{$goods.id|stock_num=###}</span> 人已获得试用 , 剩余 <span><?php echo $goods['kucun']+$goods['sell_number']-stock_num($goods['id'])?></span> 份</li>
+            </ul>
+            <div class="mfsy-l">
+            	<div class="mfsy-div">
+	            	<div class="fl">
+	            		<a href="javascript:;" class="mfsy" id="mfsy"><?php if($goods['model'] == 1){echo "免费申请";}else{echo "试用领红包";}?></a>
+	            	</div>
+		           	<!--<div class="fl">
+		           		<button class="msh">免审核(600金币)</button>
+		           	</div>
+		           	<div class="lqjb fl">
+		           		<span style="color: #5188C9;">金币不足?</span>
+		           		<span><a href="" style="color: #E20177;">领88个金币</a></span>
+		           	</div>-->
+		           	<div style="clear: both;"></div>
+		        </div>
+		        <div class="djs">
+		        	<p id="time"><script>sorttime();</script></p>
+		        </div>
+            </div>
+            <div class="erweima">
+            	<p>扫描关注微信公众号</p>
+            	<div>
+            		<img src="__PUBLIC__/maoke/images/erweima.jpg" alt="" width="100px"/>
+            	</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="shop-cat">
+        	<div class="tc-hd">
+        		<span>商家类型 : </span>
+        		<i class="icon-month icon-cat4">
+        			<?php if($member_type==0){?>
+        			<img src="__PUBLIC__/maoke/images/pro-info/img_07.png"/>
+        			<?php }else{?>
+        			<img src="__PUBLIC__/maoke/images/pro-info/img_08.png"/>
+        			<?php }?>
+        		</i>
+        	</div>
+        	<p class="pd15">入驻商城 : <span class="shopL">天猫</span></p>
+        	<p class="pd15">主营类目 : <span >鞋包服饰</span></p>
+        	<p class="pd15">已发活动 : <span class="cateN">{$publish}</span> 份</p>
+        	<div class="code">
+        		<div class="bzjin">
+        			<img src="__PUBLIC__/maoke/images/pro-info/img_15.png" alt="" />
+        		</div>
+        		<p class="pd5 bzj-has">商家已存入保证金</p>
+        		<p class="pd5 bzj-rmb">￥ <span><?php echo ceil(($goods['real_price']+$goods['red_price'])*($goods['kucun']+$goods['sell_number']));?></span> 元</p>
+        		<p class="pd5">领吧网担保  请放心申请</p>
+        	</div>
+        	<div class="new-fuli"> <a href="">新手送100金币</a></div>
+        </div>
+    </div>
+    <div class="share">
+    	<p>
+    		<span>将试用分享给小伙伴奖励88元哦</span>
+    		<a href=""><img src="__PUBLIC__/maoke/images/pro-info/img_27.png" alt="新浪微博" /></a>
+    		<a href=""><img src="__PUBLIC__/maoke/images/pro-info/img_29.png" alt="QQ"/></a>
+    		<a href=""><img src="__PUBLIC__/maoke/images/pro-info/img_31.png" alt="豆瓣"/></a>
+    		<a href=""><img src="__PUBLIC__/maoke/images/pro-info/img_33.png" alt="QQ空间"/></a>
+    	</p>
+    </div>
+    <div class="flow">
+        <div>
+        	申请流程
+            <i class="iconfont icon-right"></i>
+        </div>
+        <ul>
+            <li>
+                <i class="iconfont icon-hart"></i>
+                <div>
+                    <b>1.申请流程</b> 选择喜爱的宝贝完成申请
+                </div>
+            </li>
+            <li>
+                <i class="iconfont icon-time"></i>
+                <div>
+                    <b>2.等待审核</b> 商家进行审核
+                </div>
+            </li>
+            <li>
+                <i class="iconfont icon-recharge"></i>
+                <div>
+                    <b>3.下单付款</b> 按照流程操作并提交订单号
+                </div>
+            </li>
+            <li>
+                <i class="iconfont icon-text"></i>
+                <div>
+                    <b>4.提交试用报告</b> 提交真实客观的试用报告
+                </div>
+            </li>
+            <li>
+                <i class="iconfont icon-monery"></i>
+                <div>
+                    <b>5.返还担保金</b>报告通过后返还担保金,提现
+                </div>
+            </li>
+             <div style="clear: both;"></div>
+        </ul>
+    </div>
+
+ 	<div class="recommend mt24" style="float: left;">
+ 		<h2>推荐试用</h2>
+ 		<ul class="recom-con">
+ 			<foreach name="tuijian" item="vo" key="k">
+ 			<li>
+ 				<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>">
+ 					<img src="../{$vo.img}" alt=""/>
+ 				</a>
+ 			</li>
+ 			</foreach>
+ 		</ul>
+ 	</div>
+ 	<div class="sq-detail mt24">
+ 		<div class="detail-nav">
+ 			<ul>
+ 				<li class="nav-li">申请规则</li>
+ 				<li>新手流程</li>
+ 				<!--<li>已申请会员</li>
+ 				<li>试用报告</li>-->
+ 				<div style="clear: both;"></div>
+ 			</ul>
+
+ 		</div>
+ 		<div class="for-nav">
+ 			<ul>
+ 				<li style="display: block;">
+ 					<div class="ruler-con">
+ 						<div class="mrg-10">
+ 							<p class="font-red">领吧网交流群 :</p>
+ 							<p>不明白如何申请 ? 入群交流 :  <a href="https://jq.qq.com/?_wv=1027&k=5zRF5QU" target="_blank" title="点击进群"><img src="__PUBLIC__/maoke/images/pro-info/qqqun.png" style="vertical-align: middle;"/></a></p>
+ 						</div>
+ 						<div class="mrg-10">
+ 							<p class="font-red">试用流程 :</p>
+ 							<ul class="lineh">
+ 								<li>1、申请试用后 , 获得试用资格 .</li>
+ 								<li>2、申请通过后 , 按照搜索流程提示 , 以98.00元去指定平台下单</li>
+ 								<li>3、下单完成后 , 回领吧网填写购买付款的订单号 .</li>
+ 								<li>4、等待收货 -> 确认收货 -> 给予宝贝评价 , 并填写试用报告 .</li>
+ 								<li>5、报告通过 -> 返还 试用完成 .</li>
+ 							</ul>
+ 						</div>
+ 						<div class="mrg-10">
+ 							<p class="font-red">注意事项 :</p>
+ 							<ul class="lineh">
+ 								<li>1、不能在旺旺上跟商家咨询 " 领吧网 " 、 " 试用 " 、  " 免费试用 " 等信息 .</li>
+ 								<li>2、禁止使用信用卡 、淘金币 、优惠券 、 红包 、天猫积分等 .</li>
+ 								<li>3、禁止通过淘宝客 、返利网 、一淘等返现返利网链接下单.</li>
+ 							</ul>
+ 						</div>
+ 						<div class="mrg-10">
+ 							<p class="font-red">温馨提示 :</p>
+ 							<ul class="lineh">
+ 								<li>1、用户获得试用资格后 ,请根据时间提示按时提交订单号和试用报告 .</li>
+ 								<li>2、若因为按时提交以上信息而被系统取消试用资格 , 用户可在 " 未通过试用 " 中选择恢复资格 .</li>
+ 								<li>3、若活动已无剩余资格 , 将无法恢复资格 , 由此造成的损失由买家承担 .</li>
+ 							</ul>
+ 						</div>
+ 						<div class="mrg-10">申请通过后 , 您在个人中心里查看具体搜索流程 查看新手入门 .</div>
+ 					</div>
+ 				</li>
+ 				<li>
+ 					<div class="main-timeline">
+						<div class="timeline">
+							<div class="timeline-content">
+								<span class="date">
+									<span class="month">1</span>
+								</span>
+								<p class="title">申请试用 , 获取资格 :</p>
+								<p class="description">会员在免费试用详情页点击"免费试用" , 初次试用请务必先了解商家的活动要求后 , 再确定提交免费试用获取资格 .</p>
+
+							</div>
+							<div class="sysm-img">
+								<img src="__PUBLIC__/maoke/images/pro-info/img_59.png"/>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="timeline">
+							<div class="timeline-content">
+								<span class="date">
+									<span class="month">2</span>
+								</span>
+								<p class="title">去指定平台 ( 淘宝/天猫 ) 获取试用品 : </p>
+								<p class="description">获取资格后 , 根据活动要求搜索找到宝贝 , 进入店铺浏览 、 简单咨询 , 然后获取试用品 .</p>
+
+							</div>
+							<div class="sysm-img">
+								<img src="__PUBLIC__/maoke/images/pro-info/img_62.png"/>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="timeline">
+							<div class="timeline-content">
+								<span class="date">
+									<span class="month">3</span>
+								</span>
+								<p class="title">24小时内在微信公众号( 领吧 ) 后台提交淘宝订单号 : </p>
+								<p class="description">成功下单后 , 在淘宝 " 已买到宝贝 " 列表中复制已付款淘宝订单号 . 复制到领吧公众号试用管理 - 待下单 - 填写淘宝订单号 , 提交 . 等待商家审核后进行发货 .</p>
+
+							</div>
+							<div class="sysm-img">
+								<img src="__PUBLIC__/maoke/images/pro-info/img_64.png"/>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="timeline">
+							<div class="timeline-content">
+								<span class="date">
+									<span class="month">4</span>
+								</span>
+								<p class="title">淘宝确认发货 , 客观评价 :</p>
+								<p class="description">用户在收到货后 , 在淘宝 " 已买到宝贝 " 对相应的宝贝订单确认收货后并给予客观评价 .</p>
+
+							</div>
+							<div class="sysm-img">
+								<img src="__PUBLIC__/maoke/images/pro-info/img_66.png"/>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="timeline">
+							<div class="timeline-content">
+								<span class="date">
+									<span class="month">5</span>
+								</span>
+								<p class="title">商家返还下单金额 :</p>
+								<p class="description">用户提交试用报告后 , 商家会对其审核 , 审核通过后立即返还下单金额  . 用户可在  " 我的帐号 - 账户明细 " , 查看对应的商品返款情况 .</p>
+
+							</div>
+							<div class="sysm-img">
+								<img src="__PUBLIC__/maoke/images/pro-info/img_68.png"/>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+
+ 				</li>
+ 				<!--<li>
+ 					<div id="">
+ 						32123123123123123
+ 					</div>
+ 				</li>
+ 				<li>
+ 					<div id="">
+ 						32131321312312412412
+ 					</div>
+ 				</li>-->
+ 			</ul>
+ 		</div>
+ 	</div>
+ 	<div class="clear"></div>
+</div>
+<!--                        商品详情  end                      -->
+
+<style type="text/css">
+	.layui-layer{ box-shadow: none; top:275px; width: 627px\9 !important; height: 401px\9 !important;}
+	.layui-layer img{ width: 100%; height: 100%;}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$(".detail-nav>ul>li").click(function(){
+			$(this).addClass('nav-li').siblings('li').removeClass('nav-li');
+			$(".for-nav>ul>li").css('display',"none").eq($(this).index()).css('display',"block");
+		})
+	})
+
+</script>
+<script src="__PUBLIC__/maoke/js/dist/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/maoke/js/swiper-3.4.2.jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		var swiper = new Swiper('.swiper-container', {
+	        pagination: '.swiper-pagination',
+	        paginationClickable: true,
+	        spaceBetween: 30,
+	        centeredSlides: true,
+	        autoplay: 3000,
+	        autoplayDisableOnInteraction: false
+	    });
+	})
+	$('#mfsy').on('click', function(){
+		layer.open({
+		  type: 1,
+		  title: false,
+		  closeBtn: 0,
+		  area: ['626px', '401px'],
+		  skin: 'layui-layer-nobg', //没有背景色
+		  shadeClose: true,
+		  content: '<div style="positon:relative;"><img src="__PUBLIC__/maoke/images/pro-info/img_01_03.png"><span class="close-t" style="width:25px; height:25px; background: transparent; position:absolute; right:8px; top:43px; display:block;cursor: pointer;" onclick="closeT()"></span> <span class="close-t" style="display:block;width:68px;height:30px;background: transparent;position:absolute; left:274px; bottom:51px; cursor: pointer; " onclick="closeT()"></span></div>'
+		});
+	});
+
+	function closeT(){
+		$("body").on('click','.close-t',function(){
+//			alert(111);
+			$(".layui-layer").css('display','none');
+			$(".layui-layer-shade").css('display','none');
+
+		})
+	}
+
+</script>
+<include file="Layout:foot" />

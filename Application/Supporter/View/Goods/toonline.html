@@ -1,0 +1,89 @@
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<div class='border'>
+    <div class="clearfix">
+        <i class="iconfont icon-lipin fl f-red" style="font-size:40px;padding:0 10px;line-height:45px;"></i>
+        <span class="fl">
+					<h3 class="f-18">试用商品</h3>
+					<p class="f-12">商家可时时查看商品详情,也可对其进行操作.</p>
+				</span>
+        <a href="{:U('User/pro')}" class="fr" target="main"><span>发布试用</span></a>
+    </div>
+    <div class="clear"></div>
+    <div class="trylist-tab">
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+            	<li class="layui-this">
+                    <a href="{:U('Goods/toonline')}"><span>待上线 </span></a>
+                </li>
+                <li style="position: relative;">
+                    <a href="{:U('Goods/tocheck')}"><span >待审核 <span style="position: absolute; right: 10px; top:0px; background: #f25f55; display: inline-block; width: 20px; height: 20px; border-radius: 50%; color: #fff; line-height: 20px; font-size: 12px;">{$ds_count}</span> </span></a>
+                </li>
+                <li class="ing">
+                    <a href="{:U('Goods/alreadyshelf')}"><span>已上架 </span></a>
+                </li>
+                <li>
+                    <a href="{:U('Goods/notpass')}"><span>未通过 </span></a>
+                </li>
+                <li>
+                    <a href="{:U('Goods/hasfinish')}"><span>已完结 </span></a>
+                </li>
+                <li>
+                    <a href="{:U('Goods/complete')}"><span>已结束 </span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-tab-content">
+            <div class=""  style="width: 100%; display: block;">
+                <table class="layui-table for-li">
+                	<tbody>
+                		<tr>
+                			<th scope="col" style="width:10%">试用商品类型</th>
+                			<th scope="col" style="width:10%">商品主图</th>
+                			<th scope="col" style="width:10%">赠品主图</th>
+                			<th scope="col" style="width:10%">试用标题</th>
+                			<th scope="col" style="width:10%;">店铺名/旺旺</th>
+                			<th scope="col" style="width:15%;">下单金额/赠品价值/份额</th>
+                			<th scope="col" style="width:15%">结束时间</th>
+                			<th scope="col" style="width:15%">原商品链接</th>
+                			<th scope="col" style="width:10%">状态</th>
+                		</tr>
+                		<volist name="row1" id="v">
+                			<tr>
+                				<th scope="col">
+                					<?php if($v['model']==1){echo "赠品";}elseif($v['model']==2){echo "赠品+红包";}elseif($v['model']==3){echo '红包';}else{echo "退款单";}?>
+                				</th>
+                				<td scope="col"><img style="width: 80px;height: 80px" src="http://{$_SERVER['HTTP_HOST']}/{$v['img2']}" alt=""></td>
+                				<?php if(!empty($v['img'])){?>
+                				<td scope="col"><img style="width: 80px;height: 80px" src="http://<?=$_SERVER['HTTP_HOST']?>/<?=$v['img']?>" alt=""></td>
+                				<?php }else{?>
+                				<td scope="col"><img style="width: auto;height: 80px" src="__PUBLIC__/Images/red.png" alt=""></td>
+                				<?php }?>
+                	
+                				<td scope="col" style="word-break: break-all;">{$v['goods_name']}</td>
+                				<td scope="col">店铺名：{$v['shopname']}<br>旺旺：{$v['note']}</td>
+                				<td scope="col">
+                					<p>￥{$v['real_price']}/￥
+                						<?php echo bcadd($v['price'],$v['red_price'],2);?>/{$v['kucun']+$v['sell_number']}份</p>
+                					<!--<p><a href="{:U('payBail')}&id={$v['id']}" target='main' style="display: inline-block; padding: 2px 4px; border: 1px solid #18A195; color: #18A195; border-radius: 15px;" onclick="return checkVip({$v['vip_rank']},{$v['id']})">缴服务费</a></p>-->
+                				</td>
+                				<td scope="col">{$v.etime}</td>
+                				<td scope="col">
+                					<a href="{$v['url']}" target="_blank"><span style="display:inline-block;word-break: break-all;
+                	">{$v['url']}</span></a>
+                				</td>
+                				<td scope="col">
+                					<a style="color: #FFFFFF" href="{:U('payBail')}&id={$v['id']}" onclick="return checkVip({$v['vip_rank']},{$v['id']})"><button>上线活动</button></a>
+                					<a style="color: #FFFFFF" href="{:U('upPro')}&id={$v['id']}"><button>修改活动</button></a>
+                					<a style="color: #FFFFFF" href="{:U('delPro')}&id={$v['id']}"><button style="border-color: red; color: red; background: transparent;">删除活动</button></a>
+                				</td>
+                			</tr>
+                		</volist>
+                	
+                	</tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Layout:foot" />

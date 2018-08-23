@@ -1,0 +1,190 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+    <div class="left" style="width: 1040px;overflow: hidden;background-color: #ffffff;margin: 0 0 8px 10px;">
+        <img src="__PUBLIC__/maoke/images/merchant/release_header_show.png" alt="">
+    </div>
+                <!-- 发布试用7 -->
+                <div id="my_main" class="store_content left" style="min-height: 1067px;">
+                        <h1 class="title">发布试用</h1>
+                        <!--进度条-->
+                        <div class="progress_bar">
+                            <img src="__PUBLIC__/maoke/images/merchant/sj_fbsy_bg_jdt_07_default.png" alt="">
+                        </div>
+                        <!--4.设置试用份数-->
+                        <div class="confirm_payment">
+                            <h2 class="title">7.订单确认支付</h2>
+                            <div class="payment_content">
+                                <h3>订单信息</h3>
+                                <table>
+                                    <tbody><tr>
+                                        <th>费用分类</th>
+                                        <th>费用明细</th>
+                                        <th>合计</th>
+                                    </tr>
+                                    <tr>
+                                        <td>商品押金</td>
+                                        <td>
+                                            <p><b>商品押金=商品单价*（免费试用商品数+兑换试用数)</b></p>
+                                            <p>试用完成后，平台直接将押金返给试客</p>
+                                            <!--                                <p><b>商品单价=</b><span>-->
+                                            <!--元</span><b>免费试用商品数=</b><span>-->
+                                            <!--单</span><b>兑换试用数=</b><span>-->
+                                            <!--单</span></p>-->
+                                            <p><b>商品单价：</b><span>{$price.unit_price|number_format=2} 元</span><b>免费试用商品数：</b><span>{$price.num|default='0'}单</span><!--b>兑换试用数：</b><span>4单</span--></p>
+                                        </td>
+                                        <td><span>{$price.deposit|number_format=2}元</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">试用担保金</td>
+                                        <td>
+                                            <p><b>试用担保金=商品押金*</b><span>5%</span></p>
+                                            <p>试用完成后，平台会自动将试用担保金返回到您的账户可用押金中</p>
+                                        </td>
+                                        <td>
+                                            <span>{$price.security|number_format=2}元</span></td>
+                                    </tr>
+                                   
+                                </tbody>
+                               
+                                    <tbody>
+                                    <!--**************快速返款************-->
+                                    <tr>
+                                        <td rowspan="2">基础服务费<br><span>(基础服务费概不退还)</span></td>
+                                        <td>
+                                            <p><b>快速返款</b></p>
+                                            <p>试客完成试用后，平台将直接使用商家押金操作返款给试客</p>
+                                            <p>（商家无需耗费时间人力处理退款，省时省力）</p>
+                                            <p>每单收取商品押金的<span>2%</span></p>
+                                        </td>
+                                        <td><span>{$price.one|number_format=2}元</span></td>
+                                    </tr>
+                                    <!--**************系统自动抽奖************-->
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>系统自动抽奖</b></p>
+                                            <p>系统将自动为商家抽选出更适合商家商品品类的试客</p>
+                                            <p>节约商家运营成本和时间，同时有利于试客中奖分布更广泛</p>
+                                            <p>免费试用商品，每单收取<span>2元</span></p>
+                                        </td>
+                                        <td><span>{$price.two|number_format=2}元</span></td>
+                                    </tr>
+                                    <!--增值服务-->
+                                    <tr>
+                                        <td rowspan="9">增值服务费</td>
+                                    
+                                    </tr>
+                                   
+                                    <!--**************默认五星好评************-->
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>默认五星好评</b><span>免费</span></p>
+                                        </td>
+                                        <td><span>0元</span></td>
+                                    </tr>
+                                    <!--**************普通文字好评************-->
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>普通文字好评</b><span>免费</span></p>
+                                        </td>
+                                        <td><span>0元</span></td>
+                                    </tr>
+                                                    
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>防IP重复、防小号</b><span>免费</span></p>
+                                        </td>
+                                        <td><span>0元</span></td>
+                                    </tr>
+                                    <!--**************试用红包加赏************-->
+                                    <notempty name="price.reward_price">
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>试用红包加赏</b></p>
+                                            <p>
+                                                红包加赏单数：<span>{$price.num|default='0'}单</span>，每单收取 <span>{$price.reward}元</span></p>
+                                        </td>
+                                        <td><span>{$price.reward_price|number_format=2}元</span></td>
+                                    </tr>
+                                    </notempty>
+                                    <!--**************晒图好评************-->
+                                    <notempty name="price.good_price">
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>晒图好评</b></p>
+                                            <p>设置晒图好评单数：<span>{$price.good}单</span>，每单收取<span>2元</span></p>
+                                        </td>
+                                        <td><span>{$price.good_price|number_format=2}元</span></td>
+                                    </tr>
+                                    </notempty>
+                                    <!--**************设置好评关键词************-->
+                                    <notempty name="price.good_num_price">                                    
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>设置好评关键词</b></p>
+                                            <p>设置好评关键词单数：<span>{$price.good_num}单</span>，每单收取<span>1元</span></p>
+                                        </td>
+                                        <td><span>{$price.good_num_price|number_format=2}元</span></td>
+                                    </tr>
+                                    </notempty>
+                                    <!--**************限制重复进店************-->
+                                    <notempty name="price.safe_day">
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>禁止老用户中奖</b><if condition='($price.safe_day eq 45)'><span>45天 （此项服务费不退）</span><else /><b> {$price.safe_day}天</b> <span>免费</span></if></p>
+                                        </td>
+                                        <td><span><empty name="price.safe_day">0<else />{$price.safe|number_format=2}</empty>元</span></td>
+                                    </tr>
+                                    </notempty> 
+                                    <!--**************精准投放************-->
+                                    <notempty name="price.people">
+	                                 <tr class="other">
+	                                  <td><p><b>精准投放</b><span>20元（此项服务费不退）</span></p></td>
+	                                  <td><span>{$price.people|number_format=2}元</span></td>
+	                                 </tr>
+                                    </notempty>      
+                                    </tbody>
+                                </table>
+                                <p style="margin-bottom:40px;" class="total">押金合计：<span>{$money|number_format=2}元</span></p>
+            
+                                <h3>进行支付</h3>
+                                    <p class="deposit"><b>¥{$money|number_format=2}</b>使用余额支付&nbsp; &nbsp;
+                                    可用余额：<span>¥{$info.fund|number_format=2}</span></p>
+                                    <if condition='($msg eq 0)'><p class="recharge" id="error1">可用余额不足，请先 <a target="_blank" href="{:U('Merchant/finance')}">充值 </a></if>
+                                    </p>
+                            </div>
+                            <p><span class="error" id="pwderror"></span></p>
+                            <div class="nextStep_btn">
+                                <input type="hidden" name="msg" id="msg" value="{$msg}" />
+                                <input onclick="location.href='{:U(\'Actcenter/publish6\',array(\'id\' => $id))}'" type="button" value="上一步">
+                                <input id="confirm_payment" type="button" value="确认付款" onclick="next_step();" />
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+		<!-- page-wrapper end -->
+</div>
+		<!-- wrapper -->
+</div>
+<script type="text/javascript">
+ function next_step(){
+ 	var msg = $('#msg').val();//判断是否需要充值
+ 	
+ 	if(0 == msg){
+ 		layer.alert('余额不足，请充值');
+ 	} else {
+ 		
+        layer.confirm('是否确认付款？', {
+			  btn: ['确定','取消'] //按钮
+			}, function(){
+			  window.location.href="{:U('Actcenter/payment', array('id' => $id))}";
+			}, function(){
+			  layer.closeAll();
+			});
+ 		
+ 	}
+ }
+</script>
+<include file="Layout:foot" />

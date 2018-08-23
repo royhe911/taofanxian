@@ -1,0 +1,46 @@
+<extend name="public/modal" />
+<block name="nav">
+</block>
+<block name="menu">
+	<div class="Hui-article" style="top: -10px;">
+		<div>
+
+			<div class="dataTables_wrapper">
+				<div class="dataTables_length" id="DataTables_Table_0_length">
+				</div>
+				<table class="table table-border table-bordered table-bg table-hover table-sort">
+					<thead>
+						<tr class="text-c">
+							<!--主单显示全部，商家只能看到旺旺号，订单号，完成时间-->
+							<th>旺旺号</th>
+							<th>订单号</th>
+							<if condition="$_SESSION['user']['role'] != 5">
+							<th>刷单员/QQ</th>
+							</if>
+							<th>完成时间</th>
+						</tr>
+					</thead>
+					<tbody>
+					 <volist name="data" id="vo">
+						<tr class="text-c va-m">
+							<td class="text-l order-wang">{$vo.wangwang|default="暂无"}</td>
+							<td class="text-l order-num">{$vo.tb_item|default="暂无"}</td>
+							<if condition="$_SESSION['user']['role'] != 5">
+							<td class="text-l order-num">{$vo.name}/{$vo.qq}</td>
+							</if>
+
+							<td class="text-l"><notempty name="vo.edittime">{$vo.edittime|date="j/n H:i",###}</notempty></td>
+						</tr>
+					 </volist>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+
+</script>
+</block>

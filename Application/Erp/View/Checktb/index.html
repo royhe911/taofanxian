@@ -1,0 +1,452 @@
+<extend name="public/base" />
+<block name="nav">
+    <span class="c-666">帐号体检</span><span class="c-999 en">&gt;</span><span class="c-666">帐号体检</span>
+</block>
+<block name="menu">
+    <div class="Hui-article checktb">
+        <div style=" margin-top: 20px;">
+            <div class="form-horizonta layui-form clearf" method="POST" >
+                <div class="col-sm-12 col-lg-10 col-md-offset-0 col-lg-offset-1">
+                    <div id="InputsWrapper_url" style="text-align: center;">
+                        <div class="form-group">
+                            <label for="item_url">
+                                买家旺旺账号
+                                <span style="color: red;font-size: 12px;">(有效查询时间为1小时) </span>
+                            </label>
+                            <input type="text" id="J_nick" class="form-control" name="item_url" placeholder="请输入需要查询的买家旺旺账号" required="required">
+                            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="queryData()">立即查询 </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-10 col-md-offset-0 col-lg-offset-1" style="text-align: center;">
+                    <img src="__PUBLIC__/ERP/static/h-ui.admin/images/yanhao.png" width="150" height="150">
+                    <p style="color: red;">（鼠标右键可复制图片,将此二维码发给买家，用淘宝扫一扫）</p>
+                </div>
+                <div id="J_resultReal">
+                    <div class="col-sm-10 col-lg-10 col-md-offset-0 col-lg-offset-1">
+                        <h4 style="margin-left: 0px">查询结果如下:</h4>
+                        <div class="card" id="J_recommad" style="display: none;border:2px solid #F60;">
+                            <div class="panel-body">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <h4 style="margin-top: 0;margin-bottom: 0;">智能分析此账号为：<span class="label label-badge label-danger" id="J_notSafe">不安全</span><span class="label label-badge label-success" id="J_safe">安全</span>
+                                    </h4>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span id="J_notsafeDesc">系统分析原因：</span><span id="J_notSafeReason" style="color: red"></span>
+                                    <span id="J_fitCategoryDesc">适合类目为：</span>
+                                    <span id="J_fitCategory" style="color: #38b03f"></span>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span>月均消费额度：
+                                        <span id="J_averageFee"></span>
+                                    </span>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span id="J_liar">举报详情：</span><span id="J_liarDesc"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-10 col-md-offset-0 col-lg-offset-1">
+                        <div class="card">
+                            <div class="panel-body clearf">
+                                <h4 class="">基本信息</h4>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1">
+                                    <img class="img-circle" id="J_headPic" style="max-width:70px;" src="https://gw.alicdn.com/tps/i3/TB1yeWeIFXXXXX5XFXXuAZJYXXX-210-210.png"
+                                        width="70px" alt="">
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-1">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <td>昵称：<span id="J_sellerNick"></span> </td>
+                                                <td>性别：<span id="J_sex"></span></td>
+                                                <td>年龄：<span id="J_sellerAge"></span></td>
+                                                <td>信用： <a target="_blank"> <img id="J_honorPic1" src="https://img.alicdn.com/newrank/b_red_3.gif" align="absmiddle" style="height: 16px;" onclick="imgdis(this)"></a></td>
+                                                <td id="J_zfbno">支付宝： <span style="color: red">未实名认证</span></td>
+                                                <td id="J_zbfdesc" style="display: none;">支付宝：
+                                                    <span>
+                                                        <a target="_blank"><img id="J_zfburl" onclick="imgdis(this)" src="//gtd.alicdn.com/zfb_person_small.gif?1235" align="absmiddle" style="width: 46px; height: 27px;">
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>花呗： <span id="J_huabei"></span></td>
+                                                <td>登记所在地：<span id="J_registerAddr"></span></td>
+                                                <td>ip： <span id="J_registerIp"></span></td>
+                                                <td>ip今日次数： <span id="J_registerIpTimes"></span></td>
+                                            </tr>
+                                            <tr id="J_color" style="display: none;color: #38b03f">
+                                                <th colspan="8"><span id="J_desc"></span></th>
+                                            </tr>
+                                            <tr id="J_color1" style="display: none">
+                                                <th colspan="1"><a id="J_inA" onclick="inOutOfLine(this,20)" style="color: red">进行中的违规【<span id="J_inNumId" style="color: red">0</span>】</a>
+                                                </th>
+                                                <th colspan="1">
+                                                    <a id="J_outA" onclick="outOutOfLine(this,20)" style="color: red">已完结的违规【 <span id="J_outNumId" style="color: red">0</span>】</a>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <div class="pull-left small update" data-clipboard-action="copy" data-clipboard-target="#tkl">
+                                    <p style="cursor:pointer">
+                                        <i class="icon icon-refresh"></i> 更新时间： <span id="J_time"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-10 col-md-offset-0 col-lg-offset-1">
+                        <div class="card">
+                            <div class="panel-body clearf">
+                                <h4 class="">最近购买</h4>
+                                <div id="J_buyedGoods" style="min-height: 36px;max-height: 550px; overflow-x: hidden;overflow-y: scroll;">
+
+                                    <div class="datatable" id="buyedGoodsTable"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5 col-md-offset-0 col-lg-offset-1">
+                        <div class="card">
+                            <div class="panel-body">
+                                <h4 class="">积分等级</h4>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td>天猫积分：<span id="J_tmallPoint"></span> </td>
+                                            <td>会员等级： <span id="J_vipLevl"></span> </td>
+                                            <td>信誉评级：<span id="J_reputationDesc"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5 col-md-offset-0 col-lg-offset+1">
+                        <div class="card">
+                            <div class="panel-body">
+                                <h4 class="">喜好数据</h4>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td>收藏店铺：
+                                                <span id="J_collectGoods"></span>
+                                            </td>
+                                            <td>收藏宝贝：
+                                                <span id="J_collectShop"></span>
+                                            </td>
+                                            <td>足迹：
+                                                <span id="J_everGo"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-xs-block"></div>
+                    <div class="col-md-6 col-lg-5 col-md-offset-0 col-lg-offset-1">
+                        <div class="card">
+                            <div class="panel-body">
+                                <h4 class="">购物数据
+                                    <p class="pull-right">
+                                        <a id="J_usertag" onclick="demoTagList(this,40)" style="cursor:pointer;color: #145ccd;">
+                                            <i class="icon Hui-iconfont Hui-iconfont-tags"></i> 用户标签</a>
+                                    </p>
+                                </h4>
+
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td>待付款：
+                                                <span id="J_waitPay"></span>
+                                            </td>
+                                            <td>待发货：
+                                                <span id="J_waitConsign"></span>
+                                            </td>
+                                            <td>待收货：
+                                                <span id="J_waitSign"></span>
+                                            </td>
+                                            <td>待评价：
+                                                <span id="J_waitRate"></span>
+                                            </td>
+                                            <td>退款中：
+                                                <span id="J_inRefund"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="pull-left" style="margin-top: 17px;">
+                                    <!-- <a id="J_logbuy" onclick="demoBuyList(this,20)" style="cursor:pointer">
+                                        <i class="icon Hui-iconfont Hui-iconfont-liwu"></i> 最近购买</a>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> -->
+                                    <a id="J_logcart" onclick="demoCartList(this,20)" style="cursor:pointer">
+                                        <i class="icon Hui-iconfont Hui-iconfont-cart2-selected"></i> 购物车</a>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    <span id="J_refundRate" class="text-warning">售中退款率:%</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-5 ">
+                        <div class="card">
+                            <div class="panel-body">
+                                <h4 class="">淘龄&amp;挥霍明细(2018年数据)
+                                    <span style="display: none;" id="J_failed" class="text-red">(无数据)</span>
+                                </h4>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td>淘龄：
+                                                <span id="J_taoAge"></span>
+                                            </td>
+                                            <td>开号：
+                                                <span id="J_startDate"></span>
+                                            </td>
+                                            <td>挥霍：￥
+                                                <span id="J_amount"></span>元</td>
+                                            <td>笔数：
+                                                <span id="J_orderNum"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>散财天数：
+                                                <span id="J_countDays"></span>
+                                            </td>
+                                            <td>点赞总数：
+                                                <span id="J_countLikes"></span>
+                                            </td>
+                                            <td>占领城市：
+                                                <span id="J_countCity"></span>
+                                            </td>
+                                            <td>客单价：
+                                                <span id="J_averagePay"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-xs-block"></div>
+                    <div class="col-md-6 col-lg-5 col-md-offset-0 col-lg-offset-1">
+                        <div class="card" >
+                            <div class="panel-body" >
+                                <h4 class="">信誉明细</h4>
+                                <div class="nr">
+                                    <h4>
+                                        买家累积信用：
+                                        <a><span id="J_honorPoint"></span></a>
+                                        <a target="_blank"><img id="J_honorPic" align="absmiddle"></a>
+                                        <p class="pull-right">好评率：<strong class="text-red"><span
+                                                id="J_goodRate"></span></strong></p></h4>
+            
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>&nbsp;</th>
+                                            <th>最近1周</th>
+                                            <th>最近1个月</th>
+                                            <th>最近6个月</th>
+                                            <th>6个月前</th>
+                                            <th>总计</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><span>好评</span></td>
+                                            <td><a><span id="J_goodWeek"></span></a></td>
+                                            <td><a><span id="J_goodOneMonth"></span></a></td>
+                                            <td><a><span id="J_goodSixMonth"></span></a></td>
+                                            <td><a><span id="J_goodBeforSixMonth"></span></a></td>
+                                            <td><span id="J_goodTotal"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>中评</span></td>
+                                            <td><a><span id="J_normalWeek"></span></a></td>
+                                            <td><a><span id="J_normalOneMonth"></span></a></td>
+                                            <td><a><span id="J_normalSixMonth"></span></a></td>
+                                            <td><a><span id="J_normalBeforSixMonth"></span></a></td>
+                                            <td><span id="J_normalTotal"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>差评</span></td>
+                                            <td><a><span id="J_badWeek"></span></a></td>
+                                            <td><a><span id="J_badOneMonth"></span></a></td>
+                                            <td><a><span id="J_badSixMonth"></span></a></td>
+                                            <td><a><span id="J_badBeforSixMonth"></span></a></td>
+                                            <td><span id="J_badTotal"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>总计</td>
+                                            <td><a><span id="J_totalWeek"></span></a></td>
+                                            <td><a><span id="J_totalOneMonth"></span></a></td>
+                                            <td><a><span id="J_totalSixMonth"></span></a></td>
+                                            <td><a><span id="J_totalBeforSixMonth"></span></a></td>
+                                            <td><span id="J_totalTotal"></span></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <p class="pull-left" style="margin-top: 20px;">
+                                        <a id="J_comment2OtherB" onclick="comment2OhterList(this,20)"
+                                            style="cursor:pointer"><i class="icon Hui-iconfont Hui-iconfont-comment"></i> 给他人评价<span style="color: red" id="J_deleteNum"></span></a>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <a id="J_other2youB" onclick="other2youList(this,20)" style="cursor:pointer"><i class="icon Hui-iconfont Hui-iconfont-banzhu"></i> 来自卖家的评价</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-md-6 col-lg-5">
+                        <div class="card">
+                            <div class="panel-body">
+                                <h4 class="">淘气值：<span id="J_score"></span></h4>
+                                <div>
+                                    <table class="table table-borderless table-condensed">
+                                        <tbody>
+                                        <tr>
+                                            <strong><span id="J_explainTips"></span></strong>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: #f79b36;"><strong>购物分：<span id="J_tradeScore"></span></strong>
+                                            </td>
+                                            <td style="color: #48ccff;"><strong>奖励分：<span id="J_bonusScore"></span></strong>
+                                            </td>
+                                            <td style="color: #ffca00;"><strong>基础分：<span
+                                                    id="J_basicScoreLast"></span></strong></td>
+                                        </tr>
+                                        <tr class="small">
+                                            <td>本期：￥<span id="J_buyMoneyConvertCur"></span></td>
+                                            <td>购物奖励分：<span id="J_tradeBonusScore"></span></td>
+                                        </tr>
+                                        <tr class="small">
+                                            <td>上期：￥<span id="J_buyMoneyConvertLast"></span></td>
+                                            <td>互动奖励分：<span id="J_interactBonusScoreLast"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>亲情奖励分: <span id="J_qqhBonusScore"></span></td>
+                                        </tr>
+                                    </table>
+            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-xs-block"></div>
+
+                </div>
+            </form>
+        </div>
+        
+        <div id="J_cartGoods"
+            style="display: none;position:fixed;overflow:auto; position: fixed;width: 75%; height: 400px; z-index: 9999; border: 2px solid grey;background-color:#fff ">
+                <div class="datatable" id="cartGoodsTable"></div>
+        </div>
+
+        <div id="J_refundGoods"
+            style="display: none;position:fixed;overflow:auto; position: fixed;width: 75%; height: 400px; z-index: 9999; border: 2px solid grey;background-color:#fff ">
+                <div class="datatable" id="refundGoodsTable"></div>
+        </div>
+
+        <div id="J_comment2Other"
+            style="display: none;position:fixed;overflow:auto; position: fixed;width: 75%; height: 400px; z-index: 9999; border: 2px solid grey;background-color:#fff ">
+                <div class="datatable" id="comment2Other"></div>
+        </div>
+        <div id="J_other2You"
+            style="display: none;position:fixed;overflow:auto; position: fixed;width: 75%; height: 400px; z-index: 9999; border: 2px solid grey;background-color:#fff ">
+                <div class="datatable" id="other2you"></div>
+        </div>
+
+        <div id="J_userTag"
+            style="display: none;position:fixed;overflow:auto; position: fixed;width: 200px; height: 300px; z-index: 9999; border: 2px solid grey;background-color:#fff ">
+            <table class="layui-table" id="J_tagDatas">
+                <colgroup>
+                    <col width="100">
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th style="font-size:12px">标签</th>
+                </tr>
+                </thead>
+                <tbody id="J_tagTableData">
+                <tr id="J_tag1">
+                    <td style="font-size:12px" id="J_tag"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="J_inOutOfLine"
+            style="display: none;position:fixed;overflow:auto; position: fixed;width: 75%; height: 250px; z-index: 9999; border: 2px solid grey;background-color:#fff ">
+            <table class="layui-table" id="J_inOutOfLineData">
+                <colgroup>
+                    <col width="100">
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th style="font-size:12px">序号</th>
+                    <th style="font-size:12px">违规类型</th>
+                    <th style="font-size:12px">违规时间</th>
+                    <th style="font-size:12px">违规具体信息</th>
+                </tr>
+                </thead>
+                <tbody id="J_inOutOfLineTableData">
+                <tr id="J_inDetailData">
+                    <td style="font-size:12px" id="J_inNum"></td>
+                    <td style="font-size:12px" id="J_inTitle"></td>
+                    <td style="font-size:12px" id="J_inTips"></td>
+                    <td style="font-size:12px" id="J_inDesc"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="J_outOutOfLine"
+            style="display: none;position:fixed;overflow:auto; position: fixed;width: 75%; height: 250px; z-index: 9999; border: 2px solid grey;background-color:#fff ">
+            <table class="layui-table" id="J_outOutOfLineData">
+                <colgroup>
+                    <col width="100">
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th style="font-size:12px">序号</th>
+                    <th style="font-size:12px">违规类型</th>
+                    <th style="font-size:12px">违规时间</th>
+                    <th style="font-size:12px">违规具体信息</th>
+                </tr>
+                </thead>
+                <tbody id="J_outOutOfLineTableData">
+                <tr id="J_outDetailData">
+                    <td style="font-size:12px" id="J_outNum"></td>
+                    <td style="font-size:12px" id="J_outTitle"></td>
+                    <td style="font-size:12px" id="J_outTips"></td>
+                    <td style="font-size:12px" id="J_outDesc"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="mask" class="mask"></div>
+    </div>
+</block>
+<block name="js">
+<script src="__PUBLIC__/ERP/lib/custom/zui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/ERP/lib/custom/datatable.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var post_url = "{:U('Checktb/checkuser')}";
+</script>
+<script src="__PUBLIC__/ERP/lib/custom/checktb.js" type="text/javascript" charset="utf-8"></script>
+
+</block>

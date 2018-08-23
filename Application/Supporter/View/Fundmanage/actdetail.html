@@ -1,0 +1,61 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+
+					<!--活动明细-->
+					<div id="my_main" class="activity_pannel left" style="min-height: 1067px;">
+                        <h1 class="title">活动明细</h1>
+                        <!-- 筛选条件 -->
+                        <ul class="seachform clearfix" style="float:none;margin-bottom:0;">
+                            <li>
+                                <span>活动状态：</span>
+                                <select name="act_state" id="act_state">
+                                    <option value="0" selected="selected">全部</option>
+                                    <option value="3">进行中</option>
+                                    <option value="4">已下线</option>
+                                </select>
+                                <input id="act_id" type="text" value="" name="act_id" placeholder="请输入活动编号">
+                                <input id="act_name" type="text" value="" name="act_name" placeholder="请输入活动名称">
+                                <input type="button" id="search" value="查询">
+                                <!-- <input type="button" id="show_export_block" value="导出报表"> -->
+                            </li>
+                        </ul>
+                        <p style="text-align: right;font-size: 14px;">共查询出5个活动</p>
+                        <!-- 明细列表 循环-->
+                        <div class="item">
+                            <div class="activity_list_title clearfix">
+                                <p class="state iconfont icon-yixiaxian state_over left">已结束</p>
+                                <p class="act left">活动编号：<b class="act_id">4501</b></p>
+                                <p class="activity_productName left">oppor9手机壳 r9plus保护套</p>
+                                <p class="goDetail right" style="cursor: pointer;" onclick="show_detail(4501)">查看详情&gt;&gt;</p>
+                            </div>
+                            <div class="activity_list_info clearfix">
+                                <div class="brief_info left">
+                                    <div class="brief_info_top">
+                                        <span><em>总单数：</em><b class="total_order">50单</b></span>
+                                        <span><em>未开奖：</em><b class="not_open_order">0单</b></span>
+                                        <span><em>已开奖：</em><b class="has_open_order">50单</b></span>
+                                        <span><em class="open_order_detail">（进行中<b>0</b>单，已完成<b>48</b>单，已取消<b>2</b>单）</em></span>
+                                    </div>
+                                    <div class="brief_info_bottom">
+                                        <span><em>试用已返款：</em><b class="has_return_money">20.10元</b></span>
+                                        <span><em class="return_money_detail">（未开出试用返款：<b>0.00</b>元，已取消试用返款：<b>19.80</b>元，已完成试用差价返款：<b>0.30</b>元）</em></span>
+                                        <p class="bzj"> <em class="bzj_over">保证金已返</em> </p>
+                                    </div>
+                                </div>
+                                <div class="total_info right">
+                                    <p><em>试用单价：</em><b class="trial_unit_price">9.90元</b></p>
+                                    <p><em>商品押金：</em><b class="deposit_price">495.00元</b></p>
+                                    <p><em>保证金：</em><b class="security_price">24.75元</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<!-- my_main end -->
+				</div>
+			</section>
+		<!-- page-wrapper end -->
+		</div>
+		<!-- wrapper -->
+	</div>
+	<include file="Layout:foot" />

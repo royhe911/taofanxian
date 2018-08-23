@@ -1,0 +1,116 @@
+
+.greyframe {
+    width: 960px;
+    height: 750px;
+    border: 9px solid #f0f0f0;
+    margin: 25px auto 20px auto;
+}
+.greyframe h1 {
+    margin: 30px 0 0 57px;
+    font-size: 20px;
+    font-family: Microsoft YaHei;
+    color: #3c3d45;
+}
+.ash {
+    width: 827px;
+    height: 2px;
+    background: #f1eeeb;
+    margin: 10px 0 0 57px;
+}
+.ashone {
+    width: 92px;
+    height: 2px;
+    background: #E20177;
+}
+.phonenn {
+    margin: 40px 0 0 150px;
+    line-height: 35px;
+}
+.phone {
+    font-size: 13px;
+    color: #666666;
+}
+.textfield {
+    width: 220px;
+    height: 36px;
+    padding-left: 3px;
+    border: 1px solid #dfdfdf;
+}
+.Validform_checktip {
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    color: #999;
+    font-size: 12px;
+}
+.bination {
+    color: #999999;
+    margin: 5px 0 0 202px;
+    text-align: left;
+}
+.phoo {
+    margin: 20px 0 0 111px;
+}
+.phome {
+    margin: 20px 0 0 168px;
+}
+.submit {
+    width: 289px;
+    height: 37px;
+    background: #E20177;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+    line-height: 37px;
+    margin: 0 auto 10px;
+    cursor: pointer;
+}
+.mina_ti {
+    color: #999999;
+    font-size: 12px;
+    line-height: 25px;
+    margin-left: 78px;
+}
+.ckb {
+    margin: 14px 0 0 202px;
+    color: #666666;
+}
+.submit-btn {
+    margin: 30px 0 0 202px;
+}
+.submit-btn .btn {
+    vertical-align: middle;
+    display: inline-block;
+    width: 112px;
+    height: 34px;
+    background: #E20177;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+    line-height: 33px;
+    cursor: pointer;
+    border:0;
+}
+.submit-btn p {
+    display: inline-block;
+    vertical-align: middle;
+    color: #777;
+    font-size: 13px;
+    height: 30px;
+    margin-left: 40px;
+}
+.registe {
+    display: inline-block;
+    width: 60px;
+    height: 25px;
+    border: 1px solid #d2d0d0;
+    background: #f7f7f7;
+    text-align: center;
+    line-height: 25px;
+    color: #666;
+    border-radius: 2px;
+    margin-left: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+    

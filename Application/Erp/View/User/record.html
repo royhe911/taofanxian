@@ -1,0 +1,35 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666"><a href="{:U('User/index')}">用户管理</a></span><span class="c-999 en">&gt;</span><span class="c-666">财务管理</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="r">共有数据：<strong>{$count}</strong> 条</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th>充值时间</th>
+								<th>充值金额(元)</th>
+								<th>状态</th>
+							</tr>
+						</thead>
+						<tbody>
+						 <volist name="data" id="vo">
+							<tr class="text-c">
+								<td>{$vo.addtime|date="Y-m-d H:i:s",###}</td>
+								<td>{$vo.money}</td>
+								<td class="td-status"><eq name="vo.msg" value="1">已审核<else/>待审核</eq></td>
+							</tr>
+						 </volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+</block>

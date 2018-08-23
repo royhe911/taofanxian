@@ -1,0 +1,53 @@
+<extend name="public/modal" />
+<block name="nav">
+</block>
+<block name="menu">
+	<div class="Hui-article" style="top: -10px;">
+		<div class="dataTables_wrapper">
+			<form action="" method="post" onsubmit="return formCheck()">
+				<div class="order-con">
+					<input placeholder="请填写订单号" class="orderInput ordernum" name="tb_item" onfocusin="removeErr(this)" type="number"><br/><br/>
+					<input placeholder="请填写旺旺号" class="orderInput wang" name="wangwang" onfocusin="removeErr(this)"><br/><br/>
+					<input placeholder="请填写微信备注名" class="orderInput wechatnum" name="wechatnum" onfocusin="removeErr(this)"><br/><br/>
+					<input placeholder="请填写佣金" class="orderInput commision" name="commision" onfocusin="removeErr(this)"><br/><br/>
+					<input type="submit" value="提交" class="btn btn-success radius" />
+				</div>
+
+			</form>
+		</div>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+function formCheck(){
+	var ordernum =$.trim($(".ordernum").val()); //订单号
+	var wangnum =$.trim($(".wang").val());  //旺旺号
+	var wechatnum =$.trim($(".wechatnum").val());  //微信号
+	var commision =$.trim($(".commision").val());  //佣金
+	if(!ordernum){
+		$(".ordernum").addClass('error-input').attr('placeholder','请填写订单号');
+		return false;
+	}
+	if(ordernum.length !== 18){
+		$(".ordernum").val('').addClass('error-input').attr('placeholder','订单号为18位');
+		return false;
+	}
+	if(!wangnum){
+		$(".wang").addClass('error-input');
+		return false;
+	}
+	if(!wechatnum){
+		$(".wechatnum").addClass('error-input');
+		return false;
+	}
+	if(!commision){
+		$(".commision").addClass('error-input');
+		return false;
+	}
+	return true;
+}
+function removeErr(el){
+	$(el).removeClass('error-input');
+}
+</script>
+</block>

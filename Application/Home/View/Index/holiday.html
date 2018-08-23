@@ -1,0 +1,70 @@
+
+	<include file="Layout:head" />
+	<include file="Layout:nav" />
+<style type="text/css">
+		.anpai{margin:50px 0; font-size:14px;}
+		.anpai-t{ margin-bottom:30px;width: fit-content;}
+		.detail_right {height: 900px;}
+	</style>
+
+<!--                        假期安排  start                   -->
+<div class="info">
+	<div class="recommend mt24" style="float: left;margin-left: 108px;">
+	<h2>推荐试用</h2>
+	<ul class="recom-con">
+		<foreach name="tuijian" item="vo" key="k">
+		<li>
+			<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>" target="_blank">
+			<img src="../{$vo['img']}" alt=""/>
+			<span style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis; width: 100%; color: #666; display: inline-block;text-align: center;">{$vo['goods_name']}</span>
+			</a>
+		</li>
+		</foreach>
+	</ul>
+</div>
+<div class="detail_right ar-detail">
+    <div class="ar-container">
+        <div class="ar-top">
+            <p class="ar-tl">2017年国庆节假期安排通知</p>
+        </div>
+        
+        <div class="anpai">
+        	<p class="anpai-t">各位亲爱的会员 :</p>
+        	<p class="anpai-c">您好!根据国家放假规定,结合网站实际情况 , 2017年国庆节假期安排如下 : <br />
+        		2017年10月1日(星期日)至2017年10月8日(星期日)共放假8天.
+        	</p>
+        </div>
+        <div class="anpai">
+        	<p class="anpai-t">活动线上及商家咨询</p>
+        	<p class="anpai-c">1 . 放假期间 , 领吧将暂停试用活动上线的人工审核及试用业务咨询 , 已上线的试用活动流程正常进行; <br />
+        		2 . 商家可使用定时上线功能在放假期间上线活动(活动需提前经平台审核通过 , 即可定时上线)
+        	</p>
+        </div>
+        <div class="anpai">
+        	<p class="anpai-t">账户提现</p>
+        	<p class="anpai-c">2017年9月30日中午12点前提交的提现申请 , 将于2017年9月30日24点前予以处理.<br />
+        		<span style="color:red">2017年9月30日中午12点后至2017年10月8日期间提交的提现申请 , 将于2017年10月9日起按提交时间进行处理.</span>
+        	</p>
+        </div>
+        <div class="anpai">
+        	<p class="anpai-t" style="background:yellow;">试用报告提交时间</p>
+        	<p class="anpai-c" style="background:yellow;">
+        		放假期间 , 若因为商家或快递原因未按时收到快递 , 可以在试用报告提交时间到期前随意填写提交一份报告 , 便不会被系统取消资格 . 商家驳回后 , 用户将重新拥有12天时间提交试用报告.
+        	</p>
+        </div>
+        <div class="anpai">
+        	<p class="anpai-t">客服咨询 </p>
+        	<p class="anpai-c">2017年10月1日至2017年10月8日期间在线客服暂停受理咨询 . 如在此期间您有问题或建议 , 可以留言到客服QQ , 假期结束后 , 我们的客服人员会在第一时间为您处理.
+        	</p>
+        </div>
+   	</div>
+</div>
+<div style="clear: both;"></div>
+</div>
+
+<!--                        假期安排  end                   -->
+
+
+
+
+<include file="Layout:foot" />

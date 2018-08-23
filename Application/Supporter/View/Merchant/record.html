@@ -1,0 +1,136 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style>
+#section .section_main .funds_record .allRecord {overflow: hidden;height: 38px;width: 100%;background-color: #f5f5f5;  padding: 0 20px;  margin-top: 30px;}
+#section .section_main .funds_record .allRecord li { float: left; line-height: 38px;}
+#section .section_main .funds_record .allRecord li a {  font-size: 14px; color: #323232;}
+#section .section_main .funds_record .allRecord li.cur-record a{color: #f25f55;}
+#section .section_main .funds_record .allRecord li span {  color: #c8c8c8;  margin: 0 20px;}
+#section .section_main .funds_record .seachform { overflow: hidden; margin-top: 20px; float: none;}
+#section .section_main .funds_record .seachform li {  float: left;  height: 38px;  line-height: 38px;}
+#section .section_main .funds_record .seachform li span {font-size: 15px;}
+#section .section_main .funds_record .seachform li input[type='text'] {  width: 200px;  height: 34px;  line-height: 34px;  border: 1px solid #f5f5f5;}
+#section .section_main .funds_record .seachform li input[type='button'] {  width: 100px;  height: 34px;  line-height: 34px;  border-radius: 5px;  border: 1px solid #f10180;  background-color: #f10180; color: #fff; font-size: 14px; margin-left: 5px;vertical-align: middle; -webkit-appearance: button; cursor: pointer;}
+#section .section_main .funds_record table {width: 980px;}
+#section .section_main .funds_record table td {border: 1px solid #f5f5f5; height: 50px; line-height: 50px; text-align: center; font-size: 14px; width: 228px;}
+</style>
+                <!--资金记录-->
+                <div id="my_main" class="funds_record left" style="min-height: 889px;">
+                    <h1 class="title">资金记录</h1>
+                    <ul class="allRecord">
+                        <!-- <li class="record">
+                            <a  href="{:U('Merchant/record',array('remark'=>'1'))}">押金明细</a><span>|</span>
+                        </li> -->
+                        <li class="record  <?php if($type=='draw'){echo 'cur-record';}?>">
+                            <a href="{:U('Merchant/record',array('type'=>'draw'))}">充值记录</a><span>|</span>
+                        </li>
+                        <li class="record <?php if($type=='recharge'){echo 'cur-record';}?>">
+                            <a href="{:U('Merchant/record',array('type'=>'recharge'))}">提现记录</a>
+                        </li>
+                    </ul>
+                    <div>
+                       <?php if($type=='recharge'){?>
+                        <!-- 提现记录 -->
+                        <table class="withdraw_record">
+                            <tbody>
+                                <tr>
+                                    <td>提现申请时间</td>
+                                    <td>支付宝帐号</td>
+                                    <td>金额</td>
+                                    <td>状态</td>
+                                </tr>
+                                <foreach name="data" item="vo">
+									<tr>
+										<td class="cell4">
+											<font class="i_money"><?=$vo['addtime']?></font>
+										</td>
+										<td class="cell4"><?=$vo['zfb']?>(<?=$vo['zfb_accounts']?>)</td>
+										<td class="cell4">
+											<font class="i_money"><?=$vo['amount']?></font>
+										</td>	
+										<td class="cell2"><?=$vo['uptime']?></td>
+										<td class="col10">
+											<?php if($vo['status']==1){?>
+											<font color="#FF0000">等待返款</font>
+											<?php }elseif($vo['status']==2){?>
+											<font color="green">返款成功</font>
+											<?php }?>
+										</td>
+									</tr>
+								</foreach>
+                            </tbody>
+                        </table>
+                       <?php }elseif($type=='draw'){?>
+                        <!-- 充值记录               -->
+                        <table class="recharge_record">
+                            <tbody>
+                                <tr>
+                                    <td>充值时间</td>
+                                    <td>充值流水号</td>
+                                    <td>金额</td>
+                                    <td>状态</td>
+                                </tr>
+                                <foreach name="data" item="vo">
+                                <tr>
+                                    <td><?=$vo['uptime']?></td>
+                                    <td><?=$vo['ordid']?></td>
+                                    <td><?=$vo['ordfee']?></td>
+									<td class="col10">
+											<?php if($vo['ordstatus']==0){?>
+											<font color="#FF0000">等待付款</font>
+											<?php }elseif($vo['ordstatus']==1){?>
+											<font color="green">付款成功</font>
+											<?php }elseif($vo['ordstatus']==2){?>
+											<font color="green">取消付款</font>
+											<?php }?>
+									</td>
+                                </tr>
+                                </foreach>                     
+                            </tbody>
+                        </table>
+                        <?php }?>
+                       <div class="row">
+                            <div class="col-sm-12" >
+                                <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;">
+                                    <ul class="pagination" id="list-pagination">
+                                    </ul>
+                                </div>
+                            </div>
+				        </div>
+                       
+                    </div>
+                </div>
+                <!-- my_main end -->
+            </div>
+        </section>
+    <!-- page-wrapper end -->
+    </div>
+    <!-- wrapper -->
+</div>
+<script>
+	$(function(){	
+		var paginationOptions= $.extend(true, {$pagination|json_encode} , 
+							{
+									onPageClick: function (event, page) {
+										var options = $(this).data('twbsPagination').options;
+								        options.baseUrl = options.baseUrl.replace('','');
+								        options.getParams.page = page; 
+//								        options.getParams.pagesize = options.getParams.pagesize;
+                                        var param = '';
+										for(var x in options.getParams ){
+								        		param += '&' + x + '=' + options.getParams[x];
+								        }
+//										console.log(param);return;
+										
+								        window.location.href =  options.baseUrl + param + '';
+								    }
+							});
+		$('#list-pagination').twbsPagination(paginationOptions);
+		
+	});
+	</script>
+<include file="Layout:foot" />

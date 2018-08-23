@@ -1,0 +1,113 @@
+<extend name="public/modal" />
+<block name="title">设置服务费</block>
+<block name="menu">
+	<div class="Hui-article" style="top: -10px;">
+		<div class="dataTables_wrapper">
+			<form action="" method="post" onsubmit="return checkForm()">
+				<input type="hidden" name="id" value="{$_GET['id']}">
+				<table class="table table-border table-bordered table-bg table-hover table-sort">
+					<thead>
+						<tr >
+							<th colspan="2" style="text-align: center">所有服务费均为正整数</th>
+						</tr>
+						<tr class="text-c">
+							<th>价格区间</th>
+							<th>服务费</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-c va-m">
+							<td>0~99</td>
+							<td class="order-input">
+								<input type="text" value="{$data.price_1|default=''}" name="price_1" onkeyup="value=value.replace(/[^\d]/g,'')">
+							</td>
+						</tr>
+						<tr class="text-c va-m">
+							<td>100~199</td>
+							<td class="order-input">
+								<input type="text" value="{$data.price_2|default=''}" name="price_2" onkeyup="value=value.replace(/[^\d]/g,'')">
+							</td>
+						</tr>
+						<tr class="text-c va-m">
+							<td>200~299</td>
+							<td class="order-input">
+								<input type="text" value="{$data.price_3|default=''}" name="price_3" onkeyup="value=value.replace(/[^\d]/g,'')">
+							</td>
+						</tr>
+						<tr class="text-c va-m">
+							<td>300~399</td>
+							<td class="order-input">
+								<input type="text" value="{$data.price_4|default=''}" name="price_4" onkeyup="value=value.replace(/[^\d]/g,'')">
+							</td>
+						</tr>
+						<tr class="text-c va-m">
+							<td>400以上</td>
+							<td class="order-input">
+								<input type="text" value="{$data.price_5|default=''}" name="price_5" onkeyup="value=value.replace(/[^\d]/g,'')">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="pd-20" style="text-align: center">
+					<button class="btn btn-success radius" type="submit">提交</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+		function checkForm() {
+			var reg = /^[1-9]\d*$/
+			for (var i = 0; i < $("input[type=text]").length; i++) {
+				var self = $("input[type=text]").eq(i)
+				switch (i) {
+					case 0:
+						if(self.val()){
+							if (!reg.test(self.val()) || (parseInt(self.val()) < 13 || (parseInt(self.val()) > 16))){
+								layer.msg('0-99价格区间服务费不得低于13元，不得大于16元');
+								return false;
+							}
+						}
+						
+						break;
+					case 1:
+						if(self.val()){
+							if (!reg.test(self.val()) || (parseInt(self.val()) < 15 || parseInt(self.val()) > 18)) {
+								layer.msg('100-199价格区间服务费不得低于15元，不得大于18元')
+								return false;
+							}
+						}
+						break;
+					case 2:
+						if(self.val()){
+							if (!reg.test(self.val()) || (parseInt(self.val()) < 16 || parseInt(self.val()) > 22)) {
+								layer.msg('200-299价格区间服务费不得低于16元，不得大于22元')
+								return false;
+							}
+						}
+						break;
+					case 3:
+						if(self.val()){
+							if (!reg.test(self.val()) || (parseInt(self.val()) < 20 || parseInt(self.val()) > 25)) {
+								layer.msg('300-399价格区间服务费不得低于20元，不得大于25元')
+								return false;
+							}
+						}
+						break;
+					case 4:
+						if(self.val()){
+							if (!reg.test(self.val()) || (parseInt(self.val()) < 25)) {
+								layer.msg('400以上价格区间服务费不得低于25元')
+								return false;
+							}
+						}
+						break;
+					default:
+						break;
+				}
+			}
+			return true;
+		}
+	</script>
+</block>

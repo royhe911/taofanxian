@@ -1,0 +1,151 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<style>
+    #section .section_main .store_content {width: 1200px;margin-left: 0; background-color: #fff; padding: 30px;}
+    #section .section_main .store_content .delivery_status {margin-top: 20px;}
+    #section .section_main .store_content .delivery_status .title { height: 38px; line-height: 38px;overflow: hidden; background-color: #f5f5f5;}
+    #section .section_main .store_content .delivery_status .title div {font-size: 14px;height: 16px;}
+    #section .section_main .store_content .delivery_status .title div.left {padding-left: 20px;}
+    #section .section_main .store_content p.checkbox {display: inline-block;vertical-align: middle;cursor: pointer;}
+    #section .section_main .store_content .delivery_status .title span { margin-right: 40px;}
+    #section .section_main .store_content .delivery_status .title div.left .order-num >b { color: #323232;}
+    #section .section_main .store_content .delivery_status .title div.left span:last-of-type { margin-right: 10px; vertical-align: middle;}
+    #section .section_main .store_content .delivery_status .title div.right {padding-right: 20px;}
+    #section .section_main .store_content .delivery_status .title div.right { margin-right: 10px;}
+    #section .section_main .store_content .delivery_status .title div a {color: #005ea7;}
+    #section .section_main .store_content .delivery_status .detalis ul {height: 110px; border: 1px solid #f5f5f5;}
+    .store_content .product-name { width: 420px;}
+    .store_content .member-bindTB { width: 240px;}
+    .store_content .order-num-TB {width: 240px;}
+    .store_content .pay { width: 238px;}
+    #section .section_main .store_content .delivery_status .detalis ul li {float: left;color: #323232;font-size: 14px;height: 110px;text-align: center;line-height: 110px;display: table;}
+    #section .section_main .store_content .delivery_status .detalis ul li:first-of-type img {  width: 80px;  height: 80px;  margin-top: 15px;  margin-left: 20px;}
+    #section .section_main .store_content .delivery_status .detalis ul li:first-of-type .name { width: 258px; height: 32px; line-height: 32px; color: #323232; text-align: left; padding-right: 10px;}
+    /* #section .section_main .store_content .delivery_status .detalis ul li + li { border-left: 1px solid #f5f5f5;} */
+    #section .section_main .store_content .delivery_status .detalis ul li p { width: inherit; display: table-cell; vertical-align: middle;}
+    #section .section_main .store_content .delivery_status .detalis ul li.member-bindTB p { width: 240px; display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+    #section .section_main .store_content .delivery_status .detalis ul li.order-num-TB p {  width: 240px;  display: inline-block;  white-space: nowrap;  text-overflow: ellipsis;  overflow: hidden;}
+    .detalis li:nth-of-type(5) {  width: 145px;  line-height: 0 !important;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic, #section .section_main .store_content .delivery_status .detalis ul li.operation { display: table;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic .link-pic, #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box {  display: table-cell;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic .link-pic a, #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box a { width: 100%;line-height: 2; display: block; color: #f25f55; cursor: pointer;}
+    #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box a.main_btn { display: block;  width: 100px;  height: 30px;  line-height: 30px;  border: 1px solid #f25f55;  border-radius: 5px;  background-color: #fff;  color: #f25f55;  font-size: 14px;  margin-left: 15%;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic .link-pic a, #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box .back_content {color: #005ea7; cursor: pointer;}
+    .taobao-icon {width: 15px; height: 15px;}
+</style>
+<!-- 待追加评价订单 -->
+<section id="section">
+        
+    <div class="section_main">
+        <!--所在位置-->
+        <div class="location_title">
+            <ul>
+                <li>你所在的位置：</li>
+                <li class="order">
+                    <a class="" href="#">首页</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Usercenter/index')}">商家中心</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a href="{:U('Order/ordermanage')}">试用订单管理</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">  待追加评价订单 </li>
+            </ul>
+        </div>
+
+        <!--任务说明-->
+        <div class="store_content">
+
+            <div class="title clearfix">
+                <h1 class="left">待追加评价订单</h1>
+
+                <span class="desc left">以下试用订单淘宝评价已经确认通过，待试客到淘宝进行追评。</span>
+            </div>
+            <div class="filter clearfix">
+                <!-- 筛选店铺 -->
+                <ul class="choose-shop left">
+                    <li>店铺：</li>
+                    <li>
+                        <div class="vocation">
+                            <select class="select2" style="cursor: pointer" name="status" id="shop_id" onchange="search(this.value)">
+                                <option value="0" selected="selected">全部店铺</option>
+                                <option selected="selected" value="1089"> 鼎诚金芝麻专卖店</option>
+                                <option value="1091">礼洛数码配件专营店</option>
+                                <option value="1092">恒通伟数码 </option>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+                <!-- 筛选淘宝号 -->
+                <ul class="seachform left" style="margin-left:50px; overflow: hidden;">
+                    <li>
+                        <input placeholder="请输入试客淘宝号" id="taobao_id" type="text" class="scinput1">
+                    </li>
+                    <li>
+                        <input placeholder="请输入淘宝订单号" id="outer_id" type="text" class="scinput1">
+                    </li>
+                    <li>
+                        <label>&nbsp;</label>
+                        <input type="button" class="scbtn" value="查询" onclick="search2()">
+                    </li>
+                </ul>
+            </div>
+            <!--所有订单的状态种类-->
+            <div class="table-title">
+                <ul>
+                    <div class="select-all">
+                        <input class="checkbox" type="checkbox">
+                        <span style="float:left;margin-top:11px;margin-left:5px;">全选</span>
+                    </div>
+                    <li class="product-name">商品</li>
+                    <li class="member-bindTB">试客淘宝账号</li>
+                    <li class="order-num-TB">淘宝订单号</li>
+                    <li class="pay">付款金额</li>
+                </ul>
+            </div>
+            <!--商品发货状态-->
+            <div class="delivery_status">
+                <div class="title">
+                    <div class="left">
+                        <input class="checkbox" type="checkbox" style="margin-right:20px;">
+                        <!-- <span class="order_mark iconfont icon-biaoji" type="0" orderid="640994"></span> -->
+                        <span>2018-01-06 10:00:00</span>
+                        <span class="order-num">订单编号：<b>640994</b></span>
+                        <span>云中药草  </span>
+                        <img class="taobao-icon" src="__PUBLIC__/maoke/images/merchant/bg_tb_default.png" alt="">
+                        
+                </div>
+                <div class="right">
+                    <a target="_blank" href="{:U('Order/orderdetail')}">查看详情 &gt;&gt;</a>
+                </div>
+
+                </div>
+                <div class="detalis" id="list">
+                    <ul>
+                        <li class="product-name">
+                            <img class="left" src="http://pic-img.shike8888.com/ln_mnt2/201801/05/m/0/100ad68a-9a9f-d48c-3f7b-c9fa7dbce24e1515142944.jpeg?imageView2/2/w/348" alt="">
+                            <p class="name">正品野生文山三七粉<br><span style="color:#666666;font-size: 14px;"> 商品价格：13.20元</span>
+                            </p>
+                        </li>
+                        <li class="member-bindTB">
+                            <p>我们的为来不是梦</p>
+                        </li>
+                        <li class="order-num-TB">119480478402324423</li>
+                        <li class="pay">13.20元</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="first"></div>
+        <input type="hidden" id="count" value="0">
+        <input type="hidden" id="shop_id" value="1089">
+        <input type="hidden" id="type" value="1">
+    </div>
+</section>          
+          
+    
+<include file="Layout:foot" />

@@ -1,0 +1,390 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<link rel="stylesheet" href="__PUBLIC__/maoke/css/shikeba/orderdetail.css">
+<!-- 订单详情 -->
+<section id="section">
+    <!--订单详情-->
+    <div class="order_details">
+        <!--所在位置-->
+        <div class="location_title">
+            <ul>
+                <li>你所在的位置：</li>
+                <li class="order">
+                    <a class="" href="#">首页</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Usercenter/index')}">商家中心</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a href="{:U('Order/index')}">试用进展</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">订单详情</li>
+            </ul>
+        </div>
+        <!--商品发货状态-->
+        <div class="commodity_information">
+            <h1>试用信息：</h1>
+            <div class="title">
+                <p class="left">
+                    <span>{$data['addtime']}</span>
+                    <span>活动订单号：{$data['id']}</span>
+                </p>
+            </div>
+            <div class="details">
+                <ul>
+                    <li><img style="width:80px;height:80px" src="" alt="">
+                    </li>
+                    <li>
+                        <p>商品名称：<span>{$data['goods']['goods_name']}</span></p>
+                        <p>商品规格：<span>{$data['goods']['step_one']}</span></p>
+                        <p>商品链接：<span>
+                        <a target="_blank" href="{$data['goods']['url']}">{$data['goods']['url']}</a></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p>店铺名称：<span>{$data['seller']['shopname']}  </span></p>
+                        <p>商品运费：<span>全国包邮</span></p>
+                        <p>平台：<span>
+
+                        <if condition="$data['seller']['type'] eq 1 ">
+                           淘宝
+                        <else/>
+                           天猫
+                        </if>
+
+                    </span></p>
+                    </li>
+                    <li>
+                        <p>
+                            单件：<span><b style="margin-right:10px;">¥{$data['goods']['price']}</b>每单拍<b>1</b>个</span>
+                        </p>
+                        <p>试客：<span>{$data['sk']['ddusername']}</span></p>
+                        <p>试客淘宝账号：<span>{$data['sk_info'][0]['tb_id']}</span></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!--申请信息-->
+        <if condition="$type eq 0">
+            <div class="apply_information" style="display: none;">
+        <else />
+
+        <div class="apply_information">
+        </if>
+            <h1>申请信息：</h1>
+            <!--信息详情-->
+            <div class="information_detail clearfix">
+                <!--信息进度条-->
+                <div class="left progress_bar progress_bar_yes">
+                    <div class="default_bar"></div>
+                <if condition="$type eq 10">
+                    <div class="selected_bar" style="height: 562px;"></div>
+                <elseif condition="$type eq 20"/>
+                <div class="selected_bar" style="height: 800px;"></div>
+                    <elseif condition="$type eq 31"/>
+                    <div class="selected_bar" style="height: 1300px;"></div>
+
+                 <else />
+                     <div class="selected_bar" style="height: 1030px;"></div>
+                </if>
+                </div>
+                <!--进度条描述-->
+                <div class="left progress_description">
+                    <!--领取下单-->
+                    <div class="title placeOrder_titile">
+                        <p><span>领取下单</span></p>
+                        <p><i>{$data['addtime']}</i></p>
+                    </div>
+
+                    <!--领取下单--步骤-->
+                    <div class="placeOrder">
+                        <div class="clearfix placeOrder_one">
+                            <p class="left left_title"><b>收藏宝贝和店铺</b></p>
+                            <p class="left right_content">
+                                <b class="collection_shop show_img" data-img="http://image.shike8888.com/ln_mnt5/201801/06/s/6/33be8475-e8f9-48c7-9345-e7827789b17b.PNG?imageView2/2/w/348">收藏店铺：<a href="javascript:void(0);" onclick="showImg('{$data['colleshop_pic']}')">查看截图{$data['colleshop_pic']}</a></b>
+
+
+
+
+                                <b class="collection_product show_img" data-img="http://image.shike8888.com/ln_mnt5/201801/06/s/6/dcd1afc6-3b25-4805-a08a-50d82874d455.PNG?imageView2/2/w/348">收藏宝贝：<a href="javascript:void(0);" onclick="showImg('{$data['collebaby_pic']}')">查看截图{$data['collebaby_pic']}</a></b>
+                            </p>
+                        </div>
+                        <div class="clearfix  placeOrder_two">
+                            <p class="left left_title"><b>浏览店铺</b></p>
+                            <div class="left right_content">
+                             <foreach name="baby_link" item="vo" key="k" >
+                                <p><b>浏览链接{$k+1}：<a href="{$vo}" target="_blank">{$vo}</a></b></p>
+                             </foreach>
+
+
+                            </div>
+                        </div>
+                        <div class="clearfix  placeOrder_three">
+                            <p class="left left_title"><b>客服聊天：</b></p>
+                            <p class="left right_content">
+                                <b class="chatlog_img show_img" data-img="http://pic-img.shike8888.com/?imageView2/2/w/348">客服聊天：<a style="cursor: pointer" onclick="showImg('{$data['service_pic']}')">查看截图{$data['service_pic']}</a></b>
+                            </p>
+                        </div>
+                        <div class="clearfix  placeOrder_four">
+                            <p class="left left_title"><b>下单付款：</b><font-size=12>{$data['subtime']}</font></p>
+                            <p class="left right_content">
+                                <b>订单号：{$data['tb_item']}</b>
+                                <b>实际付款金额：<span>{$data['goods'][price]}元</span></b>
+                                <b class="show_img" data-img="http://image.shike8888.com/ln_mnt5/201801/06/s/6/58867810-8bc1-4c43-955d-4bd3f7d7dba5.PNG?imageView2/2/w/348">订单截图：{$data['order_pic']}<a style="cursor: pointer" href="javascript:void(0);" onclick="showImg('{$data['order_pic']}')">查看截图</a></b>
+                            </p>
+                        </div>
+                    </div>
+                    <!--发货8888888-->
+                 <if condition="$type eq 10">
+                    <div class="default_title evaluate0 clearfix">
+                        <p class="left title_active">发货</p>
+                        <p class="left caption_default" style="display: block;">
+                            待商家确认发货
+                            <input class="sj_btn order_fh" id="comfirm" data-context="640990" type="button" value="确认发货">
+                            <!--
+                            <a style="cursor: pointer" class="sj_btn " data-context="640990">驳回</a>-->
+                            <textarea rows="1" cols="50" id='back_content'>
+                            {$data['note_order']|trim}
+                            </textarea>
+                            <input class="sj_btn order_fh" id="back_btn" data-context="640990" type="button" value="驳回">
+                        </p>
+                    </div>
+                 <else/>
+                    <div style="" class="title ship_title clearfix selected_bar">
+                        <div class="left caption_left">
+                            <p><span>发货</span></p>
+                            <p><i class="time"></i></p>
+                        </div>
+                        <div class="left caption_right"><b>商家已发货</b>
+                        </div>
+                    </div>
+                 </if>
+
+<if condition="$type eq 10">
+                    <!--收货评价-->
+                    <div class="default_title evaluate1 clearfix">
+                        <p class="left title_active">收货评价</p>
+                        <p class="left caption_default">待试客收货并在领吧平台评价 </p>
+
+                    </div>
+<else/>
+                    <div style="" class="title evaluate_content getEvaluate clearfix">
+                        <div class="left caption_left">
+                            <p><span>收货评价</span></p>
+                            <p><i>{$data['evaluationsk_time']}</i></p>
+                        </div>
+                        <div class="left caption_right">
+                            <b>评价内容：<a class="pinjia" data-context="评价内容" href="javascript:void(0)">查看内容{$data['evaluation_good']}
+                            <b style="height: 28px;line-height: 28px;">()</b>
+                            </a>
+                            </b>
+                         </div>
+                    </div>
+ </if>
+
+<if condition="$type eq 20">
+                    <!--审核评价-->
+                    <div class="default_title evaluate2 clearfix" >
+                        <p class="left title_active">审核评价</p>
+                        <p class="left caption_default" style="display:block ">待商家审核评价 <input class="order_sh sj_btn" id="comfirm" data-context="640990" type="button" value="确认评价">
+
+                            <textarea rows="1" cols="50" id='back_content'>
+                            {$data['note_skcomments']}
+                            </textarea>
+                            <input class="sj_btn order_fh" id="back_btn" data-context="640990" type="button" value="驳回">
+
+                            <input type="hidden" id="start_time_2" value="-62170012800">
+                            <span style="margin-left: 30px;"><b id="time_2_notice">00:00:00 后</b>自动审核通过</span>
+                        </p>
+                    </div>
+
+<else />
+
+  <if condition="$type eq 10">
+                <div class="default_title evaluate3 clearfix">
+                        <p class="left title_active">审核评价</p>
+                </div>
+
+
+    <else />
+                <div style="" class="title evaluate_content checkEvaluate clearfix">
+                        <div class="left caption_left" style="display:block ">
+                            <p><span>审核评价</span></p>
+                            <p><i></i></p>
+                        </div>
+                        <div class="left caption_right">
+                            <b>商家已审核评价</b>
+                        </div>
+                    </div>
+  </if>
+</if>
+
+<if condition="($type eq 20) OR ($type eq 10)">
+                    <!--复制评价-->
+                    <div class="default_title evaluate3 clearfix">
+                        <p class="left title_active">复制评价</p>
+                        <p class="left caption_default">待试客复制评价到淘宝</p>
+                    </div>
+<else />
+                <div style="" class="title evaluate_content copyEvaluate clearfix">
+                        <div class="left caption_left">
+                            <p><span>复制评价</span></p>
+                            <p><i>{$data['evaluationtb_time']}</i></p>
+                        </div>
+                        <div class="left caption_right">
+                            <p class="left caption_default">淘宝评价截图:{$data['evaluation_pic']}<a style="cursor:pointer;color:#005ea7" class="chatlog_img show_img" data-img="http://pic-img.shike8888.com/?imageView2/2/w/348" onclick="showImg('{$data['evaluation_pic']}')">查看截图</a>
+                            </p>
+                        </div>
+                    </div>
+ </if>
+ <if condition="$type eq 30">
+                    <!--确认评价-->
+                    <div class="default_title evaluate4 clearfix">
+                        <p class="left title_active">确认评价</p>
+                        <p class="left caption_default" style="display:block " >待商家确认评价 <input class="sj_btn order_pj" id="comfirm" data-context="640990" type="button" value="确认评价">
+
+                            <textarea rows="1" cols="50" id='back_content'>
+                            {$data['note_tbcomments']}
+                            </textarea>
+
+                            <input class="sj_btn order_fh" id="back_btn" data-context="640990" type="button" value="驳回">
+
+                            <input type="hidden" id="start_time_3" value="-62170012800">
+                            <span style="margin-left: 30px;"><b id="time_3_notice">00:00:00 后</b>自动审核通过</span>
+                        </p>
+                    </div>
+
+<else />
+         <if condition="$type neq 31">
+                     <div class="default_title evaluate3 clearfix">
+                        <p class="left title_active">评价确认</p>
+                        <p class="left caption_default">待试客复制评价到淘宝</p>
+                    </div>
+        </if>
+</if>
+
+<if condition="$type eq 31">
+<div style="" class="title evaluate_content checkEvaluate clearfix">
+                        <div class="left caption_left" style="display:block ">
+                            <p><span>评价确认</span></p>
+                            <p><i></i></p>
+                        </div>
+                        <div class="left caption_right">
+                            <b>商家已审核评价</b>
+                        </div>
+                    </div>
+</if>
+                    <!--追加评价-->
+                    <!--试用返款-->
+    <if condition="$type eq 31">
+                    <div style="" class="try_rebate clearfix">
+                        <p class="left left_title"><b>试用返款</b></p>
+                        <p class="left right_content"><b>已返款</b></p>
+                    </div>
+    <else />
+                    <div class="default_title evaluate7 clearfix">
+                        <p class="left title_active">试用返款</p>
+                    </div>
+    </if>
+
+    <if condition="$type eq 31">
+                    <!--已完成-->
+                    <div class="title evaluate_content carryOut clearfix">
+                        <div class="left caption_left">
+                            <p><span>已完成</span></p>
+                            <p><i></i></p>
+                        </div>
+                    </div>
+    <else />
+                    <div class="default_title evaluate8 clearfix">
+                        <p class="left title_active">已完成</p>
+                    </div>
+    </if>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--确认发货AJAX提交-->
+<script type="text/javascript">
+    $(function(){
+        $('#comfirm').click(function(){
+            var $id = {$data['id']};
+            var $post_url = '{:U('Order/comfirm_chanage')}';
+            var $type ={$type};
+            if ($type == 10 ){
+               var $comfirm = 20;
+            }
+            if ($type == 20 ){
+               var $comfirm = 30;
+            }
+             if ($type == 30 ){
+               var $comfirm = 31;
+            }
+            //如果没有填写数据,则直接返回false.不执行ajax提交操作
+            if($id == '' || $comfirm == ''){
+                alert('非法请求！');
+                return false;
+            }
+            $.post($post_url, {id : $id,comfirm : $comfirm},function($data) {
+
+                if($data.status == 1){
+                    alert('审核成功！');
+                }else{
+                    alert('审核失败！');
+                }
+            });
+        });
+    });
+     function hideLayer(){
+		layer.closeAll();
+	}
+	//查看截图
+	function showImg(src){
+		layer.open({
+	        type: 1,
+	        title:'点击屏幕阴影部分关闭图片',
+	        shadeClose: true,
+	        closeBtn: true,
+	        area: ['375px','667px'], //宽高
+			content:'<img src="'+src+'" alt="加载失败" height="100%" width="100%"></img>'
+		});
+	}
+</script>
+<!--确认发货AJAX提交结束-->
+<!--订单驳回提交-->
+<script type="text/javascript">
+    $(function(){
+        $('#back_btn').click(function(){
+            var $type ={$type};
+            var $id = {$data['id']};
+            var $post_url = '{:U('Order/order_back')}';
+            var $back_content1 = $("#back_content").val();
+            var $back_content = $.trim($back_content1);
+            //如果没有填写数据,则直接返回false.不执行ajax提交操作
+            if($id == ''){
+                alert('非法请求！');
+                return false;
+            }
+            $.post($post_url, {id : $id,note_order : $back_content,type : $type},function($data) {
+                if($data.status == 1){
+                    alert('驳回成功！');
+                }else{
+                    alert('驳回失败！');
+                }
+            });
+        });
+    });
+</script>
+<!--订单驳回AJAX提交结束-->
+<include file="Layout:foot" />

@@ -1,0 +1,228 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">欢迎</span>
+</block>
+<block name="menu">
+		<div class="Hui-article" style="position: absolute;">
+			<article class="cl pd-20" style="position: relative;">
+				<if condition="($msg.role eq 5) and !empty($info['url']) and $info.msg eq 1">
+
+						<div class="col-sm-12 col-xs-12 pd-14-0 col-md-6 col-lg-6 " style=" min-width: 835px;">
+							<div class="box-s pd-30-0 mr-auto-14">
+								<div class="fl mr-30" style="margin-left: 20px;">
+									<img src="__PUBLIC__/ERP/static/h-ui.admin/images/maokehui.png" alt="" />
+								</div>
+								<div class="fl border-r" style="height: 155px;padding-right: 20px;">
+									<p class="mr-16-p">用户名：<span style="color: red; width: 105px; overflow: hidden;text-overflow: ellipsis; white-space:nowrap; display: inline-block; float: right;">{$info.wangwang}</span></p>
+									<p class="mr-16-p">注册时间：{$info.addtime|date="Y-m-d",###}</p>
+									<p class="mr-16-p">商家类型：普通商家</p>
+									<p class="mr-16-p"><a href="{:U('finance/record')}" class="btn btn-primary radius">账户明细</a>&nbsp;<a href="javascript:;" onclick="isAdd()" class="btn btn-secondary radius">发布任务</a></p>
+								</div>
+								<div class="fl border-r" style="width: 173px;padding: 0 20px;">
+									<p>账户余额：<br /><b style="color: red; font-size: 16px;"><span class="">¥ {$info.money}</span></b></p>
+									<p>任务冻结：<br /><b style="color: #FFAF06; font-size: 16px;"><span class="">¥ {$info.yufujin}</span></b></p>
+									<p>
+										<a href="javascript:;" onclick="recharge('充值','{:U('User/recharge')}','480','655')" class="btn btn-danger radius">充值</a>
+										<a href="javascript:;" class="btn btn-primary radius" onclick="cash()">提现</a>
+										<a href="tencent://message/?uin={$info.qq}&Site=&menu=yes" class="btn btn-warning radius">客服</a>
+									</p>
+								</div>
+								<div class="fl pd-0-30">
+									<p>负责导师：猫客堂<font color="red">{$info.info}</font></p>
+									<p>微信：{$info.wechat}</p>
+									<p>QQ：{$info.qq}</p>
+									<p>电话：{$info.phone}</p>
+								</div>
+								<div style="clear: both;"></div>
+							</div>
+						</div>
+						<div class="col-sm-12 col-xs-12 pd-14-0 col-md-6 col-lg-6" style="min-width: 835px;">
+							<div class="box-s mr-auto-14">
+								<ul class="banner">
+									<li class="ban-li" >
+										<img src="__PUBLIC__/ERP/static/h-ui.admin/images/bannera.jpg" width="100%" alt="" height="215px"  />
+									</li>
+									<li class="ban-li" style="display: none;">
+										<img src="__PUBLIC__/ERP/static/h-ui.admin/images/bannerb.jpg" width="100%" alt="" height="215px" >
+									</li>
+									<li class="ban-li" style="display: none;">
+										<img src="__PUBLIC__/ERP/static/h-ui.admin/images/bannerc.jpg" width="100%" alt="" height="215px">
+									</li>
+								</ul>
+								<div class="btn-li">
+									<span class="cur-btn-li"></span>
+									<span></span>
+									<span></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-12 col-xs-12 pd-14-0 col-md-6 col-lg-6 col-6" style="min-width: 835px;">
+							<div class="box-s pd-30-0 mr-auto-14">
+								<div class="fl commision-detail " style="width: 438px; height: 370px; margin-left: 20px;"></div>
+								<div class="fr text-r color-735" style="margin-right: 20px;">
+									<p class="" style="padding-top: 10px;">
+										<span class="shu"></span>
+										<img src="__PUBLIC__/ERP/static/h-ui.admin/images/yongjin-font.jpg" alt="" style="vertical-align: top;" />
+									</p>
+									<p  style="font-size: 16px;">SERVICE COMMISSION</p>
+									<p >拒绝与平台刷单比价</p>
+									<p >安全比什么都重要</p>
+									<p >一分钱一分货</p>
+									<p >不安全的刷法，最便宜也没有用</p>
+									<p style="color: red; margin-top: 35px; font-weight: bold; font-size: 16px;">必须发真实物流加小礼品</p>
+									<p style="color: #000;">礼品可为纸，笔记本等一系列实用型产<br />品，杜绝空包沙子水破布等等</p>
+									<p style="color: red;">（如不按要求发小礼品出现退款和差评概不负责）</p>
+								</div>
+								<div style="clear: both;"></div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-xs-6 pd-14-0 col-md-3 col-lg-3 col-cm-lg col-cm-5">
+							<div class="box-s mr-auto-14 pd-20 cm-gong" >
+								<header class="pd-10-0 border-b">
+									<span class="shu fl" style="margin-top: 11px;"></span> <span class="title-cm">最新动态</span>
+								</header>
+								<ul class="title-ul">
+									<li><a href="javascript:;"><span style="color: #000;">关于对部分用户的违规行为进行政治的公告</span></a></li>
+									<li><a href="javascript:;"><span style="color: #000;">关于同一用户多个账户申请同一商品的处理方式公告</span></a></li>
+									<li><a href="javascript:;"><span style="color: #000;">关于用户任务行为稽查系统上线的通知</span></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-sm-6 col-xs-6 pd-14-0 col-md-3 col-lg-3 col-cm-5">
+							<div class="box-s mr-auto-14 pd-20" style="min-height: 390px; height: 390px; overflow: hidden;">
+								<header class="pd-10-0 border-b">
+									<span class="shu fl" style="margin-top: 11px;"></span> <span class="title-cm">公告</span>
+								</header>
+								<ul class="title-ul">
+									<li><a href="javascript:;"><span style="color: #000;">关于对部分用户的违规行为进行政治的公告</span></a></li>
+									<li><a href="javascript:;"><span style="color: #000;">关于同一用户多个账户申请同一商品的处理方式公告</span></a></li>
+									<li><a href="javascript:;"><span style="color: #000;">关于用户任务行为稽查系统上线的通知</span></a></li>
+								</ul>
+							</div>
+						</div>
+				 <else />
+				 	<if condition="($msg.role neq 5)">
+				  	 <p class="f-20 text-success">{$now}好! &nbsp;
+						 <if condition="!empty($msg[info])">
+							 {$msg.info} <else />
+						 {$_SESSION['user']['name']}
+						 </if>
+						 <span class="f-14"></span> &nbsp;</p>
+				  	 <p>登录时间：{$msg.edittime|date="Y-m-d H:i",###}&nbsp;&nbsp;&nbsp;&nbsp;登录IP：{$msg.ip}</p>
+				  	 </if>
+				</if>
+				<!--未绑定店铺 和 审核未通过显示按钮 已绑定和待审核不显示-->
+				<if condition="(($msg.role eq 5) and (empty($info['url']) or ($info.msg eq 2)))">
+				 <div style="width: 800px; margin-top: 20px;">
+					<p class="indent">初次加入请提交店铺信息，审核服务资格：</p>
+					<form action="{:U('User/shop')}" method="post" class="form form-horizontal" id="form-admin-role-add">
+						<div class="row cl">
+							<label class="form-label col-xs-2 col-sm-2" style="text-align: right;"><span class="c-red">*</span>店铺名称：</label>
+							<div class="formControls col-xs-5 col-sm-5">
+								<input type="text" class="input-text" placeholder="请输入店铺名称" name="shopname" required oninvalid="setCustomValidity('请输入店铺名称');" oninput="setCustomValidity('');">
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-2 col-sm-2" style="text-align: right;"><span class="c-red">*</span>旺旺号：</label>
+							<div class="formControls col-xs-5 col-sm-5">
+								<input type="text" class="input-text" placeholder="请输入旺旺号" name="wangwang" required oninvalid="setCustomValidity('请输入旺旺号');" oninput="setCustomValidity('');">
+							</div>
+						</div>
+
+						<div class="row cl">
+							<label class="form-label col-xs-2 col-sm-2" style="text-align: right;"><span class="c-red">*</span>店铺网址：</label>
+							<div class="formControls col-xs-5 col-sm-5">
+								<input type="url" class="input-text" placeholder="请输入店铺地址" name="url" required oninvalid="setCustomValidity('请输入店铺地址');" oninput="setCustomValidity('');">
+							</div>
+						</div>
+
+						<div class="row cl">
+							<div class="col-xs-10 col-sm-10 col-xs-offset-2">
+							    <input type="hidden" name="id" value="{$info.id}">
+								<button type="submit" class="btn btn-success radius" id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 提交</button> <font color="red">（如需尽快通过审核，请联系服务导师）</font>
+							</div>
+						</div>
+					</form>
+				</div>
+				</if>
+			</article>
+		</div>
+</block>
+<block name='js'>
+<script type="text/javascript" >
+
+<if condition="$msg.role eq 5">
+	function recharge(title, url, w, h){
+		layer_show(title, url, w, h);
+	}
+	function cash(){
+		layer_show('申请提现', "{:U('User/cash')}", '500', '260');
+	}
+	function isAdd() {
+		var status = 0,remainder = 0,rechar = 0;
+		$.ajax({
+			url:"{:U('product/check_money')}",
+			data:{ },
+			type:'post',
+            async: false,
+			success:function(data){
+                status = data.msg;
+                remainder = data.money;
+                rechar  = data.arrearage;
+            }
+		});
+		if(status == 1){
+			var str = '您的当前余额为'+ remainder +'元，需充值'+rechar+'元，才可发布任务';
+			layer.msg(str);
+		}else{
+			window.location.href="{:U('product/addproductnew')}";
+		}
+    }
+	var t,n=0,count=0;
+	$(function(){
+		//绑定店铺
+		(function (){
+			var url = "{$info.url}";
+			var msg = {$info.msg};
+			if(url){
+
+				if(2 == msg){
+
+					layer.alert('您的店铺未通过审核', {icon: 5});
+				} else if(0 == msg){
+					layer.alert('您的店铺已提交，请等待审核', {icon: 6});
+				}
+			} else {
+//				layer_show('绑定店铺', "{:U('User/shop')}", '800', '300');
+			}
+		})();
+
+		count = $(".banner li").length;
+		$(".banner>li:not(:first-child)").hide();
+		t = setInterval("showAuto()", 3000);
+		$("#banner").hover(function() {
+	        clearInterval(t);
+	   	},function() {
+	        t = setInterval("showAuto()", 3000);
+	    });
+	    $(".btn-li span").click(function() {
+	        clearInterval(t);
+	        n = $(this).index();
+			$(this).addClass('cur-btn-li').siblings('span').removeClass('cur-btn-li');
+			$(".banner>li").filter(":visible").fadeOut(500).parent().children().eq($(this).index()).fadeIn(1000);
+	    });
+	});
+	function showAuto() {
+		n = n >= (count - 1) ? 0 : ++n;
+		$(".banner>li").filter(":visible").fadeOut(500).parent().children().eq(n).fadeIn(1000);
+		$(".btn-li span").eq(n).addClass('cur-btn-li').siblings('span').removeClass('cur-btn-li');
+	}
+</if>
+
+<if condition="$info.status == 0 and $msg.role eq 5">
+		//账户冻结提示用户联系业务员
+    layer.alert('您的账户已经被冻结,请联系自己的业务员', {icon: 5});
+	</if>
+</script>
+</block>

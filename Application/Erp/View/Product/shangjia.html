@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务上架</title>
+    <script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="__PUBLIC__/ERP/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/ERP/lib/layer/2.4/layer.js"></script>
+</head>
+<body>
+输入产品编号：<input type="text" name="shangjia" id="shangjia">
+<button name="btn" id="btn" onclick="tijiao()">提交</button>
+</body>
+</html>
+
+    <script type="text/javascript">
+       function tijiao() {
+           var id=$('#shangjia').val();
+           $.post("{:U('product/shangjia')}", {id: id}, function (data) {
+               if (1 == data.msg) {
+                   layer.msg(data.info, {icon: 1,time: 1000},function(){
+                       window.location.reload();
+                   });
+               } else {
+                   layer.msg(data.info, {icon: 2,time: 1000},function(){
+                       window.location.reload();
+                   });
+               }
+           }, 'json');
+       }
+    </script>

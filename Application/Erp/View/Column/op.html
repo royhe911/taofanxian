@@ -1,0 +1,49 @@
+<extend name="public/modal" />
+<block name="title"></block>
+<block name="menu">
+	<form action="{:U('column/op')}" method="POST" class="form form-horizontal" id="form-admin-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">所属栏目：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+			 <span class="select-box" style="width:150px;">
+				<select class="select" name="adminRole" size="1" onchange="is_show(this);">
+				    <option value="0">系统栏目</option>
+				    <volist name="data" id="vo">
+				      <option value="{$vo.id}" <eq name="info.fid" value="$vo.id">selected</eq>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--{$vo.name}</option>
+				    </volist>
+				</select>
+			 </span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>栏目名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.name}" placeholder="栏目名称" id="myname" name="myname">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>控制器名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" autocomplete="off" value="{$info.c}" placeholder="控制器名" id="cname" name="cname">
+			</div>
+		</div>
+		<div class="row cl" id="aname">
+			<label class="form-label col-xs-4 col-sm-3">方法名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" autocomplete="off" value="{$info.a}" placeholder="方法名" id="aname" name="aname">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">排序：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" autocomplete="off" value="{$info.sort}" placeholder="数字越大越靠前" id="num" name="num">
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			    <input type="hidden" name="id" value="{$info.id}">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</block>

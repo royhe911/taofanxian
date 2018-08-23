@@ -1,0 +1,186 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<link rel="stylesheet" href="__PUBLIC__/maoke/css/shikeba/try_detail.css">
+<!-- 进展详情->试用进展详情 -->
+
+        <section class="main">
+            <div class="location_title">
+                <ul>
+                    <li>你所在的位置：</li>
+                    <li class="order">
+                        <a class="" href="#">首页</a>
+                    </li>
+                    <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                    <li class="order">
+                            <a class="" href="{:U('Usercenter/index')}">商家中心</a>
+                    </li>
+                    <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                    <li class="order">
+                        <a class="" href="{:U('Actcenter/index')}">试用管理</a>
+                    </li>
+                    <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                    <li class="order">
+                        <a href="{:U('Actcenter/processdetail',array('id' => $info['gid'], 't' => 2))}">试用进展</a>
+                    </li>
+                    <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt="">
+                    </li>
+                    <li class="order">试用进展详情</li>
+                </ul>
+            </div>
+            <!-- <section class="crumbs">您的位置：首页 > 商家中心 > 试用进展 > 进展详情 > 试用进展详情</section>-->
+            <section class="basic_info">
+                <h2>试用基本信息：</h2>
+                <div class="info_table">
+                    <table>
+                        <tbody><tr>
+                            <td>试客账号</td>
+                            <td>淘宝账号</td>
+                            <td>领取方式</td>
+                            <td>申请编号</td>
+                            <td>申请状态</td>
+                        </tr>
+                        <tr>
+                            <td>{$info.ddusername}</td>
+                            <td>{$info.tb_id}</td>
+                            <td>手机自然搜索</td>
+                            <td>{$info.id}</td>
+                            <td><if condition="($info.comfirm LT 98)">已中奖<else />未中奖</if></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </section>
+            <section class="progress_info">
+                <h2>试用进展信息：</h2>
+                <div class="progress_pannel clearfix">
+                    <div class="progress_map left">
+                        <div class="default_map"></div>
+                        <div class="selected_map" id="myheight"></div>
+                        <div class="result_icon">
+                            <img id="default_win" class="map_result_icon" src="__PUBLIC__/maoke/images/merchant/progress_bg_process_win_selected.png" alt="">
+                            <img id="default_no" class="map_result_icon" src="__PUBLIC__/maoke/images/merchant/progress_bg_process_no_selected.png" alt="">
+                            <img id="first_win" class="map_result_icon" src="__PUBLIC__/maoke/images/merchant/progress_bg_process_win_selected.png" alt="">
+                            <img id="first_no" class="map_result_icon" src="__PUBLIC__/maoke/images/merchant/progress_bg_process_no_selected.png" alt="">
+                            <img id="never_no" class="map_result_icon" src="__PUBLIC__/maoke/images/merchant/progress_bg_process_over_selected.png" alt="">
+                        </div>
+                    </div>
+                    <div class="progress_main right">
+                        <div class="progress_item progress_link">
+                            <table>
+                                <tbody><tr>
+                                    <td>初次申请</td>
+                                    <td>
+                                        <span class="right">{$info.addtime}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>已加入购物车</td>
+                                    <td>
+                                        <span class="links left">
+                                            <a href="javascript:void(0);" onclick="showImg('{$info.cart_pic}')">查看截图</a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="progress_item progress_favorite" <if condition="($info.comfirm LT 98) and ($info.won_type eq 0)">style="display:none;"</if>>
+
+                            <table>
+                                <tbody>
+                                    <if condition="($info.colleshop_pic neq '') or ($info.collebaby_pic neq '')">
+                                    <tr><td>第一次回访任务</td><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <input type="hidden" value="1" id="first">
+                                        <td>收藏宝贝与店铺</td>
+                                        <td>
+                                            <div class="fav_box">
+                                                <notempty name="info.colleshop_pic">
+                                                 <div class="fav fav_product left">
+                                                    <img style="width:250px;height:290px" id="collect_goods" class="imgobj" src="{$info.colleshop_pic}" />
+                                                    <p class="fav_title">收藏宝贝</p>
+                                                 </div>
+                                                </notempty>
+                                                <notempty name="info.collebaby_pic">
+                                                 <div class="fav fav_shop right">
+                                                    <img style="width:250px;height:290px" id="collect_shop" class="imgobj" src="{$info.collebaby_pic}" />
+                                                    <p class="fav_title">收藏店铺</p>
+                                                 </div>
+                                                </notempty>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </if>
+                                    <notempty name="info.baby_link">
+                                    <tr><td>第<if condition="($info.colleshop_pic neq '') or ($info.collebaby_pic neq '')">二<else/>一</if>次回访任务</td><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <td>浏览店铺</td>
+                                        <td>
+                                         <volist name="info.baby_link" id="bl">
+                                          <p class="links_shop"><a href="{$bl}" target="_blank">{$bl}</a></p>
+                                         </volist>
+                                        </td>
+                                    </tr>
+                                    </notempty>
+                                </tbody>
+                            </table>
+
+                    	</div>
+            		</div>
+        		</div>
+    		</section>
+        </section>
+<script type="text/javascript">
+ $(function(){
+	 var myheight = 115;//默认高度
+	 <if condition="($info.baby_link neq '') or (($info.colleshop_pic neq '') and ($info.collebaby_pic neq ''))">myheight = 357;</if>//第一次回访任务未中奖
+	 <if condition="($info.baby_link neq '') and ($info.colleshop_pic neq '') and ($info.collebaby_pic neq '')">myheight = 594;</if>//第二次回访任务未中奖
+	 <if condition="($info.comfirm LT 98)">
+	   <if condition="($info.won_type eq 0)">myheight = 115;$('#default_win').show();
+	    <elseif condition="$info.won_type eq 1" />myheight = 357;$('#first_win').show();
+	    <elseif condition="$info.won_type eq 2" />myheight += 98;
+	   </if>
+	 <else />
+	  <if condition="($goods.endtime ELT time())">
+	   if(115 == myheight){
+		   myheight += 68;
+		   $('#default_no').show();
+	   } else if(357 == myheight){
+		   myheight += 65;
+		   $('#first_no').show();
+	   } else if(594 == myheight){
+	       $('#never_no').show();
+	   }
+	  </if>
+	 </if>
+	 $('#myheight').css('height', myheight+'px');
+
+ })
+
+
+  //查看截图
+ function showImg(src2){
+ 	var carImg = new Image();
+ 	carImg.src = src2;
+ 	setTimeout(function(){
+		var imgHeight = carImg.height ;
+ 		var imgWidth = carImg.width;
+ 		var obj = {
+	 		type: 1,
+	        title:'宝贝加购截图',
+	        shadeClose: true,
+	        closeBtn: true
+	 	}
+	 	if(imgWidth >= imgHeight){
+	 		obj.area = ['460px'];
+	 		obj.content = '<img src="'+src2+'" alt="加载失败" width="100%"></img>';
+	 	}else{
+	 		obj.area = ['375px','667px'];
+	 		obj.content = '<img src="'+src2+'" alt="加载失败" width="100%"></img>';
+	 	}
+	 	layer.open(obj);
+	 	},
+	300);
+ }
+</script>
+<include file="Layout:foot" />

@@ -1,0 +1,449 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">任务管理</span><span class="c-999 en">&gt;</span><span class="c-666">退款订单</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" >
+		<div>
+			<div class="pd-20">
+				<form action="" method="get" onsubmit="return checkSearch()">
+					<input type="hidden" name="m" value="Erp">
+					<input type="hidden" name="c" value="product">
+					<input type="hidden" name="a" value="refundorder">
+					<input type="hidden" name="status" value="{$status}">
+					<div class="text-c" style="margin-bottom: 10px;">
+						<if condition="($_SESSION['user']['role'] == 4 or $_SESSION['user']['role'] == 1) and $_GET['status'] == 2">
+							<select name="search_time" class="select select-box" style="width: 120px;">
+								<option value="1" <eq name="search_time" value="1">selected</eq>>完成时间</option>
+								<option value="2" <eq name="search_time" value="2">selected</eq>>退款时间</option>
+							</select>
+							<input type="text" id="datemin" name="time" class="input-text" style="width:100px;" placeholder="起始时间">
+							<input type="text" id="datemax" name="endtime" class="input-text" style="width:100px;" placeholder="结束时间">
+							<select name="choicezz" class="select select-box" style="width: 110px;">
+								<option value="">请选择站长</option>
+								<volist name="zz" id="vo">
+								<option value="{$vo.id}" <eq name="Think.get.choicezz" value="$vo.id">selected="selected"</eq>>{$vo.realname}</option>
+								</volist>
+							</select>
+							<select name="choiceyw" class="select select-box" style="width: 120px;">
+								<option value="">请选择业务员</option>
+								<volist name="yw" id="vo">
+									<option value="{$vo.id}" <eq name="Think.get.choiceyw" value="$vo.id">selected="selected"</eq>>{$vo.info}</option>
+								</volist>
+							</select>
+
+						</if>
+						<input type="text" class="input-text ordernum" style="width:150px" placeholder="店铺名搜索" id="" name="shopname" value="{$shopname}">
+						<input type="text" class="input-text ordernum" style="width:150px" placeholder="订单号搜索" id="" name="ordernum" value="{$ordernum}">
+						<input type="text" class="input-text wangwang" style="width:150px" placeholder="旺旺号搜索" id="" name="wangwang" value="{$wangwang}">
+						<button type="submit" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+						<if condition="$Think.get.status eq 2 ">
+						<a class="btn btn-success radius" onclick="downExecl()" href="javascript:;"><i class="Hui-iconfont">&#xe644;</i> 下载EXECL</a>
+						</if>
+					</div>
+				</form>
+				<div class="cl pd-5 bg-1 bk-gray" style="height: 34px; line-height: 34px;">
+
+					<!--财务 管理员-->
+					<if condition="($_SESSION['user']['role'] == 4  or $_SESSION['user']['role'] == 1) and $_GET['status'] == 2">
+						<div class="r" style="font-size: 12px; margin-top: -6px;margin-right: -6px;">
+							<table class="table table-border table-bordered">
+								<tr>
+									<td class="td-pd " width="150" style="padding: 1px 8px">退款总额：<font color="#ff9000">{$total_a|default=0}</font></td>
+									<td class="td-pd " width="150" style="padding: 1px 8px">本金：<font color="#ff9000">{$total_price|default=0}</font></td>
+									<td class="td-pd " width="150" style="padding: 1px 8px">佣金：<font color="#ff9000">{$total_commision|default=0}</font></td>
+									<td class="td-pd " width="150" style="padding: 1px 8px">红包：<font color="#ff9000">{$total_redbag|default=0}</font></td>
+									<td class="td-pd " width="150" style="padding: 1px 8px">共有数据：<strong>{$count}</strong> 条</td>
+								</tr>
+								<tr>
+									<td class="td-pd " style="padding: 1px 8px">已追回总额：<font color="#ff9000">{$total|default=0}</font></td>
+									<td class="td-pd " style="padding: 1px 8px">本金：<font color="#ff9000">{$totalprice|default=0}</font></td>
+									<td class="td-pd " style="padding: 1px 8px">佣金：<font color="#ff9000">{$totalcommision|default=0}</font></td>
+									<td class="td-pd " style="padding: 1px 8px">红包：<font color="#ff9000">{$totalredbag|default=0}</font></td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+					</if>
+					<!--商家-->
+					<if condition=" $_SESSION['user']['role'] == 5 and $_GET['status'] == 2">
+						<span class="r">退款总额：<font color="red">{$total|default=0}</font>，本金：<font color="red">{$totalprice|default=0}</font>，服务费：<font color="red">{$totalcost|default=0}</font>，其他：<font color="red">{$totalorder|default=0}</font>。</span>
+					</if>
+					<ul class="l comm-ul" style="display: flex;">
+						<if condition="$_SESSION['user']['role'] neq 4">
+						<li class="<if condition="$_GET['status'] == 0">current</if>"><a href="{:U('product/refundorder','status=0')}&shopname={$shopname}">全部</a></li>
+						</if>
+						<li class="<if condition="$_GET['status'] == 3 or ($_GET['status'] == '' and $_SESSION['user']['role'] == 4)">current</if>"><a href="{:U('product/refundorder','status=3')}&shopname={$shopname}">待审核</a></li>
+						<li class="<if condition="$_GET['status'] == 1">current</if>"><a href="{:U('product/refundorder','status=1')}&shopname={$shopname}">已拒绝</a></li>
+						<li class="<if condition="$_GET['status'] == 2">current</if>"><a href="{:U('product/refundorder','status=2')}&shopname={$shopname}">已返款</a></li>
+
+					</ul>
+				</div>
+
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+								<tr class="text-c">
+									<th>id</th>
+									<th width="80">完成时间</th>
+									<if condition="$Think.get.status eq 2">
+									<th width="80">退款时间</th>
+									</if>
+									<th width="6%">店铺名称</th>
+									<th width="80">主图</th>
+									<th width="8%">宝贝详情</th>
+									<th width="8%">关键词</th>
+									<if condition="($_SESSION['user']['role'] == 1 or $_SESSION['user']['role'] == 4) or ($_SESSION['user']['role'] == 3 or $_SESSION['user']['role'] == 2 )and $Think.get.status == 2">
+									<th width="5%">是否追回</th>
+									</if>
+									<th>下单价</th>
+									<if condition="$_SESSION['user']['role'] neq 2 and $_SESSION['user']['role'] neq 3">
+									<th>服务费</th>
+									</if>
+									<th>其它</th>
+									<if condition="$_SESSION['user']['role'] neq 5 and $_SESSION['user']['role'] neq 6">
+									<th>佣金</th>
+									</if>
+									<th>赠送礼品</th>
+									<th>订单编号</th>
+									<th>旺旺</th>
+									<th width="5%">异常信息</th>
+									<if condition="$_SESSION['user']['role'] neq 6 and $_SESSION['user']['role'] neq 5">
+									<th>业务员</th>
+									</if>
+                                    <if condition="$_SESSION['user']['role'] == 3">
+									<th>刷单员</th>
+                                    </if>
+									<if condition="$_SESSION['user']['role'] == 6">
+										<th>刷单员</th>
+									</if>
+									<if condition="$_SESSION['user']['role'] == 4">
+										<th>刷单员</th>
+									</if>
+									<if condition="$_SESSION['user']['role'] ==1 or $_SESSION['user']['role'] ==4 or $_SESSION['user']['role'] ==6">
+									<th>站长</th>
+									</if>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							<volist name="task" id="vo">
+								<tr class="text-c va-m">
+									<td>{$vo.id}</td>
+									<td>{$vo.edittime|date="j/n H:i",###}</td>
+									<if condition="$Think.get.status eq 2 ">
+									<td>{$vo.successtime|date="j/n H:i",###}</td>
+									</if>
+									<td>{$vo.shopname}</td>
+									<td>
+										<a href="javascript:;" title="鼠标右键复制图片"><img width="80" height="80" class="product-thumb" src="{$vo.goods_pic}"></a>
+									</td>
+									<td>
+										<a href="{$vo.goods_url}" style="color: #06c;" target="_blank" title="点击查看详情">	{$vo.goods_title}</a>
+									</td>
+									<td>{$vo.keyword}</td>
+									<if condition="($_SESSION['user']['role'] == 1 or $_SESSION['user']['role'] == 4) or ($_SESSION['user']['role'] == 3  or $_SESSION['user']['role'] == 2 ) and $Think.get.status == 2">
+										<td><eq name="vo.repay" value="2">否</eq><eq name="vo.repay" value="1">是</eq></td>
+									</if>
+									<td><b style="font-size: 11px;">¥</b> {$vo.actual_price}</td>
+									<if condition="$_SESSION['user']['role'] neq 2 and $_SESSION['user']['role'] neq 3">
+									<td><b style="font-size: 11px;">¥</b> {$vo.cost}</td>
+									</if>
+									<td><b style="font-size: 11px;">¥</b> {$vo.order_cost|default=0}</td>
+									<if condition="$_SESSION['user']['role'] neq 5 and $_SESSION['user']['role'] neq 6">
+									<td>{$vo.commision}</td>
+									</if>
+									<td>{$vo.goods_zeng|default='无'}</td>
+									<td>
+
+										<span class="<if condition='$vo.abn neq null'>label label-danger radius</if>">{$vo.tb_item}</span>
+									</td>
+									<td>{$vo.wangwang}</td>
+									<td>
+										<if condition="$vo.abn neq null">
+										<a href="javascript:;" onclick="referAbn('退款订单信息','{:U('product/abninfo','id='.$vo['id'])}','500','500')">查看详情</a><br>
+											<if condition="$vo.reason neq null">
+											拒绝理由:{$vo.reason}
+										</if>
+											<else />
+										</if>
+									</td>
+									<if condition="$_SESSION['user']['role'] neq 6 and $_SESSION['user']['role'] neq 5">
+									<td>{$vo.f_info}</td>
+									</if>
+                                    <if condition="$_SESSION['user']['role'] == 3">
+                                    <td>{$vo.realname_s}</td>
+                                    </if>
+									<if condition="$_SESSION['user']['role'] == 6">
+										<td>{$vo.realname_s}</td>
+									</if>
+									<if condition="$_SESSION['user']['role'] == 4">
+										<td>{$vo.realname_s}</td>
+									</if>
+									<if condition="$_SESSION['user']['role'] ==1 or $_SESSION['user']['role'] ==4 or $_SESSION['user']['role'] ==6">
+									<td>{$vo.realname}</td>
+									</if>
+									<td>
+										<!--刷单员-->
+										<if condition="$_SESSION['user']['role'] == 2">
+
+											<if condition="$vo.abn_status == 0">
+											<a href="javascript:;" onclick="abnCheck({$vo.id})">审核</a>
+											</if>
+											<if condition="$vo.abn_status == 4">退款成功</if>
+											<if condition="$vo.abn_status == 1">待财务审核</if>
+											<if condition="$vo.abn_status == 3">财务驳回</if>
+											<if condition="$vo.abn_status == 2">已驳回</if>
+										</if>
+										<!--财务-->
+										<if condition="$_SESSION['user']['role'] == 4">
+											<if condition="$vo.abn_status == 1">
+												<a href="javascript:;" onclick="financeCheck({$vo.id})">审核</a>
+
+											</if>
+											<if condition="$vo.abn_status == 4">退款成功</if>
+											<if condition="$vo.abn_status == 0">待刷单员审核</if>
+											<if condition="$vo.abn_status == 2">刷单员驳回</if>
+											<if condition="$vo.abn_status == 3">财务驳回</if>
+										</if>
+										<!--超级管理员-->
+										<if condition="$_SESSION['user']['role'] == 1 or $_SESSION['user']['role'] == 6 or $_SESSION['user']['role'] == 3">
+											<if condition="$vo.abn_status == 0">待刷单员审核</if>
+											<if condition="$vo.abn_status == 1">待财务审核</if>
+											<if condition="$vo.abn_status == 2">刷单员驳回</if>
+											<if condition="$vo.abn_status == 3">财务驳回</if>
+											<if condition="$vo.abn_status == 4">退款成功</if>
+										</if>
+										<!--商家-->
+										<if condition="$_SESSION['user']['role'] == 5">
+
+											<if condition="$vo.abn_status == 4">退款成功,<br>该款项已返回至余额</if>
+											<if condition="$vo.abn_status == 2 or $vo.abn_status == 3">
+												<a href="javascript:;" title="撤销" onclick="revoke({$vo.id})">撤销</a>
+												<a href="javascript:;" title="此订单有误？申请处理！" onclick="referAbn('订单异常','{:U('product/abn','id='.$vo['id'])}','500','600')">提交异常</a>
+
+											</if>
+											<if condition="$vo.abn_status == 0 or $vo.abn_status == 1">待审核</if>
+										</if>
+										<!-- <if condition="$_SESSION['user']['role'] == 3">
+											<if condition="$vo.abn_status == 4"><span class="label label-success radius">已退款</span></if>
+											<if condition="$vo.abn_status == 2 or $vo.abn_status == 3"><span class="label label-danger radius">已拒绝</span></if>
+											<if condition="$vo.abn_status == 0 or $vo.abn_status == 1"><span class="label label-orange radius">处理中</span></if>
+										</if> -->
+									</td>
+									</tr>
+								</volist>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			var start_time = "{$starttime}",end_time = "{$endtime}";
+			laydate.render({
+			  	elem: '#datemin',
+			   	min: '2018-01-01',
+				value:"{$starttime}",
+			   	max: '',
+			   	done: function(value, date){
+					start_time = value;
+					if(new Date(value).getTime() > new Date(end_time).getTime()){
+						$("#datemax").val(value)
+					}
+			  	}
+			});
+			laydate.render({
+			  	elem: '#datemax',
+			  	min: '2018-01-01',
+                value:"{$endtime}",
+		   		max: '',
+			  	done: function(value, date){
+			  		end_time = value;
+					if(new Date(value).getTime() < new Date(start_time).getTime()){
+						$("#datemin").val(value)
+					}
+			  	}
+			});
+		})
+		/*产品-申请上线*/
+		function product_fukuan(obj, id,sun,cost) {
+			$.ajax({
+				url:"{:U('Product/fukuan')}",
+				data:{id:id,sun:sun,cost:cost},
+				type:'post',
+				success:function (msg) {
+					if( msg.status == 1){
+                        layer.msg(msg.msg, {icon: 1, time: 2000},function () {
+                            window.location.reload();
+                        });
+					}else{
+                        layer.msg(msg.msg, { icon: 2, time: 2000 },function () {
+                            window.location.reload();
+                        });
+					}
+                }
+			});
+		}
+		//刷单员审核
+		function abnCheck(id,type) {
+			layer.confirm('确定通过吗？', {
+				btn: ['通过', '不通过', '取消'],
+				shade: false,
+				closeBtn: 0
+			}, function() {
+				//确认通过要补充信息给财务看到
+				layer.open(
+					{	content: '<div id="isreturn"><span style="margin-right:20px;"><input type="radio" name="isreturn" value="1" style="width:16px;height:16px;margin-right:5px;">钱已返回</span><span><input type="radio" value="2" name="isreturn" checked style="width:16px;height:16px;margin-right:5px;">钱未返回</span></div>',
+						title:'提示',
+						btn: ['确定', '取消',],
+						btn1: function(index, layero){
+							var val = $("#isreturn input[type=radio]:checked").val();
+							if(val){
+                                $.ajax({
+                                    type:'post',
+                                    url:"{:U('product/abnCheck')}",
+                                    data:{id:id,val:val},
+                                    success:function (msg) {
+                                        if(msg.msg == 1){
+                                            layer.msg('已通过', {icon: 6, time: 1000},function () {
+                                                window.location.reload();
+                                            });
+                                        }
+                                    }
+                                });
+							}else{
+								alert('请确定钱是否返回！')
+							}
+						},
+						btn2: function(index, layero){
+							layer.close(index)
+						},
+						cancel: function(){
+
+					  	}
+					});
+
+			}, function(index) {
+				layer.prompt({
+				  	formType: 2,
+				  	title: '请输入驳回原因'
+				}, function(value, index, elem){
+					layer.close(index);
+				  	$.ajax({
+	                    type:'post',
+	                    url:"{:U('product/reject')}",
+	                    data:{id:id,reason:value},
+	                    success:function (msg) {
+	                        if(msg.msg == 1){
+	                            layer.msg(msg.info, {icon: 1, time: 1000 },function(){
+	                            	 window.location.reload();
+	                            });
+	                        }else{
+                                layer.msg(msg.info, {icon: 1, time: 1000 },function(){
+                                    window.location.reload();
+                                });
+							}
+	                    }
+                	});
+				});
+			});
+		}
+		/*商家已发布任务展示*/
+		function showProDetail(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+		function showTaskPro(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+		function checkSearch(){
+//			if(!$.trim($(".ordernum").val()) && !$.trim($(".wangwang").val())){
+//				layer.msg("请至少输入一个搜索项！");
+//				return false;
+//			}
+			return true;
+		}
+		function referAbn(title, url, w, h){
+			layer_show(title, url, w, h);
+		}
+		function revoke(id){
+
+            $.post("{:U('product/revoke')}",{id:id},function(data){
+               if(data.msg == 1){
+                   //成功
+                   layer.msg(data.info, {icon: 1, time: 2000},function () {
+                       window.location.reload();
+                   });
+			   }else{
+                   layer.msg(data.info, {icon: 2, time: 2000},function () {
+                       window.location.reload();
+                   });
+			   }
+            })
+		}
+
+		//财务审核
+        function financeCheck(id,type) {
+
+            layer.confirm('确定通过吗？', {
+                btn: ['通过', '不通过', '取消'],
+                shade: false,
+                closeBtn: 0
+            }, function() {
+
+                $.ajax({
+                    type:'post',
+                    url:"{:U('product/financeCheck')}",
+                    data:{id:id},
+                    success:function (msg) {
+                        if(msg.msg == 1){
+                            layer.msg(msg.info, {icon: 6, time: 1000},function () {
+                                window.location.reload();
+                            });
+                        }else{
+                            layer.msg(msg.info, {icon: 5, time: 1000},function () {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }, function(index) {
+                layer.prompt({
+                    formType: 2,
+                    title: '请输入驳回原因'
+                }, function(value, index, elem){
+                    layer.close(index);
+                    $.ajax({
+                        type:'post',
+                        url:"{:U('product/reject')}",
+                        data:{id:id,reason:value},
+                        success:function (msg) {
+                            if(msg.msg == 1){
+                                layer.msg(msg.info, {icon: 1, time: 1000 },function(){
+                                    window.location.reload();
+                                });
+                            }else{
+                                layer.msg(msg.info, {icon: 1, time: 1000 },function(){
+                                    window.location.reload();
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        }
+        function downExecl(){
+            if($("tbody tr").length <= 0){
+                layer.msg('无数据，请重新搜索！');
+            }else{
+                window.location.href = "{:U('product/excel_abn')}&shopname={$shopname}&ordernum={$ordernum}&wangwang={$wangwang}&time={$starttime}&endtime={$endtime}&choicezz={$Think.get.choicezz}&choiceyw={$Think.get.choiceyw}";
+            }
+        }
+	</script>
+</block>

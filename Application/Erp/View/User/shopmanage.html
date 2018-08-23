@@ -1,0 +1,64 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">个人中心</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+
+					<a href="javascript:;" class="btn btn-success radius" onclick="bindShop()">添加店铺</a>
+				</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th>店铺名称</th>
+								<th>旺旺</th>
+								<th>店铺网址</th>
+								<th width="333px">状态</th>
+							</tr>
+						</thead>
+						<tbody>
+							<volist name="data" id="info">
+							<tr class="text-c">
+								<td>{$info.shopname}</td>
+								<td>{$info.wangwang}</td>
+								<td><a href="{$info.url}" title="点击查看" target="_blank">点击查看</a></td>
+								<td style="position: relative;">
+									<if condition="$info.status eq 2"><span class="label label-success radius">已审核</span></if>
+									<if condition="$info.status eq 0"><span class="label label-warning radius">待审核</span></if>
+									<if condition="$info.status eq 1">
+										<span class="label label-danger radius">已拒绝</span>
+										<a href="javascript:;" title="修改" class="editimg" onclick="editShop('{$info.id}')" ></a></if>
+								</td>
+							</tr>
+							</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+
+	//绑定店铺
+	function bindShop(){
+		layer_show('绑定店铺', "{:U('User/shop')}", '800', '300');
+	}
+	function editShop(id){
+		layer_show('绑定店铺', "{:U('User/editshop')}&id="+id, '800', '300');
+	}
+	function isAdd() {
+
+         window.location.href="{:U('product/addproductnew')}";
+
+    }
+</script>
+</block>
+

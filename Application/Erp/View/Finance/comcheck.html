@@ -1,0 +1,242 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">佣金审核</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action="" method="get" onsubmit="return checkSearch()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="finance">
+				<input type="hidden" name="a" value="comcheck">
+				<input type="hidden" name="status" value="{$status}">
+				<div class="text-c" >
+					日期：<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" placeholder="起始时间">
+					<input type="text" id="datemax" name="endtime" class="input-text" style="width:150px;" placeholder="结束时间">
+					<select name="applicant" class="select select-box" style="width: 200px;">
+						<option value="">全部</option>
+						<volist name="userdata" id="vo">
+						<option value="{$vo.realname}" <eq name="Think.get.applicant" value="$vo.realname">selected</eq> >{$vo.realname}</option>
+						</volist>
+					</select>
+					<button type="submit" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl bg-1 bk-gray mt-20" style="height: 34px; line-height: 34px;">
+				<ul class="l comm-ul" style="display: flex;">
+					<li class="<if condition="$_GET['status'] == 0">current</if>"><a href="{:U('finance/comcheck','status=0')}">待审核</a></li>
+					<!--<li class="<if condition="$_GET['status'] == 1">current</if>"><a href="{:U('finance/comcheck','status=1')}">待收款</a></li>-->
+					<li class="<if condition="$_GET['status'] == 3">current</if>"><a href="{:U('finance/comcheck','status=3')}">已收款</a></li>
+					<li class="<if condition="$_GET['status'] == 2">current</if>"><a href="{:U('finance/comcheck','status=2')}">已拒绝</a></li>
+					<li class="<if condition="$_GET['status'] == 4">current</if>"><a href="{:U('finance/comcheck','status=4')}">异常</a></li>
+				</ul>
+				<span class="r"><if condition="$_GET['status'] == 3">今日收款金额：{$nowmoney|default=0},收款总额：{$allmoney|default=0}</if> 共：<strong>{$day|default=0}</strong> 条</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr>
+								<th colspan="8">审核记录</th>
+							</tr>
+							<tr class="text-c">
+								<if condition="$_GET['status'] == 0">
+									<th>申请时间</th>
+									<th>申请人</th>
+									<th>申请金额</th>
+									<th>操作</th>
+								</if>
+								<if condition="$_GET['status'] == 1 or $_GET['status'] == 3">
+									<th>申请时间</th>
+									<th>申请人</th>
+									<th>申请金额</th>
+									<th width="80">打款截图</th>
+									<th>打款时间</th>
+									<th>备注</th>
+									<!--<th>异常信息</th>-->
+								</if>
+								<if condition="$_GET['status'] == 2">
+									<th>申请时间</th>
+									<th>申请人</th>
+									<th>申请金额</th>
+									<th>原因</th>
+								</if>
+								<if condition="$_GET['status'] == 4">
+									<th>申请时间</th>
+									<th>异常时间</th>
+									<th>申请人</th>
+									<th>申请金额</th>
+									<th>异常信息</th>
+								</if>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="data" id="vo">
+							<tr class="text-c">
+								<if condition="$_GET['status'] == 0">
+									<td>{$vo.addtime|date="j/n H:i",###}</td>
+									<td><a href="javascript:;" onclick="showZhanInfo(this,{$vo.user_id})" style="text-decoration: underline;">{$vo.realname}</a></td>
+									<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+									<td>
+										<a onclick="checkCommisson('{$vo.id}')" href="javascript:;" title="审核"><span class="label label-warning radius">待审核</span></a>
+									</td>
+								</if>
+								<if condition="$_GET['status'] == 1 or $_GET['status'] == 3">
+									<td>{$vo.addtime|date="j/n H:i",###}</td>
+									<td><a href="javascript:;" onclick="showZhanInfo(this,{$vo.user_id})" style="text-decoration: underline;">{$vo.realname}</a></td>
+									<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+									<td>
+										<if condition="$vo.money_pic != ''">
+										<a href="javascript:;" title="鼠标右键复制截图">
+											<img width="80" height="80" class="product-thumb" src="__ROOT__/upload/{$vo.endtime|date='Ymd',###}/{$vo.money_pic}"  />
+										</a>
+										</if>
+									</td>
+									<td>{$vo.endtime|default=''|date="j/n H:i",###}</td>
+									<td>{$vo.note}</td>
+									<!--<td><a href="javascript:;" title="异常详情" onclick="layer_show('异常详情','{:U(\'finance/abninfo\',\'id=\')}'+id,'500','500')">查看详情</a></td>	-->
+								</if>
+								<if condition="$_GET['status'] == 2">
+									<td>{$vo.addtime|date="j/n H:i",###}</td>
+									<td><a href="javascript:;" onclick="showZhanInfo(this,{$vo.user_id})" style="text-decoration: underline;">{$vo.realname}</a></td>
+									<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+									<td>{$vo.reason}</td>
+								</if>
+								<if condition="$_GET['status'] == 4">
+									<td>{$vo.addtime|date="j/n H:i",###}</td>
+									<td>{$vo.abntime|date="j/n H:i",###}</td>
+									<td><a href="javascript:;" onclick="showZhanInfo(this,{$vo.user_id})" style="text-decoration: underline;">{$vo.realname}</a></td>
+									<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+									<td><notempty name="vo.abn_pic">
+										<a href="javascript:;" title="鼠标右键复制截图">
+											<img width="80" class="product-thumb" src="{$vo.abn_pic}"  />
+										</a>
+									</notempty>
+										<br>
+										异常说明：{$vo.abn_info}</td>
+								</if>
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		 $(function(){
+			var start_time = "{$starttime}",end_time = "{$endtime}";
+			laydate.render({
+			  	elem: '#datemin',
+			   	min: '2018-01-01',
+				value:"{$starttime}",
+			   	max: '',
+			   	done: function(value, date){
+					start_time = value;
+					if(new Date(value).getTime() > new Date(end_time).getTime()){
+						$("#datemax").val(value)
+					}
+			  	}
+			});
+			laydate.render({
+			  	elem: '#datemax',
+			  	min: '2018-01-01',
+                value:"{$endtime}",
+		   		max: '',
+			  	done: function(value, date){
+			  		end_time = value;
+					if(new Date(value).getTime() < new Date(start_time).getTime()){
+						$("#datemin").val(value)
+					}
+			  	}
+			});
+        })
+		//审核
+		function checkCommisson(id){
+
+		    var id=id;
+			var role = '{$_SESSION['user']['role']}',post_url = '';
+			if(role == 3){
+				post_url = '{:U('finance/referz','id=')}'+id;
+			}else if(role == 4 || role == 1){
+				post_url = '{:U('finance/refer','id=')}'+id;
+			}
+//			layer.confirm('确定通过吗？', {
+//				btn: ['通过', '不通过','取消'],
+//			}, function () {
+//				$.post("{:U('finance/checkmoney')}", {id: id,msg: 1}, function (data) {
+//					if (1 == data.msg) {
+//						layer.msg(data.info, {icon: 1,time: 1000},function(){
+//							console.log(id)
+//							referCommisson('打款',"{:U('finance/refer')}&id="+id,'500','500');
+//						});
+//					} else {
+//						layer.msg(data.info, {icon: 2,time: 1000},function(){
+//							window.location.reload();
+//						});
+//					}
+//				}, 'json');
+//			},function(index){
+//				layer.prompt({
+//				  	formType: 2,
+//				  	title: '请输入驳回原因'
+//				}, function(value, index, elem){
+//					layer.close(index);
+//					$.post("{:U('finance/checkmoney')}", {id: id,msg: 2,reason:value}, function (data) {
+//						if (1 == data.msg) {
+//							layer.msg(data.info, {icon: 1,time: 1000},function(){
+//								window.location.reload();
+//							});
+//						} else {
+//							layer.msg(data.info, {icon: 2,time: 1000},function(){
+//								window.location.reload();
+//							});
+//						}
+//					}, 'json');
+//				})
+//			},function(index){
+//				layer.close(index);
+//			});
+			referCommisson('审核',post_url,'600','500')
+		}
+		function referCommisson(title,url,w,h){
+			layer_show(title,url,w,h);
+		}
+		function checkSearch(){
+//			if(!$.trim($(".applicant").val())){
+//				layer.msg("请输入申请人姓名");
+//				return false;
+//			}
+			return true;
+		}
+		//商家联系方式
+		function showZhanInfo(el,id){
+			var role = "{$_SESSION['user']['role']}";
+			if(role == 4 || role == 1){
+//				var etc_balance = 0,site_balance = 0,card = 0;
+//				$.ajax({
+//					url:"{:U('finance/getuserdata')}",
+//					data:{id:id},
+//					type:'post',
+//	                async: false,
+//					success:function(data){
+//						if(data.msg == 1){
+//							etc_balance = data.info.money; //站长余额
+//		                    site_balance = data.info.allmoney; //站点余额
+//		                    card = data.info.card;  //银行卡
+//						}
+//	                }
+//				});
+//				layer.open({
+//				  type: 1,
+//				  title:'站点信息',
+//				  area: ['500px', '118px'], //宽高
+//				  content:'<table class="table table-border table-bordered table-bg table-hover table-sort"><thead><tr class="text-c"><th>站长余额</th><th>站点余额</th><th>银行卡</th></tr></thead><tbody><tr class="text-c"><td><b style="font-size:11px">¥</b>'+etc_balance+'</td><td><b style="font-size:11px">¥</b>'+site_balance+'</td><td>'+card+'</td></tr></tbody></table>'
+//				});
+				layer_show('站点信息','{:U('finance/getuserdata','id=')}'+id,'500','500')
+			}
+		}
+	</script>
+</block>

@@ -1,0 +1,164 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+
+					<!--右侧个人中心-->
+					<div id="my_main" class="content left" style="min-height: 732px;">
+						
+						<div class="member_power">
+							<!--个人信息-->
+							<div class="left personal_details">
+								<div class="left  avatar">
+									<img src="__PUBLIC__/maoke/images/merchant/sj_grzx_icon_touxiang_default.png" alt="">
+								</div>
+								<div class="left username">
+									<h1>{$userdata.adminname}</h1>
+									<p>会员等级：
+										<span>普通会员</span>
+									</p>
+									<!--<p>到期时间：<b>2018-05-21</b>
+										<a href="#" style="color:#005ea7;margin-left: 10px">续费</a>
+									</p> -->
+									<input type="button" value="发布试用任务" onclick="location.href='{:U(\'Actcenter/publish1\')}'" style="margin-top:10px;">
+									<!-- <input type="button" value="发布流量任务" onclick="issue_task()"> -->
+								</div>
+							</div>
+							<!--试用任务-->
+							<div class="left try_task">
+								<div class="try_monery">
+									<p style="padding:5px 0;">
+										可用余额：<span><?php echo $userdata['fund']?$userdata['fund']:'0.00';?></span>元
+										<a href="{:U('Merchant/finance')}">充值</a>
+									</p>
+									<p style="padding:5px 0;">
+										冻结押金：<span><?=$userdata['deposit']?$userdata['deposit']:'0.00'?></span>元
+									</p>
+								</div>
+								<p style="padding:5px 0; font-size: 12px;">
+									余&nbsp; &nbsp;&nbsp; &nbsp;额：可用来支付平台一切费用，可提现。
+								</p>
+	
+								<p style="padding:5px 0;font-size: 12px;">
+									冻结押金：试用任务中支付的押金和保证金费用，试用任务结束，押金打给试客，保证金返还到可用押金上
+								</p>
+	
+							
+							</div>
+						</div>
+	
+						<div class="main-pannel left" style="width: 780px">
+							
+							<!--任务说明-->
+							<div class="task_specification left">
+								<h2>待处理任务</h2>
+								<div class="task_list">
+									<div class="task">
+										<p class="task_title">试客已下单，待发货：</p>
+										<ul class="shop_list clearfix">
+											<foreach name="total_order" item="vo">
+											<a target="_blank" href="{:U('Order/orderlist')}&type=10&shop_id={$vo.id}">
+												<li class="shop actived left">
+	
+													<p class="shop_name">{$vo.shopname} <img src="__PUBLIC__/maoke/images/merchant/<?php if($vo['type']==2){echo 'bg_tm_default.png';}else{echo 'bg_tb_default.png';}?>" alt="">
+													</p>
+													<p class="shop_order">待处理：（<b><?=$vo['count']>0?$vo['count']:0?></b>）</p>
+												</li>
+											</a>
+											</foreach>
+										</ul>
+									</div>
+								</div>
+								<div class="task_list">
+									<div class="task">
+										<p class="task_title">试客已在领吧评价，待审核评价：</p>
+										<ul class="shop_list clearfix">
+											<foreach name="total_comment" item="vo">
+											<a target="_blank" href="{:U('Order/orderlistcheck')}&type=20&shop_id={$vo.id}">
+												<li class="shop actived left">
+	
+													<p class="shop_name">{$vo.shopname} <img src="__PUBLIC__/maoke/images/merchant/<?php if($vo['type']==2){echo 'bg_tm_default.png';}else{echo 'bg_tb_default.png';}?>" alt="">
+													</p>
+													<p class="shop_order">待处理：（<b><?=$vo['count']>0?$vo['count']:0?></b>）</p>
+												</li>
+											</a>
+											</foreach>
+										</ul>
+									</div>
+								</div>
+								<div class="task_list">
+									<div class="task">
+										<p class="task_title">试客已在淘宝评价，待确认评价：</p>
+										<ul class="shop_list clearfix">
+											<foreach name="total_end" item="vo">
+											<a target="_blank" href="{:U('Order/orderlistsure')}&type=30&shop_id={$vo.id}">
+												<li class="shop actived left">
+	
+													<p class="shop_name">{$vo.shopname} <img src="__PUBLIC__/maoke/images/merchant/<?php if($vo['type']==2){echo 'bg_tm_default.png';}else{echo 'bg_tb_default.png';}?>" alt="">
+													</p>
+													<p class="shop_order">待处理：（<b><?=$vo['count']>0?$vo['count']:0?></b>）</p>
+												</li>
+											</a>
+											</foreach>
+										</ul>
+									</div>
+								</div>
+								<!--<div class="task_list">
+									<div class="task">
+										<p class="task_title">试客已在淘宝追评，待确认追评：</p>
+										<ul class="shop_list clearfix">
+											<a target="_blank" href="{:U('Actcenter/orderlistadd')}">
+												<li class="shop actived left">
+													<p class="shop_name">鼎诚金芝麻专卖店 <img src="__PUBLIC__/maoke/images/merchant/bg_tm_default.png" alt="">
+													</p>
+													<p class="shop_order">待处理：（<b>0</b>）</p>
+												</li>
+											</a>
+											<a target="_blank" href="{:U('Actcenter/orderlistadd')}">
+												<li class="shop actived left">
+													<p class="shop_name">礼洛数码配件专营店 <img src="__PUBLIC__/maoke/images/merchant/bg_tm_default.png" alt="">
+													</p>
+													<p class="shop_order">待处理：（<b>0</b>）</p>
+												</li>
+											</a>
+											<a target="_blank" href="{:U('Actcenter/orderlistadd')}">
+												<li class="shop actived left">
+													<p class="shop_name">恒通伟数码 <img src="__PUBLIC__/maoke/images/merchant/bg_tb_default.png" alt="">
+													</p>
+													<p class="shop_order">待处理：（<b>0</b>）</p>
+												</li>
+											</a>
+	
+										</ul>
+									</div>
+								</div>
+							--></div>
+						</div>
+						<!-- 最新资讯 -->
+						<div class="news-list right">
+							<h2>最新资讯<a href="{:U('Message/index')}" class="more right" >   查看更多&nbsp;&gt;</a></h2>
+	
+						
+							<foreach name="newsdata" item="vo">
+								<p class="news">
+									<a target="_blank" href="{:U('Message/news_detail',array('id'=>$vo['id']))}">{$vo.title}</a>
+								</p>
+							</foreach>
+						</div>
+	
+						<!-- 商家互链广告位 -->
+						<!-- <div class="news-list right" style="padding-bottom:0px;">
+	
+							<a href="#" class="more right" target="_blank">
+								<img src="__PUBLIC__/maoke/images/merchant/darenjishi_shikeba.gif" width="250" height="140">
+							</a>
+	
+						</div> -->
+					</div>
+					<!-- my_main end -->
+				</div>
+			</section>
+		<!-- page-wrapper end -->
+		</div>
+		<!-- wrapper -->
+	</div>
+	<include file="Layout:foot" />

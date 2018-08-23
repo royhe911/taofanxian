@@ -1,0 +1,419 @@
+<extend name="public/base" />
+<block name="nav">
+    <span class="c-666">任务中心</span><span class="c-999 en">&gt;</span><span class="c-666">任务列表</span>
+</block>
+<block name="menu">
+    <div class="Hui-article" style="position: absolute;">
+        <div>
+            <div class="pd-20">
+                <div class="cl pd-5 bg-1 bk-gray" style="line-height: 29px;">
+                    <span class="l">
+                        <a class="btn btn-primary radius" href="javascript:;" onclick="getTask({$_SESSION['user']['id']},0)"><i class="Hui-iconfont">&#xe600;</i> 提取中额任务</a>
+                        <a class="btn btn-success radius" href="javascript:;" onclick="getTask({$_SESSION['user']['id']},1)"><i class="Hui-iconfont">&#xe600;</i> 提取小额任务</a>
+                        <a class="btn btn-danger radius" href="javascript:;" onclick="getTask({$_SESSION['user']['id']},2)"><i class="Hui-iconfont">&#xe600;</i> 提取大额任务</a>
+                    </span>
+
+                </div>
+                <div class="cl pd-5 bg-1 bk-gray" style="line-height: 29px; margin-top: 10px;">
+                    <span class="l">&nbsp;&nbsp;今日限领小额任务：<b style="color: red;">{$num_now}</b> 单，中额任务：<b style="color: red;">{$mnum_now}</b> 单，大额任务：<b style="color: red;">{$lnum_now}</b> 单</span>
+                    <span class="r">今日已取任务数量：<b style="color: red;">{$ha_count|default=0}</b> 单。今日已完成任务数量：<b style="color: red;">{$count|default=0}</b> 单，本金：<strong>{$price|default=0}</strong> 元，佣金：<strong>{$commision|default=0}</strong> 元</span>
+                </div>
+                <div class="mt-20">
+                    <div class="dataTables_wrapper">
+                        <table class="table table-border table-bordered table-bg table-hover table-sort">
+                            <thead>
+                                <tr class="text-c">
+                                    <th width="8%">店铺名称</th>
+                                    <th width="80">主图</th>
+                                    <th width="7%">宝贝详情</th>
+                                    <th>赠送礼品</th>
+                                    <th width="7%">关键词</th>
+                                    <th width="9%">备注</th>
+                                    <th>单价</th>
+                                    <th>其它</th>
+                                    <th width="45px">下单价</th>
+                                    <!-- <th>红包支出</th> -->
+                                    <th>订单号</th>
+                                    <th>旺旺号</th>
+                                    <th width="45px">佣金</th>
+                                    <th>业务员</th>
+                                    <th>操作</th>
+                                    <th width="5%">记事本</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="info" id="vo">
+                                <tr class="text-c va-m">
+                                    <td>{$vo.shopname}</td>
+                                    <td>
+                                        <a href="javascript:;" title="鼠标右键复制图片"><img width="80" height="80" class="product-thumb" src="{$vo.goods_pic}"></a>
+                                    </td>
+                                    <td class="text-l">
+                                        <a style="text-decoration:none" href="{$vo.goods_url}" target="_blank"> <b class="text-success">{$vo.goods_title}</b></a>
+                                    </td>
+                                    <td>{$vo.goods_zeng}</td>
+                                    <td>{$vo.keyword}</td>
+                                    <td class="sku">{$vo.sku|default='无'}</td>
+                                    <td><b style="font-size: 11px;">¥ </b>{$vo.price}</td>
+                                    <td class="kong"><b style="font-size: 11px;">¥ </b> <span>{$vo.empty_cost|default=0}</span></td>
+                                    <td class="good-price order-input"></td>
+                                    <!-- <td class="order-input redbag"></td> -->
+                                    <td class="order-num order-input"></td>
+                                    <td class="order-wang order-input"></td>
+
+                                    <td class="order-commision order-input"></td>
+                                    <td>{$vo.yw_info}</td>
+                                    <td>
+                                        <a onClick="orderNum(this,0)" href="javascript:;" class="order-a" title="输入订单号" style="display: block; margin-bottom: 10px;">
+                                            <span class="label label-primary radius">输入信息</span>
+                                        </a>
+                                        <a href="javascript:;" class="sure-a" style="display: none;" onclick="orderSure(this,{$vo.id},0,{$vo.price})">确定</a>
+                                        <a href="javascript:;" class="cancel-a" style="display: none;" onclick="orderCancel(this)">取消</a>
+                                        <a onClick="orderRevoke({$vo.id})" href="javascript:;" class="order-a" title="退回任务" style="display: block;margin-bottom: 10px;">
+                                            <span class="label label-danger radius">退回任务</span>
+                                        </a>
+                                        
+                                        <a onClick="copyLink({$vo.id})" href="javascript:;" class="order-a" title="复制短链接" style="display: block;">
+                                            <span class="label label-success radius">复制短链接</span>
+                                        </a>
+                                        
+                                    </td>
+                                    <td style="padding: 5px 5px;">
+                                        <textarea class="beizhuyangshi js-text-aera" name="remark" id="{$vo.id}" cols="20" rows="3">{$vo.remark}</textarea>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="js">
+    <script type="text/javascript">
+        $(function(){
+            $(".sku").each(function(){
+                var sku_str = $(this).text();
+                if(sku_str != ','){
+                    var sku_arr = sku_str.split(',');
+                    $(this).html('');
+                    for (var s = 0;s < sku_arr.length;s++) {
+                        if(s == sku_arr.length - 1){
+                            $(this).append('<span class="label label-info label-sku" style="white-space:inherit">'+$.trim(sku_arr[s])+'</span>');
+                        }else {
+                            if($.trim(sku_arr[s]) == '货比三家' || $.trim(sku_arr[s]) == '关注店铺' || $.trim(sku_arr[s]) == '浏览店内两个宝贝以上' || $.trim(sku_arr[s]) == '浏览详情到底5分钟以上' ){
+                                
+                            }else{
+                                $(this).append('<span class="label label-info label-sku">'+sku_arr[s]+'</span>');
+                            }
+                            
+                        }
+                    }
+                }else{
+                    $(this).html('');
+                }
+            })
+            // 任务备注
+            $('.js-text-aera').blur(function () {
+                var id=$(this).attr('id');
+                var remark=$(this).val();
+                $.post("{:U('Task/add_remark')}",{task_id:id,remark:remark},function(msg){
+
+                });
+            });
+        })
+
+        //取任务
+        var section=0;
+        var disableButton = false,is_now = false;
+        function getTask(id,type){
+            if ($('.va-m').length < 15){
+                if(!disableButton){
+                    var uid = {$_SESSION['user']['id']};
+                    var islimit = {$type};
+                    if(islimit == 1){
+                        if(type){
+                            $.post("{:U('Task/get_task')}",{user_id:id,type:type},function(msg){
+                                if(msg.status == 1){
+                                    layer.msg(msg.msg,{icon:1,time:1000},function(){
+                                        window.location.reload()
+                                    });
+                                }else{
+                                    layer.msg(msg.msg,{icon:2,time:1000},function(){
+                                        window.location.reload()
+                                    });
+                                }
+                            });
+                        }else{
+                            $.post("{:U('Task/get_task')}",{user_id:id},function(msg){
+                                if(msg.status == 1){
+                                    //取任务成功
+                                    layer.msg(msg.msg,{icon:1,time:1000},function(){
+                                        window.location.reload()
+                                    });
+                                }else{
+                                    layer.msg(msg.msg,{icon:2,time:1000},function(){
+                                        window.location.reload()
+                                    });
+                                }
+                            });
+                        }
+                    }else if(islimit == 2){
+                        if(type){
+                            if(uid == 399){
+                                $.post("{:U('Task/get_task')}",{user_id:id,type:type},function(msg){
+                                    if(msg.status == 1){
+                                        layer.msg(msg.msg,{icon:1,time:1000},function(){
+                                            window.location.reload()
+                                        });
+                                    }else{
+                                        layer.msg(msg.msg,{icon:2,time:1000},function(){
+                                            window.location.reload()
+                                        });
+                                    }
+                                });
+                            }else{
+                                var numnow = {$num_now}, lnumnow = {$lnum_now};
+                                if(type == 1 && numnow <= 0){
+                                    layer.msg('今日小额任务配额已领完',{icon:2,time:1000});
+                                    return false;
+                                }
+                                if(type == 2 && lnumnow <= 0){
+                                    layer.msg('今日大额任务配额已领完',{icon:2,time:1000});
+                                    return false;
+                                }
+                                $.post("{:U('Task/get_task')}",{user_id:id,type:type},function(msg){
+                                    if(msg.status == 1){
+                                        layer.msg(msg.msg,{icon:1,time:1000},function(){
+                                            window.location.reload()
+                                        });
+                                    }else{
+                                        layer.msg(msg.msg,{icon:2,time:1000},function(){
+                                            window.location.reload()
+                                        });
+                                    }
+                                });
+                            }
+                        }else{
+                            //提现任务
+                            var m_numnow = {$mnum_now};
+                            if(m_numnow <= 0){
+                                layer.msg('今日中额任务配额已领完',{icon:2,time:1000});
+                                return false;
+                            }
+                            $.post("{:U('Task/get_task')}",{user_id:id},function(msg){
+                                if(msg.status == 1){
+                                    //取任务成功
+                                    layer.msg(msg.msg,{icon:1,time:1000},function(){
+                                        window.location.reload()
+                                    });
+                                }else{
+                                    layer.msg(msg.msg,{icon:2,time:1000},function(){
+                                        window.location.reload()
+                                    });
+                                }
+                            });
+                        }
+                    }
+
+                    disableButton = true;
+                }
+            }else{
+                layer.msg('你的未完成任务过多，做完再领', {icon: 2, time: 1000});return false;
+            }
+        };
+        //撤销任务
+        function orderRevoke(id){
+            layer.confirm('确认退回任务吗？',function(index){
+                $.post("{:U('Task/revoke')}",{task_id:id},function(msg){
+                    if(msg.status == 1){
+                        //取任务成功
+                        layer.msg(msg.msg,{icon:1,time:1000},function(){
+                                window.location.reload()
+                            });
+                    }else{
+                        layer.msg(msg.msg,{icon:2,time:1000});
+                    }
+                });
+            });
+
+        }
+        //短链接
+        function applyLink(id){
+            layer.confirm('确认申请短链接吗？',function(index){
+                $.post("{:U('Task/short_url')}",{task_id:id},function(msg){
+                    if(msg.msg == 1){
+                        //取任务成功
+                        layer.msg(msg.info,{icon:1,time:1000},function(){
+                                window.location.reload()
+                            });
+                    }else{
+                        layer.msg(msg.info,{icon:2,time:1000});
+                    }
+                });
+            });
+        }
+        //输入订单号
+        function orderNum(el,type){
+            if(!type){
+                 $(el).parent().siblings('.order-commision').html('<select class="commision select"><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>');
+                $(el).parent().siblings('.order-wang').html('<input type="text" class="wang" value="" placeholder="请输入旺旺号" onfocusin="removeErr(this)">');
+                $(el).parent().siblings('.order-num').html('<input type="number" class="ordernum" maxlength="18" value=""  placeholder="请输入18位订单号" onfocusin="removeErr(this)" onkeyup="value=value.replace(/[^\\d]/g,\'\')">');
+                $(el).parent().siblings('.good-price').html('<input type="number" class="price" value="" placeholder="请输入实际下单价" onfocusin="removeErr(this)">');
+                // $(el).parent().siblings('.redbag').html('<input type="number" class="red-bag" value="" placeholder="红包金额，选填" onfocusin="removeErr(this)">');
+            }else{
+
+            }
+            $(el).hide().siblings(".order-a").hide().siblings(".sure-a,.cancel-a").show();
+//            $(el).hide().siblings(".sure-a,.cancel-a").show();
+
+        }
+        //提交
+        function orderSure(el,id,type,oriprice){
+            var price =$.trim($(el).parent().siblings('.good-price').find('input').val()); //单价
+            var ordernum =$.trim($(el).parent().siblings('.order-num').find('input').val()); //订单号
+            var wangnum =$.trim($(el).parent().siblings('.order-wang').find('input').val());  //旺旺号
+            var commision =$.trim($(el).parent().siblings('.order-commision').find('select').val());  //佣金
+            var redbag =$.trim($(el).parent().siblings('.redbag').find('input').val()) || 0;  //红包
+            var emptybag =$(el).parent().siblings('.kong').find('span').text();  //其它
+            var reg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+            if(!price || parseFloat(price) < 0){
+                $(el).parent().siblings('.good-price').find('input').addClass('error-input');
+                layer.msg('请填写实际下单价');
+                return ;
+            }
+            if(parseFloat(price) >= 2*oriprice){
+                $(el).parent().siblings('.good-price').find('input').addClass('error-input');
+                layer.msg('下单价需小于单价2倍');
+                return ;
+            }
+            if(!reg.test(price)){
+                $(el).parent().siblings('.good-price').find('input').addClass('error-input');
+                layer.msg('最多保留两位小数');
+                return ;
+            }
+            if(!ordernum){
+                $(el).parent().siblings('.order-num').find('input').addClass('error-input').attr('placeholder','请填写订单号');
+                return ;
+            }
+            if(ordernum.length !== 18){
+                $(el).parent().siblings('.order-num').find('input').val('').addClass('error-input').attr('placeholder','订单号为18位');
+                return ;
+            }
+            if(!wangnum){
+                $(el).parent().siblings('.order-wang').find('input').addClass('error-input');
+                return;
+            }
+            if(redbag < 0){
+                $(el).parent().siblings('.redbag').find('input').addClass('error-input');
+                layer.msg('红包金额不得小于0');
+                return ;
+            }
+            if(emptybag != 0){
+                if( parseFloat(redbag) > parseFloat(emptybag) || parseFloat(redbag)  > 9.00){
+                    $(el).parent().siblings('.redbag').find('input').addClass('error-input');
+                    layer.msg('红包金额最大9元，且不得大于空包费用');
+                    return ;
+                }
+            }else{
+                if(price < 100){
+                    if(parseFloat(redbag) >= 4.00){
+                        $(el).parent().siblings('.redbag').find('input').addClass('error-input');
+                        layer.msg('下单价100以内的商品红包金额必须小于4元');
+                        return ;
+                    }
+                }else if(price < 200){
+                    if(parseFloat(redbag) >= 5.00){
+                        $(el).parent().siblings('.redbag').find('input').addClass('error-input');
+                        layer.msg('下单价100-200的商品红包金额必须小于5元');
+                        return ;
+                    }
+                }else if(price < 300){
+                    if(parseFloat(redbag) >= 6.00){
+                        $(el).parent().siblings('.redbag').find('input').addClass('error-input');
+                        layer.msg('下单价200-300的商品红包金额必须小于6元');
+                        return ;
+                    }
+                }else if(price < 400){
+                    if(parseFloat(redbag) >= 8.00){
+                        $(el).parent().siblings('.redbag').find('input').addClass('error-input');
+                        layer.msg('下单价300-400的商品红包金额必须小于8元');
+                        return ;
+                    }
+                }else{
+                    if(parseFloat(redbag) > 9.00){
+                        $(el).parent().siblings('.redbag').find('input').addClass('error-input');
+                        layer.msg('下单价400以上的商品红包金额必须小于9元');
+                        return ;
+                    }
+                }
+            }
+
+            if(redbag != 0 && !reg.test(redbag)){
+                $(el).parent().siblings('.redbag').find('input').addClass('error-input');
+                layer.msg('红包金额最多保留两位小数');
+                return ;
+            }
+            if((price < 100 && price > 0) && (commision != 5)){
+                layer.msg('小额单佣金金额仅限5元');
+                return ;
+            }
+            if((price < 300 && price >= 100) && (commision != 5)){
+                layer.msg('中额单佣金金额可选5元');
+                return ;
+            }
+            if((price >= 300) && (commision > 7 || commision < 5)){
+                layer.msg('大额单佣金金额可选5,6,7元');
+                return ;
+            }
+              //提交表单
+            $.post("{:U('Task/myOrder')}", {id:id,wangwang:wangnum,tb_item:ordernum,commision:commision,actual_price:price,redbag:redbag,type:type}, function(data) {
+                if (1 == data.msg){
+                    layer.msg(data.info,{icon:1,time:1000});
+                    setTimeout(function(){window.location.reload()},1000)
+                } else {
+                    layer.msg(data.info,{icon:2,time:1000});
+                    setTimeout(function(){window.location.reload()},1000)
+
+                }
+            },'json');
+        }
+        //取消
+        function orderCancel(el){
+            window.location.reload();
+        }
+        function removeErr(el){
+            $(el).removeClass('error-input');
+        }
+        
+        //复制短链接
+        function copyLink(id){
+            var short_url = '';
+            $.ajax({
+                url:"{:U('Task/is_sure')}",
+                data:{task_id:id,type:1},
+                type:'post',
+                async: false,
+                success:function(data){
+                    if(data.msg == 1){
+                        short_url = data.url;
+                    }
+                }
+            });
+            var input_c = document.createElement('input');
+            document.body.appendChild(input_c);
+            input_c.setAttribute('value', short_url);
+            input_c.select();
+            if(short_url && document.execCommand('copy')) {
+                document.execCommand('copy');
+                layer.msg('复制成功');
+            }else{
+                layer.msg('复制失败');
+            }
+            
+             document.body.removeChild(input_c);
+        }
+    </script>
+</block>

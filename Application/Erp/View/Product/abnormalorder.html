@@ -1,0 +1,408 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">任务管理</span><span class="c-999 en">&gt;</span><span class="c-666">异常订单</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" >
+		<div>
+			<div class="pd-20">
+				<form action="" method="get" onsubmit="return checkSearch()">
+					<input type="hidden" name="m" value="Erp">
+					<input type="hidden" name="c" value="product">
+					<input type="hidden" name="a" value="abnormalorder">
+					<input type="hidden" name="status" value="{$status}">
+					<div class="text-c" style="margin-bottom: 10px;">
+						<!--日期：<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" placeholder="起始时间">
+					<input type="text" id="datemax" name="endtime" class="input-text" style="width:150px;" placeholder="结束时间">-->
+						<input type="text" class="input-text ordernum" style="width:200px" placeholder="店铺名搜索" id="" name="shopname" value="{$shopname}"> 或
+						<input type="text" class="input-text ordernum" style="width:200px" placeholder="订单号搜索" id="" name="ordernum" value="{$ordernum}"> 或
+						<input type="text" class="input-text wangwang" style="width:200px" placeholder="旺旺号搜索" id="" name="wangwang" value="{$wangwang}">
+						<button type="submit" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+					</div>
+				</form>
+				<div class="cl bg-1 bk-gray mt-20" style="height: 34px; line-height: 34px;">
+					<if condition="$_SESSION['user']['role'] eq 1 or $_SESSION['user']['role'] eq 4 or $_SESSION['user']['role'] eq 5">
+						<ul class="l comm-ul" style="display: flex;">
+							<li class="<if condition="$_GET['status'] == 0">current</if>"><a href="{:U('product/abnormalorder','status=0')}">全部</a></li>
+							<li class="<if condition="$_GET['status'] == 1">current</if>"><a href="{:U('product/abnormalorder','status=1')}">处理中</a></li>
+							<li class="<if condition="$_GET['status'] == 2">current</if>"><a href="{:U('product/abnormalorder','status=2')}">已处理</a></li>
+						</ul>
+					</if>
+					<span class="r">共有数据：<strong>{$count}</strong> 条</span>
+				</div>
+
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+								<tr class="text-c">
+									<th>id</th>
+									<th width="80">完成时间</th>
+									<th width="7%">店铺名称</th>
+									<th width="80">主图</th>
+									<th width="7%">宝贝详情</th>
+									<th width="7%">关键词</th>
+									<th width="7%">备注</th>
+									<th>赠送礼品</th>
+									<th>单价</th>
+									<th>下单价</th>
+									<if condition="$_SESSION['user']['role'] eq 5 or $_SESSION['user']['role'] eq 6">
+									<th>服务费</th>
+									</if>
+									<th>其它</th>
+									<if condition="$_SESSION['user']['role'] neq 5">
+									<th>红包支出</th>
+									</if>
+									<th>订单号</th>
+									<th width="5%">旺旺号</th>
+									<if condition="$_SESSION['user']['role'] neq 5 and $_SESSION['user']['role'] neq 6">
+									<th>佣金</th>
+									</if>
+									<th width="70">异常信息</th>
+									<if condition="$_SESSION['user']['role'] neq 6 and $_SESSION['user']['role'] neq 5">
+									<th>业务员</th>
+									</if>
+                                    <if condition="$_SESSION['user']['role'] == 3 or $_SESSION['user']['role'] ==1">
+									<th>刷单员</th>
+                                    </if>
+									<if condition="$_SESSION['user']['role'] == 6 ">
+										<th>刷单员</th>
+									</if>
+									<if condition="$_SESSION['user']['role'] ==1 or $_SESSION['user']['role'] ==4 or $_SESSION['user']['role'] ==6">
+									<th>站长</th>
+									</if>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							<volist name="task" id="vo">
+								<tr class="text-c va-m">
+									<td>{$vo.id}</td>
+									<td>{$vo.edittime|date="j/n H:i",###}</td>
+									<td>{$vo.shopname}</td>
+									<td>
+										<a href="javascript:;" title="鼠标右键复制图片"><img width="80" height="80" class="product-thumb" src="{$vo.goods_pic}"></a>
+									</td>
+
+									<td>
+										<a href="{$vo.goods_url}" style="color: #06c;" target="_blank" title="点击查看详情">	{$vo.goods_title}</a>
+									</td>
+									<td>{$vo.keyword}</td>
+
+									<td>{$vo.sku|default='无'}</td>
+									<td>{$vo.goods_zeng|default='无'}</td>
+									<td><b style="font-size: 11px;">¥</b> {$vo.price}</td>
+									<td class="good-price order-input" style="color: red;"><b style="font-size: 11px;">¥ </b><span>{$vo.actual_price}</span></td>
+									<if condition="$_SESSION['user']['role'] eq 5 or $_SESSION['user']['role'] eq 6">
+										<td>{$vo.cost}</td>
+									</if>
+									<td class="kong"><b style="font-size: 11px;">¥ </b> <span>{$vo.order_cost|default=0}</span></td>
+									<if condition="$_SESSION['user']['role'] neq 5">
+
+									<td class="order-input redbag"><b style="font-size: 11px;">¥ </b><span>{$vo.redbag}</span></td>
+									</if>
+									<td class="order-num order-input">
+										<span class="<if condition='$vo.abn neq null'>label label-danger radius</if>">{$vo.tb_item}</span>
+									</td>
+									<td class="order-wang order-input">{$vo.wangwang}</td>
+									<if condition="$_SESSION['user']['role'] neq 5 and $_SESSION['user']['role'] neq 6">
+									<td class="order-commision order-input"><b style="font-size: 11px;">¥ </b> <span>{$vo.commision}</span> </td>
+									</if>
+									<td>
+										
+										<a href="javascript:;" onclick="referAbn('异常订单信息','{:U('product/abninfo','id='.$vo['id'])}','500','500')">查看详情</a><br>
+										<if condition="$vo.abn_status == 5 && $_SESSION['user']['role']==5">
+											<span class="label label-success radius">已处理</span>
+										</if>
+										<if condition="$vo.abn_status == 0 && $_SESSION['user']['role']==5">
+											<span class="label label-success radius">处理中</span>
+										</if>
+										<if condition="$vo.abn_status == 6 && $_SESSION['user']['role']==5">
+											<span class="label label-danger radius">已拒绝</span>
+										</if>
+										<if condition="$vo.abn_status eq 6"><br>
+										<a href="javascript:;" onclick="referAbnInfo('{$vo.abn_img}')">拒绝详情</a>
+										</if>
+										
+									</td>
+									<if condition="$_SESSION['user']['role'] neq 6 and $_SESSION['user']['role'] neq 5">
+									<td>{$vo.f_info}</td>
+									</if>
+                                    <if condition="$_SESSION['user']['role'] == 3 or $_SESSION['user']['role'] ==1">
+                                    <td>{$vo.realname_s}</td>
+                                    </if>
+									<if condition="$_SESSION['user']['role'] == 6 ">
+										<td>{$vo.realname_s}</td>
+									</if>
+									<if condition="$_SESSION['user']['role'] ==1 or $_SESSION['user']['role'] ==4 or $_SESSION['user']['role'] ==6">
+									<td>{$vo.realname}</td>
+									</if>
+									<td>
+										<!--刷单员-->
+										<if condition="$_SESSION['user']['role'] == 2">
+											<if condition="$vo.abn_status != 5">
+												<a onClick="orderNum(this,1,'{$vo.abn}','{$vo.edittime}')" href="javascript:;" class="order-a" title="输入订单号" style="display: block;width: 30px;text-align: center;">修改</a>
+											<if condition="$vo.abn_status eq 0">
+												<a onClick="refuseOrderNum({$vo.id})" href="javascript:;" class="refuse-a" title="输入订单号" style="display: block;width: 30px;text-align: center;">拒绝</a>
+											</if>
+												<a href="javascript:;" class="sure-a" style="display: none;" onclick="orderSure(this,{$vo.id},1,{$vo.price},'{$vo.abn}','{$vo.edittime}',{$vo.commision},{$vo.redbag})">确定</a>
+												<a href="javascript:;" class="cancel-a" style="display: none;" onclick="orderCancel(this)">取消</a>
+												<else /><span class="label label-success radius">处理成功</span>
+											</if>
+										</if>
+										<!--商家-->
+										<if condition="$_SESSION['user']['role'] == 5">
+											<if condition="$vo.abn_status == 5 or $vo.abn_status  == 6">
+
+												<a href="javascript:;" title="此订单有误？申请处理！" onclick="referAbn('订单异常','{:U('product/abn','id='.$vo['id'])}','500','600')">提交异常</a>
+
+											</if>
+											<if condition="$vo.abn_status !=0"><a href="javascript:;" title="撤销" onclick="revoke({$vo.id})">撤销</a></if>
+
+										</if>
+										<!--除了商家和刷单员外-->
+										<if condition="$_SESSION['user']['role'] != 2 and $_SESSION['user']['role'] != 5">
+											<if condition="$vo.abn_status == 5">
+											<span class="label label-success radius">已处理</span>
+												<elseif condition="$vo.abn_status == 6" /><span class="label label-danger radius">已拒绝</span>
+											<else /><span class="label label-success radius">处理中</span>
+										</if>
+
+										</if>
+									</td>
+									</tr>
+							</volist>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			var start_time = "{$starttime}",end_time = "{$endtime}";
+			laydate.render({
+			  	elem: '#datemin',
+			   	min: '2018-01-01',
+			   	max: '',
+			   	done: function(value, date){
+					start_time = value;
+					if(new Date(value).getTime() > new Date(end_time).getTime()){
+						$("#datemax").val(value)
+					}
+			  	}
+			});
+			laydate.render({
+			  	elem: '#datemax',
+			  	min: '2018-01-01',
+		   		max: '',
+			  	done: function(value, date){
+			  		end_time = value;
+					if(new Date(value).getTime() < new Date(start_time).getTime()){
+						$("#datemin").val(value)
+					}
+			  	}
+			});
+		})
+
+		/*商家已发布任务展示*/
+		function showProDetail(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+		function showTaskPro(title, url, w, h) {
+			layer_show(title, url, w, h);
+		}
+		function checkSearch(){
+//			if(!$.trim($(".ordernum").val()) && !$.trim($(".wangwang").val())){
+//				layer.msg("请至少输入一个搜索项！");
+//				return false;
+//			}
+			return true;
+		}
+		function referAbn(title, url, w, h){
+			layer_show(title, url, w, h);
+		}
+		function referAbnInfo(img){
+			var height = img?'480':'280';
+			layer_show('异常订单拒绝信息','{:U('product/refuseinfo','id='.$vo['id'])}','500',height);
+		}
+		function revoke(id){
+            $.post("{:U('product/revoke')}",{id:id},function(data){
+               if(data.msg == 1){
+                   //成功
+                   layer.msg(data.info, {icon: 1, time: 2000},function () {
+                       window.location.reload();
+                   });
+			   }else{
+                   layer.msg(data.info, {icon: 2, time: 2000},function () {
+                       window.location.reload();
+                   });
+			   }
+            })
+		}
+		//输入订单号
+		function orderNum(el,type,abn,time){
+			var order_num = $(el).parent().siblings('.order-num').find('span').text();
+			var wang = $(el).parent().siblings('.order-wang').text();
+            var redbag = $(el).parent().siblings('.redbag').find('span').text();
+			var price = $(el).parent().siblings('.good-price').find('span').text();
+			var now_time = new Date().getTime();
+			if(now_time < time*1000 + 24*3600*1000){
+				var commision = $(el).parent().siblings('.order-commision').find('span').text();
+				$(el).parent().siblings('.order-commision').html('<select class="commision select"><option value="5">5</option><option value="6">6</option><option value="7">7</option></select>');
+				$(".commision option").each(function(){
+					if(this.value == parseInt(commision)){
+						$(this).prop('selected','true');
+					}
+				})
+			}
+			$(el).parent().siblings('.good-price').html('<input type="number" value="'+price+'" placeholder="请输入实际下单价" class="ordernum" onfocusin="removeErr(this)">');
+            $(el).parent().siblings('.redbag').html('<input type="text" value="'+redbag+'" class="red-bag" onfocusin="removeErr(this)">');
+			$(el).parent().siblings('.order-wang').html('<input type="text" value="'+wang+'" placeholder="请输入旺旺号" class="wang" onfocusin="removeErr(this)">');
+			$(el).parent().siblings('.order-num').html('<input type="number" value="'+order_num+'" placeholder="请输入18位订单号" class="ordernum" onfocusin="removeErr(this)" onkeyup="value=value.replace(/[^\\d]/g,\'\')">');
+			$(el).hide().siblings(".refuse-a").hide();
+            $(el).siblings(".sure-a,.cancel-a").show();
+		}
+		//提交
+		function orderSure(el,id,type,oriprice,abn,time,comm){
+			var now_time = new Date().getTime();
+			if(now_time < time*1000 + 24*3600*1000){
+				var commision =$.trim($(el).parent().siblings('.order-commision').find('select').val());  //佣金
+			}else if(abn == 1 ){
+				var commision = $(el).parent().siblings('.order-commision').find('span').text();
+			}
+			var price =$.trim($(el).parent().siblings('.good-price').find('input').val()); //单价
+			var ordernum =$.trim($(el).parent().siblings('.order-num').find('input').val()); //订单号
+			var wangnum =$.trim($(el).parent().siblings('.order-wang').find('input').val());  //旺旺号
+			var redbag =$.trim($(el).parent().siblings('.redbag').find('input').val());  //红包
+			
+			var emptybag =$(el).parent().siblings('.kong').find('span').text();  //其它
+			var reg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+			if(!price || parseFloat(price) < 0){
+				$(el).parent().siblings('.good-price').find('input').addClass('error-input');
+				layer.msg('请填写实际下单价');
+				return ;
+			}
+			if(parseFloat(price) >= 2*oriprice){
+				$(el).parent().siblings('.good-price').find('input').addClass('error-input');
+				layer.msg('下单价需小于单价2倍');
+				return ;
+			}
+			if(!reg.test(price)){
+				$(el).parent().siblings('.good-price').find('input').addClass('error-input');
+				layer.msg('最多保留两位小数');
+				return ;
+			}
+			if(!wangnum){
+				$(el).parent().siblings('.order-wang').find('input').addClass('error-input');
+				return;
+			}
+			if(!ordernum){
+				$(el).parent().siblings('.order-num').find('input').addClass('error-input').attr('placeholder','请填写订单号');
+				return ;
+			}
+			if(ordernum.length !== 18){
+				$(el).parent().siblings('.order-num').find('input').val('').addClass('error-input').attr('placeholder','订单号为18位');
+				return ;
+			}
+			if(redbag < 0){
+				$(el).parent().siblings('.redbag').find('input').addClass('error-input');
+				layer.msg('红包金额不得小于0');
+				return ;
+			}
+           if(emptybag != 0){
+				if( parseFloat(redbag) > parseFloat(emptybag) || parseFloat(redbag)  > 9.00){
+	                $(el).parent().siblings('.redbag').find('input').addClass('error-input');
+	                layer.msg('红包金额最大9元，且不得大于空包费用');
+	                return ;
+	            }
+			}else{
+				if(price < 100){
+					if(parseFloat(redbag) >= 4.00){
+						$(el).parent().siblings('.redbag').find('input').addClass('error-input');
+						layer.msg('下单价100以内的商品红包金额必须小于4元');
+						return ;
+					}
+				}else if(price < 200){
+					if(parseFloat(redbag) >= 5.00){
+						$(el).parent().siblings('.redbag').find('input').addClass('error-input');
+						layer.msg('下单价100-200的商品红包金额必须小于5元');
+						return ;
+					}
+				}else if(price < 300){
+					if(parseFloat(redbag) >= 6.00){
+						$(el).parent().siblings('.redbag').find('input').addClass('error-input');
+						layer.msg('下单价200-300的商品红包金额必须小于6元');
+						return ;
+					}
+				}else if(price < 400){
+					if(parseFloat(redbag) >= 8.00){
+						$(el).parent().siblings('.redbag').find('input').addClass('error-input');
+						layer.msg('下单价300-400的商品红包金额必须小于8元');
+						return ;
+					}
+				}else{
+					if(parseFloat(redbag) > 9.00){
+						$(el).parent().siblings('.redbag').find('input').addClass('error-input');
+						layer.msg('下单价400以上的商品红包金额必须小于9元');
+						return ;
+					}
+				}
+			}
+			if(redbag != 0 && !reg.test(redbag)){
+				$(el).parent().siblings('.redbag').find('input').addClass('error-input');
+				layer.msg('红包金额最多保留两位小数');
+				return ;
+			}
+			if(comm != commision){
+				if((price < 100 && price > 0) && (commision != 5)){
+					layer.msg('小额单佣金金额仅限5元');
+					return ;
+				}
+				if((price < 300 && price >= 100) && (commision != 5)){
+					layer.msg('中额单佣金金额可选5元');
+					return ;
+				}
+				if((price >= 300) && (commision > 7 || commision < 5)){
+					layer.msg('大额单佣金金额可选5,6,7元');
+					return ;
+				}
+			}
+		  	//提交表单
+	        $.post("{:U('Product/myOrder')}", {id:id,wangwang:wangnum,tb_item:ordernum,commision:commision,actual_price:price,redbag:redbag,type:type}, function(data) {
+	        	if (1 == data.msg){
+	        		layer.msg(data.info,{icon:1,time:1000},function(){
+	        			window.location.reload();
+	        		})
+	        	} else {
+	        		layer.msg(data.info,{icon:2,time:1000});
+	        		//setTimeout(function(){window.location.reload()},1000)
+
+	        	}
+	        },'json');
+		}
+		//取消
+		function orderCancel(el){
+			window.location.reload();
+		}
+		//拒绝
+		function refuseOrderNum(id){
+			layer.confirm('确认拒绝吗？', {
+				btn: ['确认', '取消'],
+				shade: false,
+				closeBtn: 0
+			}, function(index) {
+				layer.close(index);
+				layer_show('异常订单拒绝',"{:U('product/refuseAbn','id=')}"+id,'500','500');
+			});
+		}
+		function removeErr(el){
+			$(el).removeClass('error-input');
+		}
+	</script>
+</block>

@@ -1,0 +1,117 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">产品管理</span><span class="c-999 en">&gt;</span><span class="c-666">发布产品</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" style="position: absolute;">
+		<article class="cl pd-20">
+			<div class="page-container">
+				<div>
+					<font color="red">温馨提醒：1、每天12点前发布的任务，审核通过后当天上线；12点后发布的任务，审核通过后次日上线。<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、每天10点至12点之间发布的任务，总份数不得大于50单。</font>
+				</div>
+				<form action="" method="post" class="form form-horizontal" id="form-article-add" onsubmit="return productCheck()" enctype="multipart/form-data">
+					<input type="hidden" name="id" value="{$info.id}">
+					<div class="form-con">
+						<!--<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>店铺名称：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<select name="shopname" class="select select-box" style="width: 200px;">
+									<option value=""></option>
+								</select>
+							</div>
+						</div>-->
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>标题：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<input type="text" class="input-text" value="{$info.goods_title}" placeholder="" id="" name="goods_title" required oninvalid="setCustomValidity('请输入产品标题');" oninput="setCustomValidity('');">
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>链接：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<input type="url" class="input-text" value="{$info.goods_url}" placeholder="以http://或者https://开头" id="checkurl" name="goods_url" required oninvalid="setCustomValidity('请输入产品链接');" oninput="setCustomValidity('');">
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主图：</label>
+							<div class="formControls col-xs-8 col-sm-9 posi-rela">
+								<div id="img_preview_one">
+									<input type="hidden" name="goods_pic" id="img" value="{$info.goods_pic}">
+									<input type="hidden" name="goods_thumb" id="thumb" value="{$info.goods_thumb}">
+
+									<img src="{$info.goods_pic}" id="thumb-preview">
+								</div><br />
+								<div style="position: relative;">
+									<button class="btn btn-success radius">上传主图</button>
+									<input class="file-input fileToUpload" type="file" accept="image/*" name="fileToUpload" id="fileToUpload" onchange="uploadFile(this,'fileToUpload');"  value="{$info.goods_pic}">
+								</div>
+							</div>
+						</div>
+
+						<div class="row cl">
+							<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>赠送礼品：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<input type="text" class="input-text" value="{$info.goods_zeng}" placeholder="建议赠送抽纸或卷纸" id="" name="goods_zeng" required oninvalid="setCustomValidity('请输入赠送礼品名称');" oninput="setCustomValidity('');" style="width: 215px;" >
+							</div>
+						</div>
+						<volist name="attr" id="vo">
+						<div class="row cl keycon">
+							<div class="col-xs-4 col-sm-2"></div>
+							<div class="col-xs-8 col-sm-9 back">
+								<span class="close-keyword" onclick="delKeywords(this)" title="删除"></span>
+								<div class="row cl row1">
+									<label class="form-label col-xs-3 col-sm-3">输入搜索关键词：</label>
+									<div class="formControls col-xs-8 col-sm-6">
+										<input type="text" name="goods_attr[{$vo.id}][k]"  placeholder="" value="{$vo.k}" class="input-text" required oninvalid="setCustomValidity('请输入搜索关键词');" oninput="setCustomValidity('');">
+									</div>
+								</div>
+								<div class="row cl row2 skumore">
+									<label class="form-label col-xs-3 col-sm-3" style="position: relative;">
+										<label class="cm-label">增添备注</label>
+										<select name="sku[{$vo.goods_id}-{$vo.id}]" class="select" style="width: 40px;">
+											<option value="yes" <if condition="!empty($vo[s])">selected</if>>是</option>
+											<option value="no" <if condition="empty($vo[s])">selected</if>>否</option>
+										</select>
+										<span style="color: red; position: absolute; bottom: 25px;right: 5px;">（备注可填写收藏加购假聊领券下单等要求）</span>
+									</label>
+									<div class="formControls col-xs-9 col-sm-9 sku  <if condition='!empty($vo[s])'>sku-yes<else />sku-no</if>">
+										<if condition='!empty($vo[s])'>
+										<div class="formControls addsku">
+
+											<button class="btn btn-success radius" type="button" onclick="addSku(this,{$vo.id})">添加</button>
+											<span class="cm-space">备注: </span>
+											<input type="text" name="goods_attr[{$vo.id}][s][]" id="" placeholder="输入备注" value="{$vo.s}" class="input-text" style="width:130px;" required oninvalid="setCustomValidity(\'请输入备注\');" oninput="setCustomValidity(\'\');" >
+
+										</div>
+										</if>
+										<input type="number" step="0.01" min="0.01" name="goods_attr[{$vo.id}][p][]" id=""  placeholder="输入价格" pattern="^[1-9]+(.[0-9]{1,2})?$" value="{$vo.p}" class="input-text price-input" required oninvalid="setCustomValidity('请输入价格,最多两位小数');" oninput="setCustomValidity('');" onfocusout="calCost(this)"> 元
+										<input type="number" step="1" min="1" name="goods_attr[{$vo.id}][n][]" id="" placeholder="输入份数" onkeyup="value=value.replace(/[^\d]/g,'')" value="{$vo.n}" class="input-text num-input" required oninvalid="setCustomValidity('请输入份数');" oninput="setCustomValidity('');" onfocusout="calCost(this)"> 份
+										<span class="calcost"><font color="red">本金：{$vo.p}元，服务费：{$vo.cost}元</font></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						</volist>
+					</div>
+					<div class="row cl" style="margin-top: 20px;">
+						<div class="formControls col-xs-1 col-sm-1 col-sm-offset-2 col-xs-offset-2">
+							<button class="btn btn-success radius" type="button" onclick="addkeywords(this)">添加关键词</button>
+						</div>
+					</div>
+					<div class="row cl" style="margin-top: 20px;">
+						<div class="col-xs-1 col-sm-1 col-sm-offset-2 col-xs-offset-2">
+							<button  class="btn btn-secondary radius" type="submit" id="btn" style="height: 40px;"><i class="Hui-iconfont">&#xe632;</i> 提交任务</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ajaxfileupload.js"></script>
+	<script type="text/javascript">
+        var i = {$lastId},picUrl = "{:U('Product/ajaxUpload')}",url2="{:U('Product/checkstatus')}",isFile = true;
+	</script>
+	<script src="__PUBLIC__/ERP/lib/custom/addpro.js" type="text/javascript" charset="utf-8"></script>
+</block>

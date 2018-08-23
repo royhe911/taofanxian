@@ -1,0 +1,61 @@
+<body>
+	<div id="qq-con">
+		<a class="wpa-container" name="e" target="_blank" href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true">
+			<span class="title">在线咨询</span>
+			<img class="avatar" src="__PUBLIC__/maoke/images/merchant/0.jpg">
+			<span class="btn-area" style="background: #ee685d">
+				<span class="icon-qq"></span>
+				<span class="btn-text">QQ交谈</span>
+			</span>
+		</a>
+	</div>
+	
+	<div id="wrapper">
+		<!--商城的头部-->
+		<div class="header">
+			<!--顶部-->
+			<div class="top">
+				<div class="top_main">
+					<ul>
+						<li>
+							<a href="{:U('Home/Index/index')}">返回首页</a>
+						</li>
+						<li>
+							<a href="#">欢迎您：<span> <?=$_SESSION['ext_user']['adminname']?>  <img src="__PUBLIC__/maoke/images/merchant/nav_icon_tx_default.png" alt=""></span></a>
+						</li>
+						<li>
+							<a href="{:U('Usercenter/unlogin')}">退出</a>
+						</li>
+						<li>
+							<a href="{:U('Home/Help/userhelp')}">帮助中心</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--Logo和搜索框-->
+			<div class="search">
+				<div class="left" style="padding-top: 9px;">
+					<a href="{:U('Usercenter/index')}"><img class="logo" src="__PUBLIC__/maoke/images/merchant/lingke-logo.png" alt=""></a>
+					<span class="details_title">商家中心</span>
+				</div>
+	
+				<!--<div class="advertisement right" >
+	                   <a href="" target="_blank" title="">
+	             <img style="margin-top:-3px;" src="images/merchant/adv4.png" alt="">
+	         </a>
+	        </div>-->
+	
+			</div>
+			<div class="line"></div>
+		</div>
+	
+		<script>
+			$(function(){
+				$('.left_nav .title').on('click','a' ,function() {
+					var this_ul = $(this).parent().children('ul');
+					$(this).toggleClass('selected');
+					$(this).hasClass('selected') ? this_ul.slideDown('fast') : this_ul.slideUp('fast');
+				});
+			})	
+		</script>
+		

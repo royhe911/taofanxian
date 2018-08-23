@@ -1,0 +1,308 @@
+body {
+  background-color: #f5f5f5;
+}
+
+.left_nav {
+  width: 150px;
+  background-color: #fff;
+}
+
+.left_nav a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none !important;
+}
+
+.left_nav a:focus {
+  text-decoration: none !important;
+}
+
+.left_nav .issue {
+  padding-top: 30px;
+  height: 90px;
+}
+
+.left_nav .task {
+  height: 60px;
+}
+
+.left_nav .issue a,
+.left_nav .task a
+{
+  width: 120px;
+  height: 36px;
+  line-height: 36px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+  color: #f25f55;
+  background-color: #fef2f9;
+  border: 1px solid #f25f55;
+  border-radius: 5px;
+}
+
+.left_nav .title a {
+  line-height: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  color:#171616;
+  font-size: 16px;
+}
+
+.left_nav .title {
+  border-top: 1px solid #f5f5f5;
+}
+
+.left_nav .title >ul>li>a {
+  font-size: 14px;
+  color: #716b6b;
+}
+
+
+/* 个人中心 */
+
+.left_nav .personal_center > a {
+  background: url(../../images/merchant/leftnav_icon_my_default.png) no-repeat 16px center;
+  background-size: 18px 22px;
+}
+.left_nav .personal_center > a:hover{
+  color: #f25f55;
+  background-image: url(../../images/merchant/leftnav_icon_my_selected.png);
+}
+.left_nav .personal_center > a.selected {
+  background-image: url(../../images/merchant/leftnav_icon_my_selected.png);
+  background-color: #fef2f9;
+  color: #f25f55;
+}
+
+
+/* 店铺管理 */
+
+.left_nav .store_manage > a {
+  background: url(../../images/merchant/leftnav_icon_store_default.png) no-repeat 16px center;
+  background-size: 18px 22px;
+}
+
+.left_nav .store_manage > a:hover{
+  background-image: url(../../images/merchant/leftnav_icon_store_selected.png);
+  color: #f25f55;
+}
+
+.left_nav .store_manage > a.selected {
+  background-image: url(../../images/merchant/leftnav_icon_store_selected.png);
+  background-color: #fef2f9;
+  color: #f25f55;
+}
+
+
+/* 活动管理 */
+
+.left_nav .try_manage > a {
+  position: relative;
+  background: url(../../images/merchant/leftnav_icon_gift_default.png) no-repeat 16px center;
+  background-size: 18px 22px;
+}
+
+.left_nav .try_manage > ul>li>a:hover {
+  /*background-color: #fef2f9;*/
+  color: #f25f55
+}
+/* 优惠券管理 */
+
+.left_nav .coupon_manage > a {
+  position: relative;
+  background: url(../../images/merchant/coupon.png) no-repeat 16px center;
+  background-size: 18px;
+}
+
+.left_nav .coupon_manage > ul>li>a:hover {
+  /*background-color: #fef2f9;*/
+  color: #f25f55
+}
+/* 任务管理 */
+
+.left_nav .task_manage > a {
+  position: relative;
+  background: url(../../images/merchant/leftnav_icon_task_default.png) no-repeat 16px center;
+  background-size: 18px 22px;
+}
+
+.left_nav .task_manage > ul>li>a:hover {
+  color: #f25f55
+}
+
+
+/* 账号信息 */
+
+.left_nav .account_information > a {
+  position: relative;
+  background: url(../../images/merchant/leftnav_icon_setup_default.png) no-repeat 16px center;
+  background-size: 18px 22px;
+}
+
+.left_nav .account_information > ul>li>a:hover {
+  /*background-color: #fef2f9;*/
+  color: #f25f55
+}
+
+
+/* 资金管理 */
+
+.left_nav .fund_manage > a {
+  position: relative;
+  background: url(../../images/merchant/leftnav_icon_money_default.png) no-repeat 16px center;
+  background-size: 18px 22px;
+}
+
+.left_nav .fund_manage > ul>li>a:hover {
+  /*background-color: #fef2f9;*/
+  color: #f25f55
+}
+
+
+/* 消息中心 */
+
+.left_nav .message_center > a {
+  background: url(../../images/merchant/leftnav_icon_news_default.png) no-repeat 16px center;
+  background-size: 18px 22px;
+  padding-left:20px;
+}
+
+.left_nav .message_center > a:hover {
+  background-image: url(../../images/merchant/leftnav_icon_news_selected.png);
+  color: #f25f55;
+}
+
+
+.left_nav .message_center > a.selected {
+  background-image: url(../../images/merchant/leftnav_icon_news_selected.png);
+  background-color: #fef2f9;
+  color: #f25f55;
+}
+
+
+/* 二级菜单 */
+
+.left_nav .try_manage >ul>li a,
+.left_nav .task_manage >ul>li a,
+.left_nav .account_information >ul>li a,
+.left_nav .fund_manage >ul>li a,
+.left_nav .invited_manage >ul>li a,
+.left_nav .coupon_manage >ul>li a{
+  line-height: 33px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+
+/* 箭头 */
+
+.left_nav .try_manage > a::after,
+.left_nav .task_manage > a::after,
+.left_nav .account_information > a::after,
+.left_nav .fund_manage > a::after,
+.left_nav .invited_manage > a::after,
+.left_nav .coupon_manage > a::after
+{
+  position: absolute;
+  content: url(../../images/merchant/leftnav_icon_arrow_default.png);
+  left: 120px;
+}
+
+
+/* 箭头 */
+
+.left_nav .try_manage > a.selected::after,
+.left_nav .task_manage > a.selected::after,
+.left_nav .account_information > a.selected::after,
+.left_nav .fund_manage > a.selected::after,
+.left_nav .invited_manage > a.selected::after,
+.left_nav .coupon_manage > a.selected::after{
+  position: absolute;
+  content: url(../../images/merchant/leftnav_icon_arrow_selected.png);
+  left: 120px;
+}
+
+.left_nav .try_manage > ul>li>a.selected,
+.left_nav .task_manage > ul>li>a.selected,
+.left_nav .account_information > ul>li>a.selected,
+.left_nav .fund_manage > ul>li>a.selected,
+.left_nav .invited_manage > ul>li>a.selected {
+  background-color: #fef2f9;
+  color: #f25f55;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contact_customerService {
+  position: fixed;
+  right: 2%;
+  top: 70%;
+}
+.contact_customerService .contact_wayContent {
+  overflow: hidden;
+  width: 265px;
+}
+.contact_customerService .contact_wayContent .contact_way {
+  width: 150px;
+  border-radius: 5px;
+  border: 1px solid #f5f5f5;
+  background-color: #fff;
+  display: none;
+}
+.contact_customerService .contact_wayContent .contact_way .title {
+  border-radius: 5px 5px 0 0;
+  height: 35px;
+  line-height: 35px;
+  background-color: #ff7373;
+}
+.contact_customerService .contact_wayContent .contact_way .title p {
+  background: url(../../../../images/lianxikefu/contact_icon_people_default.png) left center no-repeat;
+  padding-left: 40px;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+.contact_customerService .contact_wayContent .contact_way ul {
+  padding: 12px 10px;
+}
+.contact_customerService .contact_wayContent .contact_way ul li {
+  background: url(../../../../images/lianxikefu/contact_bg_car_default.png) left center no-repeat;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 25px;
+}
+.contact_customerService .contact_wayContent .contact_way ul li a {
+  font-size: 14px;
+  color: #333;
+}
+.contact_customerService .contact_wayContent .contact_way ul li a:hover {
+  color: #f25f55;
+  text-decoration: underline;
+}
+.contact_customerService .contact_wayContent .contact_wayBtn img {
+cursor:pointer;
+}

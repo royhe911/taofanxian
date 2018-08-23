@@ -1,0 +1,155 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style type="text/css">
+	#section .section_main .content .activity_manage .delivery_status .detalis ul li .detail-l{ width: 175px; float: left;}
+	#section .section_main .content .activity_manage .delivery_status .detalis ul li .detail-r{ width: 124px; float: left;}
+	#section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(2) p{ width: 100%;}
+</style>
+                <!-- 优惠券管理 -->
+                <div id="my_main" class="content left" style="background-color: rgb(255, 255, 255); min-height: 889px;">
+                    <div class="activity_manage">
+                        <h1 class="title">优惠券活动管理</h1>
+                        <!--所有订单的状态种类-->
+                        <div class="order_status">
+                            <ul>
+                                <li class="order"><a <empty name="confirm">class="personal_active"</empty> href="{:U('Coupon/index')}">所有活动（<span>{$totalCount[0]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($confirm eq 6)'>class="personal_active"</if> href="{:U('Coupon/index', array('confirm' => 6))}">待完善活动（<span>{$totalCount[6]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($confirm eq 5)'>class="personal_active"</if> href="{:U('Coupon/index', array('confirm' => 5))}">待付款活动（<span>{$totalCount[5]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($confirm eq 4)'>class="personal_active"</if> href="{:U('Coupon/index', array('confirm' => 4))}">待审核活动（<span>{$totalCount[4]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($confirm eq 2)'>class="personal_active"</if> href="{:U('Coupon/index', array('confirm' => 2))}">活动中活动（<span>{$totalCount[2]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($confirm eq 3)'>class="personal_active"</if> href="{:U('Coupon/index', array('confirm' => 3))}">已结束活动（<span>{$totalCount[3]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($confirm eq 1)'>class="personal_active"</if> href="{:U('Coupon/index', array('confirm' => 1))}">已驳回活动（<span>{$totalCount[1]}</span>）</a></li>
+                            </ul>
+                        </div>
+                        <!--查询和回收站-->
+                        <div class="inquire_recycleBin clearfix">
+                            <!--查询搜索框-->
+                            <div class="left inquire_box">
+                              <form action="" method="GET" id="myform" />
+                                <ul class="clearfix">
+                                    <li class="goods_name">商品名称：</li>
+                                    <li class="input_box"><input type="text" id="gname" name="gname" placeholder="请输入商品名称" value="{$gname}"></li>
+                                    <li class="inquire_btn">
+                                     <input type="hidden" name="m" value="Supporter" />
+                                     <input type="hidden" name="c" value="Coupon" />
+                                     <input type="hidden" name="a" value="index" />
+                                     <input type="submit" value="查询" />
+                                    </li>
+                                </ul>
+                              </form>
+                            </div>
+                            <!--优惠券回收站-->
+                            <div class="right recycle_bin">
+                                <a class="iconfont icon-p-delet" href="{:U('Coupon/trash')}">&nbsp;回收站</a>
+                            </div>
+                        </div>
+                        <!--商品发货状态-->
+                       <volist name="data" id="vo">
+                        <div class="delivery_status">
+                        	<div class="title">
+                        		<p class="left">
+                        			<span>发布时间：<if condition="($vo.confirm eq 2)">{$vo.addtime|strtotime|date="Y-m-d",###}<else />还未发布</if></span>
+                        			<span>结束时间：<if condition="($vo.confirm eq 2)">{$vo.etime|strtotime|date="Y-m-d",###}<else />还未发布</if></span>
+                        			<span>活动编号：{$vo.id}</span>
+                        			<span>押金合计：<b>{$vo['real_price']*$vo['kucun'] + $vo['red_price']*$vo['kucun'] + $vo['kucun']|number_format=2}</b></span>
+                        		</p>
+                        		<p class="right"><a href="{:U('Coupon/processdetail',array('id' => $vo['id']))}" target="_blank">进展详情</a></p>
+                        	</div>
+                        	<div class="detalis">
+                        		<ul>
+                        			<li><img style="width:80px;height:80px" src="../{$vo.img}"></li>
+                        			<li>
+                        				<div class="detail-l">
+                        					<p>商品名称：<span>{$vo.goods_name}</span></p>
+	                        				<p>店铺名称：<span>{$vo.shopname}</span></p>
+	                        				<p>商品来源：<span>{$vo.laiyuan|getPlatformName}</span></p>
+	                        				<p>商品分类：<span>{$category[$vo['cid']]}</span></p>
+                        				</div>
+                        				<div class="detail-r">
+                        					<p>下单金额：<span>{$vo.real_price}</span>元</p>
+	                        				<p>优惠券金额：<span>{$vo.red_price}</span>元</p>
+	                        				<p>商品链接：<a href="{$vo.url}"  target="_blank" style="color: #f25f55; text-decoration: underline;">点击查看</a></p>
+                        				</div>
+                        			</li>
+                        			<li>
+                        				<p>
+                                            <if condition="($vo.confirm eq 99)"><span>待付款</span>
+                                             <elseif condition="$vo.confirm eq 100"/><span>待完善</span>
+                                             <elseif condition="$vo.confirm eq 0"/><span>待审核</span>
+                                             <elseif condition="$vo.confirm eq 1"/><span>已驳回</span>
+                                             <elseif condition="$vo.confirm eq 2"/>
+                                             <if condition="($vo.etime ELT date('Y-m-d H:i:s', time()))"><span>已结束</span>
+                                              <else /><span>活动进行中</span>
+                                             </if>
+                                            </if>
+                        				</p>
+                        			</li>
+                        			<li>
+                        				<div class="table_cell">
+                        				    <if condition="($vo.confirm eq 99)">
+                        				        <p class="status"><span>信息有待完善<a href="{:U(\'Coupon/publish4\',array(\'id\' => $vo['id']))}">去支付&gt;&gt;</a></span></p>
+                        				     <elseif condition="$vo.confirm eq 100"/>
+                        				        <p class="status"><span>信息有待完善<a href="{:U(\'Coupon/publish1\',array(\'id\' => $vo['id']))}">去完善&gt;&gt;</a></span></p>
+                        				     <elseif condition="$vo.confirm eq 0"/>
+                        				        <p class="status"><span>信息有待审核</span></p>
+                        				     <elseif condition="$vo.confirm eq 1"/>
+                        				        <p class="status"><span>{$vo.confirmnote|default="信息已驳回"}</span></p>
+                        				     <elseif condition="$vo.confirm eq 2"/>
+                        				        <if condition="($vo.etime ELT date('Y-m-d H:i:s', time()))">
+                        				            <p class="status"><span>活动已结束</span></p>
+                        				           <else />
+                        				            <p class="status"><span>活动进行中</span></p>
+                        				        </if>
+                        				    </if>
+                        				</div>
+                        			</li>
+                        		</ul>
+                        		<p class="tryNum_detail">
+                        			<span>总库存：<b>{$vo.kucun}份</b></span>
+                        			<span>申请人数：<b>{$vo.sq|default="0"}人</b></span>
+                        			<span>已领取：<b>{$vo.lq|default="0"} 份</b></span>
+                        			<span class="right into_recycleBin"><a href="{:U('Coupon/trash', array('id' => $vo['id']))}">放入回收站</a></span> </p>
+                        		<!--新添 end 第三期-->
+                        	</div>
+                        </div>
+                       </volist>
+                    </div>
+                    <!------分页-------->
+                    <notempty name="pagination.totalCount">
+                    <if condition="($pagination.totalPages gt 1)">
+                     <div class="row">
+                      <div class="col-sm-12">
+                       <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;"><ul class="pagination" id="list-pagination"></ul></div>
+                      </div>
+				     </div>
+				    </if>
+				    </notempty>
+				    <!------end----------->
+				</div>
+			</section>
+		<!-- page-wrapper end -->
+		</div>
+		<!-- wrapper -->
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		var paginationOptions= $.extend(true, {$pagination|json_encode} ,
+		{
+			onPageClick: function (event, page) {
+				var options = $(this).data('twbsPagination').options;
+				options.baseUrl = options.baseUrl.replace('','');
+				options.getParams.page = page;
+				//options.getParams.pagesize = options.getParams.pagesize;
+				var param = '';
+				for(var x in options.getParams ){
+					param += '&' + x + '=' + options.getParams[x];
+				}
+				//console.log(param);return;
+				window.location.href =  options.baseUrl + param + '';
+			}
+		});
+		$('#list-pagination').twbsPagination(paginationOptions);
+	});
+	</script>
+	<include file="Layout:foot" />

@@ -1,0 +1,221 @@
+<include file="Layout:headf" />
+<include file="Layout:navf" />
+    <script type="text/javascript">
+	
+		var url = "#";
+		var bigImg = "__PUBLIC__/maoke/images/vip_350.jpg";
+		var smallImg = "__PUBLIC__/maoke/images/vip_100.jpg";
+		$(function () {
+			var i = "VIP精品试用:)";
+			var b = 350;
+			var a = "#e8fafc";
+			var k = 100;
+			var j = "#e8fafc";
+			var f = 35;
+			var d = 54;
+			var h = [];
+			h.push('<div id="top-banner">');
+			h.push('    <div class="banner-min-bg">');
+			h.push('        <div class="banner-box">');
+			h.push('            <span class="slideDown" title="展开"></span>');
+			h.push("        </div>");
+			h.push('        <a href="' + url + '" id="smallImgClick">');
+			h.push('            <img class="none" src="' + smallImg + '" alt="' + i + '"/>');
+			h.push("        </a>");
+			h.push("    </div>");
+			h.push('    <div class="banner-max-bg">');
+			h.push('        <div class="banner-box">');
+			h.push('            <span class="slideUp" title="收起"></span>');
+			h.push("        </div>");
+			h.push('        <a href="' + url + '" id="bigImgClick" ');
+			h.push('            <img class="none" src="' + bigImg + '" alt="' + i + '"/>');
+			h.push("        </a>");
+			h.push("    </div>");
+			h.push("</div>");
+			h = h.join("");
+			var g = [];
+			g.push("<style>");
+			g.push(".none { display: none; }");
+			g.push("#top-banner { width: 100%; height: " + b + "px; position: relative; }");
+			g.push(".banner-max-bg, .banner-min-bg { width: 100%;position: absolute;}");
+			g.push(".banner-max-bg a, .banner-min-bg a { width: 100%; height: 100%; display: block; cursor: pointer; }");
+			g.push(".banner-max-bg { height: " + b + "px; background: url(" + bigImg + ") no-repeat bottom " + a + "; }");
+			g.push(".banner-min-bg { height: " + k + "px;top: -" + k + "px;background: url(" + smallImg + ") no-repeat bottom " + j + "}");
+			g.push(".banner-box { width: 1000px; margin: 0 auto; position: relative}");
+			g.push(".slideUp, .slideDown { width: " + f + "px; height: " + d + "px; position: absolute; top: 0; right: 0; display: block; cursor: pointer}");
+			// g.push(".slideDown { background: url(" + e + ") no-repeat}");
+			// g.push(".slideUp { background: url(" + c + ") no-repeat}");
+			g.push("</style>");
+			g = g.join("");
+			if ($("link").length > 0) {
+				$("link:last").after(g)
+			} else {
+				if ($("script").length > 0) {
+					$("script").eq(0).before(g)
+				} else {
+					$("head").eq(0).append(g)
+				}
+			}
+			$("body").eq(0).prepend(h);
+			$("#left-side").css("top", "480px");
+			$("#jumptwo").css("top", "480px");
+			$("#top-banner").top_adbanner({
+				executeTime: 6000,
+				Up_DownHeight: 100,
+				UpbannerHeight: 350,
+				DownbannerHeight: 100,
+				slideUp_btn: ".slideUp",
+				slideDown_btn: ".slideDown",
+				ad_Upbanner: ".banner-max-bg",
+				ad_Downbanner: ".banner-min-bg",
+				ad_time: 700,
+				btn_time: 594
+			})
+		});
+		(function () {
+			$.fn.top_adbanner = function (h) {
+				var g = {
+					executeTime: 1000,
+					Up_DownHeight: 105,
+					UpbannerHeight: 303,
+					DownbannerHeight: 100,
+					slideUp_btn: ".slideUp",
+					slideDown_btn: ".slideDown",
+					ad_Upbanner: ".cool_bg",
+					ad_Downbanner: ".cool_bg2",
+					ad_time: 700,
+					btn_time: 594
+				};
+				var j = $(this);
+				var c = $(this).find(h.slideUp_btn);
+				var b = $(this).find(h.slideDown_btn);
+				var d = $(this).find(h.ad_Upbanner);
+				var a = $(this).find(h.ad_Downbanner);
+				var i = setTimeout(f, h.executeTime);
+				c.click(f);
+				b.click(e);
+				function f() {
+					clearTimeout(i);
+					if (d.is(":animated")) {
+						return false
+					}
+					$("#left-side").css("top", "255px");
+					$("#jumptwo").css("top", "255px");
+					j.animate({
+								height: "0px"
+							},
+							h.ad_time);
+					d.animate({
+								top: "-" + h.UpbannerHeight
+							},
+							h.ad_time,
+							function () {
+								c.css("top", -h.Up_DownHeight);
+								j.animate({
+											height: h.DownbannerHeight
+										},
+										h.btn_time);
+								a.animate({
+											top: "0px"
+										},
+										h.btn_time,
+										function () {
+											b.animate({
+														top: "0px"
+													},
+													h.ad_time)
+										})
+							})
+				}
+
+				function e() {
+					if (a.is(":animated")) {
+						return false
+					}
+					j.animate({
+								height: "0px"
+							},
+							h.btn_time);
+					a.animate({
+								top: "-" + h.DownbannerHeight
+							},
+							h.btn_time,
+							function () {
+								b.css("top", -h.Up_DownHeight);
+								j.animate({
+											height: h.UpbannerHeight
+										},
+										h.ad_time);
+								d.animate({
+											top: "0px"
+										},
+										h.ad_time,
+										function () {
+											c.animate({
+														top: "0px"
+													},
+													h.ad_time)
+										})
+							})
+				}
+			}
+		})();
+   </script>	
+
+<div class="sec_main">
+
+    <div class="wrap-cont">
+        <div class="rule-box">
+            <div class="rule-box-tit">
+                <div class="line-tit">
+                    <span class="lump"></span>
+                    <span class="tit-txt">商家登录</span>
+                </div>
+            </div>
+            <div class="rule-list">
+                <div class="login-cont J_cont" data-mode="normal">
+                    <!--<div class="reg-switch J_switch">
+                        <span class="switch-bg1 J_switch_tab reg-switch-sel" data-index="0">商家登录</span>
+						<a href="http://sell.51lingla.com/Login/partner"><span class="switch-bg2 J_switch_tab" data-index="0">学院登录</span></a>
+                    </div>-->
+                    <div class="reg-switch-box J_switch_box" style="border: 0;">
+                    	<form class="layui-form" method="post" action="{:U('Index/login')}">
+                        <div class="J_login Fix" style="margin-left: 115px; margin-top: 130px;">
+                            <ul class="login-new-ul">
+                                <li>
+                                    <span class="ws">用户名</span>
+                                    <input class="text J_login_username focus" tabindex="1" name="username" type="text" id="username" autocomplete="off" required>
+                                </li>
+                                <li>
+                                    <span class="ws">密　码</span>
+                                    <input class="text foc J_login_password focus" tabindex="2" name="password" id="password" type="password" autocomplete="off" required>
+                                    <a href="{:U('Regist/getpassword')}">忘记密码</a>
+                                </li>
+                                <li>
+                                	<span class="ws"></span>
+                                    <label><input name="remember" id="autologin" class="J_month_remember" type="checkbox" tabindex="4" value="1" style="display: inline-block;">一个月内免登录</label>
+                                </li>
+                                <li class="J_action">
+                                    <div class="login-btn-new" style="margin-left: 80px;"><button class="layui-btn login_btn" type="submit" lay-filter="login" style="font-weight: bold;font-size: 16px;">登 录</button></div>
+                                </li>
+                            </ul>
+                        </div>
+                    	</form>
+                    </div>
+                </div>
+                <div class="aside-right-new">
+                    <span>没有商家帐号？</span>
+                    <a class="aside-right-buy-btn m-lbtn" href="{:U('Regist/index')}"><span>商家账号注册</span></a>
+                    <a class="aside-right-regist-btn m-btn" href="{:U('Regist/getpassword')}" ><span style="width: 95px; color: #000;">忘记密码</span></a>
+
+                    <div class="J_login_3rd">
+                        <span class="login"><a href="#"><img src="__PUBLIC__/maoke/images/sell_ad_2.png" width="250" height="250"></a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--S-底部-->
+
+<include file="Layout:footf" />

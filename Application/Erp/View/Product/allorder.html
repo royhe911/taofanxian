@@ -1,0 +1,35 @@
+<extend name="public/modal" />
+<block name="nav">
+
+</block>
+<block name="menu">
+	<div class="Hui-article" >
+		<div class="dataTables_wrapper">
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th>站长</th>
+						<th>已领取数量</th>
+						<th>已完成数量</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="data" item="vo">
+					<tr class="text-c va-m">
+						<td>{$vo.realname}</td>
+						<td>{$vo.count}</td>
+						<td>{$vo.cou}</td>
+					</tr>
+					</foreach>
+				</for>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+
+
+</script>
+</block>

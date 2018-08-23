@@ -1,0 +1,94 @@
+<div id="page-wrapper">
+    <section id="section">
+        <div class="section_main">
+
+            <div class="flexslider">
+                <ul class="slides">
+                    <li style=" cursor: pointer; width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;" class="flex-active-slide">
+                    </li>
+                </ul>
+                <ol class="flex-control-nav flex-control-paging"></ol>
+                <ul class="flex-direction-nav">
+                    <li>
+                        <a class="flex-prev flex-disabled" href="#" tabindex="-1"></a>
+                    </li>
+                    <li>
+                        <a class="flex-next flex-disabled" href="#" tabindex="-1"></a>
+                    </li>
+                </ul>
+            </div>
+            <!--左侧导航-->
+            <aside class="left" id="left_nav">
+                <div class="left_nav" style="display: block;">
+                    <div class="issue" style="display: block;">
+                        <a style=" cursor:pointer" href="{:U('Actcenter/publish1')}">发布试用</a>
+                    </div>
+                     <div class="task" style="display: block;">
+                        <a style=" cursor:pointer" href="http://www.taofanxian.com/admin.php?m=Home&c=User&a=index" target="_blank">拍A发B</a>
+                    </div>
+                    <div class="task" style="display: block;">
+                        <a style=" cursor:pointer" href="{:U('Coupon/publish1')}" >上传优惠券</a>
+                    </div>
+
+                    <div class="title personal_center" style="display: block;">
+                        <a href="{:U('Usercenter/index')}" class="selected">个人中心</a>
+                    </div>
+                    <div class="title store_manage" style="display: block;">
+                        <a href="{:U('Usercenter/bindshop')}">店铺管理</a>
+                    </div>
+                    <div class="title try_manage" style="display: block;">
+                        <a class="selected" href="javascript:void(0);">活动管理</a>
+                        <ul class="parent_ul">
+                            <li>
+                                <a href="{:U('Actcenter/index')}">试用管理</a>
+                            </li>
+                            <li>
+                                <a href="{:U('Order/ordermanage')}">订单管理</a>
+                            </li>
+                            <li>
+                                <a href="{:U('Order/orderquery')}">订单快捷查询</a>
+                            </li>
+                        </ul>
+                    </div>
+					<div class="title coupon_manage" style="display: block;">
+                        <a class="selected" href="javascript:void(0);">优惠券管理</a>
+                        <ul class="parent_ul">
+                            <li>
+                                <a href="{:U('Coupon/index')}">活动管理</a>
+                            </li>
+                            <li>
+                                <a href="{:U('Couponorder/ordermanage')}">订单管理</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="title account_information" style="display: block;">
+                        <a class="selected" href="javascript:void(0);">账号信息</a>
+                        <ul class="parent_ul">
+                            <li>
+                                <a href="{:U('Usercenter/basicset')}">基本设置</a>
+                            </li>
+                            <!-- <li>
+                                <a href="#">绑定银行卡</a>
+                            </li> -->
+                             <li>
+                                <a href="{:U('Usercenter/vipmanage')}">会员管理</a>
+                            </li>
+                        </ul>
+                     </div>
+                    <div class="title fund_manage " style="display: block; ">
+                        <a class="selected " href="javascript:void(0); ">资金管理</a>
+                        <ul class="parent_ul ">
+                            <li><a href="{:U('Merchant/finance')}">我要充值</a></li>
+                            <li><a href="{:U('Merchant/draw')}">押金提现</a></li>
+                            <li><a href="{:U('Merchant/record')}">资金记录</a>
+                            </li>
+                            <!-- <li>
+                                <a href="{:U('Merchant/actlist')}">活动明细</a>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <div class="title message_center" style="display: block;">
+                        <a id="message_num" href="{:U('Message/index')}">消息中心</a>
+                    </div>
+                </div>
+            </aside>

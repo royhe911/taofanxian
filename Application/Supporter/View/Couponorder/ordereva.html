@@ -1,0 +1,265 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<style>
+    #section .section_main .store_content {width: 1200px;margin-left: 0; background-color: #fff; padding: 30px;}
+    #section .section_main .store_content .delivery_status {margin-top: 20px;}
+    #section .section_main .store_content .delivery_status .title { height: 38px; line-height: 38px;overflow: hidden; background-color: #f5f5f5;}
+    #section .section_main .store_content .delivery_status .title div {font-size: 14px;height: 16px;}
+    #section .section_main .store_content .delivery_status .title div.left {padding-left: 20px;}
+    #section .section_main .store_content p.checkbox {display: inline-block;vertical-align: middle;cursor: pointer;}
+    #section .section_main .store_content .delivery_status .title span { margin-right: 40px;}
+    #section .section_main .store_content .delivery_status .title div.left .order-num >b { color: #323232;}
+    #section .section_main .store_content .delivery_status .title div.left span:last-of-type { margin-right: 10px; vertical-align: middle;}
+    #section .section_main .store_content .delivery_status .title div.right {padding-right: 20px;}
+    #section .section_main .store_content .delivery_status .title div.right { margin-right: 10px;}
+    #section .section_main .store_content .delivery_status .title div a {color: #005ea7;}
+    #section .section_main .store_content .delivery_status .detalis ul {height: 110px; border: 1px solid #f5f5f5;}
+    .store_content .product-name { width: 400px;}
+    .store_content .pay{ width: 170px;}
+    .store_content .pic{ width: 115px;}
+    .store_content .operation{ width: 145px;}
+    #section .section_main .store_content .delivery_status .detalis ul li {float: left;color: #323232;font-size: 14px;height: 110px;text-align: center;line-height: 110px;display: table;}
+    #section .section_main .store_content .delivery_status .detalis ul li:first-of-type img {  width: 80px;  height: 80px;  margin-top: 15px;  margin-left: 20px;}
+    #section .section_main .store_content .delivery_status .detalis ul li:first-of-type .name { width: 258px; height: 32px; line-height: 32px; color: #323232; text-align: left; padding-right: 10px;}
+    #section .section_main .store_content .delivery_status .detalis ul li + li { border-left: 1px solid #f5f5f5;}
+    #section .section_main .store_content .delivery_status .detalis ul li p { width: inherit; display: table-cell; vertical-align: middle;}
+    #section .section_main .store_content .delivery_status .detalis ul li.member-bindTB p { width: 160px; display: inline-block; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+    #section .section_main .store_content .delivery_status .detalis ul li.order-num-TB p {  width: 150px;  display: inline-block;  white-space: nowrap;  text-overflow: ellipsis;  overflow: hidden;}
+    .detalis li:nth-of-type(5) {  width:140px;  line-height: 0 !important;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic, #section .section_main .store_content .delivery_status .detalis ul li.operation { display: table;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic .link-pic, #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box {  display: table-cell;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic{ width: 115px;}
+    #section .section_main .store_content .delivery_status .detalis ul li.operation{ width: 141px;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic .link-pic a { width: 100%;line-height: 2; display: block; color: #f25f55; cursor: pointer;}
+    #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box a{ display: inline-block;width: 100px;height: 30px;line-height: 30px;border-radius: 5px; background-color: #fff;  font-size: 14px; float: left; margin-left: 20px;}
+    #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box a.main_btn {  border: 1px solid green;  background-color: #fff;  color: green;}
+    #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box a.sub_btn {  border: 1px solid #f25f55;  background-color: #fff;  color: #f25f55; margin-bottom: 10px;}
+    #section .section_main .store_content .delivery_status .detalis ul li.pic .link-pic a, #section .section_main .store_content .delivery_status .detalis ul li.operation .operation_box .back_content {color: #005ea7; cursor: pointer;}
+    .taobao-icon {width: 15px; height: 15px;}
+
+</style>
+<!-- 待确认评价返款 -->
+<section id="section">
+    <div class="section_main">
+        <!--所在位置-->
+        <div class="location_title">
+            <ul>
+                <li>你所在的位置：</li>
+                <li class="order">
+                    <a class="" href="#">首页</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Usercenter/index')}">商家中心</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a href="{:U('Couponorder/ordermanage')}">优惠券订单管理</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">待确认评价返款</li>
+            </ul>
+        </div>
+        <!--任务说明-->
+        <div class="store_content">
+            <div class="title clearfix">
+                <h1 class="left">待确认评价返款</h1>
+                <span class="desc left">
+                    以下试用订单试客已经在淘宝评价，请审核返款</span>
+            </div>
+            <form action="" method="GET" id="myform" />
+            <div class="filter clearfix">
+                <!-- 筛选店铺 -->
+                <ul class="choose-shop left">
+                    <li>店铺：</li>
+                    <li>
+                        <div class="vocation">
+                            <select class="select2" style="cursor: pointer" name="sid" id="sid">
+                                <option value="0" >全部店铺</option>
+                                <volist name="shop" id="vo">
+                                    <if condition="$vo['id'] eq $sid">
+                                        <option value="{$vo.id}" selected> {$vo.shopname}</option>
+                                    <else />
+                                        <option value="{$vo.id}"> {$vo.shopname}</option>
+                                    </if>
+                                </volist>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+                <!-- 筛选淘宝号 -->
+                <ul class="seachform left" style="margin-left:50px; overflow: hidden;">
+                    <li><input placeholder="请输入试客淘宝号" id="tb_id" name="tb_id" type="text" class="scinput1" value="{$tb_id}"></li>
+                    <li><input placeholder="请输入QQ号" id="qq" name="qq" type="text" class="scinput1" value="{$qq}"></li>
+                    <li><label>&nbsp;</label><input type="submit" class="scbtn" value="查询" /></li>
+                </ul>
+                <p class="status" id="delivery_fh" onclick="complete();"><a href="javascript:void(0)" id="pl">批量通过<span id="lenght">0</span>单</a></p>
+            </div>
+            <input type="hidden" name="m" value="Supporter" />
+            <input type="hidden" name="c" value="Couponorder" />
+            <input type="hidden" name="a" value="order" />
+            <input type="hidden" name="state" value="{$state}" />
+            </form>
+            <!--所有订单的状态种类-->
+            <div class="table-title">
+                <ul>
+                    <div class="select-all">
+                        <input class="checkbox" type="checkbox" name="chk_all" id="chk_all" />
+                        <span style="float:left;margin-top:11px;margin-left:5px;">全选</span>
+                    </div>
+                    <li class="product-name">商品</li>
+                    <li class="member-bindTB">试客淘宝账号</li>
+                    <li class="order-num-TB">试客QQ号</li>
+                    <li class="pay">订单号</li>
+                    <li class="pic">评价截图</li>
+                    <li class="operation">操作</li>
+                </ul>
+            </div>
+            <!--商品发货状态-->
+            <form action="{:U('Couponorder/agreed')}" method="POST" id="myform2" />
+            <input type="hidden" name="state" value="{$state}" />
+            <volist name="data" id="vo" empty="暂无数据">
+            <div class="delivery_status">
+                <div class="title">
+                    <div class="left">
+                        <input class="checkbox cb" type="checkbox" name="ids[]" value="{$vo.id}" style="margin-right:20px;" />
+                        <span class="order_mark iconfont icon-biaoji" type="0" orderid="{$vo.id}"></span>
+                        <span>{$vo.addtime}</span>
+                        <span>{$vo.shopname}</span>
+		                  <if condition="$vo['laiyuan'] eq 1">
+		                        <img class="taobao-icon" src="__PUBLIC__/maoke/images/merchant/bg_tb_default.png" alt="">
+		                  <else/>
+		                       <img class="taobao-icon" src="__PUBLIC__/maoke/images/merchant/bg_tm_default.png" alt="">
+		                  </if>
+                	</div>
+	                <div class="right"><a href="{:U('Coupon/orderInfo', array('id' => $vo['id']))}">查看详情 &gt;&gt;</a></div>
+                </div>
+                <div class="detalis" id="list">
+                    <ul>
+                        <li class="product-name">
+                            <img class="left" src="../{$vo.img}" />
+                            <p class="name">{$vo.goods_name}<br><span style="color:#666666;font-size: 14px;"> 商品价格：{$vo.real_price}元</span></p>
+                        </li>
+                        <li class="member-bindTB"><p>{$vo.tb_id}</p></li>
+                        <li class="order-num-TB"><p>{$vo.qq}</p></li>
+                    	<li class="pay"><p>{$vo.tb_item}</p></li>
+                        <li class="pic">
+                            <p class="link-pic" style="text-align: center">
+                                <a class="show_img" data-img="{$vo.order_pic}" onclick="showImg('{$vo.order_pic}')">查看评价截图
+                                </a>
+                            </p>
+                        </li>
+                        <li class="operation">
+                         <p class="delivery_1 operation_box">
+                           <a class="order_fh  sub_btn" href="javascript:void(0)" onclick="agreed({$vo.id});">通过</a>
+                           <a class="back_content main_btn" href="javascript:void(0)" onclick="refuse({$vo.id})">驳回</a>
+                         </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </volist>
+            </form>
+            
+            <notempty name="data">
+             <if condition="($pagination.totalPages gt 1)">
+	            <div class="row">
+	             <div class="col-sm-12" >
+	               <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+	             </div>
+	             <div class="col-sm-12">
+	                <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;">
+	                  <ul class="pagination" id="list-pagination"></ul>
+	                </div>
+	             </div>
+	            </div>
+	         </if>   
+            </notempty>
+
+        </div>
+        <div id="first"></div>
+        <input type="hidden" id="count" value="0">
+        <input type="hidden" id="shop_id" value="1089">
+        <input type="hidden" id="type" value="1">
+    </div>
+</section>
+
+  <script>
+  	$(function(){
+        var paginationOptions= $.extend(true, {$pagination|json_encode} ,
+                            {
+                                    onPageClick: function (event, page) {
+                                        var options = $(this).data('twbsPagination').options;
+                                        options.baseUrl = options.baseUrl.replace('','');
+                                        options.getParams.page = page;
+//                                      options.getParams.pagesize = options.getParams.pagesize;
+                                        var param = '';
+                                        for(var x in options.getParams ){
+                                                param += '&' + x + '=' + options.getParams[x];
+                                        }
+//                                      console.log(param);return;
+
+                                        window.location.href =  options.baseUrl + param + '';
+                                    }
+                            });
+        $('#list-pagination').twbsPagination(paginationOptions);
+
+    });
+  	
+    //全选
+    $("#chk_all").click(function(){
+	     $("input[name='ids[]']").prop("checked", $(this).prop("checked"));
+	     var lenght = $("input[type='checkbox']:checked").length - 1;
+	     if(lenght <= 0) lenght = 0;
+	     $("#lenght").text(lenght);
+    });
+    
+   //单个勾选
+	$(".cb").click(function(){
+	     $(this).prop("checked", $(this).prop("checked"));
+	     var lenght = $(".delivery_status input[type='checkbox']:checked").length;
+	     if(lenght <= 0) lenght = 0;
+	     $("#lenght").text(lenght);
+   });
+   
+   //批量操作
+   function complete(){
+   	var lenght = $(".delivery_status input[type='checkbox']:checked").length;
+   	if (lenght >= 1){
+   		$('#myform2').submit();
+   	} else {
+   		layer.alert('请勾选您要审核的订单！'); 
+   	}
+   }
+
+	//驳回
+	function refuse(id){
+		layer.confirm('确认驳回吗？', {icon: 3, title:'提示'}, function(){
+			window.location.href = "{:U('Couponorder/refuse',array('state' => $state))}&id="+id;
+		}, function(){
+			layer.close();
+		});
+	}
+	
+	//通过
+	function agreed(id){
+		layer.confirm('确认通过吗？', {icon: 3, title:'提示'}, function(){
+			window.location.href = "{:U('Couponorder/agreed',array('state' => $state))}&id="+id;
+		}, function(){
+			layer.close();
+		});
+	}
+	
+	//查看截图
+	function showImg(src){
+		layer.open({
+	        type: 1,
+	        title:'试客评价截图',
+	        shadeClose: true,
+	        closeBtn: true,
+	        area: ['375px','667px'], //宽高
+			content:'<img src="'+src+'" alt="加载失败" height="100%" width="100%"></img>'
+		});
+	}
+    </script>
+<include file="Layout:foot" />

@@ -1,0 +1,132 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">申请佣金</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+					我的账户余额：<b>{$money}</b> 元 &nbsp;
+					<a class="btn btn-success radius" onclick="applyCommisson()" href="javascript:;"> 申请佣金</a>
+				</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr>
+								<th colspan="6">申请记录</th>
+							</tr>
+							<tr class="text-c">
+								<th width="120">申请时间</th>
+								<th>申请金额</th>
+								<th width="80">打款截图</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr>
+
+						</thead>
+						<tbody>
+						<volist name="data" id="vo">
+							<tr class="text-c">
+								<td>{$vo.addtime|date="j/n H:i",###}</td>
+								<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+								<td>
+									<if condition="$vo.money_pic != ''">
+									<a href="javascript:;" title="鼠标右键复制截图">
+										<img width="80" class="product-thumb" src="__ROOT__/upload/{$vo.endtime|date='Ymd',###}/{$vo.money_pic}"  />
+									</a>
+									</if>
+								</td>
+								<td class="td-status">
+									<if condition="$vo.status == 0">
+										<span class="label label-warning radius">待审核</span>
+										<elseif condition="$vo.status == 1" />
+										<span class="label label-success radius">审核通过</span>
+										<elseif condition="$vo.status == 3" />
+										<span class="label label-success radius">已收款</span>
+										<elseif condition="$vo.status == 2" />
+										<span class="label label-danger radius">已拒绝</span>
+										<br> 原因：{$vo.reason}
+									</if>
+								</td>
+								<td>
+									<if condition="$vo.status == 0">
+										审核中<elseif condition="$vo.status == 1" />
+										<a href="javascript:;" onclick="sureGathering({$vo.id})">确认收款</a>
+										<elseif condition="$vo.status == 3" />
+										收款成功
+									</if>
+								</td>
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+		//申请佣金
+		function applyCommisson(){
+//			var userId = "{$_SESSION['user']['id']}";
+//			if ( {$money} >= 1000){
+//				layer.msg("账户余额充足，不允许申请", {icon: 2, time: 1000}, function(){
+//					window.location.reload();
+//				});
+//			}else{
+				layer.prompt({formType:0,value: '',title:'请输入佣金金额'},function (value,index,elem) {
+					var reg = /^\d+$/;
+					if(parseInt(value) <= 0){
+				 		layer.msg('请输入佣金金额');
+				 		return false;
+				 	}
+					if(!reg.test(value)){
+						layer.msg('佣金金额为整数');
+						return false;
+				 	}
+//					if(parseFloat(value) > 5000){
+//						layer.msg("每次最多申请5000元");
+//						return false;
+//					}
+
+					$.post("{:U('finance/applicationz')}",{money:value},function(msg){
+						if (msg.msg == 1){
+							layer.msg(msg.info, {icon: 1, time: 1000}, function(){
+								window.location.reload();
+							});
+						}else{
+							layer.msg(msg.info, {icon: 2, time: 1000}, function(){
+								window.location.reload();
+							});
+						}
+					})
+
+				})
+//			}
+		}
+        function sureGathering(id,type) {
+            layer.confirm('确定通过吗？', {
+                btn: ['通过', '取消'],
+                shade: false,
+                closeBtn: 0
+            }, function() {
+
+                $.ajax({
+                    type:'post',
+                    url:"{:U('Finance/receiptz')}",
+                    data:{id:id},
+                    success:function (msg) {
+                        if(msg.msg == 1){
+                            layer.msg(msg.info, {icon: 6, time: 1000},function () {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            });
+
+        }
+	</script>
+</block>

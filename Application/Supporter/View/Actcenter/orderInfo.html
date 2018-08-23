@@ -1,0 +1,365 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<link rel="stylesheet" href="__PUBLIC__/maoke/css/shikeba/orderdetail.css">
+<!-- 订单详情 -->
+<section id="section">
+    <!--订单详情-->
+    <div class="order_details">
+        <!--所在位置-->
+        <div class="location_title">
+            <ul>
+                <li>你所在的位置：</li>
+                <li class="order">
+                    <a class="" href="#">首页</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Usercenter/index')}">商家中心</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Actcenter/index')}">试用管理</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a href="{:U('Actcenter/processdetail',array('id'=>$info['gid'], 't'=>3))}">中奖进展</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">订单详情</li>
+            </ul>
+        </div>
+        <!--商品发货状态-->
+        <div class="commodity_information">
+            <h1>试用信息：</h1>
+            <div class="title">
+                <p class="left">
+                    <span>{$info.addtime}</span>
+                    <span>活动订单号：{$info.id}</span>
+                </p>
+            </div>
+            <div class="details">
+                <ul>
+                    <li><img style="width:80px;height:80px" src="../{$goods.image}" alt="">
+                    </li>
+                    <li>
+                        <p>商品名称：<span>{$goods.gname}</span></p>
+                        <p>商品规格：<span>{$goods.format.thecolor}</span></p>
+                        <p>商品链接：<span>
+                        <a target="_blank" href="{$goods.url}">{$goods.url}</a></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p>店铺名称：<span>{$goods.shopname}</span></p>
+                        <p>商品运费：<span><notempty name="goods.scosts">{$goods.scosts}元<else />全国包邮</notempty></span></p>
+                        <p>平台：<span><if condition="($goods.type eq 1)">淘宝<else/>天猫</if></span></p>
+                    </li>
+                    <li>
+                        <p>单件：<span><b style="margin-right:10px;">¥{$goods.unit_price}</b>每单拍<b>1</b>个</span></p>
+                        <p>试客：<span>{$name}</span></p>
+                        <p>试客淘宝账号：<span>{$info.tb_id}</span></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <!--申请信息-->
+        <div class="apply_information">
+            <h1>申请信息：</h1>
+            <!--信息详情-->
+            <div class="information_detail clearfix">
+                <!--信息进度条-->
+                <div class="left progress_bar progress_bar_yes">
+                    <div class="default_bar"></div>
+                    <div class="selected_bar" id="myHeight"></div>
+                </div>
+                <!--进度条描述-->
+                <div class="left progress_description">
+                    <!--领取下单-->
+                    <div class="title placeOrder_titile">
+                        <p><span>领取下单</span></p>
+                        <p><i>{$data['addtime']}</i></p>
+                    </div>
+                    <!--领取下单--步骤-->
+                    <div class="placeOrder">
+                        <div class="clearfix placeOrder_one">
+                            <p class="left left_title"><b>收藏宝贝和店铺</b></p>
+                            <p class="left right_content">
+                             <notempty name="info.colleshop_pic"><b class="collection_shop show_img">收藏店铺：<a href="javascript:void(0);" onclick="showImg('{$info.colleshop_pic}')">查看截图</a></b></notempty>
+                             <notempty name="info.collebaby_pic"><b class="collection_product show_img">收藏宝贝：<a href="javascript:void(0);" onclick="showImg('{$info.collebaby_pic}')">查看截图</a></b></notempty>
+                            </p>
+                        </div>
+                        <div class="clearfix  placeOrder_two">
+                            <p class="left left_title"><b>浏览店铺</b></p>
+                            <div class="left right_content">
+                            <notempty name="info.baby_link">
+                             <volist name="info.baby_link" id="bl" key="k">
+                              <p><b>浏览链接{$k}：<a href="{$bl}" target="_blank">{$bl}</a></b></p>
+                             </volist>
+                            </notempty>
+                            </div>
+                        </div>
+                        <notempty name="info.is_talk">
+                         <div class="clearfix  placeOrder_three" >
+                            <notempty name="info.service_pic">
+                             <p class="left left_title"><b>客服聊天：</b></p>
+                             <p class="left right_content"><b class="chatlog_img show_img">客服聊天：<a style="cursor: pointer" onclick="showImg('{$info.service_pic}')">查看截图</a></b></p>
+                            </notempty>
+                         </div>
+                        <else/>
+                         <div class="clearfix  placeOrder_three" >
+                            <p class="left left_title">&nbsp;</p>
+                         </div>
+                        </notempty>
+                        <div class="clearfix  placeOrder_four">
+                            <p class="left left_title"><b>下单付款：</b></p>
+                            <p class="left right_content">
+                                <notempty name="info.tb_item"><b>订单号：{$info.tb_item}</b></notempty>
+                                <notempty name="info.real_price"><b>实际付款金额：<span>{$info.real_price|number_format=2}元</span></b></notempty>
+                                <notempty name="info.order_pic"><b class="show_img">订单截图：<a style="cursor: pointer" href="javascript:void(0);" onclick="showImg('{$info.order_pic}')">查看截图</a></b></notempty>
+                            </p>
+                        </div>
+                    </div>
+                    <!--发货8888888-->
+                    <in name="info.comfirm" value="11,20,21,22,30,31,32">
+                     <div class="title ship_title clearfix" id="zero" data-height="70" >
+                        <div class="left caption_left" style="margin-top: -10px;">
+                            <p><span>发货</span></p>
+                            <!--p><i class="time">0000-00-00 00:00:00</i></p-->
+                        </div>
+                        <div class="left caption_right">
+                         <notempty name="info.ship_name"><b>物流公司：{$info.ship_name}</b></notempty>
+                         <notempty name="info.shiporders"><b>运单号： {$info.shiporders}</b></notempty>
+                        </div>
+                     </div>
+                    <else/>
+                     <div class="default_title evaluate0 clearfix">
+                        <p class="left title_active" style="color:#f10180;">待发货</p>
+                        <p class="left caption_default" <eq name="info.comfirm" value="10">style="display: block;"</eq>>待商家确认发货
+                            <input class="sj_btn order_fh" data-context="640990" type="button" value="确认发货" onclick="isCheck({$info.id},11,'确认发货！');" />
+                            <a style="cursor: pointer" class="sj_btn back_content" data-context="640990" onclick="refuse({$info.id},10);">驳回</a>
+                        </p>
+                     </div>
+                    </in>
+                    <!--收货评价-->
+                    <in name="info.comfirm" value="20,21,30,31,32">
+                     <div class="title evaluate_content getEvaluate clearfix" id="one" data-height="115" style="margin-top: 18px;">
+                        <div class="left caption_left">
+                            <p><span>收货评价</span></p>
+                            <p><i>{$info.evaluationsk_time}</i></p>
+                        </div>
+                        <div class="left caption_right">
+                         <notempty name="info.evaluation_goods">
+                          <b>评价内容：<a class="pinjia" data-context="评价内容" href="javascript:void(0)" onclick="showCont()">查看内容<b style="height: 28px;line-height: 28px;" data-txt="{$info.evaluation_goods}" id="evaluation_goods"></b></a></b>
+                         </notempty>
+                        </div>
+                     </div>
+                    <else/>
+                     <div class="default_title evaluate1 clearfix" >
+                        <p class="left title_active">收货评价</p>
+                        <p class="left caption_default" <in name="info.comfirm" value="11,22">style="display:block;"</in>>待试客收货并在领吧平台评价 </p>
+                     </div>
+                    </in>
+                    <in name="info.comfirm" value="21,30,31,32">
+                    <!--审核评价-->
+                     <div class="title evaluate_content checkEvaluate clearfix" id="two" data-height="115">
+                        <div class="left caption_left">
+                            <p><span>审核评价</span></p>
+                        </div>
+                        <div class="left caption_right">
+                            <b>商家已审核评价</b>
+                        </div>
+                     </div>
+                    <else/>
+                     <div class="default_title evaluate2 clearfix">
+                        <p class="left title_active">审核评价</p>
+                         <p class="left caption_default" <eq name="info.comfirm" value="20">style="display:block;"</eq>>待商家审核评价
+                            <input class="order_sh sj_btn" data-context="640990" type="button" value="确认评价" onclick="isCheck({$info.id},21,'确认评价！');" />
+                            <a style="cursor: pointer" class="sj_btn back_content" data-context="640990" onclick="refuse({$info.id},20);">驳回</a>
+                            <input type="hidden" id="start_time_2" value="-62170012800">
+                            <!--span style="margin-left: 30px;"><b id="time_2_notice">00:00:00 后</b>自动审核通过</span-->
+                         </p>
+                     </div>
+                    </in>
+
+                    <in name="info.comfirm" value="30,31">
+                     <!--复制评价-->
+                     <div class="title evaluate_content copyEvaluate clearfix" id="three" data-height="120" style="margin-top: 12px;">
+                        <div class="left caption_left">
+                            <p><span>复制评价</span></p>
+                            <p><i>{$info.evaluationtb_time|default=""}</i></p>
+                        </div>
+                        <div class="left caption_right">
+                         <notempty name="info.evaluation_pic">
+                            <p class="left caption_default">
+                                                              淘宝评价截图：<a style="cursor:pointer;color:#005ea7" class="chatlog_img show_img" onclick="showImg('{$info.evaluation_pic}')">查看截图</a>&nbsp;&nbsp;
+                            </p>
+                         </notempty>
+                        </div>
+                     </div>
+                    <else />
+                     <div class="default_title evaluate3 clearfix">
+                        <p class="left title_active">复制评价</p>
+                        <p class="left caption_default" <in name="info.comfirm" value="21,32">style="display:block;"</in>>待试客复制评价到淘宝</p>
+                     </div>
+                    </in>
+
+                    <if condition="($info.comfirm eq 31)">
+                     <div class="title evaluate_content confirmEvaluate clearfix" id="four" data-height="305">
+                        <div class="left caption_left">
+                            <p><span>确认评价</span></p>
+                            <p><i>&nbsp;</i></p>
+                        </div>
+                        <div class="left caption_right">
+                            <b>商家已确认评价</b>
+                        </div>
+                     </div>
+                     <div class="try_rebate clearfix">
+                        <p class="left left_title"><b>试用返款</b></p>
+                        <p class="left right_content"><b>已返款</b></p>
+                     </div>
+                     <div class="title evaluate_content carryOut clearfix">
+                        <div class="left caption_left">
+                            <p><span>已完成</span></p>
+                            <p><i>&nbsp;</i></p>
+                        </div>
+                     </div>
+                    <else />
+                     <!--确认评价-->
+                     <div class="default_title evaluate4 clearfix">
+                        <p class="left title_active">确认评价</p>
+                         <p class="left caption_default" <eq name="info.comfirm" value="30">style="display:block;"</eq>>待商家确认评价
+                            <input class="sj_btn order_pj" data-context="640990" type="button" value="确认评价" onclick="complete({$info.id});" />
+                            <a style="cursor: pointer" class="sj_btn back_content" data-context="640990" onclick="refuse({$info.id},30);">驳回</a>
+                            <input type="hidden" id="start_time_3" value="-62170012800">
+                            <!--span style="margin-left: 30px;"><b id="time_3_notice">00:00:00 后</b>自动审核通过</span-->
+                         </p>
+                     </div>
+                     <!--追加评价-->
+                     <!--试用返款-->
+                     <div class="default_title evaluate7 clearfix">
+                        <p class="left title_active">试用返款</p>
+                     </div>
+                     <!--已完成-->
+                     <div class="default_title evaluate8 clearfix">
+                        <p class="left title_active">已完成</p>
+                     </div>
+                    </if>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+ $(function(){
+	 var myHeight = 568;//高度值
+	 var zero = $('#zero').attr('data-height');
+	 var one = $('#one').attr('data-height');
+	 var two = $('#two').attr('data-height');
+	 var three = $('#three').attr('data-height');
+	 var four = $('#four').attr('data-height');
+	 if(zero) myHeight = parseInt(myHeight) + parseInt(zero);
+	 if(one) myHeight = parseInt(myHeight) + parseInt(one);
+	 if(two) myHeight = parseInt(myHeight) + parseInt(two);
+	 if(three) myHeight = parseInt(myHeight) + parseInt(three);
+	 if(four) myHeight = parseInt(myHeight) + parseInt(four);
+	 $('#myHeight').css('height', myHeight+'px');
+ })
+
+ function hideLayer(){
+ 	layer.closeAll();
+ }
+
+ //查看截图
+ function showImg(src){
+	layer.open({
+        type: 1,
+        title:'点击屏幕阴影部分关闭图片',
+        shadeClose: true,
+        closeBtn: true,
+        area: ['375px','667px'], //宽高
+		content:'<img src="'+src+'" alt="加载失败" height="100%" width="100%"></img>'
+	});
+ }
+
+ function showCont(){
+	var evaluation_goods =$("#evaluation_goods").attr('data-txt');
+	layer.open({
+        type: 1,
+        title:'评价内容',
+        shadeClose: true,
+        closeBtn: true,
+        area: ['300px','200px'], //宽高
+		content:'<div style="font-size:14px; word-break:break-all; text-align:center;">'+evaluation_goods+'</div>'
+	});
+ }
+
+ //审核
+ function isCheck(id,comfirm,message){
+	 if(id && comfirm){
+		var url = "{:U('Order/comfirm_chanage')}";
+	        layer.confirm(message, {icon:3}, function(index){
+	            $.post(url,{id:id,comfirm:comfirm}, function(data){
+	                if (data.status == 1){
+	                    layer.alert('操作成功！',function(index){window.location.reload()});
+	                } else {
+	                	layer.alert('操作失败！');
+	                }
+	            });
+	            layer.close(index);
+	        });
+	 } else {
+		layer.alert('操作失败！');
+	 }
+ }
+
+ //驳回
+ function refuse(id,comfirm){
+	 if(id && comfirm){
+		var url = "{:U('Order/order_back')}";
+		layer.prompt({title:'请输入驳回原因，并确认', formType:2},
+				      function(text,index){
+			              if(text.replace(/^\s+|\s+$/g,"")){
+					          $.post(url,{id:id, note_order:text, type:comfirm}, function(data){
+					                 if (data.status == 1){
+					                    layer.alert('操作成功！',function(index){window.location.reload()});
+					                 } else {
+					                    layer.alert('操作失败！');
+					                 }
+					            });
+			                  layer.close(index);
+			              } else {
+			            	  layer.alert('请输入驳回原因！');
+			              }
+			          }
+		);
+	 }
+ }
+
+ //确认评价
+ function complete(id){
+	 var url = "{:U('Order/audit')}";
+	 if(id){
+		 layer.confirm('确认评价！', {icon:3}, function(index){
+			 $.post(url, {id:id}, function(data){
+				 if(1 == data.msg){
+                     layer.open({
+                   	  content: '审核成功！',
+                   	  btn: ['确定'],
+                   	  yes: function(index, layero){
+                   		  window.location.reload();
+                   	  },
+                   	  cancel: function(){ //右上角关闭回调(开启该代码可禁止点击该按钮关闭)
+                   	    return false;
+                   	  }
+                   	});
+				 } else {
+					 layer.alert('审核失败！');
+				 }
+			 });
+		 });
+		 layer.close(index);
+	 }
+ }
+</script>
+<include file="Layout:foot" />

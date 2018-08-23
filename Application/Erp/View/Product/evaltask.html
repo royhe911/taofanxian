@@ -1,0 +1,242 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">任务管理</span><span class="c-999 en">&gt;</span><span class="c-666">评价任务</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" >
+		<div class="pd-20">
+			<form action="" method="get" onsubmit="return checkSearch()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="product">
+				<input type="hidden" name="a" value="evaltask">
+				<input type="hidden" name="status" value="{$status}">
+				<!--<div class="text-c" style="margin-bottom: 10px;">-->
+					<!--日期：<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" placeholder="起始时间">-->
+				<!--<input type="text" id="datemax" name="endtime" class="input-text" style="width:150px;" placeholder="结束时间">-->
+					<!--<input type="text" class="input-text ordernum" style="width:200px" placeholder="店铺名搜索" id="" name="shopname" value="{$shopname}"> 或-->
+					<!--<input type="text" class="input-text ordernum" style="width:200px" placeholder="订单号搜索" id="" name="ordernum" value="{$ordernum}"> 或-->
+					<!--<input type="text" class="input-text wangwang" style="width:200px" placeholder="旺旺号搜索" id="" name="wangwang" value="{$wangwang}">-->
+					<!--<button type="submit" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>-->
+				<!--</div>-->
+			</form>
+			<div class="cl bg-1 bk-gray mt-20"  style="height: 34px; line-height: 34px;">
+				<ul class="l comm-ul" style="display: flex;">
+					<li class="<if condition="$_GET['status'] == 0">current</if>"><a href="{:U('product/evaltask','status=0')}">待完成</a></li>
+					<li class="<if condition="$_GET['status'] == 1">current</if>"><a href="{:U('product/evaltask','status=1')}">已完成</a></li>
+					<li class="<if condition="$_GET['status'] == 2">current</if>"><a href="{:U('product/evaltask','status=2')}">已拒绝</a></li>
+					<li class="<if condition="$_GET['status'] == 3">current</if>"><a href="{:U('product/evaltask','status=3')}">待审核</a></li>
+				</ul>
+				<span class="r">共有数据：{$count}条</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-bg table-hover table-sort">
+						<thead>
+							<tr class="text-c">
+								<th width="3%">id</th>
+								<th width="5%">发起日期</th>
+								<th width="5%">任务日期</th>
+								<if condition="$Think.get.status eq 1">
+								<th width="5%">完成时间</th>
+								</if>
+								<th width="80px">主图</th>
+								<th width="6%">店铺名</th>
+								<th width="10%">宝贝详情</th>
+								<th width="5%">下单价</th>
+								<th width="9%">订单编号</th>
+								<th width="6%">旺旺</th>
+								<th width="80px">评价晒图</th>
+								<th width="12%">评价文字</th>
+								<th width="80px">评价截图</th>
+								<if condition="$_SESSION['user']['role'] == 1">
+									<th>业务员</th>
+								</if>
+								<if condition="$_SESSION['user']['role'] == 6 ">
+									<th>站长</th>
+									<th>刷单员</th>
+								</if>
+								<if condition="$_SESSION['user']['role'] == 3 || $_SESSION['user']['role'] == 1">
+									<th>刷单员</th>
+								</if>		
+								<th width="6%">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="eval_pic" id="vo">
+							<tr class="text-c va-m">
+								<td>{$vo.id}</td>
+								<td>{$vo.addtime|date="j/n H:i",###}</td>
+								<td>{$vo.rw_addtime|date="j/n H:i",###}</td>
+								<if condition="$Think.get.status eq 1">
+								<td>{$vo.checktime|date="j/n H:i",###}</td>
+								</if>
+								<td>
+									<a href="javascript:;" title="鼠标右键复制图片"><img width="80" height="80" class="product-thumb" src="{$vo.goods_pic}"></a>
+								</td>
+								<td>{$vo.shopname}</td>
+								<td>
+									<a href="{$vo.goods_url}" style="color: #06c;" target="_blank" title="点击查看详情">	{$vo.goods_title}</a>
+								</td>
+								<td style="color: red;"><b style="font-size: 11px;">¥</b> {$vo.actual_price}</td>
+								<td>
+									<span class="<if condition='$vo.abn neq null'>label label-danger radius</if>">{$vo.tb_item}</span>
+								</td>
+								<td>{$vo.wangwang}</td>
+								<td>
+									<if condition="!empty($vo[eval_pic])">
+									<a href="javascript:;" onclick="showEvalImg({$vo.id})">查看图片</a>
+									<else />
+										无
+									</if>
+								</td>
+								<td>{$vo.remark}</td>
+								<td>
+									<if condition="$vo.eval_screenshot neq null">
+									<a href="javascript:;" title="鼠标右键复制图片"><img width="80" height="80" class="product-thumb" src="{$vo.eval_screenshot}"></a>
+									</if>
+								</td>
+								<if condition="$_SESSION['user']['role'] == 1">
+									<td>{$vo.yw_info}</td>
+								</if>
+								<if condition="$_SESSION['user']['role'] == 6">
+									<td>{$vo.zz_realname}</td>
+									<td>{$vo.sd_realname}</a></td>
+								</if>
+								<if condition="$_SESSION['user']['role'] == 3 or $_SESSION['user']['role'] == 1">
+									<td>{$vo.sd_realname}</td>
+								</if>
+								<td>
+									<if condition="$_SESSION['user']['role'] eq 2 && ($vo.eval_status eq 3 or $vo.eval_status eq 2)">
+									<!-- 刷单员 查看业余员上传的截图，上传刷手的评价截图 -->
+									<a href="javascript:;" onclick="upevalimg({$vo.id})">上传评价截图</a><br>
+									</if>
+									<if condition="$_SESSION['user']['role'] neq 5 and $_SESSION['user']['role'] neq 6">
+									<eq name="vo.eval_status" value="0">
+										<span class="label label-warning radius">待审核</span>
+									</eq>
+									</if>
+									<eq name="vo.eval_status" value="1">
+									<span class="label label-success radius">已通过</span>
+									</eq>
+									<eq name="vo.eval_status" value="2">
+										<a href="javascript:;" style="display: block;" onclick="evalDelete({$vo.id})">删除</a>
+										<span class="label label-danger radius">已拒绝</span>
+										<br>
+										理由：{$vo.eval_reason}
+									</eq>
+									<if condition="$_SESSION['user']['role'] neq 5">
+										<eq name="vo.eval_status" value="3">
+											<span class="label label-success radius">待完成</span>
+											<a href="javascript:;" style="display: block;" onclick="evalDelete({$vo.id})">删除</a>
+										</eq>
+									</if>
+									<!-- 业务员 审核刷手的评价截图 -->
+									<if condition="$_SESSION['user']['role'] == 6 and $vo.eval_status eq 0">
+									<a href="javascript:;" onclick="eval_check({$vo.id})">审核</a>
+									</if>
+								</td>
+								</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			laydate.render({
+			  	elem: '#datemin',
+                value:'{$starttime}',
+			  	min: '2018-01-01',
+		   		max: '',
+			  	done: function(value, date){
+
+			  	}
+			});
+
+		})
+		function showEvalImg(id){
+			layer_show('评价晒图',"{:U('product/evalimgshow','id=')}"+id,'350','500');
+		}
+        function upevalimg(id){
+            layer_show('评价截图',"{:U('product/evalimg_s','id=')}"+id,'500','500');
+		}
+		//审核
+		function eval_check(id) {
+			layer.confirm('确定通过吗？', {
+				btn: ['通过', '不通过', '取消'],
+				shade: false,
+				closeBtn: 0
+			}, function() {
+				$.ajax({
+					type:'post',
+					url:"{:U('product/eval_check')}",
+					data:{id:id,type:1},
+					success:function (msg) {
+					    if(msg.msg == 1){
+                            layer.msg(msg.info, {icon: 6, time: 1000},function () {
+                            	window.location.reload();
+                        	});
+						}else if( msg.msg == 0 ){
+                            layer.msg(msg.info, {icon: 5, time: 1000},function () {
+                                window.location.reload();
+                            });
+						}
+                    }
+				});
+			}, function(index) {
+				layer.prompt({
+				  	formType: 2,
+				  	title: '请输入驳回原因'
+				}, function(value, index, elem){
+					layer.close(index);
+				  	$.ajax({
+	                    type:'post',
+	                    url:"{:U('product/eval_check')}",
+	                    data:{id:id,reason:value,type:2},
+	                    success:function (msg) {
+	                        if(msg.msg == 1){
+	                            layer.msg(msg.info, {icon: 1, time: 1000 },function(){
+	                            	 window.location.reload();
+	                            });
+	                        }else{
+                                layer.msg(msg.info, {icon: 2, time: 1000 },function(){
+                                    window.location.reload();
+                                });
+							}
+	                    }
+                	});
+				});
+			});
+		}
+		//删除
+		function evalDelete(id){
+			layer.confirm('确定删除吗？', {
+				btn: ['确定', '取消'],
+				shade: false,
+				closeBtn: 0
+			}, function() {
+				$.ajax({
+					type:'post',
+					url:"{:U('product/del_eval')}",
+					data:{id:id},
+					success:function (msg) {
+					    if(msg.msg == 1){
+                            layer.msg(msg.info, {icon: 6, time: 1000},function () {
+                            	window.location.reload();
+                        	});
+						}else if( msg.msg == 0 ){
+                            layer.msg(msg.info, {icon: 5, time: 1000},function () {
+                                window.location.reload();
+                            });
+						}
+                    }
+				});
+			});
+		}
+	</script>
+</block>

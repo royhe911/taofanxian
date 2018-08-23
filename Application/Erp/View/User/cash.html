@@ -1,0 +1,73 @@
+<extend name="public/modal" />
+<block name="title">提现</block>
+<block name="menu">
+	<!--<form action="{:U('User/cash')}" method="post" class="form form-horizontal" id="form-admin-role-add" >-->
+		<div class="row cl" style="margin-bottom: 15px;">
+			<label class="form-label col-xs-4 col-sm-4" ><span class="c-red">*</span>提现金额：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="number" class="input-text" placeholder="请输入提现金额，不得低于50元" step="0.01" min="50" max="{$av_balance}" style="width: 100%;" id="cashmoney" >
+			</div>
+		</div>
+		<div class="row cl" style="margin-bottom: 15px;">
+			<label class="form-label col-xs-4 col-sm-4" ><span class="c-red">*</span>银行卡号：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text" placeholder="请输入银行卡号" style="width: 100%;"  id="card" onkeyup="value=value.replace(/[^\d]/g,'')" value="{$info.card}">
+			</div>
+		</div>
+		<div class="row cl" style="margin-bottom: 15px;">
+			<label class="form-label col-xs-4 col-sm-4" ><span class="c-red">*</span>银行卡姓名：</label>
+			<div class="formControls col-xs-8 col-sm-8">
+				<input type="text" class="input-text" placeholder="请输入银行卡姓名" style="width: 100%;"  id="name" value="{$info.name}">
+			</div>
+		</div>
+		<div class="row cl" >
+			<label class="form-label col-xs-4 col-sm-4" ></label>
+			<div class="formControls col-xs-3 col-sm-3 " style="text-align: left;">
+				<a class="btn btn-success radius fr" onclick="checkForm()">提交</a>
+			</div>
+		</div>
+
+	<!--</form>-->
+</block>
+<block name="js">
+<script type="text/javascript">
+	function checkForm(){
+		var yu = {$av_balance};
+		var cash = $("#cashmoney").val();
+		var card = $.trim($("#card").val());
+		var name = $.trim($("#name").val());
+		var reg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+		if(!$.trim(cash) || $.trim(parseFloat(cash)) < 50){
+			layer.msg('提现金额不得低于50元');
+			return false;
+		}
+		if(!reg.test(cash)){
+			layer.msg('提现金额最多两位小数');
+			return false;
+		}
+		if(parseFloat(yu) < parseFloat(cash)){
+			layer.msg('提现金额不能超过您的余额');
+			return false;
+		}
+		if(!card){
+			layer.msg('请输入银行卡号');
+			return false;
+		}
+		if(!name){
+			layer.msg('请输入银行卡姓名');
+			return false;
+		}
+		$.post("{:U('User/cash')}",{money:cash,card:card,name:name},function(data){
+			if (1 == data.msg){
+        		layer.msg(data.info,{icon:1,time:1000},function(){
+        			window.parent.location.href = "{:U('finance/cashrecord')}";
+        		})
+        	} else {
+        		layer.msg(data.info,{icon:2,time:1000},function(){
+        			window.location.reload()
+        		});
+        	}
+		})
+	}
+</script>
+</block>

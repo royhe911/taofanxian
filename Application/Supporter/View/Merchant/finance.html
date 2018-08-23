@@ -1,0 +1,111 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style>
+#section .section_main .deposit_recharge h2 {color: #323232;font-size: 16px;}
+#section .section_main .deposit_recharge h2.select_bank { padding-top: 30px;}
+#section .section_main .deposit_recharge table {margin-left: -10px;border-collapse: separate;}
+#section .section_main .deposit_recharge table td {width: 180px;height: 40px;line-height: 40px;text-align: center;cursor: pointer;padding:15px;position:relative;}
+#section .section_main .deposit_recharge table td.pay_select_active img{ border:1px solid #e61e28;}
+#section .section_main .deposit_recharge table td.pay_select_active .pitchOn{ display:block !important;}
+#section .section_main .deposit_recharge table td .pitchOn{ display:none; width: 180px; height: 40px;position:absolute;bottom:14px;right:14px;z-index:99;background: url(__PUBLIC__/maoke/images/merchant/pitch_on.png) right bottom no-repeat;}
+#section .section_main .deposit_recharge table td.rechange_way{padding:0;text-align:left;}
+#section .section_main .deposit_recharge table td.rechange_way p{  font-size:14px; color:#333; padding-left:22px;}
+#section .section_main .deposit_recharge table td img { width: 180px; height: 40px; margin-top: -2px; border: 1px solid #c8c8c8;}
+#section .section_main .deposit_recharge table td a { color: #005ea7; display:inline-block; width: 180px; height: 40px; border: 1px solid #c8c8c8;}
+#section .section_main .deposit_recharge .recharge_type {padding: 20px 0 30px 0;}
+#section .section_main .deposit_recharge .recharge_type span {display: inline-block; margin-left: 15px; padding-left: 26px; height: 20px; font-size: 14px; background: url(/images/merchant/sj_fbsy_icon_quan_default.png) left center no-repeat;cursor:pointer;}
+#section .section_main .deposit_recharge .recharge_amount p {font-size: 14px;padding-top: 30px;padding-left: 20px;}
+#section .section_main .deposit_recharge .recharge_amount p span { font-size: 20px;}
+#section .section_main .deposit_recharge .recharge_amount p.recharge_amount { padding-top: 30px;}
+#section .section_main .deposit_recharge .recharge_amount p.recharge_amount input { width: 200px; height: 28px; line-height: 28px; border: 1px solid #969696; border-radius: 5px; padding-left: 5px;}
+#section .section_main .deposit_recharge .recharge_amount p.recharge_amount b {font-size: 12px;color: #969696;margin-left: 10px;}
+#section .section_main .deposit_recharge .recharge_amount p.error { padding-left: 90px; height: 30px; padding-top: 3px;}
+#section .section_main .deposit_recharge .recharge_amount p.error span {font-size: 14px;}
+#section .section_main .deposit_recharge .confirm_btn { width: 100%; padding: 30px 0 50px 20px; border-bottom: 1px solid #f5f5f5;}
+#section .section_main .deposit_recharge .confirm_btn input { width: 150px; height: 40px; line-height: 40px; border: 1px solid #f25f55; border-radius: 5px; font-size: 16px; background-color: #f25f55; color: #fff;}
+#section .section_main .deposit_recharge .warm_prompt { padding-left: 20px; padding-bottom: 20px;}
+#section .section_main .deposit_recharge .warm_prompt h1 { color: #323232; font-size: 14px; padding: 30px 0 10px 0;}
+#section .section_main .deposit_recharge .warm_prompt p { padding-top: 10px;}
+#section .section_main .deposit_recharge .warm_prompt p img { margin-top: -2px; cursor: pointer;}
+</style>
+                <!--我要充值-->
+                <div id="my_main" class="deposit_recharge  left" style="min-height: 732px;">
+                        <h1 class="title">我要充值</h1>
+                        <h2 class="select_bank">1.充值方式</h2>
+                        <table>
+                            <!--第一种充值方式-->
+                            <tbody>
+                                <tr>
+                                <td class="rechange_way"><p class="zfb_rechange rechange_waySE"><input type="radio" style="width:16px;height:16px;vertical-align: middle;margin-right: 10px; " checked >支付宝</p></td>
+                            </tr>
+                            <tr>
+                                <td class="bank pay_select pay_select_active">
+                                    <img src="__PUBLIC__/maoke/images/merchant/alipay_logo.png" alt="">
+                                    <p class="pitchOn"></p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h2>2.填写充值金额</h2>
+                        <form action="{:U('Recharge/doalipay')}" method="post" onSubmit="return checkAmount()" action="{"U('Merchant/finance')"}">
+                            <div class="recharge_amount">
+                                <p class="account_balance">可用余额：<span><?php echo $fund?$fund:'0.00';?></span>元</p>
+                                <p class="recharge_amount">充值金额：
+                                    <input id="recharge_money" type="number" onkeyup="pay_prceil_fon(this.value)" name="amount" step="0.01">
+                                    <b class="recharge_hint">亲~！充值金额正确格式:1 或 0.1 或 0.01</b>
+                                </p>
+                                <p class="error"><span id="moneyerror"></span></p>
+                            </div>
+                
+                            <p class="confirm_btn">
+                                <input id="confirm_payment" type="submit" value="确认充值" onclick="check_recharge()">
+                                <br><br><span style="color:red;font-size:14px;">注意：在第三方页面支付时，请在15分钟内完成支付</span>
+                            </p>
+                        </form>
+                        
+                        <div class="warm_prompt">
+                            <h1>温馨提示：</h1>
+                            <!-- <p>1、信用卡支付时银行会自动提示风险安全提醒，可继续支付，请勿担心；</p>
+                            <p>2、请注意您的银行卡充值限制，以便造成不便；</p> -->
+                            <p>1、禁止洗钱、虚假交易等行为，一经发现并确认，将终止该账号的试用；</p>
+                            <p>2、如果充值金额没有及时到账，请联系客服。</p>
+                        </div>
+                    </div>
+                <!-- my_main end -->
+            </div>
+        </section>
+    <!-- page-wrapper end -->
+    </div>
+    <!-- wrapper -->
+</div>
+<script>
+     $(document).ready(function(){
+        var amount = $('#recharge_money').val();
+        if(amount>0){
+            pay_prceil_fon(amount);
+        }
+
+    });
+    function pay_prceil_fon(timprceil){
+        var sum_two = (parseFloat(timprceil)).toFixed(2);           
+        $('#moneyerror').html('温馨提示：共需充值金额<font color="#F60"><strong>'+sum_two+'</strong></font> 元 ');
+    }
+    function checkAmount(){
+        var amount = $('#recharge_money').val();   //充值金额
+        var pricereg=/^[1-9]+[0-9]*]*$/;
+        var pricereg_1=/^\d+\.\d{1}[1-9]{1}$/;
+        var pricereg_2=/^\d+\.\d{1}$/;
+        if(amount == ''){
+            $('#moneyerror').html('<font color="red">亲~！您是不是忘记了填写充值金额了？</font>');
+            return false;
+        }else if(!pricereg.test(amount) && !pricereg_1.test(amount) && !pricereg_2.test(amount)){
+            $('#moneyerror').html('<font color="red">亲~！充值金额正确格式:1 或 0.1 或 0.01</font>');
+            return false;
+        }else{
+            return true;
+        }
+        
+    }
+</script>
+<include file="Layout:foot" />

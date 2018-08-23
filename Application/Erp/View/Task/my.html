@@ -1,0 +1,81 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">任务管理</span><span class="c-999 en">&gt;</span><span class="c-666">任务列表</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+						<div class="dataTables_length" id="DataTables_Table_0_length">
+							<label>显示
+								<select name="" class="select">
+									<option value="0" selected>全部</option>
+									<option value="25">已完成</option>
+									<option value="50">进行中</option>
+								</select>任务：
+							</label>
+						</div>
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+							<tr class="text-c">
+								<th width="40">ID</th>
+								<th width="60">缩略图</th>
+								<th>商品名称</th>
+								<th width="100">状态</th>
+								<th width="100">任务数量/金额</th>
+								<th width="120">结束时间</th>
+								<th width="110">已完成数量/金额</th>
+								<th width="110">未完成数量/金额</th>
+								<th width="100">返款金额</th>
+								<th width="100">操作</th>
+							</tr>
+							</thead>
+							<tbody>
+							<volist name="data" id="vo">
+								<tr class="text-c va-m">
+									<td>{$vo.id}</td>
+									<td>
+										<a href="javascript:;"><img width="60" class="product-thumb" src="{$vo.goods_thumb}"></a>
+									</td>
+									<td class="text-l">
+										<a style="text-decoration:none" href="javascript:;"><img title="国内品牌" src="static/h-ui/images/gq/cn.gif"> <b class="text-success">{$vo.goods_title}</a>
+									</td>
+									<td class="text-m"><span class="label radius label-primary">进行中</span></td>
+									<td class="text-l">{$vo.num}份/{$vo.price}元</td>
+									<td class="text-l">2018-04-09</td>
+									<td class="text-l">1份/10元</td>
+									<td class="text-l">9份/90元</td>
+									<td class="text-l">100元</td>
+									<td>
+											<a href="javascript:;" title="查看任务" onclick="showMyTask('我的任务','{:U('task/my', array('gid' => $vo.id))}','990','300','001')"><i class="Hui-iconfont">查看任务</i></a>
+											<!--派单员权限-->
+											<!--<a href="javascript:;" title="查看任务" onclick="showMyTask('任务分配详情','{:U('task/taskdetail')}','990','500','001')"><i class="Hui-iconfont">任务分配详情</i></a>-->
+									</td>
+								</tr>
+							</volist>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+		/*
+		 参数解释：
+		 title	标题
+		 url		请求的url
+		 id		需要操作的数据id
+		 w		弹出层宽度（缺省调默认值）
+		 h		弹出层高度（缺省调默认值）
+		 */
+		/*我的任务*/
+        function showMyTask(title, url, w, h, id) {
+            layer_show(title, url, w, h, id);
+        }
+	</script>
+</block>

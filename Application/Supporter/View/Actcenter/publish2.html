@@ -1,0 +1,357 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+    <div class="left" style="width: 1040px;overflow: hidden;background-color: #ffffff;margin: 0 0 8px 10px;">
+        <img src="__PUBLIC__/maoke/images/merchant/release_header_show.png" alt="">
+    </div>
+                <!-- 发布试用2 -->
+                <div id="my_main" class="store_content left" style="min-height: 1067px;">
+                        <h1 class="title">发布试用</h1>
+                        <!--进度条-->
+                        <div class="progress_bar">
+                            <img src="__PUBLIC__/maoke/images/merchant/sj_fbsy_bg_jdt_02_default.png" alt="">
+                        </div>
+                        <!--2.填写商品信息-->
+                        <form action="{:U('Actcenter/publish2')}" method="POST" id="myform" />
+                        <div class="fill_information">
+                            <h2 class="title">2.填写商品信息</h2>
+                            <div class="shop_information">
+                                <div class="commodity_information">
+                                    <i id="focus"></i>
+                                    <label for="commodity_name"><span>*</span>平台展示名称：</label>
+                                    <input id="commodity_name" name="commodity_name" type="text" value="{$goods.gname}" required />
+                                    <span id="product_name_error"></span>
+                                    <br>
+                                    <p>
+                                        请输入试用品名称，
+                                        <a href="javascript:void(0);">不要和{$platform.name}商品名称相同，</a>
+                                        防止试客直接搜索名称购买，请控制在20个字内
+                                    </p>
+
+                                    <label for="goods_name"><span>*</span>{$platform.name}商品标题：</label>
+                                    <input id="goods_name" name="goods_name" type="text" value="{$goods.title}" required />
+                                    <span id="goods_name_error"></span>
+                                    <br>
+                                    <p>
+                                        请输入{$platform.name}完整标题，
+                                        <a href="javascript:void(0);">和{$platform.name}商品标题完全相同，</a>
+                                        请将商品在{$platform.name}显示的完整名称复制到此输入框，如果商品名称<br>中有空格，请连着空格一起复制粘贴。
+                                        <a href="javascript:void(0);" style="color:#e61e28;font-weight:bold;font-style: normal">活动期间{$platform.name}网上的商品标题不得更改！</a>
+                                    </p>
+                                    <label for="shop_url"><span>*</span>商品链接：</label>
+                                    <input id="shop_url" name="shop_url" type="text" value="{$goods.url}" required />
+                                    <span class="error" id="product_link_error"></span>
+                                    <br>
+                                    <p>平台会根据您填写的商品链接抓取对应{$platform.name}商品的宝贝描述，显示在试用详情页。</p>
+                                    <label for="commodity_classify"><span>*</span>商品的分类：</label>
+                                    <select id="commodity_classify" name="commodity_classify" required>
+                                     <volist name="category" id="msg">
+                                      <option value="{$key}" <if condition='($goods.cid eq $key)'>selected</if>>{$msg}</option>
+                                     </volist>
+                                    </select>
+                                    <br>
+                                    <!--p><a>此分类为领吧平台分类</a></p-->
+                                    <div class="upload_image goods_picture">
+                                        <label class="left"><span>*</span>平台展示图：</label>
+                                        <div class="up_img left" onclick="upd_file(this,'fileToUpload');" style="margin-left: 8px;">
+                                            <input type="file" name="fileToUpload" class="fileToUpload" id="fileToUpload" data-img="..{$goods.image}" style="width:100px;height:100px;margin:0;" value="" accept="image/*"/>
+                                            <input type="hidden" name="mypic" id="mypic" value="{$goods.image}" required />
+                                            <empty name="goods.image">
+                                             <img id="picture_url" class="imgList img" src="__PUBLIC__/maoke/images/merchant/sk_zjgl_lqxd_icon_jiahao_default.png">
+                                            <else />
+                                             <img id="picture_url" class="imgList img" src="..{$goods.image}">
+                                            </empty>
+                                            <div class="displayValue" style="word-spacing: normal;word-wrap: break-word;"></div>
+                                        </div>
+                                        <i class="img_tips icon iconfont left" id="picture_url_error"></i>
+                                    </div>
+
+                                    <p class="upload_image_hint">
+                                        上传的商品图将会展示在领吧平台，图片格式为：<b>jpg、png、jpeg、gif</b>，图片大小在<b>1M以内</b><br>
+                                       <b>展示图要求：白底背景，必须是所送的商品，不能出现图片拼接、水印、logo、及其他文字。</b>
+                                    </p>
+
+                                    <!--****************商品规格*******************-->
+                                    <div class="goods_standard">
+                                        <div class="left norms">商品规格：</div>
+                                        <div class="left goods_standard_details">
+                                            <div class="goods_standard_content" style="margin-top: 10px;">
+                                                <ul>
+                                                    <li>
+                                                        <p class="title"><span>*</span> 试客下单价格(元)</p>
+                                                        <p class="price"><input type="text" id="unit_price" name="unit_price" value="<notempty name='goods.unit_price'>{$goods.unit_price|number_format=2}</notempty>" placeholder="请填写"  required /></p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="title"><span>*</span> {$platform.name}搜索价格(元)</p>
+                                                        <p class="price"><input type="text" id="iphone_unit_price" name="iphone_unit_price" value="{$format.iphone_unit_price}" placeholder="请填写"  required /></p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="title"><span>*</span> 试客每单拍(件)</p>
+                                                        <!--<p class="price"><input type="text" id="buy_sum" name="buy_sum" value="{$format.buy_sum}" onkeypress="onlyNum()" placeholder="请填写" required /></p>-->
+                                                        <p class="price"><input type="text" id="buy_sum" name="buy_sum" value="1" disabled="disabled" onkeypress="onlyNum()" placeholder="请填写" required /></p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="title">商品规格</p>
+                                                        <p class="price"><input type="text" id="thecolor" name="thecolor" value="{$format.thecolor}" placeholder="颜色、尺寸等"></p>
+                                                    </li>
+                                                </ul>
+                                                    <p>单品售价：需要试客实际下单付款的商品SKU价格；</p>
+                                                    <p>商品搜索价格：商品在搜索结果页面显示的价格；</p>
+                                                    <p>如需试客拍下指定规格，请务必填写商品规格信息，如不填写，默认买手可以拍下任意规格的商品；</p>
+                                                <p><span>鞋子服装类商品，不可限制产品的尺寸</span></p>
+                                                <p>
+                                                    <span>如有疑问，请联系在线客服</span>
+                                                </p>
+                                            </div>
+                                            <p style="padding: 0;">
+                                                <span id="product_format_error"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <label for="is_huabei" style="width: 110px;">试客付款方式：</label>
+                                    <span class="is_huabei_checkbox actived"><input type="checkbox" name="huabei" value="1" <if condition='($goods.huabei eq 1)'>checked</if> style="width:16px;height:16px;;vertical-align: sub;margin-top:10px;"> 可以使用花呗或信用卡付款</span>
+                                    <p style="margin: 10px 0;color: #646464;font-size: 14px">若选中，则代表同意试客在{$platform.name}的付款方式可以用花呗或信用卡，这会增加试客对商品申请的积极性</p>
+
+                                    <label for="commodity_classify" style="width: 110px;">备注：</label>
+                                    <input type="text" style="margin: 0;" id="notice_remark" name="notice_remark" maxlength="20" value="{$goods.remark}" />
+                                    <p style="margin: 10px 0;color: #646464;font-size: 14px;">限制（20字），如您有指定下单规格，请在备注中填写，我们会对试客下单时进行特别提醒，以免拍错！</p>
+
+                                    <label for="freight">商品运费：</label>
+
+                                    <em style="cursor:pointer">
+                                        <span id="baoyou" class="pinkage <if condition='($goods.scosts eq 0)'>ifchoose</if>"><input type="radio" name="is_baoyou" value="0" <if condition='($goods.scosts eq 0)'>checked</if> onchange="change();" style="width:16px;height:16px;;vertical-align: sub;margin-top:10px;" checked>全国包邮</span>
+                                        <span class="pinkage freight" id="yunfei"><input type="radio" name="is_baoyou" value="1" <if condition='($goods.scosts gt 0)'>checked</if> onchange="change();" style="width:16px;height:16px;;vertical-align: sub;margin-top:10px;">收取运费：</span>
+                                    </em>
+
+                                    <input class="norms" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" id="freight" name="freight" type="text" placeholder="元" <if condition='($goods.scosts gt 0)'>value="{$goods.scosts}"<else />disabled="disabled"</if> />
+                                    <span id="freight_error_notice"></span>
+                                    <p style="padding-top:5px;">运费设置需要与商品在销售平台（{$platform.name}）上的邮资情况保持一致</p>
+                                </div>
+                            </div>
+                            <p class="note">
+                                <span class="icon iconfont icon-tishi1"></span>
+                                <b>提示：</b>
+                                试客成功领取试用后，商家需按照提交的试用商品进行发货。
+                                <a href="javascript:void(0);" style="color:#e61e28;font-weight:bold;font-style: normal">若试客收到的商品与任务商品不一致，平台会对商家进行严厉的处罚。</a>
+                            </p>
+                            <div class="nextStep_btn">
+                                <input type="hidden" name="id" value="{$goods.id}" />
+                                <input type="hidden" name="sid" value="{$sid}" />
+                                <input type="hidden" name="type" value="{$type}" />
+                                <input onclick="location.href='{:U(\'Actcenter/publish1\',array(\'id\' => $goods['id']))}'" type="button" value="上一步">
+                                <input type="button" value="下一步" onclick="next_step({$platform.id});" />
+                            </div>
+                        </div>
+                       </form>
+                    </div>
+            </div>
+        </div>
+    </section>
+		<!-- page-wrapper end -->
+</div>
+		<!-- wrapper -->
+</div>
+<script src="__PUBLIC__/ajaxfileupload.js"></script>
+<script src="__PUBLIC__/maoke/js/pub2.js"></script>
+<script type="text/javascript">
+ function change(){
+    var type = $('input:radio[name=is_baoyou]:checked').val();
+    if(1 == type){
+    	$('#freight').attr("disabled",false);
+    } else {
+    	$('#freight').attr("disabled",true);
+    	$('#freight').val('');
+    }
+ }
+ function onlyNum() {
+    var keyCode = event.keyCode;
+    if ((keyCode >= 48 && keyCode <= 57)) {
+        event.returnValue = true;
+    } else {
+        event.returnValue = false;
+    }
+}
+ function strToObj(str) {
+    return eval("(" + str + ")");
+}
+ function upd_file(obj,file_id){
+ 	$("input[name='"+file_id+"']").bind("change",function(){
+ 		$.ajaxFileUpload({
+ 			url:"{:U('Actcenter/AjaxUpload')}",//上传图片处理文件
+ 			secureuri:false,
+ 			fileElementId:file_id,
+ 			dataType: 'text',
+ 			success: function (data){
+                var data= strToObj(data);
+                if(1 == data.status){
+     				$('#mypic').val(data.url);
+     				$('#picture_url').attr('src', '../'+data.url);
+                    $("#picture_url_error").removeClass('icon-cuowu error').addClass('icon-chenggong correct').text(data.msg);
+                } else {
+                	$("#picture_url_error").removeClass('icon-cuowu error').addClass('icon-chenggong correct').html("<font color='#e61e28'>"+data.msg+"</font>");
+                	showSearch('product_name_error');
+                }
+ 			},
+ 			error: function (data){
+                var data= strToObj(data);
+ 				$('#picture_url_error').html(data.msg);
+ 				$('#picture_url_error').show();
+ 				showSearch('product_name_error');
+ 			}
+ 		});
+ 	});
+ }
+
+ function next_step(platform_id) {
+    var commodity_name = $("#commodity_name").val();
+    if (commodity_name == '') {
+        $("#product_name_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品名称不得为空");
+        showSearch('focus');
+        return;
+    }
+    if (commodity_name.length > 20) {
+        $("#product_name_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品名称请控制在20个字符以内");
+        showSearch('focus');
+        return;
+    }
+    else {
+        $("#product_name_error").html("");
+    }
+    var goods_name = $("#goods_name").val();
+    if (goods_name == '') {
+        $("#goods_name_error").html("<span class='icon iconfont icon-cuowu'></span>" + "{$platform.name}商品完整标题不得为空");
+        showSearch('focus');
+        return;
+    }
+    if (goods_name.length > 100) {
+        $("#goods_name_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品完整标题请控制在100个字符以内");
+        showSearch('focus');
+        return;
+    }
+    else {
+        $("#goods_name_error").html("");
+    }
+
+    var shop_url = $("#shop_url").val();
+    if (shop_url == '') {
+        $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品链接不得为空");
+        showSearch('focus');
+        return;
+    } else {
+        $("#product_link_error").html("");
+    }
+
+    var reg = /.*[\u4e00-\u9fa5]+.*$/;
+    if ((reg.test(shop_url))) {
+        $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品链接中不得出现中文");
+        showSearch('focus');
+        return;
+    } else {
+        $("#product_link_error").html("");
+    }
+
+
+    var iftmall = shop_url.indexOf("tmall");
+    // 药店的详情链接是  "detail.yao.95095.com"
+    var ifyao = shop_url.indexOf(".yao.");
+    var iftaobao = shop_url.indexOf("taobao");
+    if(((iftaobao<0 || iftmall > 0) && platform_id == 1)||((iftmall<0 && ifyao < 0) && platform_id == 2)) {
+        $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>"+"商品链接不匹配");
+        showSearch('focus');
+        return;
+    }else if(((iftmall < 0 && ifyao < 0) && iftaobao < 0)){
+        $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>"+"请输入正确的商品链接");
+        showSearch('focus');
+        return;
+    }else if (!/(\?|\&)id=\d+/g.test(shop_url)) {
+        $("#product_link_error").html("<span class='icon iconfont icon-cuowu'></span>"+"商品链接不匹配");
+        showSearch('focus');
+        return;
+    }else{
+        $("#product_link_error").html("");
+    }
+
+//	var picture_urls = document.getElementsByClassName('fileToUpload')[0].value;
+	var picture_urls = $("#picture_url").attr('src');
+    if (picture_urls.indexOf('maoke')>0 && $('.fileToUpload').attr('data-img') == '..') {
+        $("#picture_url_error").removeClass('icon-chenggong correct').addClass('icon-cuowu error').text("请上传图片!");
+        showSearch("product_name_error");
+        return false;
+    }
+    if ($("#picture_url_error").hasClass('error')) {
+        return false;
+    }
+    // 验证试客下单价格
+    var unit_price = $("#unit_price").val();
+    if (unit_price == '' || unit_price <= 0) {
+        $("#product_format_error").html("<span class='icon iconfont icon-cuowu'></span>" + "单品售价不得为空或者不大于0");
+        return;
+    } else {
+        $("#product_format_error").html("");
+    }
+    var reg = /\d+\.\d{0,2}|\d$/;
+    if (!reg.test(unit_price)) {
+        $("#product_format_error").html("<span class='icon iconfont icon-cuowu'></span>" + "单品售价格式错误");
+        return;
+    } else {
+        $("#product_format_error").html("");
+
+    }
+
+    // 验证手机淘宝价格
+    var iphone_unit_price = $("#iphone_unit_price").val();
+    if (iphone_unit_price == '' || iphone_unit_price == 0) {
+        $("#product_format_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品搜索价格不得为空或者为0");
+        return;
+    } else {
+        $("#product_format_error").html("");
+    }
+    var reg = /\d+\.\d{0,2}|\d$/;
+    if (!reg.test(iphone_unit_price)) {
+        $("#product_format_error").html("<span class='icon iconfont icon-cuowu'></span>" + "商品搜索价格格式错误");
+        return;
+    } else {
+        $("#product_format_error").html("");
+    }
+
+
+    // 验证每单数量
+    var buy_sum = $("#buy_sum").val();
+    if (buy_sum == '' || buy_sum == 0) {
+        $("#product_format_error").html("<span class='icon iconfont icon-cuowu'></span>" + "每单数量不得为空或者为0");
+        return;
+    } else {
+        $("#product_format_error").html("");
+    }
+    var reg = /\d+\.\d{0,2}|\d$/;
+    if (!reg.test(buy_sum)) {
+        $("#product_format_error").html("<span class='icon iconfont icon-cuowu'></span>" + "每单数量格式错误");
+        return;
+    } else {
+        $("#product_format_error").html("");
+    }
+
+    var freight = $("#freight").val();
+
+    if($('#yunfei').hasClass('ifchoose') && (!freight || freight <=0)){
+        $('#freight_error_notice').text("运费不得为空或者为0");
+        return;
+    }else{
+        $('#freight_error_notice').text("");
+    }
+    if($("#baoyou").hasClass('ifchoose')){
+        $("#freight").val(0);
+    }else{
+        var reg = /\d+\.\d{0,2}|\d*$/;
+        if((!reg.test(freight))){
+            $("#unit_price_error").text("运费格式错误");
+            return;
+        }else{
+            $("#unit_price_error").text("");
+        }
+    }
+    $('#myform').submit();
+ }
+</script>
+<include file="Layout:foot" />

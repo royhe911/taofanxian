@@ -1,0 +1,512 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<style>
+   #try_plan_table{ text-align: center;}
+   #try_plan_table>li{ float: left;}
+   #try_plan_table::after{ content: ''; display: block; clear: both;}
+    #try_plan_table>li ul li{height: 50px; vertical-align: middle; text-align: center;font-size: 14px;padding: 6px 0;}
+   #try_plan_table>li ul li:first-of-type{  background: #f5f5f5;}
+</style>
+<!-- 进展详情 -->
+<section id="section">
+        
+    <div class="activity_details">
+        <!--所在位置-->
+        <div class="location_title">
+            <ul>
+                <li>你所在的位置：</li>
+                <li class="order">
+                    <a class="" href="#">首页</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Usercenter/index')}">商家中心</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Actcenter/index')}">试用管理</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a href="{:U('Actcenter/index')}">
+                     <if condition="($t eq 1)">试用详情
+                      <elseif condition="$t eq 2"/>试用进展
+                      <elseif condition="$t eq 3" />中奖进展
+                      <elseif condition="$t eq 4" />费用信息
+                     </if>
+                    </a>
+                </li>
+                <!--li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li-->
+                <!--li class="order">  进展详情</li-->
+            </ul>
+        </div>
+
+        <!--商品发货状态-->
+        <div class="commodity_information">
+                <h1>试用信息：</h1>
+                <div class="title">
+                    <p class="left">
+                        <span>发布时间：<if condition='($info.starttime eq 0)'>还未发布<else/>{$info.starttime|date="Y-m-d",###}</if></span>
+                        <span>活动订单号：{$info.id}</span>
+                    </p>
+                </div>
+                <div class="details" id="details">
+                    <ul>
+                        <li><img style="width: 80px;height: 80px" src="../{$info.image}" />
+                        </li>
+                        <li>
+                            <div>
+                                <p>店铺名称：<span>{$info.shopname}</span></p>
+                                <p>平台：<span><if condition="($info.type eq 1)">淘宝<elseif condition="$info.type eq 2"/>天猫</if></span></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p>商品名称：<span>{$info.gname}</span></p>
+                                <p>商品分类：<span>{$category}</span></p>
+                                <p>商品规格：<span>{$info.format.thecolor}</span></p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p>单价：<span><b style="margin-right:10px;">¥{$info.unit_price}</b>每单拍<b>{$info.format.buy_sum}</b>件</span>
+                                </p>
+                                <p>试用份数：<b>{$info.num}份</b></p>
+                                <p>商品运费：<span><empty name="info.scosts">全国包邮<else />{$info.scosts}元</empty></span></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="evolve_dateil">
+                    <div class="evolve_dateil_tab">
+                        <ul>
+                            <a href="{:U('Actcenter/processdetail', array('id' => $info['id'], 't' => 1))}"><li id="pro_1" class="bg_active">试用详情</li></a>
+                            <a href="{:U('Actcenter/processdetail', array('id' => $info['id'], 't' => 2))}"><li id="pro_2">试用进展</li></a>
+                            <a href="{:U('Actcenter/processdetail', array('id' => $info['id'], 't' => 3))}"><li id="pro_3">中奖进展</li></a>
+                            <a href="{:U('Actcenter/processdetail', array('id' => $info['id'], 't' => 4))}"><li id="pro_4">费用信息</li></a>
+                        </ul>
+                    </div>
+                        <script>
+                            $(function () {
+                                var type = {$t};
+                                $('.evolve_dateil_tab li').removeClass('bg_active');
+                                $('#pro_' + type).addClass('bg_active');
+                                $('.try_content').css('display', 'none');
+                                $('#try_' + type).css('display', 'block');
+                            });
+                        </script>
+                    
+                    <div class="try_state">
+                        <!-- 使用详情 -->
+                        <div style="display: block;" class="try_content try_details" id="try_1">
+                            <div class="details_content">
+                                <div class="left left_information">
+                                    <ul>
+                                        <li>
+    
+                                            <p>
+                                                <span>总共发放试用：<b><i>{$info.num}</i>份</b></span>
+                                                <span>今日发放试用：<b><i>{$today.num|default="0"}</i>份<!--(兑换<i>0</i>份，免费中奖<i> 0</i>份)--></b></span>                                        
+                                            </p>
+                                            <p>
+                                                <span>已申请试用：<b><i>{$info.count.count|default="0"}</i>人</b></span>
+                                                <span>已通过试用资格：<b><i>{$info.count.zj|default="0"}</i>人
+                                                (<i>{$info.count.tb|default="0"}</i>人下单，
+                                                 <if condition="($info.endtime ELT time())"><i>0</i>人待下单，<i>{$info['count']['zj'] - $info['count']['tb']}</i>人取消
+                                                  <else/><i>{$info['count']['zj'] - $info['count']['tb']}</i>人待下单，<i>0</i>人取消
+                                                 </if>
+                                                )</b>
+                                                </span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <h2>试用发放方式</h2>
+                                                <notempty name="info.tag"><p>手机淘宝淘口令：<volist name="info.tag" id="vo"><b>{$vo}、</b></volist></p></notempty>                                     
+                                        </li>
+                                        <li>
+                                            <p>押金合计：<b><i>{$info.money|default="0"} </i>元</b></p>
+                                            <!--p>元合计：<b><i>0.00</i>元</b></p-->
+                                        </li>
+                                        <li>
+                                            <p>任务编号：<b>{$info.id}</b></p>
+                                            <p>店铺名：<b>{$info.shopname}</b></p>
+                                        </li>
+                                    </ul>
+    
+                                </div>
+                                <div class="left right_state">
+                                    <!--右侧状态提示-->
+                                    <div class="status_alert">
+                                        <!--已结束-->
+    
+                                        <div class="status_content">
+                                         <if condition="($info.state eq 2)">                                
+                                            <h3>试用活动未编辑完毕，待完善活动信息并提交</h3>
+                                            <p>您的活动信息未填写完毕，请继续完善之后点击提交<a style="color:#005ea7 " href="{:U(\'Actcenter/publish2\',array(\'id\' => $info['id']))}">前去提交试用活动</a>
+                                            </p>
+                                           <elseif condition="$info.state eq 7"/> 
+                                            <h3>试用活动未支付</h3>
+                                            <p>您的试用尚未支付<a style="color:#005ea7 " href="{:U(\'Actcenter/publish7\',array(\'id\' => $info['id']))}">前去活动支付</a>
+                                            </p>
+                                           <elseif condition="$info.state eq 10"/> 
+                                            <h3>试用活动待发布</h3>
+                                           <elseif condition="$info.state eq 11"/>
+                                            <h3>试用活动进行中</h3>  
+                                           <elseif condition="$info.state eq 20"/> 
+                                            <h3>试用活动已开奖商品已结束</h3> 
+                                            <p>您的试用活动已结束<!--a style="color:#005ea7 " href="{:U(\'Actcenter/publish7\',array(\'id\' => $info['id']))}">前去活动支付</a-->
+                                         </if>   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+    
+                            <h2 class="try_plan">试用份数发放计划</h2>
+                            <notempty name="info.days">
+                             <table id="try_plan_table">
+                              <tbody>
+                               <for start="0" end="myPage($info['days'],7)">
+	                            <tr>
+	                             <volist name="info.days" id="d" key="k" offset="$i*7" length='7'>
+	                              <th>第{$k+$i*7|integerToch}天</th>
+	                             </volist>
+	                            </tr>
+	                            <tr>
+	                             <volist name="info.days" id="d" key="k" offset="$i*7" length='7'>
+	                              <td>{$d.num}份(<notempty name="d.rate">{$d.rate}%<else/>无转化率</notempty>)</td>
+	                             </volist>
+	                            </tr>
+	                           </for>    
+                              </tbody>
+                             </table>
+                            </notempty>
+                        </div>
+                        <!-- 试用进展 -->
+                        <div class="try_content try_evolve" id="try_2" style="display: none;">
+                            <notempty name="info.days">
+                             <table id="try_data_table">
+                              <tbody>
+                               <for start="0" end="myPage($info['days'],7)">
+                                <tr>
+                                 <volist name="info.days" id="d" key="k" offset="$i*7" length='7'>
+                                  <th>第{$k+$i*7|integerToch}天<br>{$d.time|date="Y-m-d",###}</th>
+                                 </volist>
+                                </tr>
+                                <tr>
+                                 <volist name="info.days" id="d" key="k" offset="$i*7" length='7'>
+                                  <td>申请：{$apply[$d['time']]|default="0"}人<br>回访：{$apply['apply'][$d['time']]|default="0"}人</td>
+                                 </volist>
+                                </tr>
+                               </for>
+                              </tbody>
+                             </table>
+                            <h1 style="margin-bottom: 20px; color: rgb(50, 50, 50); display: block;padding-top: 30px;font-size: 16px;" id="try_data_apply_num">合计申请人数：<b style="color: #f25f55;">{$apply.total|default="0"}</b>人</h1>
+                            </notempty> 
+                            <h1 class="title">申请试用进展，您可以实时掌握各试客试用的进度</h1>
+                            <form action="" method="GET">
+                            <ul class="seachform">
+                                <li>
+                                    <input placeholder="请输入试客账号" name="tbname" type="text" class="scinput1" value="{$tbname}" />
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="hidden" name="t" value="2">
+                                        <input type="hidden" name="id" value="{$id}">
+                                        <input type="hidden" name="m" value="Supporter" />
+                                        <input type="hidden" name="c" value="Actcenter" />
+                                        <input type="hidden" name="a" value="processdetail" />
+                                    </label>
+                                    <input type="submit" class="scbtn" value="查询">
+                                </li>
+                            </ul>
+                            </form>
+                            <div id="first">
+                                <table id="list2">
+                                    <tbody>
+                                        <tr>
+                                            <th>申请时间</th>
+                                            <th>试客</th>
+                                            <th>领取方式</th>
+                                            <th>申请编号</th>
+                                            <th>申请状态</th>
+                                            <th>详情</th>
+                                        </tr>
+                                        <!-- 循环  -->
+                                        <notempty name="data">
+                                          <volist name="data" id="vo">
+                                           <tr>
+                                            <td>{$vo.addtime}</td>
+                                            <td>{$vo.ddusername}</td>
+                                            <td>手机淘宝进店</td>
+                                            <td>{$vo.id}</td>
+                                            <td><if condition="($vo.comfirm LT 98)">已中奖<else />未中奖</if></td>                                        
+                                            <td><a href="{:U('Actcenter/apply', array('id' => $vo['id']))}">查看详情</a></td>
+                                           </tr> 
+                                          </volist>  
+                                        </notempty>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="next">
+                             <div style="text-align:center;">
+			                    <!------分页-------->
+			                    <notempty name="data">
+			                     <if condition="($pagination.totalPages gt 1)">
+				                  <div class="row">
+				                   <div class="col-sm-12">
+				                    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;"><ul class="pagination" id="list-pagination"></ul></div>
+				                   </div>
+								  </div>
+								 </if>   
+							    </notempty>
+							    <!------end----------->
+                             </div>
+                            </div>
+                        </div>
+                        <!-- 中奖进展 -->
+                        <div class="try_content try_evolve" id="try_3" style="display: none;">
+                            <h1 class="title title3">试客中奖试用进展，您可以实时掌握各试客试用的进度</h1>
+                            <form action="" method="get">
+                                <ul class="seachform">
+                                        <li style="margin-right: 20px;border: 1px solid #f5f5f5;">
+                                            <select name="order">
+                                                <option value="apply_time" <eq name="Think.get.order" value="apply_time">selected</eq>>默认排序</option>
+                                                <option value="id" <eq name="Think.get.order" value="id">selected</eq>>下单时间从新到旧排序</option>
+                                            </select>
+                                        </li>
+                                        <li>
+                                            <div class="vocation">
+                                                <select class="select2" name="search_type">
+                                                 <option value="tb_item" <eq name="search_type" value="tb_item">selected</eq>>淘宝订单号</option>
+                                                 <option value="tb_id" <eq name="search_type" value="tb_id">selected</eq>>淘宝账号</option>
+                                                </select>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <input name="search_content" value="{$search_content}" placeholder="请输入搜索内容" type="text" class="scinput1">
+                                        </li>
+                                        <li>
+                                            <label>
+		                                        <input type="hidden" name="t" value="3">
+		                                        <input type="hidden" name="id" value="{$id}">
+		                                        <input type="hidden" name="m" value="Supporter" />
+		                                        <input type="hidden" name="c" value="Actcenter" />
+		                                        <input type="hidden" name="a" value="processdetail" />
+                                            </label>
+                                            <input type="submit" class="scbtn" value="查询">
+                                        </li>
+                                    </ul>
+                                </form>
+                                <div id="first">
+                                    <table id="list">
+                                        <tbody>
+                                            <tr>
+                                                <th>下单时间</th>
+                                                <th>试客</th>
+                                                <th>淘宝账号</th>
+                                                <th>领取方式</th>
+                                                <th>中奖编号</th>
+                                                <th>中奖时间</th>
+                                                <th>淘宝订单号</th>
+                                                <th>状态</th>
+                                                <th>付款金额</th>
+                                                <th>详情</th>
+                                            </tr>
+                                                <!-- 循环 -->
+                                            <notempty name="msg">
+                                            <volist name="msg" id="m">                                               
+                                            <tr>
+                                                <td>{$m.addtime}</td>
+                                                <td>{$m.ddusername}</td>
+                                                <td>{$m.tb_id}</td>
+                                                <td>手机淘宝进店</td>
+                                                <td>{$m.id}</td>
+                                                <td>{$m.apply_time}</td>
+                                                <td>{$m.tb_item}</td>
+                                                <td>
+                                                 <if condition="($m.comfirm eq 31)">已完成
+                                                  <elseif condition="$info.endtime elt time()" />已取消
+                                                  <else />进行中
+                                                 </if>
+                                                </td>
+                                                <td>{$m.real_price|number_format=2}</td>
+                                                <td><a href="{:U('Actcenter/orderInfo', array('id' => $m['id']))}">查看详情</a>
+                                                </td>
+                                            </tr>
+                                            </volist>
+                                            </notempty>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="next">
+                                 <div style="text-align:center;">
+				                    <!------分页-------->
+				                    <notempty name="msg">
+				                     <if condition="($pagination.totalPages gt 1)">
+					                  <div class="row">
+					                   <div class="col-sm-12">
+					                    <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;"><ul class="pagination" id="list-pagination"></ul></div>
+					                   </div>
+									  </div>
+									 </if>   
+								    </notempty>
+								    <!------end----------->
+                                 </div>
+                            </div>
+                        </div>
+                        <!-- 费用详情 -->
+                        <div class="try_content cost_information" id="try_4" style="display: block;">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>费用分类</th>
+                                            <th>费用明细</th>
+                                            <th>合计</th>
+                                        </tr>
+                                    <tr>
+                                        <td>商品押金</td>
+                                        <td>
+                                            <p><b>商品押金=商品单价*免费试用份数+兑换试用份数)</b></p>
+                                            <p>试用完成后，平台直接将押金返给试客</p>
+                                            <p><b>商品单价：</b><span>{$price.unit_price|number_format=2}元</span><b> 免费试用份数：</b><span>{$price.num|default='0'}单</span><!--b> 兑换试用份数：</b><span>8单</span-->
+                                            </p>
+                                        </td>
+                                        <td><span>{$price.deposit|number_format=2}元</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">试用担保金</td>
+                                        <td>
+                                            <p><b>试用担保金=商品押金*</b><span>5%</span></p>
+                                            <p>试用完成后，平台会自动将试用担保金返回到您的账户可用押金中。</p>
+                                        </td>
+                                        <td>
+                                            <span>{$price.security|number_format=2}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            
+                                    <tbody>
+                                    
+                                    <tr>
+                                        <td rowspan="2">基础服务费<br><span>(基础服务费概不退还)</span></td>
+                                        <td>
+                                            <p><b>快速返款</b></p>
+                                            <p>试客完成试用后，平台将直接使用商家押金操作返款给试客</p>
+                                            <p>（商家无需耗费时间人力处理退款，省时省力）</p>
+                                            <p>每单收取商品押金的<span>2%</span></p>
+                                        </td>
+                                        <td><span>{$price.one|number_format=2}元</span></td>
+                                    </tr>
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>系统自动抽奖</b></p>
+                                            <p>系统将自动为商家抽选出更适合商家商品品类的试客</p>
+                                            <p>节约商家运营成本和时间，同时有利于试客中奖分布更广泛</p>
+                                            <p>免费试用商品，每单收取<span>2元</span></p>
+                                        </td>
+                                        <td><span>{$price.two|number_format=2}元</span></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td rowspan="9">增值服务费</td>
+                                    </tr>
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>默认五星好评</b><span>免费</span></p>
+                                        </td>
+                                        <td><span>0元</span></td>
+                                    </tr>
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>普通文字好评</b><span>免费</span></p>
+                                        </td>
+                                        <td><span>0元</span></td>
+                                    </tr>
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>防IP重复、防小号</b><span>免费</span></p>
+                                        </td>
+                                        <td><span>0元</span></td>
+                                    </tr>
+                                    
+                                    <notempty name="price.reward_price">
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>试用红包加赏</b></p>
+                                            <p>
+                                                红包加赏单数：<span>{$price.num|default='0'}单</span>，每单收取 <span>{$price.reward}元</span></p>
+                                        </td>
+                                        <td><span>{$price.reward_price|number_format=2}元</span></td>
+                                    </tr>
+                                    </notempty>
+                                    <!--**************晒图好评************-->
+                                    <notempty name="price.good_price">
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>晒图好评</b></p>
+                                            <p>设置晒图好评单数：<span>{$price.good}单</span>，每单收取<span>2元</span></p>
+                                        </td>
+                                        <td><span>{$price.good_price|number_format=2}元</span></td>
+                                    </tr>
+                                    </notempty>
+                                    <!--**************设置好评关键词************-->
+                                    <notempty name="price.good_num_price">                                    
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>设置好评关键词</b></p>
+                                            <p>设置好评关键词单数：<span>{$price.good_num}单</span>，每单收取<span>1元</span></p>
+                                        </td>
+                                        <td><span>{$price.good_num_price|number_format=2}元</span></td>
+                                    </tr>
+                                    </notempty>
+                            
+                                    <notempty name="price.safe_day">
+                                    <tr class="other">
+                                        <td>
+                                            <p><b>禁止老用户中奖</b><if condition='($price.safe_day eq 45)'><span>45天 （此项服务费不退）</span><else /><b> {$price.safe_day}天</b> <span>免费</span></if></p>
+                                        </td>
+                                        <td><span><empty name="price.safe_day">0<else />{$price.safe|number_format=2}</empty>元</span></td>
+                                    </tr>
+                                    </notempty>
+            
+                                    <notempty name="price.people">
+	                                 <tr class="other">
+	                                  <td><p><b>精准投放</b><span>20元（此项服务费不退）</span></p></td>
+	                                  <td><span>{$price.people|number_format=2}元</span></td>
+	                                 </tr>
+                                    </notempty> 
+                                </tbody>
+                            </table>
+                            <p class="total">押金合计：<span>{$price.total|number_format=2}元</span></p>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+    </div>
+</section>          
+	<script type="text/javascript">
+	$(function(){
+		var paginationOptions= $.extend(true, {$pagination|json_encode} ,
+		{
+			onPageClick: function (event, page) {
+				var options = $(this).data('twbsPagination').options;
+				options.baseUrl = options.baseUrl.replace('','');
+				options.getParams.page = page;
+				//options.getParams.pagesize = options.getParams.pagesize;
+				var param = '';
+				for(var x in options.getParams ){
+					param += '&' + x + '=' + options.getParams[x];
+				}
+				//console.log(param);return;
+				window.location.href =  options.baseUrl + param + '';
+			}
+		});
+		$('#list-pagination').twbsPagination(paginationOptions);
+	
+	});
+	</script>
+<include file="Layout:foot" />

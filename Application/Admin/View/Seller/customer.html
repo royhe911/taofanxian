@@ -1,0 +1,142 @@
+<extend name="Layout:layout" />
+<block name="content">
+	<!--<div class="row">
+		<div class="col-lg-12">
+            <h1 class="page-header">商户提现  </h1>
+	    </div>
+	</div>-->
+	<nav class="breadcrumb" style="padding: 0px 15px; line-height: 37px; border-radius: 0; border-bottom: 1px solid #ddd; position: absolute;top: 0;left: 0;width: 100%;"><i class="fa fa-home"></i> 首页 <span class="c-gray en">&gt;</span> 商家管理 <span class="c-gray en">&gt;</span> <a href="{:U('Seller/index')}">商家列表</a> <span class="c-gray en">&gt;</span><a href="{:U('Seller/goods',array('id'=>$uid))}">试用商品</a>&nbsp;<span class="c-gray en">&gt;</span>&nbsp;试用详情<a class="btn btn-success radius r" style="margin-top:1px;float: right;padding: 6px 20px;" href="javascript:location.replace(location.href);" title="刷新" ><i class="fa fa-refresh"></i></a><div style="clear: both;"></div></nav>
+	<div style="height: 50px; width: 100%;"></div>
+	<div>
+		<p>商家名：<span style="color: #337ab7;">{$seller.adminname}</span> &nbsp;&nbsp;&nbsp;手机号：<span style="color: #337ab7;">{$seller.tel}</span></p>
+	</div>
+	
+	<div class="panel panel-default">
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+			<div>
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="{:U('Seller/goods',array('id'=>$id))}">申请试用进展</a>
+					</li>
+					<!--li>
+						<a href="{:U('Seller/finance_record',array('id'=>$id))}">充值记录</a>
+					</li>
+					<li >
+						<a href="{:U('Seller/draw_record',array('id'=>$id))}">提现记录</a>
+					</li-->
+				</ul>
+			</div>
+			<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+				<div class="row">
+					<div class="col-sm-12">
+						<table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info" style="width: 100%;text-align:center;" width="100%">
+							<thead>
+							    <tr> 
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 115px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">申请编号</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 180px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">试客</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 180px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">试客淘宝账户</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 200px;">开奖时间</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 200px;">淘宝订单号</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 180px;" aria-label="Platform(s): activate to sort column ascending">申请时间</th>
+									<th class="" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" style="width: 80px;" aria-label="Platform(s): activate to sort column ascending">申请状态</th>
+								</tr>
+							</thead>
+							<tbody>
+									<volist name="data" id="vo">
+									<tr>
+										<td>{$vo.id}</td>
+										<td>{$vo.ddusername}</td>
+										<td>{$vo.tb_id}</td>
+										<td>{$vo.apply_time}</td>
+										<td>{$vo.tb_item}</td>
+										<td>{$vo.addtime}</td>
+										<td>
+			                             <notempty name="vo.apply_time"><font color="#FF0000">已中奖</font></br>
+			                             	<if condition="($vo.comfirm eq 98)">未中奖
+			                                  <elseif condition="$vo.comfirm eq 99" />待开奖
+			                                  <elseif condition="$vo.comfirm eq 10" />待发货
+			                                  <elseif condition="$vo.comfirm eq 11" />订单号通过
+			                                  <elseif condition="$vo.comfirm eq 12" />订单号驳回
+			                                  <elseif condition="$vo.comfirm eq 20" />试客收货评价待审核
+			                                  <elseif condition="$vo.comfirm eq 21" />试客收货评价通过
+			                                  <elseif condition="$vo.comfirm eq 22" />试客收货评价驳回
+			                                  <elseif condition="$vo.comfirm eq 30" />淘宝评价待审核
+			                                  <elseif condition="$vo.comfirm eq 31" />淘宝评价通过
+			                                  <elseif condition="$vo.comfirm eq 32" />淘宝评价驳回
+			                                  <else />审核中
+			                                </if>			                                
+			                             </notempty>
+										 <!--<notempty name="vo.apply_time"><font color="#FF0000">已中奖</font>
+										  <else />
+										    <if condition="($vo.comfirm eq 98)">未中奖
+										      <elseif condition="$vo.comfirm eq 99" />待开奖
+										      <elseif condition="$vo.comfirm eq 10" />待发货
+										      <elseif condition="$vo.comfirm eq 11" />订单号通过
+										      <elseif condition="$vo.comfirm eq 12" />订单号驳回
+										      <elseif condition="$vo.comfirm eq 20" />
+										      试客收货评价待审核
+										      <elseif condition="$vo.comfirm eq 21" />试客收货评价通过
+										      <elseif condition="$vo.comfirm eq 22" />试客收货评价驳回
+										      <elseif condition="$vo.comfirm eq 30" />淘宝评价待审核
+										      <elseif condition="$vo.comfirm eq 31" />淘宝评价通过
+										      <elseif condition="$vo.comfirm eq 32" />淘宝评价驳回
+										      <else />审核中
+										    </if>
+										 </notempty> -->
+										</td>
+									</tr>
+									</volist>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+							<ul class="pagination" id="list-pagination">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.table-responsive -->
+
+		</div>
+		<!-- /.panel-body -->
+	</div>
+
+
+
+</block>
+<block name="otherfoot">
+	<script>
+	$(function(){	
+		var paginationOptions= $.extend(true, {$pagination|json_encode} , 
+							{
+									onPageClick: function (event, page) {
+										var options = $(this).data('twbsPagination').options;
+								        options.baseUrl = options.baseUrl.replace('','');
+								        options.getParams.page = page; 
+//								        options.getParams.pagesize = options.getParams.pagesize;
+                                        var param = '';
+										for(var x in options.getParams ){
+								        		param += '&' + x + '=' + options.getParams[x];
+								        }
+//										console.log(param);return;
+										
+								        window.location.href =  options.baseUrl + param + '';
+								    }
+							});
+		$('#list-pagination').twbsPagination(paginationOptions);
+		
+	});
+	</script>
+	
+	
+	
+	
+</block>

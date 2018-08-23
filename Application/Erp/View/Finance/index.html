@@ -1,0 +1,166 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">充值审核</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<div>
+			<div class="pd-20">
+				<form action="" method="get" onsubmit="return checkSearch()">
+					<input type="hidden" name="m" value="Erp">
+					<input type="hidden" name="c" value="finance">
+					<input type="hidden" name="a" value="index">
+					<div class="text-c" style="margin-bottom: 10px;">
+						日期：<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" placeholder="起始时间">
+						<input type="text" id="datemax" name="endtime" class="input-text" style="width:150px;" placeholder="结束时间">
+						<input type="text" class="input-text shopname" style="width:250px" placeholder="店铺名搜索（全称）" id="" name="shopname" value="{$shopname}">
+						<button type="submit" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+					</div>
+				</form>
+				<div class="cl pd-5 bg-1 bk-gray mt-20">
+					<span class="r"><if condition="$today eq true">今日任务充值金额：<strong>{$money_today|default=0}</strong>，今日完成任务金额：<strong>{$finish_money|default=0}，</strong></if>
+						总任务充值金额：<strong>{$money|default=0}</strong>，
+						<a href="javascript:;" onclick="showErrorAcount('{$shopname}')">累计修正金额：<strong>{$abnormal|default=0}</strong></a>，</if>共有数据：<strong>{$count}</strong> 条</span>
+				</div>
+				<div class="mt-20">
+					<div class="dataTables_wrapper">
+						<table class="table table-border table-bordered table-bg table-hover table-sort">
+							<thead>
+								<tr class="text-c">
+									<th>id</th>
+									<th width="100">充值时间</th>
+									<th>店铺名称</th>
+									<th width="80">充值截图</th>
+									<th>充值金额</th>
+									<th>交易单号</th>
+									<if condition="$_SESSION['user']['role'] == 1 or $_SESSION['user']['role'] == 4">
+									<th>业务员</th>
+									</if>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="data" id="vo">
+									<tr class="text-c va-m">
+										<td>{$vo.id}</td>
+										<td>{$vo.addtime|date="j/n H:i",###}</td>
+										<td >{$vo.shopname}</td>
+										<td class="recharge-img">
+											<a href="javascript:;" title="鼠标右键复制图片">
+												<img width="80" height="80" class="product-thumb" src='__ROOT__/upload/{$vo.addtime|date="Ymd",###}/{$vo.img}' />
+											</a>
+										</td>
+										<td><b style="font-size: 11px;">¥ </b>{$vo.money}</td>
+										<td>{$vo.serialnum}</td>
+										<if condition="$_SESSION['user']['role'] == 1 or $_SESSION['user']['role'] == 4">
+											<td>{$vo.yw_info}</td>
+										</if>
+										<td class="td-manage">
+											<switch name="vo.msg">
+												<case value="0">
+													<if condition=" $_SESSION['user']['role'] == 4">
+												<a title="审核" href="javascript:;" onclick="rechargeCheck(this,{$vo.id})" class="ml-5" style="text-decoration:none">
+													<i class="Hui-iconfont">审核</i>
+												</a>
+													<else />
+														<span class="label label-warning radius">待审核</span>
+													</if>
+												</case>
+												<case value="1">
+													<span class="label label-success radius">已通过</span>
+												</case>
+												<case value="2">
+													<span class="label label-danger radius">已拒绝</span>
+													<br />原因：{$vo.reason}
+												</case>
+												</switch>
+										</td>
+									</tr>
+								</volist>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+            var start_time = "{$starttime}",end_time = "{$endtime}";
+			laydate.render({
+			  	elem: '#datemin',
+			   	min: '2018-01-01',
+				value:"{$starttime}",
+			   	max: +1,
+			   	done: function(value, date){
+					start_time = value;
+					if(new Date(value).getTime() > new Date(end_time).getTime()){
+						$("#datemax").val(value)
+					}
+			  	}
+			});
+			laydate.render({
+			  	elem: '#datemax',
+			  	min: '2018-01-01',
+                value:"{$endtime}",
+		   		max: +1,
+			  	done: function(value, date){
+			  		end_time = value;
+					if(new Date(value).getTime() < new Date(start_time).getTime()){
+						$("#datemin").val(value)
+					}
+			  	}
+			});
+        })
+		function rechargeCheck(obj, id) {
+			layer.confirm('确定通过吗？', {
+				btn: ['通过', '不通过','取消'],
+			}, function () {
+				$.post("{:U('Finance/status')}", {id: id,msg: 1}, function (data) {
+					if (1 == data.msg) {
+						layer.msg(data.info, {icon: 1,time: 1000},function(){
+							window.location.reload();
+						});
+					} else {
+						layer.msg(data.info, {icon: 2,time: 1000},function(){
+							window.location.reload();
+						});
+					}
+				}, 'json');
+			},function(index){
+				layer.prompt({
+				  	formType: 2,
+				  	title: '请输入驳回原因'
+				}, function(value, index, elem){
+					$.post("{:U('Finance/jujue')}", {id: id,msg: 2,reason:value}, function (data) {
+						if (1 == data.msg) {
+							layer.msg(data.info, {icon: 1,time: 1000},function(){
+								window.location.reload();
+							});
+						} else {
+							layer.msg(data.info, {icon: 2,time: 1000},function(){
+								window.location.reload();
+							});
+						}
+					}, 'json');
+				})
+
+			},function(index){
+				layer.close(index);
+			});
+		}
+		function showErrorAcount(shopname){
+			layer_show('累计修正金额',"{:U('finance/erroracount')}&shopname="+shopname,'1000');
+		}
+		function checkSearch(){
+//			if(!$.trim($(".shopname").val())){
+//				layer.msg("请输入店铺名！");
+//				return false;
+//			}
+			return true;
+		}
+	</script>
+</block>

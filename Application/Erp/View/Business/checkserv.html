@@ -1,0 +1,42 @@
+<extend name="public/modal" />
+<block name="title">服务费审核</block>
+<block name="menu">
+	<div class="Hui-article" style="top: -10px;">
+		<div class="dataTables_wrapper">
+
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th>价格区间</th>
+						<th>服务费</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="text-c va-m">
+						<td>0~99</td>
+						<td class="order-input">{$data.price_1|default=16}</td>
+					</tr>
+					<tr class="text-c va-m">
+						<td>100~199</td>
+						<td class="order-input">{$data.price_2|default=18}</td>
+					</tr>
+					<tr class="text-c va-m">
+						<td>200~299</td>
+						<td class="order-input">{$data.price_3|default=22}</td>
+					</tr>
+					<tr class="text-c va-m">
+						<td>300~399</td>
+						<td class="order-input">{$data.price_4|default=25}</td>
+					</tr>
+					<tr class="text-c va-m">
+						<td>400以上</td>
+						<td class="order-input">{$data.price_5|default='10%'}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</block>
+<block name="js">
+	
+</block>

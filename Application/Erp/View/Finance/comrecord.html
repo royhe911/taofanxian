@@ -1,0 +1,187 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">申请佣金</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+					我的账户余额：<b>{$money}</b> 元 &nbsp;
+					<a class="btn btn-success radius" onclick="applyCommisson()" href="javascript:;"> 申请佣金</a>
+				</span>
+			</div>
+			<div class="cl bg-1 bk-gray mt-20" style="height: 34px; line-height: 34px;">
+				<ul class="l comm-ul" style="display: flex;">
+					<li class="<if condition="$_GET['status'] == 0">current</if>"><a href="{:U('finance/comrecord','status=0')}">待审核</a></li>
+					<!--<if condition="$_SESSION['user']['role'] !=2">-->
+					<!--<li class="<if condition="$_GET['status'] == 1">current</if>"><a href="{:U('finance/comrecord','status=1')}">待收款</a></li>-->
+					<!--</if>-->
+
+					<li class="<if condition="$_GET['status'] == 3">current</if>"><a href="{:U('finance/comrecord','status=3')}">已收款</a></li>
+					<li class="<if condition="$_GET['status'] == 2">current</if>"><a href="{:U('finance/comrecord','status=2')}">已拒绝</a></li>
+					<li class="<if condition="$_GET['status'] == 4">current</if>"><a href="{:U('finance/comrecord','status=4')}">异常</a></li>
+				</ul>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr>
+								<th colspan="7">申请记录</th>
+							</tr>
+							<tr class="text-c">
+								<if condition="$_GET['status'] == 0">
+									<th width="150">申请时间</th>
+									<th>申请金额</th>
+								</if>
+								<if condition="$_GET['status'] == 1 or $_GET['status'] == 3">
+									<th width="150">申请时间</th>
+									<th>申请金额</th>
+									<th width="80">打款截图</th>
+									<th width="150">备注</th>
+									<th width="80">操作</th>
+								</if>
+								<if condition="$_GET['status'] == 2">
+									<th width="150">申请时间</th>
+									<th>申请金额</th>
+									<th>原因</th>
+								</if>
+								<if condition="$_GET['status'] == 4">
+									<th width="150">申请时间</th>
+									<th>申请金额</th>
+									<th>原因</th>
+								</if>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="data" id="vo">
+							<tr class="text-c">
+								<!--待审核-->
+								<if condition="$_GET['status'] == 0">
+									<td>{$vo.addtime|date="j/n H:i",###}</td>
+									<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+								</if>
+
+								<!--已通过-->
+								<if condition="$_GET['status'] == 1 or $_GET['status'] == 3">
+									<td>{$vo.addtime|date="j/n H:i",###}</td>
+									<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+									<td>
+										<if condition="$vo.money_pic != ''">
+										<a href="javascript:;" title="鼠标右键复制截图">
+											<img width="80" class="product-thumb" src="__ROOT__/upload/{$vo.endtime|date='Ymd',###}/{$vo.money_pic}"  />
+										</a>
+										</if>
+									</td>
+									<td>{$vo.note}</td>
+									<!--已收款-->
+									<td><a href="javascript:;" onclick="gatheringAbn({$vo.id})">收款异常</a></td>
+									</if>
+								</if>
+
+								<!--已拒绝-->
+								<if condition="$_GET['status'] == 2">
+									<td>{$vo.addtime|date="j/n H:i",###}</td>
+									<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+									<td>{$vo.reason}</td>
+								</if>
+								<!--异常-->
+								<if condition="$_GET['status'] == 4">
+									<td>{$vo.abntime|date="j/n H:i",###}</td>
+									<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+									<td>
+										<notempty name="vo.abn_pic">
+											<a href="javascript:;" title="鼠标右键复制截图">
+											<img width="80" class="product-thumb" src="{$vo.abn_pic}"  />
+											</a>
+										</notempty>
+										<br>
+										异常说明：{$vo.abn_info}
+									</td>
+								</if>
+
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script type="text/javascript">
+		//申请佣金
+		function applyCommisson(){
+//			var userId = "{$_SESSION['user']['id']}";
+//			if ( {$money} >= 20000){
+//				layer.msg("账户余额充足，不允许申请", {icon: 2, time: 1000}, function(){
+//					window.location.reload();
+//				});
+//			}else{
+				var role = "{$_SESSION['user']['role']}",post_url = '';
+				if(role == 3){
+					post_url = "{:U('finance/application')}";
+				}else if(role == 2){
+					post_url = "{:U('finance/applicationz')}";
+				}
+				layer.prompt({formType:0,value: '',title:'请输入佣金金额'},function (value,index,elem) {
+					var reg = /^\d+$/;
+					if(parseInt(value) <= 0){
+				 		layer.msg('请输入佣金金额');
+				 		return false;
+				 	}
+					if(!reg.test(value)){
+						layer.msg('佣金金额为整数');
+						return false;
+				 	}
+//					if(parseInt(value) > 50000){
+//						layer.msg("每次最多申请50000元");
+//						return false;
+//					}
+
+					$.post(post_url,{money:value},function(msg){
+
+						if (msg.msg == 1){
+							layer.msg(msg.info, {icon: 1, time: 1000}, function(){
+								window.location.reload();
+							});
+						}else{
+							layer.msg(msg.info, {icon: 2, time: 1000}, function(){
+								window.location.reload();
+							});
+						}
+
+					})
+				})
+//			}
+		}
+		/*
+		//确认收款
+        function sureGathering(id,type) {
+            layer.confirm('确定收款吗？', {
+                btn: ['通过', '取消'],
+                shade: false,
+                closeBtn: 0
+            }, function() {
+
+                $.ajax({
+                    type:'post',
+                    url:"{:U('Finance/receipt')}",
+                    data:{id:id},
+                    success:function (msg) {
+                        if(msg.msg == 1){
+                            layer.msg(msg.info, {icon: 6, time: 1000},function () {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            });
+        }
+		*/
+		//收款异常
+		function gatheringAbn(id){
+			layer_show('收款异常',"{:U('finance/gatheringabn','id=')}"+id,'500','500')
+		}
+	</script>
+</block>

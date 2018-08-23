@@ -1,0 +1,1147 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+    <div class="left" style="width: 1040px;overflow: hidden;background-color: #ffffff;margin: 0 0 8px 10px;">
+        <img src="__PUBLIC__/maoke/images/merchant/release_header_show.png" alt="">
+    </div>
+                <!-- 发布试用3 -->
+                <div id="my_main" class="store_content left" style="min-height: 1067px;">
+                        <h1 class="title">发布试用</h1>
+                        <!--进度条-->
+                        <div class="progress_bar">
+                            <img src="__PUBLIC__/maoke/images/merchant/sj_fbsy_bg_jdt_03_default.png" alt="">
+                        </div>
+                        <!--3.设置商品搜索-->
+						<form action="{:U('Actcenter/publish3')}" method="POST" id="myform" />
+                         <div class="settings_search">
+                            <h2 class="title">3.设置商品搜索</h2>
+                            <div class="search_content">
+                                <!--************************ 通过PC淘宝搜索  start  ************************-->
+                                <!--<div class="by_PCtaobao <notempty name='msg.pc.attr'>search_active</notempty>" data-toggle="search">
+                                    设置试客从<span>PC淘宝自然搜索</span>找商品
+                                </div>
+                                <div class="taobao_PCcontent" style="display: none;">
+                                    <div class="goods_picture">
+                                        <h2>请上传<b>"商品的PC淘宝搜索主图"</b>，以便试客快速找到任务商品：</h2>
+                                        <div id="pc_tb_a">
+                                            <div class="up_img" onclick="upd_file(this,'img_pc');">
+                                                <input type="file" name="img_pc" class="fileToUpload" id="img_pc" data-img="..{$msg.pc.img}" />
+                                                <input type="hidden" id="my_img_pc" name="tag[pc][img]" value="{$msg.pc.img}" />
+                                                <empty name="msg.pc.img">
+                                                 <img id="img_pc_tb" class="imgList img" src="__PUBLIC__/maoke/images/merchant/sk_zjgl_lqxd_icon_jiahao_default.png">
+                                                <else />
+                                                 <img id="img_pc_tb" class="imgList img" src="..{$msg.pc.img}">
+                                                </empty>
+                                                <div class="displayValue" style="word-spacing: normal;word-wrap: break-word;"></div>
+                                            </div>
+                                          	<i class="img_tips icon iconfont" id="img_pc_tb_error"></i>
+                                        </div>
+                                        <p class="xing" style="font-size: 12px;color: #646464; margin-top:10px;">需要填写的是在电脑上登录淘宝网页进行搜索，搜索页面所展示的搜索主图，图片尺寸为：<b>800*800</b>,格式为：<b>jpg、png、jpeg、gif</b>，图片大小在<b>1M以内</b></p>
+                                    </div>
+                                    <i id="focus1"></i>
+                                    <ul id="search_keyword_box">
+										 <empty name="msg.pc.attr">
+                                            <li class="search_keyword_box box_1">
+                                                        <div class="search_keyword">
+                                                            <div class="keyword_title">
+                                                                <span>*</span>
+                                                                <label for="keyword_box">搜索关键词 <i class="number_btn_pc">1</i>：</label>
+                                                                <input class="keywords mykeywordspc" type="text" placeholder="连衣裙" name="tag[pc][attr][1][keyword]" />
+                                                                <b>注：让试客在www.taobao.com进行搜索的关键词</b><span class="keywords_error"></span>
+                                                            </div>
+                                                            <p class="add_box">
+                                                                <a class="fold" href="javascript:void(0);">增加缩小关键词搜索范围（选填）</a>
+                                                                <a class="fold1" href="javascript:void(0);" style="display:none">增加缩小关键词搜索范围（选填）</a>
+                                                                <b>如关键词排名较低，请务必设置此选项，以便试客能找到商品</b>
+                                                            </p>
+                                                            <div class="keyword_write">
+                                                                <p class="title">
+                                                                    <span>缩小搜索范围：试客选择搜索列表中的"分类"和"排序"缩小范围（选填） <a class="submit_btn" href="javascript:void(0);">清空</a> </span>
+                                                                    <a class="close_btn" href="javascript:void(0);">收起</a>
+                                                                </p>
+                                                                <div class="keyword_write_box">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>风格</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>休闲</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>材质</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>蕾丝</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>1</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-1 cate-pc-1" name="tag[pc][attr][1][cate][1][key]" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-1 val-pc-1"  name="tag[pc][attr][1][cate][1][val]" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>2</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-2 cate-pc-2" name="tag[pc][attr][1][cate][2][key]" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-2 val-pc-2" name="tag[pc][attr][1][cate][2][val]" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>3</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-3 cate-pc-3" name="tag[pc][attr][1][cate][3][key]" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-3 val-pc-3" name="tag[pc][attr][1][cate][3][val]" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>4</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-4 cate-pc-4" name="tag[pc][attr][1][cate][4][key]" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-4 val-pc-4" name="tag[pc][attr][1][cate][4][val]" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <div class="discount_server">
+                                                                    <div class="title">折扣与服务：</div>
+                                                                    <div class="server_content">
+                                                                        <p class="checkbox_btn">
+                                                                         <span data-val="27" data-name="包邮、" class="checkbox  ">包邮</span>
+                                                                         <span data-val="28" data-name="天猫、" class="checkbox  ">天猫</span>
+                                                                         <span data-val="29" data-name="消费者保障、" class="checkbox  ">消费者保障</span>
+                                                                         <span data-val="30" data-name="全球购、" class="checkbox  ">全球购</span>
+                                                                         <span data-val="31" data-name="淘金币抵钱、" class="checkbox  ">淘金币抵钱</span>
+                                                                         <span data-val="32" data-name="7+天内退货、" class="checkbox  ">7+天内退货</span>
+                                                                         <span data-val="33" data-name="货到付款、" class="checkbox  ">货到付款</span>
+                                                                         <span data-val="34" data-name="花呗分期、" class="checkbox  ">花呗分期</span>
+                                                                         <span data-val="35" data-name="通用排序、" class="checkbox  ">通用排序</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="arrange_way">
+                                                                    <div class="left title">排列方式：</div>
+                                                                    <div class="left arrange_content">
+                                                                        <p>
+                                                                         <select class="sort mysortpc" name="tag[pc][attr][1][sort]">
+                                                                          <option value="1">综合排序</option>
+                                                                          <option value="8">人气从高到低</option>
+                                                                          <option value="2">销量从高到低</option>
+                                                                          <option value="3">信用从高到低</option>
+                                                                          <option value="4">价格从高到低</option>
+                                                                          <option value="5">价格从低到高</option>
+                                                                          <option value="6">总价从高到低</option>
+                                                                          <option value="7">总价从低到高</option>
+                                                                         </select>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </li>
+										 <else />
+										  <volist name="msg.pc.attr" id="vo" key="k">
+                                            <li class="search_keyword_box box_1">
+                                                        <div class="search_keyword">
+                                                            <div class="keyword_title">
+                                                                <span>*</span>
+                                                                <label for="keyword_box">搜索关键词 <i class="number_btn_pc">{$k}</i>：</label>
+                                                                <input class="keywords mykeywordspc" name="tag[pc][attr][{$k}][keyword]" value="{$vo.keyword}" type="text" placeholder="连衣裙">
+                                                                <b>注：让试客在www.taobao.com进行搜索的关键词</b><span class="keywords_error"></span>
+                                                            </div>
+                                                            <p class="add_box">
+                                                                <a class="fold" href="javascript:void(0);">增加缩小关键词搜索范围（选填）</a>
+                                                                <a class="fold1" href="javascript:void(0);" style="display:none">增加缩小关键词搜索范围（选填）</a>
+                                                                <b>如关键词排名较低，请务必设置此选项，以便试客能找到商品</b>
+                                                                <if condition='($k gt 1)'><span class="right select_btn1" href="#">删除</span></if>
+                                                            </p>
+                                                            <div class="keyword_write">
+                                                                <p class="title">
+                                                                    <span>缩小搜索范围：试客选择搜索列表中的"分类"和"排序"缩小范围（选填） <a class="submit_btn" href="javascript:void(0);">清空</a> </span>
+                                                                    <a class="close_btn" href="javascript:void(0);">收起</a>
+                                                                </p>
+                                                                <div class="keyword_write_box">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>风格</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>休闲</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>材质</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>蕾丝</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>1</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-pc-1" name="tag[pc][attr][{$k}][cate][1][key]" value="{$vo.cate.1.key}" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-pc-1" name="tag[pc][attr][{$k}][cate][1][val]" value="{$vo.cate.1.val}" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>2</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-pc-2" name="tag[pc][attr][{$k}][cate][2][key]" value="{$vo.cate.2.key}" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-pc-2" name="tag[pc][attr][{$k}][cate][2][val]" value="{$vo.cate.2.val}" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>3</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-pc-3" name="tag[pc][attr][{$k}][cate][3][key]" value="{$vo.cate.3.key}" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-pc-3" name="tag[pc][attr][{$k}][cate][3][val]" value="{$vo.cate.3.val}" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>4</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-pc-4" name="tag[pc][attr][{$k}][cate][4][key]" value="{$vo.cate.4.key}" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-pc-4" name="tag[pc][attr][{$k}][cate][4][val]" value="{$vo.cate.4.val}" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <div class="discount_server">
+                                                                    <div class="title">折扣与服务：</div>
+                                                                    <div class="server_content">
+                                                                        <p class="checkbox_btn">
+                                                                         <span data-val="27" data-name="包邮、" class="checkbox  ">包邮</span>
+                                                                         <span data-val="28" data-name="天猫、" class="checkbox  ">天猫</span>
+                                                                         <span data-val="29" data-name="消费者保障、" class="checkbox  ">消费者保障</span>
+                                                                         <span data-val="30" data-name="全球购、" class="checkbox  ">全球购</span>
+                                                                         <span data-val="31" data-name="淘金币抵钱、" class="checkbox  ">淘金币抵钱</span>
+                                                                         <span data-val="32" data-name="7+天内退货、" class="checkbox  ">7+天内退货</span>
+                                                                         <span data-val="33" data-name="货到付款、" class="checkbox  ">货到付款</span>
+                                                                         <span data-val="34" data-name="花呗分期、" class="checkbox  ">花呗分期</span>
+                                                                         <span data-val="35" data-name="通用排序、" class="checkbox  ">通用排序</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="arrange_way">
+                                                                    <div class="left title">排列方式：</div>
+                                                                    <div class="left arrange_content">
+                                                                        <p>
+                                                                         <select class="sort mysortpc" name="tag[pc][attr][{$k}][sort]">
+	                                                                          <option value="1" <if condition='($vo.sort eq 1)'>selected</if>>综合排序</option>
+	                                                                          <option value="8" <if condition='($vo.sort eq 8)'>selected</if>>人气从高到低</option>
+	                                                                          <option value="2" <if condition='($vo.sort eq 2)'>selected</if>>销量从高到低</option>
+	                                                                          <option value="3" <if condition='($vo.sort eq 3)'>selected</if>>信用从高到低</option>
+	                                                                          <option value="4" <if condition='($vo.sort eq 4)'>selected</if>>价格从高到低</option>
+	                                                                          <option value="5" <if condition='($vo.sort eq 5)'>selected</if>>价格从低到高</option>
+	                                                                          <option value="6" <if condition='($vo.sort eq 6)'>selected</if>>总价从高到低</option>
+	                                                                          <option value="7" <if condition='($vo.sort eq 7)'>selected</if>>总价从低到高</option>
+                                                                         </select>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </li>
+                                         </volist>
+                                         </empty>
+											<li id="my_pc_li" style="display:none;">xxx</li>
+									</ul>
+
+                                    <p class="add_search_keyword  ">
+                                        <a id="add_search_keyword" href="javascript:void(0);">可多添加1个淘宝搜索关键词方案</a>
+                                        <b>最多可添加5组关键词方案</b>
+                                    </p>
+                                    <div class="shrink_searchScope">
+                                        <h1>缩小搜索范围：（选填）</h1>
+                                        <p>试客可用列表筛选中“价格筛选”、“发货地”缩小范围（选填）</p>
+                                        <p>
+                                            价格：<input id="pc_tb_price1" name="tag[pc][price1]" value="{$msg.pc.price1}" type="text" placeholder="0.00" /> - <input id="pc_tb_price2" name="tag[pc][price2]" value="{$msg.pc.price2}" type="text" placeholder="0.00" />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发货地：<input id="pc_tb_from" name="tag[pc][address]" value="{$msg.pc.address}" type="text" />
+                                        </p>
+                                    </div>
+                                </div>-->
+
+                                <!--************************  通过手机淘宝APP搜索 start   ************************-->
+
+                                <div class="by_taobao <notempty name='msg.app.password'>search_active</notempty> <notempty name='msg.app.attr'>search_active</notempty>" data-toggle="search">
+                                    设置试客从<span>手机淘宝APP</span>找商品
+                                </div>
+                                <div class="taobao_content" style="display: none;">
+                                  <div class="goods_picture">
+                                        <h2>请上传<b>"商品的手机淘宝搜索主图"</b>，以便试客快速找到任务商品：</h2>
+                                        <div id="iphone_tb_a">
+                                            <div class="up_img" onclick="upd_file(this,'img_app');">
+                                                 <input type="file" name="img_app" class="fileToUpload" id="img_app" data-img="..{$msg.app.img}" accept="image/*"/>
+                                                 <input type="hidden" id="my_img_app" name="tag[app][img]" value="{$msg.app.img}" />
+                                                 <empty name="msg.app.img">
+                                                  <img id="img_app_tb" class="imgList img" src="__PUBLIC__/maoke/images/merchant/sk_zjgl_lqxd_icon_jiahao_default.png">
+                                                 <else />
+                                                 <img id="img_app_tb" class="imgList img" src="..{$msg.app.img}">
+                                                 </empty>
+
+                                                 <div class="displayValue" style="word-spacing: normal;word-wrap: break-word;"></div>
+                                           </div>
+                                          <i class="img_tips icon iconfont" id="m_app_tb_img_error"></i>
+                                        </div>
+                                      <p class="xing" style="font-size: 12px;color: #646464; margin-top:10px;">需要上传的是在手机APP进行搜索，搜索页面所展示的搜索主图，图片尺寸为：<b>800*800</b>,格式为：<b>jpg、png、jpeg、gif</b>，图片大小在<b>1M以内</b></p>
+                                  </div>
+                                    <!--************************手机淘宝APP搜索关键词 --页面默认有的**************************-->
+                                    <div class="goods_keywords">
+                                        <h2 <notempty name="msg.app.attr">class="actived"</notempty>>通过<b>"手机淘宝APP自然搜索"</b>找到商品<i class="icon iconfont icon-cuowu error hided" id="no_choose_tips" style="display:none;">请至少选择淘口令或者自然搜索其中一种方案找商品</i></h2>
+                                    </div>
+                                    <div class="goods_keywords_pannel hided ">
+                                    	<i id="focus2"></i>
+                                        <ul id="search_keyword_box_taobao">
+										 <empty name="msg.app.attr">
+                                            <li class="search_keyword_box box_1">
+                                                        <div class="search_keyword">
+                                                            <div class="keyword_title">
+                                                                <span>*</span>
+                                                                <label for="keyword_box">搜索关键词 <i class="number_btn_app">1</i>：</label>
+                                                                <input class="keywords mykeywordsapp" type="text" placeholder="连衣裙" name="tag[app][attr][1][keyword]" />
+                                                                <b>注：让试客在手机淘宝APP进行搜索的关键词</b><span class="keywords_error"></span>
+                                                            </div>
+                                                            <p class="add_box">
+                                                                <a class="fold" href="javascript:void(0);">增加缩小关键词搜索范围（选填）</a>
+                                                                <a class="fold1" href="javascript:void(0);" style="display:none">增加缩小关键词搜索范围（选填）</a>
+                                                                <b>如关键词排名较低，请务必设置此选项，以便试客能找到商品</b>
+                                                            </p>
+                                                            <div class="keyword_write">
+                                                                <p class="title">
+                                                                    <span>缩小搜索范围：试客选择搜索列表中的"分类"和"排序"缩小范围（选填） <a class="submit_btn" href="javascript:void(0);">清空</a> </span>
+                                                                    <a class="close_btn" href="javascript:void(0);">收起</a>
+                                                                </p>
+                                                                <div class="keyword_write_box">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>风格</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>休闲</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>材质</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>蕾丝</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>1</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-1 cate-app-1" name="tag[app][attr][1][cate][1][key]" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-1 val-app-1"  name="tag[app][attr][1][cate][1][val]" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>2</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-2 cate-app-2" name="tag[app][attr][1][cate][2][key]" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-2 val-app-2" name="tag[app][attr][1][cate][2][val]" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>3</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-3 cate-app-3" name="tag[app][attr][1][cate][3][key]" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-3 val-app-3" name="tag[app][attr][1][cate][3][val]" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>4</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-4 cate-app-4" name="tag[app][attr][1][cate][4][key]" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-4 val-app-4" name="tag[app][attr][1][cate][4][val]" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <!--折扣与服务-->
+                                                                <div class="discount_server">
+                                                                    <div class="title">折扣与服务：</div>
+                                                                    <div class="server_content">
+                                                                        <p class="checkbox_btn">
+                                                                         <span data-val="27" data-name="包邮、" class="checkbox  ">包邮</span>
+                                                                         <span data-val="28" data-name="天猫、" class="checkbox  ">天猫</span>
+                                                                         <span data-val="29" data-name="消费者保障、" class="checkbox  ">消费者保障</span>
+                                                                         <span data-val="30" data-name="全球购、" class="checkbox  ">全球购</span>
+                                                                         <span data-val="31" data-name="淘金币抵钱、" class="checkbox  ">淘金币抵钱</span>
+                                                                         <span data-val="32" data-name="7+天内退货、" class="checkbox  ">7+天内退货</span>
+                                                                         <span data-val="33" data-name="货到付款、" class="checkbox  ">货到付款</span>
+                                                                         <span data-val="34" data-name="花呗分期、" class="checkbox  ">花呗分期</span>
+                                                                         <span data-val="35" data-name="通用排序、" class="checkbox  ">通用排序</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--排列方式-->
+                                                                <div class="arrange_way">
+                                                                    <div class="left title">排列方式：</div>
+                                                                    <div class="left arrange_content">
+                                                                        <p>
+                                                                         <select class="sort mysortapp" name="tag[app][attr][1][sort]">
+                                                                          <option value="1">综合排序</option>
+                                                                          <option value="8">人气从高到低</option>
+                                                                          <option value="2">销量从高到低</option>
+                                                                          <option value="3">信用从高到低</option>
+                                                                          <option value="4">价格从高到低</option>
+                                                                          <option value="5">价格从低到高</option>
+                                                                          <option value="6">总价从高到低</option>
+                                                                          <option value="7">总价从低到高</option>
+                                                                         </select>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </li>
+										 <else />
+										  <volist name="msg.app.attr" id="vo" key="k">
+                                            <li class="search_keyword_box box_1">
+                                                        <div class="search_keyword">
+                                                            <div class="keyword_title">
+                                                                <span>*</span>
+                                                                <label for="keyword_box">搜索关键词 <i class="number_btn_app">{$k}</i>：</label>
+                                                                <input class="keywords mykeywordsapp" name="tag[app][attr][{$k}][keyword]" value="{$vo.keyword}" type="text" placeholder="连衣裙">
+                                                                <b>注：让试客在手机淘宝APP进行搜索的关键词</b><span class="keywords_error"></span>
+                                                            </div>
+                                                            <p class="add_box">
+                                                                <a class="fold" href="javascript:void(0);">增加缩小关键词搜索范围（选填）</a>
+                                                                <a class="fold1" href="javascript:void(0);" style="display:none">增加缩小关键词搜索范围（选填）</a>
+                                                                <b>如关键词排名较低，请务必设置此选项，以便试客能找到商品</b>
+                                                                <if condition='($k gt 1)'><span class="right select_btn2" href="#">删除</span></if>
+                                                            </p>
+                                                            <div class="keyword_write">
+                                                                <p class="title">
+                                                                    <span>缩小搜索范围：试客选择搜索列表中的"分类"和"排序"缩小范围（选填） <a class="submit_btn" href="javascript:void(0);">清空</a> </span>
+                                                                    <a class="close_btn" href="javascript:void(0);">收起</a>
+                                                                </p>
+                                                                <div class="keyword_write_box">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>风格</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>休闲</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>材质</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>蕾丝</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>1</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-app-1" name="tag[app][attr][{$k}][cate][1][key]" value="{$vo.cate.1.key}" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-app-1" name="tag[app][attr][{$k}][cate][1][val]" value="{$vo.cate.1.val}" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>2</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-app-2" name="tag[app][attr][{$k}][cate][2][key]" value="{$vo.cate.2.key}" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-app-2" name="tag[app][attr][{$k}][cate][2][val]" value="{$vo.cate.2.val}" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>3</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-app-3" name="tag[app][attr][{$k}][cate][3][key]" value="{$vo.cate.3.key}" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-app-3" name="tag[app][attr][{$k}][cate][3][val]" value="{$vo.cate.3.val}" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>4</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-app-4" name="tag[app][attr][{$k}][cate][4][key]" value="{$vo.cate.4.key}" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-app-4" name="tag[app][attr][{$k}][cate][4][val]" value="{$vo.cate.4.val}" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <!--折扣与服务-->
+                                                                <div class="discount_server">
+                                                                    <div class="title">折扣与服务：</div>
+                                                                    <div class="server_content">
+                                                                        <p class="checkbox_btn">
+                                                                         <span data-val="27" data-name="包邮、" class="checkbox  ">包邮</span>
+                                                                         <span data-val="28" data-name="天猫、" class="checkbox  ">天猫</span>
+                                                                         <span data-val="29" data-name="消费者保障、" class="checkbox  ">消费者保障</span>
+                                                                         <span data-val="30" data-name="全球购、" class="checkbox  ">全球购</span>
+                                                                         <span data-val="31" data-name="淘金币抵钱、" class="checkbox  ">淘金币抵钱</span>
+                                                                         <span data-val="32" data-name="7+天内退货、" class="checkbox  ">7+天内退货</span>
+                                                                         <span data-val="33" data-name="货到付款、" class="checkbox  ">货到付款</span>
+                                                                         <span data-val="34" data-name="花呗分期、" class="checkbox  ">花呗分期</span>
+                                                                         <span data-val="35" data-name="通用排序、" class="checkbox  ">通用排序</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--排列方式-->
+                                                                <div class="arrange_way">
+                                                                    <div class="left title">排列方式：</div>
+                                                                    <div class="left arrange_content">
+                                                                        <p>
+                                                                         <select class="sort mysortapp" name="tag[app][attr][{$k}][sort]">
+	                                                                          <option value="1" <if condition='($vo.sort eq 1)'>selected</if>>综合排序</option>
+	                                                                          <option value="8" <if condition='($vo.sort eq 8)'>selected</if>>人气从高到低</option>
+	                                                                          <option value="2" <if condition='($vo.sort eq 2)'>selected</if>>销量从高到低</option>
+	                                                                          <option value="3" <if condition='($vo.sort eq 3)'>selected</if>>信用从高到低</option>
+	                                                                          <option value="4" <if condition='($vo.sort eq 4)'>selected</if>>价格从高到低</option>
+	                                                                          <option value="5" <if condition='($vo.sort eq 5)'>selected</if>>价格从低到高</option>
+	                                                                          <option value="6" <if condition='($vo.sort eq 6)'>selected</if>>总价从高到低</option>
+	                                                                          <option value="7" <if condition='($vo.sort eq 7)'>selected</if>>总价从低到高</option>
+                                                                         </select>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </li>
+                                         </volist>
+                                         </empty>
+											<li id="my_app_li" style="display:none;">xxx</li>
+                                        </ul>
+                                        <!--淘宝pc关键字(复制)start-->
+                                        <div id="my_pc_keyword" style="display:none;">
+                                                       <li class="search_keyword_box box_1">
+                                                        <div class="search_keyword">
+                                                            <div class="keyword_title">
+                                                                <span>*</span>
+                                                                <label for="keyword_box">搜索关键词 <i class="number_btn_pc">1</i>：</label>
+                                                                <input class="keywords mykeywordspc" type="text" placeholder="连衣裙">
+                                                                <b>注：让试客在www.taobao.com进行搜索的关键词</b><span class="keywords_error"></span>
+                                                            </div>
+                                                            <p class="add_box">
+                                                                <a class="fold" href="javascript:void(0);">增加缩小关键词搜索范围（选填）</a>
+                                                                <a class="fold1" href="javascript:void(0);" style="display:none">增加缩小关键词搜索范围（选填）</a>
+                                                                <b>如关键词排名较低，请务必设置此选项，以便试客能找到商品</b>
+                                                                <span class="right select_btn1" href="#">删除</span>
+                                                            </p>
+                                                            <div class="keyword_write">
+                                                                <p class="title">
+                                                                    <span>缩小搜索范围：试客选择搜索列表中的"分类"和"排序"缩小范围（选填） <a class="submit_btn" href="javascript:void(0);">清空</a> </span>
+                                                                    <a class="close_btn" href="javascript:void(0);">收起</a>
+                                                                </p>
+                                                                <div class="keyword_write_box">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>风格</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>休闲</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>材质</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>蕾丝</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>1</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-pc-1" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-pc-1" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>2</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-pc-2" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-pc-2" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>3</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-pc-3" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-pc-3" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>4</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-pc-4" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-pc-4" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <!--折扣与服务-->
+                                                                <div class="discount_server">
+                                                                    <div class="title">折扣与服务：</div>
+                                                                    <div class="server_content">
+                                                                        <p class="checkbox_btn">
+                                                                         <span data-val="27" data-name="包邮、" class="checkbox  ">包邮</span>
+                                                                         <span data-val="28" data-name="天猫、" class="checkbox  ">天猫</span>
+                                                                         <span data-val="29" data-name="消费者保障、" class="checkbox  ">消费者保障</span>
+                                                                         <span data-val="30" data-name="全球购、" class="checkbox  ">全球购</span>
+                                                                         <span data-val="31" data-name="淘金币抵钱、" class="checkbox  ">淘金币抵钱</span>
+                                                                         <span data-val="32" data-name="7+天内退货、" class="checkbox  ">7+天内退货</span>
+                                                                         <span data-val="33" data-name="货到付款、" class="checkbox  ">货到付款</span>
+                                                                         <span data-val="34" data-name="花呗分期、" class="checkbox  ">花呗分期</span>
+                                                                         <span data-val="35" data-name="通用排序、" class="checkbox  ">通用排序</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--排列方式-->
+                                                                <div class="arrange_way">
+                                                                    <div class="left title">排列方式：</div>
+                                                                    <div class="left arrange_content">
+                                                                        <p>
+                                                                         <select class="sort mysortpc">
+                                                                          <option selected="selected" value="1">综合排序</option>
+                                                                          <option value="8">人气从高到低</option>
+                                                                          <option value="2">销量从高到低</option>
+                                                                          <option value="3">信用从高到低</option>
+                                                                          <option value="4">价格从高到低</option>
+                                                                          <option value="5">价格从低到高</option>
+                                                                          <option value="6">总价从高到低</option>
+                                                                          <option value="7">总价从低到高</option>
+                                                                         </select>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       </li>
+                                        </div>
+                                        <!--淘宝pc关键字(复制)end-->
+                                        <!--淘宝APP关键字(复制)start-->
+                                        <div id="my_app_keyword" style="display:none;">
+                                                       <li class="search_keyword_box box_1">
+                                                        <div class="search_keyword">
+                                                            <div class="keyword_title">
+                                                                <span>*</span>
+                                                                <label for="keyword_box">搜索关键词 <i class="number_btn_app">1</i>：</label>
+                                                                <input class="keywords mykeywordsapp" type="text" placeholder="连衣裙">
+                                                                <b>注：让试客在手机淘宝APP进行搜索的关键词</b><span class="keywords_error"></span>
+                                                            </div>
+                                                            <p class="add_box">
+                                                                <a class="fold" href="javascript:void(0);">增加缩小关键词搜索范围（选填）</a>
+                                                                <a class="fold1" href="javascript:void(0);" style="display:none">增加缩小关键词搜索范围（选填）</a>
+                                                                <b>如关键词排名较低，请务必设置此选项，以便试客能找到商品</b>
+                                                                <span class="right select_btn2" href="#">删除</span>
+                                                            </p>
+                                                            <div class="keyword_write">
+                                                                <p class="title">
+                                                                    <span>缩小搜索范围：试客选择搜索列表中的"分类"和"排序"缩小范围（选填） <a class="submit_btn" href="javascript:void(0);">清空</a> </span>
+                                                                    <a class="close_btn" href="javascript:void(0);">收起</a>
+                                                                </p>
+                                                                <div class="keyword_write_box">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>风格</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>休闲</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>示例</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span>材质</span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span>蕾丝</span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>1</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-app-1" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-app-1" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>2</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-app-2" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-app-2" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>3</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-app-3" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-app-3" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="box">
+                                                                                <h1>4</h1>
+                                                                                <p class="username">分类名称</p>
+                                                                                <p><span><input type="text" class="cate-app-4" /></span></p>
+                                                                                <p class="keyword">分类关键词</p>
+                                                                                <p><span><input type="text" class="val-app-4" /></span></p>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <!--折扣与服务-->
+                                                                <div class="discount_server">
+                                                                    <div class="title">折扣与服务：</div>
+                                                                    <div class="server_content">
+                                                                        <p class="checkbox_btn">
+                                                                         <span data-val="27" data-name="包邮、" class="checkbox  ">包邮</span>
+                                                                         <span data-val="28" data-name="天猫、" class="checkbox  ">天猫</span>
+                                                                         <span data-val="29" data-name="消费者保障、" class="checkbox  ">消费者保障</span>
+                                                                         <span data-val="30" data-name="全球购、" class="checkbox  ">全球购</span>
+                                                                         <span data-val="31" data-name="淘金币抵钱、" class="checkbox  ">淘金币抵钱</span>
+                                                                         <span data-val="32" data-name="7+天内退货、" class="checkbox  ">7+天内退货</span>
+                                                                         <span data-val="33" data-name="货到付款、" class="checkbox  ">货到付款</span>
+                                                                         <span data-val="34" data-name="花呗分期、" class="checkbox  ">花呗分期</span>
+                                                                         <span data-val="35" data-name="通用排序、" class="checkbox  ">通用排序</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--排列方式-->
+                                                                <div class="arrange_way">
+                                                                    <div class="left title">排列方式：</div>
+                                                                    <div class="left arrange_content">
+                                                                        <p>
+                                                                         <select class="sort mysortapp">
+                                                                          <option selected="selected" value="1">综合排序</option>
+                                                                          <option value="8">人气从高到低</option>
+                                                                          <option value="2">销量从高到低</option>
+                                                                          <option value="3">信用从高到低</option>
+                                                                          <option value="4">价格从高到低</option>
+                                                                          <option value="5">价格从低到高</option>
+                                                                          <option value="6">总价从高到低</option>
+                                                                          <option value="7">总价从低到高</option>
+                                                                         </select>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       </li>
+                                        </div>
+                                        <!--淘宝APP关键字(复制)end-->
+                                        <p class="add_search_keyword  ">
+                                            <a id="add_search_keyword_taobao" href="javascript:void(0);">可多添加1个淘宝搜索关键词方案</a>
+                                            <b>最多可添加5组关键词方案</b>
+                                        </p>
+
+                                        <!--缩小搜索范围-->
+                                        <div class="shrink_searchScope">
+                                            <h1>缩小搜索范围：（选填）</h1>
+                                            <p>试客可用列表筛选中“价格筛选”、“发货地”缩小范围（选填）</p>
+                                            <p>
+                                                价格：<input id="iphone_tb_price1" name="tag[app][price1]" value="{$msg.app.price1}" type="text" placeholder="1.00"/> - <input id="iphone_tb_price2" name="tag[app][price2]" value="{$msg.app.price2}" type="text" placeholder="10.00" />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发货地：<input id="iphone_tb_from" name="tag[app][address]" value="{$msg.app.address}" type="text" />
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- 手机淘口令 -->
+                                     <div class="goods_taokouling">
+                                        <h2 <notempty name="msg.app.password">class="actived"</notempty>>通过<b>"手机淘宝APP淘口令"</b>找到商品 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 12px;color: #646464;"></span></h2>
+                                     </div>
+                                     <div class="goods_taokouling_pannel hided">
+                                            <div class="taokouling_pannel clearfix">
+                                             <empty name="msg.app.password">
+                                                 <div class="taokouling_box left">
+                                                    <p><span class="title left">淘口令<span class="taokouling_num">1</span>：<i class="icon iconfont icon-cuowu error hided">淘口令不能为空</i></span></p>
+                                                    <textarea class="iphone_tb_command" name="tag[app][password][]" cols="15" rows="10" style="resize: none;"></textarea>
+                                                 </div>
+                                             <else />
+                                                <volist name="msg.app.password" id="vo" key="k">
+                                                 <div class="taokouling_box left">
+                                                    <p>
+                                                        <span class="title left">淘口令<span class="taokouling_num">{$k}</span>：<i class="icon iconfont icon-cuowu error hided">淘口令不能为空</i>
+                                                        </span>
+                                                        <s class="detele right <if condition='($k eq 1)'>hided</if>">删除</s>
+                                                    </p>
+                                                    <textarea class="iphone_tb_command" name="tag[app][password][]" cols="15" rows="10" style="resize: none;">{$vo}</textarea>
+                                                 </div>
+                                                </volist>
+                                             </empty>
+                                                <!--淘口令(复制项)-->
+                                                <div class="mypd" style="display:none;">
+                                                 <div class="taokouling_box left">
+                                                    <p>
+                                                        <span class="title left">淘口令<span class="taokouling_num">1</span>：<i class="icon iconfont icon-cuowu error hided">淘口令不能为空</i>
+                                                        </span>
+                                                        <s class="detele right">删除</s>
+                                                    </p>
+                                                    <textarea class="iphone_tb_command" cols="15" rows="10" style="resize: none;"></textarea>
+                                                 </div>
+                                                </div>
+                                                <!--淘口令(复制项)end-->
+                                            </div>
+                                        <p class="add_search_taokouling  ">
+                                            <a id="add_search_taokouling" href="javascript:void(0);">可多添加1个淘宝淘口令方案</a>
+                                            <b>最多可添加5组淘口令方案</b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--**************************** 通过手机淘宝APP搜索 end  ****************************-->
+                            </div>
+                            <div class="nextStep_btn">
+                                <input onclick="location.href='{:U(\'Actcenter/publish2\',array(\'id\' => $id))}'" type="button" value="上一步">
+                                <input type="hidden" id="id" name="id" value="{$id}"/>
+                                <input type="button" value="下一步" onclick="next_step();"/>
+                            </div>
+                        </div>
+                        </form>
+				</div>
+            </div>
+        </div>
+    </section>
+		<!-- page-wrapper end -->
+</div>
+		<!-- wrapper -->
+</div>
+    <script type="text/javascript">
+        $(function(){
+            if($(".by_PCtaobao").hasClass("search_active")){
+            	$(".taobao_PCcontent").slideToggle("slow");
+            }
+            if($(".by_taobao").hasClass("search_active")){
+            	$(".taobao_content").slideToggle("slow");
+            	if($(".goods_keywords>h2").hasClass('actived')){
+            		$(".goods_keywords_pannel").slideToggle("slow");
+            	}
+            	if($(".goods_taokouling>h2").hasClass('actived')){
+            		$(".goods_taokouling_pannel").slideToggle("slow");
+            	}
+            }
+
+            $(".by_PCtaobao,.by_taobao").click(function(){
+                if(($(this).attr('class')).indexOf('by_PCtaobao')>=0){
+                	if($(this).hasClass("search_active")){
+                		$(this).removeClass("search_active");
+                	}else{
+                		$(this).addClass("search_active");
+                	}
+                    $(".taobao_PCcontent").slideToggle("slow");
+                }else if(($(this).attr('class')).indexOf('by_taobao')>=0){
+                    if($(this).hasClass("search_active")){
+                		$(this).removeClass("search_active");
+                	}else{
+                		$(this).addClass("search_active");
+                	}
+                    $(".taobao_content").slideToggle("slow");
+                }
+
+            });
+            $(".goods_keywords>h2,.goods_taokouling>h2").click(function(){
+                if(($(this).parent().attr('class')).indexOf('goods_keywords')>=0){
+                	if($(this).hasClass("actived")){
+                		$(this).removeClass("actived");
+                	}else{
+                		$(this).addClass("actived");
+                	}
+                }else if(($(this).parent().attr('class')).indexOf('goods_taokouling')>=0){
+                	if($(this).hasClass("actived")){
+                		$(this).removeClass("actived");
+                	}else{
+                		$(this).addClass("actived");
+                	}
+                }
+
+            });
+            $(".taobao_PCcontent .fold,.taobao_content .fold").click(function(){
+                $(this).parent("p").next(".keyword_write").slideToggle("slow");
+            });
+            $(".taobao_PCcontent .close_btn,.taobao_content .close_btn").click(function(){
+                $(this).parents(".keyword_write").slideToggle("slow");
+            });
+
+            //pc淘宝自然搜索 添加关键字
+            $("#add_search_keyword").click(function(){
+
+            	var n = $("#search_keyword_box").children("li").length;
+                if(n < 6 && n > 1){
+                    var $keywordbox = $("#my_pc_keyword").children("li").clone(true);
+                    $("#my_pc_li").before($keywordbox);
+
+                    $('.number_btn_pc').eq(n-1).html(n);
+                    $('.mykeywordspc').eq(n-1).attr('name','tag[pc][attr]['+n+'][keyword]');
+                    $('.cate-pc-1').eq(n-1).attr('name','tag[pc][attr]['+n+'][cate][1][key]');
+                    $('.val-pc-1').eq(n-1).attr('name','tag[pc][attr]['+n+'][cate][1][val]');
+                    $('.cate-pc-2').eq(n-1).attr('name','tag[pc][attr]['+n+'][cate][2][key]');
+                    $('.val-pc-2').eq(n-1).attr('name','tag[pc][attr]['+n+'][cate][2][val]');
+                    $('.cate-pc-3').eq(n-1).attr('name','tag[pc][attr]['+n+'][cate][3][key]');
+                    $('.val-pc-3').eq(n-1).attr('name','tag[pc][attr]['+n+'][cate][3][val]');
+                    $('.cate-pc-4').eq(n-1).attr('name','tag[pc][attr]['+n+'][cate][4][key]');
+                    $('.val-pc-4').eq(n-1).attr('name','tag[pc][attr]['+n+'][cate][4][val]');
+                    $('.mysortpc').eq(n-1).attr('name','tag[pc][attr]['+n+'][sort]');
+                }
+                if($("#search_keyword_box>li").length >= 6)
+                {
+                    $(this).hide();
+                }
+            });
+            //pc淘宝自然搜索 删除关键字
+            $(".select_btn1").click(function(){
+                $(this).parents(".search_keyword_box").remove();
+                if($("#search_keyword_box>li").length<5){
+                    $("#add_search_keyword").show();
+                }
+            });
+            //手机淘宝APP 添加关键字
+            $("#add_search_keyword_taobao").click(function(){
+
+            	var n = $("#search_keyword_box_taobao").children("li").length;
+                if(n < 6 && n > 1){
+                    var $keywordbox = $("#my_app_keyword").children("li").clone(true);
+                    $("#my_app_li").before($keywordbox);
+
+                    $('.number_btn_app').eq(n-1).html(n);
+                    $('.mykeywordsapp').eq(n-1).attr('name','tag[app][attr]['+n+'][keyword]');
+                    $('.cate-app-1').eq(n-1).attr('name','tag[app][attr]['+n+'][cate][1][key]');
+                    $('.val-app-1').eq(n-1).attr('name','tag[app][attr]['+n+'][cate][1][val]');
+                    $('.cate-app-2').eq(n-1).attr('name','tag[app][attr]['+n+'][cate][2][key]');
+                    $('.val-app-2').eq(n-1).attr('name','tag[app][attr]['+n+'][cate][2][val]');
+                    $('.cate-app-3').eq(n-1).attr('name','tag[app][attr]['+n+'][cate][3][key]');
+                    $('.val-app-3').eq(n-1).attr('name','tag[app][attr]['+n+'][cate][3][val]');
+                    $('.cate-app-4').eq(n-1).attr('name','tag[app][attr]['+n+'][cate][4][key]');
+                    $('.val-app-4').eq(n-1).attr('name','tag[app][attr]['+n+'][cate][4][val]');
+                    $('.mysortapp').eq(n-1).attr('name','tag[app][attr]['+n+'][sort]');
+                }
+                if($("#search_keyword_box_taobao").children("li").length>=6){
+                    $(this).hide();
+                }
+            });
+            //手机淘宝APP 删除关键字
+            $(".taobao_content .select_btn2").click(function(){
+                $(this).parents(".search_keyword_box").remove();
+                if($("#search_keyword_box_taobao").length<5){
+                    $("#add_search_keyword_taobao").show();
+                }
+            });
+             //淘口令 添加
+             $("#add_search_taokouling").click(function(){
+
+                if($(this).parent("p").prev(".taokouling_pannel").children(".taokouling_box").length<5){
+                    var $taokouling = $(".mypd").children(".taokouling_box").clone(true);
+                    var n = $(this).parent("p").prev(".taokouling_pannel").children(".taokouling_box").length;
+                    $(".mypd").before($taokouling);
+                    $(".iphone_tb_command").eq(n).attr('name','tag[app][password][]');
+                    $(".taokouling_num").eq(n).html(n+1);
+                }
+                if($(this).parent("p").prev(".taokouling_pannel").children(".taokouling_box").length==5){
+                    $(this).hide();
+                }
+            });
+            //淘口令 删除
+            $(".detele").click(function(){
+                $(this).parents(".taokouling_box").remove();
+                if($(this).parents(".taokouling_pannel").children(".taokouling_box").length<5){
+                    $("#add_search_taokouling").show();
+                }
+            });
+
+            $(".goods_keywords").click(function(){
+                $(this).next(".goods_keywords_pannel").slideToggle("slow");
+            });
+            $(".goods_taokouling").click(function(){
+                $(this).next(".goods_taokouling_pannel").slideToggle("slow");
+            })
+        })
+
+        function upd_file(obj,file_id){
+        	$("input[name='"+file_id+"']").bind("change",function(){
+        		$.ajaxFileUpload({
+        			url:"{:U('Actcenter/AjaxUpload')}",//上传图片处理文件
+        			secureuri:false,
+        			fileElementId:file_id,
+        			dataType: 'text',
+        			success: function (data){
+                        var data= strToObj(data);
+                        if(1 == data.status){
+                        	$('#my_'+file_id).val(data.url);
+        					$('#'+file_id+'_tb').attr('src', '../'+data.url);
+        					if(file_id == 'img_pc'){
+	        					$("#img_pc_tb_error").text('上传成功').css({'display':'inline-block','color':'green'});
+	        				}else if(file_id == 'img_app'){
+	        					$("#m_app_tb_img_error").text('上传成功').css({'display':'inline-block','color':'green'});
+	        				}
+                        }else{
+                        	if(file_id == 'img_pc'){
+	        					$("#img_pc_tb_error").text(data.msg).css({'display':'inline-block','color':'#e61e28'});
+        						showSearch('focus1');
+
+	        				}else if(file_id == 'img_app'){
+	        					$("#m_app_tb_img_error").text(data.msg).css({'display':'inline-block','color':'#e61e28'});
+        						showSearch('focus2');
+
+	        				}
+
+                        }
+        			},
+        			error: function (data){
+                        var data= strToObj(data);
+						if(file_id == 'img_pc'){
+        					$("#img_pc_tb_error").text(data.msg).css({'display':'inline-block','color':'#e61e28'});
+    						showSearch('focus1');
+
+        				}else if(file_id == 'img_app'){
+        					$("#m_app_tb_img_error").text(data.msg).css({'display':'inline-block','color':'#e61e28'});
+    						showSearch('focus2');
+
+        				}
+        			}
+        		});
+        	});
+        }
+        function strToObj(str) {
+            return eval("(" + str + ")");
+        }
+		function showSearch(id){
+		    var oDiv=$("#"+id);
+		    var t=document.createElement("input");
+		    t.type="text";
+		    oDiv.prepend(t);
+		    t.focus();
+		    t.remove();
+		}
+        function next_step() {
+        	if($(".by_PCtaobao").hasClass('search_active')){
+//      		var imgPc = $("#img_pc").val(); //pc端上传图片
+				var imgPc = $("#img_pc_tb").attr('src'); //pc端上传图片
+        		var isUpload = $("#img_pc").data('img');
+        		if(imgPc.indexOf('maoke')>0 && isUpload == '..'){
+        			$("#img_pc_tb_error").text('请上传图片').css({'display':'inline-block','color':'red'});
+        			showSearch('focus1');
+        			return false;
+        		}
+        		//关键词
+        		for(var i = 0 ; i < $("#search_keyword_box .mykeywordspc").length ; i++){
+        			if($("#search_keyword_box .mykeywordspc").eq(i).val() == ''){
+        				$("#search_keyword_box .mykeywordspc").eq(i).attr('autofocus','autofocus');
+        				$("#search_keyword_box .mykeywordspc").eq(i).siblings('span.keywords_error').text('请填写关键字');
+        				showSearch('focus1');
+        				return false;
+        			}else{
+        				$("#search_keyword_box .mykeywordspc").eq(i).siblings('span.keywords_error').text('');
+        			}
+        		}
+        	}else if($(".by_taobao").hasClass('search_active')){
+//      		var imgApp = $("#img_app").val(); //淘宝app上传图片
+        		var imgApp = $("#img_app_tb").attr('src'); //淘宝app上传图片
+        		var isUpload = $("#img_app").data('img');
+        		if(imgApp.indexOf('maoke')>0 && isUpload == '..'){
+        			$("#m_app_tb_img_error").text('请上传图片').css({'display':'inline-block','color':'red'});
+        			showSearch('focus2');
+        			return false;
+        		}
+
+        		if($(".goods_keywords").children('h2').hasClass('actived')){
+        			//关键词
+
+        			for(var i = 0 ; i < $("#search_keyword_box_taobao .mykeywordsapp").length ; i++){
+        				if($("#search_keyword_box_taobao .mykeywordsapp").eq(i).val() == ''){
+        					$("#search_keyword_box_taobao .mykeywordsapp").eq(i).siblings('span.keywords_error').text('请填写关键字');
+        					showSearch('focus2');
+        					return false;
+        				}else{
+        					$("#search_keyword_box_taobao .mykeywordsapp").eq(i).siblings('span.keywords_error').text('');
+        				}
+        			}
+        		}else if($(".goods_taokouling").children('h2').hasClass('actived')){
+        			//淘口令
+
+        			for(var i = 0 ; i < $(".taokouling_pannel>.taokouling_box .iphone_tb_command").length ; i++){
+        				if($(".taokouling_pannel>.taokouling_box .iphone_tb_command").eq(i).val() == ''){
+        					$(".taokouling_pannel>.taokouling_box .iphone_tb_command").eq(i).siblings('p').find('i').text('淘口令不能为空').show();
+
+        					return false;
+        				}else{
+        					$(".taokouling_pannel>.taokouling_box .iphone_tb_command").eq(i).siblings('p').find('i').text('');
+        				}
+        			}
+        		}else{
+        			$("#no_choose_tips").show();
+        			return false;
+        		}
+
+        	}else{
+        		alert('请选择发布平台');
+        		return false;
+        	}
+
+        	$('#myform').submit();
+        }
+    </script>
+    <script src="__PUBLIC__/ajaxfileupload.js"></script>
+	<include file="Layout:foot" />

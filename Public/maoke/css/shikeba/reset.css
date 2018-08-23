@@ -1,0 +1,184 @@
+
+body{
+    font:12px "Microsoft YaHei";
+    margin:0;
+    padding:0;
+    color:#646464;
+    background-color:#fff;
+}
+div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, p,form,
+fieldset, input, blockquote,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+}
+
+h1, h2, h3, h4, h5, h6, strong, th{
+    font-size: 1.0em;
+    font-weight: normal;
+    font-style: normal;
+}
+article, aside, details, figcaption, figure,footer, header, menu, nav, section {
+    display: block;
+}
+
+input,button,select,textarea {
+    outline:none;
+    border:none;
+}
+textarea{
+    padding-left:10px;
+}
+input[type='button']{
+    cursor:pointer;
+    text-align:center;
+    padding-left:0px;
+}
+input[type='text']{
+    padding-left:10px;
+    /*padding-right:10px;*/
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+img{
+    border:none;
+    vertical-align: middle;
+}
+ul {
+    list-style: none;
+}
+q:before, q:after {
+    content: '';
+}
+b{
+    font-weight:normal;
+}
+a {
+    color:#646464;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+
+i,em,b{ font-style:normal;}
+
+
+.passwd{
+    width: 200px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #969696;
+    border-radius: 5px;
+}
+
+.return_top {
+    position: fixed;
+    z-index: 99;
+    top: 90%;
+    right: 2%;
+}
+.return_top img {
+    cursor: pointer;
+}
+
+
+
+
+.icon-tishi1{ display:inline-block !important;margin-right:5px !important;font-size: 18px !important;color: #f29317 !important;  }
+
+.icon-cuowu {display:inline-block; margin-right:5px !important;color: #e61e28 !important;font-size: 12px !important;  }
+
+.icon-chenggong{ display: inline-block; font-size: 12px !important;color: #1ac63e !important; }
+
+
+
+.modal_issue .succeed_content{
+    padding:54px 0;
+}
+.modal_issue .succeed_content p{
+    line-height:28px;
+    font-size:16px;
+}
+.modal_issue .confirm_exchange{
+    margin-right:30px;
+}
+
+
+.left   {float:left;}
+.right  {float:right;}
+.clear  {clear:both;}
+.clearfix:after{content:" "; display:block; height:0; visibility:hidden; clear:both; }
+.clearfix {*zoom:1; } 
+.container{width: 1200px;margin:0 auto;}
+
+
+.tl{text-align:left;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+.bc{margin-left:0;margin-right:0;}
+.fl{float:left;display:inline;}
+.fr{float:right;display:inline;}
+.cb{clear:both;}
+.cl{clear:left;}
+.cr{clear:right;}
+.vm{vertical-align: middle;}
+.pr{position:relative;}
+.pa{position:absolute;}
+.abs-right{position:absolute;right:0}
+.zoom{zoom:1;}
+.hided{display:none;}
+.showed{display:block;}
+.ol{overflow:hidden;}
+
+.f12{font-size:12px;}
+.f14{font-size:14px;}
+.f16{font-size:16px;}
+.f18{font-size:18px;}
+.f20{font-size:20px;}
+.f22{font-size:22px;}
+.f24{font-size:24px;}
+.fb{font-weight:bold}
+.fn{font-weight:normal;}
+.t2{text-indent:2em;}
+.lh100{line-height:100%;}
+.lh150{line-height:150%;}
+.lh180{line-height:180%;}
+.lh200{line-height:200%;}
+.unl{text-decoration:underline;}
+.red{color:#f25f55;}
+.fc_default{color:#333;}
+.fc_weak{color:#666;}
+.fc_tip{color:#999;}
+.no_unl{text-decoration:none;}
+
+.layui-layer-setwin a {
+   background-position: 4px -40px;
+}
+#refuseBtn {
+	width: 60%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-around;
+}
+
+#refuseBtn button {
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #fff;
+	border-radius: 5px;
+}
+
+#refuseBtn button#refuseSure {
+	background: #f25f55;
+}
+#refuseBtn button#back_btn {
+	background: #f25f55;
+}
+#refuseBtn button#refuseCancel {
+	background: #d4cfcf;
+}

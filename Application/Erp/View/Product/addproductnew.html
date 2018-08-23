@@ -1,0 +1,241 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">产品管理</span><span class="c-999 en">&gt;</span><span class="c-666">发布任务</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" style="position: absolute;">
+		<article class="cl pd-20">
+			<div class="page-container" style="padding-left: 60px;">
+				<div class="row cl" style="color: red;">
+					<label class="form-label fl text-r addp-label" >温馨提醒：</label>
+					<div class="formControls fl">
+						<p>1、每天12点前发布的任务，审核通过后当天上线；12点后发布的任务，审核通过后次日上线。</p>
+						<p>2、每天10点至12点之间发布的任务，总单数不得大于50单。</p>
+						<p>2、带*号的输入项为必填项。</p>
+					</div>
+				</div>
+				<form action="{:U('product/addproductnew')}" method="post" class="form form-horizontal" id="addpronew"  enctype="multipart/form-data">
+					<div class="form-con" style="width: 805px;min-width: 805px;">
+						<div class="row cl">
+							<label class="form-label fl addp-label"><span class="c-red">*</span>选择店铺</label>
+							<div class="formControls fl" >
+								<select name="shop_id" class="select select-box addp-select">
+									<volist name="shop" id="vo">
+									<option value="{$vo.id}">{$vo.shopname}</option>
+									</volist>
+								</select>
+							</div>
+							<div class="formControls fl" style="margin-left: 10px;">
+								<a href="javascript:;" onclick="bindShop()" class="btn btn-secondary radius"> 新增店铺</a>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label fl addp-label"><span class="c-red">*</span>权重类目号&nbsp;<i class="icon Hui-iconfont Hui-iconfont-help" style="cursor: pointer;" onclick="showCategory()"></i></label>
+							<div class="formControls fl" >
+								<select name="category" class="select select-box addp-select">
+									<option value="0">女装/男装/内衣</option>
+									<option value="1">鞋装/箱包/配件</option>
+									<option value="2">童装玩具/孕产/用品</option>
+									<option value="3">家电/数码/手机</option>
+									<option value="4">美妆/洗护/保健品</option>
+									<option value="5">珠宝/眼镜/手表</option>
+									<option value="6">运动/户外/乐器</option>
+									<option value="7">游戏/动漫/影视</option>
+									<option value="8">美食/生鲜/零食</option>
+									<option value="9">鲜花/宠物/农资</option>
+									<option value="10">房产/装修/建材</option>
+									<option value="11">家具/家饰/家纺</option>
+									<option value="12">汽车/二手车/用品</option>
+									<option value="13">办公/DIY/五金电子</option>
+									<option value="14">百货/餐厨/家庭保健</option>
+									<option value="15">学习/卡券/本地服务</option>
+								</select>
+							</div>
+							<div class="fr" style="margin-right: 15px;">
+								<label class="form-label fl addp-label">标签词&nbsp;<i class="icon Hui-iconfont Hui-iconfont-help" style="cursor: pointer;" onclick="showTag()"></i></label>
+								<div class="formControls fl" >
+									<input type="text" class="input-text addp-select-input" name="label" autocomplete="new-password" value="" placeholder="选填"/>
+								</div>
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label fl addp-label"><span class="c-red">*</span>商品标题</label>
+							<div class="formControls fl">
+								<input type="text" class="input-text addp-input" value="" placeholder="商品在淘宝全标题" id="" name="goods_title" required oninvalid="setCustomValidity('请输入商品标题');" oninput="setCustomValidity('');">
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label fl addp-label"><span class="c-red">*</span>商品链接</label>
+							<div class="formControls fl">
+								<input type="url" class="input-text addp-input" value="" placeholder="需要补单商品链接，以http://或者https://开头" id="checkurl" name="goods_url" required oninvalid="setCustomValidity('请输入产品链接');" oninput="setCustomValidity('');">
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label addp-label fl"><span class="c-red">*</span>商品主图</label>
+							<div class="formControls posi-rela fl">
+								<div id="img_preview_one">
+									<input type="hidden" name="goods_pic" id="img">
+									<input type="hidden" name="goods_thumb" id="thumb" required="" >
+									<img src="__PUBLIC__/ERP/static/h-ui.admin/images/upimg.png" id="thumb-preview">
+									<input class="file-input fileToUpload" type="file" name="fileToUpload" id="fileToUpload" onchange="uploadFile(this,'fileToUpload')" value="" style="width: 100%; height: 100%;">
+								</div>
+								<span style="position: absolute;bottom: 0;right: -135px;"><font color="red">（建议尺寸800 X 800）</font></span>
+							</div>
+						</div>
+
+						<div class="row cl" style="min-width: 900px;">
+
+							<div class="fl" style="margin-right: 15px;">
+								<label class="form-label fl addp-label lift" style="margin-top: 0; line-height: 31px;">
+									<!--<select name="" class="select select-box lift" style="width: 65px;">
+										<option value="0">空包</option>
+										<option value="1" selected="">赠品</option>
+									</select>-->
+									<input type="radio" name="isZeng" value="1" style="width: 16px; height: 16px;" checked/>赠品
+									<input type="radio" name="isZeng" value="0" style="width: 16px; height: 16px;"/>空包
+								</label>
+								<div class="formControls fl k-bag">
+									<input type="text" class="input-text addp-select-input" name="goods_zeng" placeholder="建议赠送抽纸或卷纸" required oninvalid="setCustomValidity('请输入赠品名称');" oninput="setCustomValidity('');" />
+									<font color="red">（提示：禁止赠送有争议的产品，比如易碎、易破、产品质量超级垃圾等。）</font>
+								</div>
+
+							</div>
+						</div>
+						<div class="row cl">
+							<label class="form-label fl addp-label">商家子账户</label>
+							<div class="formControls fl" >
+								<input type="text" class="input-text addp-select-input" name="childacc" autocomplete="off" value="" placeholder="选填"/>
+							</div>
+							<div class="fr" style="margin-right: 15px;">
+								<label class="form-label fl addp-label">子账户密码</label>
+								<div class="formControls fl" >
+									<input type="password" class="input-text addp-select-input" name="childacc_pass" autocomplete="new-password" value="" placeholder="选填"/>
+								</div>
+							</div>
+						</div>
+
+						<div class="back-new">
+							<div class="row cl">
+								<label class="form-label fl addp-label"><span class="c-red">*</span>搜索关键词</label>
+								<div class="formControls fl">
+									<input type="text" name="k[0]" class="input-text addp-select-input" required oninvalid="setCustomValidity('请输入搜索关键词');" oninput="setCustomValidity('');"/>
+								</div>
+								<div class="fr good-num" style="margin-right: 40px;">
+									<label class="form-label fl addp-label" style="width: 56px;"><span class="c-red">*</span>单数</label>
+									<div class="formControls fl">
+										<input type="number" step="1" min="1" name="n[0]" class="input-text addp-select-input num-input" style="width: 80px;" required oninvalid="setCustomValidity('请输入单数');" oninput="setCustomValidity('');" onfocusout="calCost(this)"/>
+									</div>
+								</div>
+								<div class="fr good-price">
+									<label class="form-label fl addp-label" style="width: 110px;"><span class="c-red">*</span>下单实际价格&nbsp;<i class="icon Hui-iconfont Hui-iconfont-help" style="cursor: pointer;" onclick="showPrice()"></i></label>
+									<div class="formControls fl">
+										<input type="text" name="p[0]" class="input-text addp-select-input price-input" style="width: 104px;" pattern="^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$" required oninvalid="setCustomValidity('请输入下单价,最多两位小数');" oninput="setCustomValidity('');" onfocusout="calCost(this)"/>
+									</div>
+								</div>
+							</div>
+							<div class="row cl">
+								<label class="form-label fl addp-label">附属服务</label>
+								<div class="fl service-all" style="width: 700px;">
+									<div class="formControls fl">
+										<span class="service service-m unselect">
+											<span class="ser-text text-c">需要聊天</span>
+											<input type="checkbox" class="ser-item" name="s[0][]" value="需要聊天" />
+										</span>
+									</div>
+									<div class="formControls fl">
+										<span class="service service-m unselect">
+											<span class="ser-text text-c">货比三家</span>
+											<input type="checkbox" class="ser-item" name="s[0][]" value="货比三家" />
+										</span>
+									</div>
+									<div class="formControls fl">
+										<span class="service service-m unselect">
+											<span class="ser-text text-c">加购物车</span>
+											<input type="checkbox" class="ser-item" name="s[0][]" value="加购物车" />
+										</span>
+									</div>
+									<div class="formControls fl">
+										<span class="service service-m unselect">
+											<span class="ser-text text-c">收藏宝贝</span>
+											<input type="checkbox" class="ser-item" name="s[0][]" value="收藏宝贝" />
+										</span>
+									</div>
+									<div class="formControls fl">
+										<span class="service service-m unselect">
+											<span class="ser-text text-c">关注店铺</span>
+											<input type="checkbox" class="ser-item" name="s[0][]" value="关注店铺" />
+										</span>
+									</div>
+									<div class="formControls fl">
+										<span class="service service-l unselect">
+											<span class="ser-text text-c">浏览店内两个宝贝以上</span>
+											<input type="checkbox" class="ser-item" name="s[0][]" value="浏览店内两个宝贝以上" />
+										</span>
+									</div>
+									<div class="formControls fl">
+										<span class="service service-l unselect">
+											<span class="ser-text text-c">浏览详情到底5分钟以上</span>
+											<input type="checkbox" class="ser-item" name="s[0][]" value="浏览详情到底5分钟以上" />
+										</span>
+									</div>
+								</div>
+
+							</div>
+							<div class="row cl">
+								<label class="form-label fl addp-label">其他要求</label>
+								<div class="formControls fl">
+									<input type="text" class="input-text addp-input" name="order[0]"  placeholder="备注" />
+								</div>
+							</div>
+							<div class="row cl cost-tip">
+								<label class="form-label fl addp-label"></label>
+								<div class="formControls fl">
+									<span class="tip"></span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="row cl" style="margin-top: 20px;">
+							<label class="form-label fl addp-label"></label>
+							<div class="formControls ">
+								<button class="btn btn-success radius" type="button" onclick="addkeywords()">添加关键词</button>
+							</div>
+						</div>
+						<div class="row cl" style="margin-top: 20px;">
+							<label class="form-label fl addp-label"></label>
+							<div>
+								<button  class="btn btn-secondary radius" type="submit" id="btn" style="height: 40px;"><i class="Hui-iconfont">&#xe632;</i> 提交任务</button>
+							</div>
+						</div>
+				</form>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ajaxfileupload.js"></script>
+	<script type="text/javascript">
+		var i=0 , picUrl = "{:U('Product/ajaxUpload')}",url2="{:U('Product/checkstatus')}",isFile = false;
+		function showCategory(){
+			layer.alert('每个买家号通过日积月累的消费习惯和浏览习惯产生的高权重类目标签，此标签是淘宝系统分配的，我们的号通过查号接口已经得到用户权重类目并且已经分配好。', function(index){
+			  layer.close(index);
+			});
+		}
+		function showTag(){
+			layer.alert('标签词：一个产品的标示代表产品的身份的词句。它有时会是产品的品牌名，产品的成分，或者产品的独特个性！', function(index){
+			  layer.close(index);
+			});
+		}
+		function showPrice(){
+			layer.alert('提示：下单金额需与淘宝最终购买价一致', function(index){
+			  layer.close(index);
+			});
+		}
+		function bindShop(){
+			layer_show('绑定店铺', "{:U('User/shop')}", '800', '300');
+		}
+	</script>
+	<script src="__PUBLIC__/ERP/lib/custom/addnew.js" type="text/javascript" charset="utf-8"></script>
+
+</block>

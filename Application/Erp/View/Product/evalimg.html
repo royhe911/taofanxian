@@ -1,0 +1,100 @@
+<extend name="public/modal" />
+<block name="title"></block>
+<block name="menu">
+	<form action="" method="POST" class="form form-horizontal" id="form-admin-add">
+		<input type="hidden" name="id" value="{$Think.get.id}">
+		<div class="row cl" >
+			<label class="form-label col-xs-3 col-sm-3"><span class="c-red">*</span>评价文字：</label>
+			<div class="formControls col-xs-9 col-sm-9 posi-rela">
+				<textarea name="remark" id="" class="textarea" placeholder="必填"></textarea>
+			</div>
+		</div>
+		<div class="row cl" >
+			<label class="form-label col-xs-3 col-sm-3">评价晒图（选填）：</label>
+			<div class="formControls col-xs-9 col-sm-9 posi-rela">
+				<div id="img_preview_one">
+					<input type="hidden" name="img[]" id="img-0" />
+					<img src="__PUBLIC__/ERP/static/h-ui.admin/images/upimg.png" id="thumb-preview" class="thumb-preview-0" >
+					<input class="file-input fileToUpload" type="file" accept="image/*" name="fileToUpload" id="fileToUpload-0" onchange="uploadFile(this);" value="" style="width: 100%; height: 100%;" data-index="0">
+				</div>
+			</div>
+		</div>
+		<div class="row cl" id="evalimg">
+			<div class=" col-xs-offset-4 col-sm-offset-4">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;" style="margin-left: -25px;">
+				<button class="btn btn-secondary radius" type="button" style="margin-left: 20px" onclick="addEvalImg()">添加截图</button>
+			</div>
+		</div>
+	</form>
+</block>
+<block name="js">
+<script src="__PUBLIC__/ajaxfileupload.js"></script>
+<script type="text/javascript">
+	var isFile = false,imgIndex = 0;
+	function uploadFile(el,file_id){
+		if(el.value){isFile = true;}
+		var file_id = $(el).attr('id');
+        $.ajaxFileUpload({
+ 			url:"{:U('Welcome/ajaxUpload')}",//上传图片处理文件
+ 			secureuri:false,
+ 			fileElementId:file_id,
+ 			dataType: 'text',
+ 			success: function (data){
+ 				var data= strToObj(data);
+ 				if(1 == data.status){
+					var index = $(el).attr('data-index');
+
+					$('#img-'+index).val('upload/'+timestampToTime()+'/'+data.name);
+ 					$('.thumb-preview-'+index).attr('src', '__ROOT__/upload/'+data.savepath+'/'+data.name);
+ 				} else {
+ 					layer.msg(data.msg,{icon:2,time:1000});
+ 				}
+ 			},
+ 			error: function (data){
+ 				layer.msg('上传失败!',{icon:2,time:1000});
+ 			}
+ 		});
+    }
+	function strToObj(str) {
+		return eval("(" + str + ")");
+	}
+	function addEvalImg() {
+		if($(".evalimg").length >= 2){
+			layer.msg('最多上传3张截图');
+		}else{
+			imgIndex++;
+			var $html = '<div class="row cl evalimg">'+
+				'<label class="form-label col-xs-3 col-sm-3"><span class="c-red"></label>'+
+				'<div class="formControls col-xs-9 col-sm-9 posi-rela">'+
+					'<div id="img_preview_one">'+
+						'<input type="hidden" name="img[]" id="img-'+imgIndex+'" />'+
+						'<div class="close-evalimg" onclick="removekey(this)"></div>'+
+						'<img src="__PUBLIC__/ERP/static/h-ui.admin/images/upimg.png" id="thumb-preview" class="thumb-preview-'+imgIndex+'" >'+
+						'<input class="file-input fileToUpload" type="file" name="fileToUpload" id="fileToUpload-'+imgIndex+'"   onchange="uploadFile(this);" value="" style="width: 100%; height: 100%;" data-index="'+imgIndex+'">'+
+					'</div>'+
+				'</div>'+
+			'</div>';
+			$("#evalimg").before($html);
+		}
+		
+	}
+	function removekey(el){
+		$(el).parents(".evalimg").remove();
+	}
+	document.getElementById("form-admin-add").onsubmit = function(){
+		// if(!isFile){
+		// 	layer.msg('请上传评价截图',{icon:2,time:1000});
+		// 	return false;
+		// }
+		return true;
+	};
+    function timestampToTime() {
+        var date = new Date();//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear();
+        M = date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1;
+        D = date.getDate() < 10 ? '0'+(date.getDate()) : date.getDate();
+        return Y+M+D+'';
+    }
+</script>
+
+</block>

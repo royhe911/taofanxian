@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="Content-Language" content="zh-cn">
+		<title>商家申请注册 - 领吧网</title>
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta name="author" content="ling8.Com">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/comm.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/base.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/loginqt.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/layui.css" />
+		<script src="__PUBLIC__/maoke/js/jquery-1.7.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			* { margin: 0; padding: 0; box-sizing: border-box; }
+	body { font-family: Microsoft YaHei; height: auto !important; list-style: none; margin: 0; min-height: 100px; overflow: scroll; overflow-x: hidden; padding: 0; width: 100%; }
+	body, button, input, select, textarea, font { font-size: 12px; }
+	a { outline: none; text-decoration: none; }
+	a:hover{ text-decoration: none;}
+	.header_top { width: 1190px; height: 34px; line-height: 35px; margin: 0 auto; }
+	.header_leftt { color: #c5c5c5; float: left; font-size: 14px; height: 35px; max-width: 500px; position: relative; z-index: 999; }
+	.top_mb { /* margin-left: 12px; */ float: left; height: 35px; line-height: 35px; }
+	.top_mb a { color: #ea5546; margin-right: 5px; text-decoration: none; }
+	.color_fg { color: #c5c5c5; }
+	.header_leftt .top_left { color: #c5c5c5; float: left; font-size: 14px; }
+	.top_left a { margin: auto 10px; }
+	.top_left a { background: url(__PUBLIC__/maoke/images/q.png) left center no-repeat; color: #888; display: block; float: left; padding-left: 22px; /* background-size: 22px; */ }
+	.shou_btn { background: url(__PUBLIC__/maoke/images/shouicon.png) left center no-repeat; background-position: 4px 10px; border-left: 1px solid #f2f2f2; border-right: 1px solid #f2f2f2; color: #888; cursor: pointer; float: left; font-size: 12px; line-height: 35px; position: relative; text-align: center; width: 60px; }
+	em { font-style: normal; }
+	.shou_toggle { background: #fff; border: 1px solid #dddddd; display: none; height: 26px; left: -1px; line-height: 26px; margin-top: -1px; position: absolute; text-align: center; top: 35px; width: 130px; z-index: -1; }
+	.shou_toggle span { color: #f25f55; }
+	.header_right { color: #c5c5c5; float: right; font-size: 12px; position: relative; z-index: 1000; }
+	.header_right a { color: #888; font-size: 12px; margin: 0 4px; width: auto; display: inline-block; height: 100%; }
+	.oneto { background-color: #ffffff; border-bottom: 1px solid #cccccc; border-left: 1px solid #cccccc; border-right: 1px solid #cccccc; display: none; height: 223px; overflow: hidden; position: absolute; right: 15px; top: 35px; width: 171px; z-index: 999; }
+	.onetoa { border-bottom: 1px dotted #dbdbdb; height: 60px; margin: 0 auto 0 auto; width: 142px; }
+	.tcbt { font-weight: bold; padding-top: 8px; }
+	.onetoa p { color: #666666; line-height: 22px; margin-left: -3px; }
+	.header { width: 100%; }
+	.header_main { width: 1190px; height: 90px; margin: 0 auto; }
+	.header_center { font-family: Microsoft YaHei; height: 90px; margin: 0 auto; overflow: hidden; width: 1190px; }
+	.qn-logo { background: url(__PUBLIC__/maoke/images/lingke-logo.png) no-repeat; display: inline-block; float: left; height: 56px; margin: 17px 20px auto 0; width: 330px; }
+	.logo_right { float: right; margin-right: 13px; }
+	.kl { background: url(__PUBLIC__/maoke/images/se.jpg) left center no-repeat; height: 38px; margin-right: 0px; margin-top: 28px; width: 335px; }
+	.dl { background: none; border: none; display: block; float: left; height: 38px; outline: none; width: 32px; }
+	.pl { background: none; border: none; color: #9d9d9d; float: left; font-size: 12px; height: 36px; line-height: 36px; outline: none; padding-left: 2px; width: 224px; }
+	.fl { background: none; border: none; cursor: pointer; display: block; float: left; height: 36px; line-height: 36px; outline: none; width: 70px; color: #ffffff; }
+	.nav { height: 40px; line-height: 40px; background: #f25f55; }
+	.main { margin: 0 auto; position: relative; width: 1190px; z-index: 888; }
+	li { list-style: none; }
+	.main>ul>li:hover { background-color: #E74D45; }
+	.main>ul>li:hover a { border-bottom: 3px solid #D83E35; }
+	.showtrytype { display: block; }
+	.nav ul li { float: left; text-align: center; }
+	.fication { width: 162px; height: 40px; background-color: #D83E35; color: #ffffff; font-size: 15px; font-family: Microsoft YaHei; cursor: pointer; }
+	i { display: inline-block; }
+	.fication i { width: 30px; height: 40px; margin: 0 -32px 0 22px; background: url(__PUBLIC__/maoke/images/sortIcon.png) center center no-repeat; float: left; }
+	.nav ul li a { color: #fff; font-weight: bold; font-size: 15px; padding: 0 27px; display: block; position: relative; height: 40px; line-height: 38px; }
+	.ntp-hot { position: absolute; top: -20px; }
+	.sj_apply { float: right; background: url(__PUBLIC__/maoke/images/login_yellow_a.png) left center no-repeat; margin-right: 10px; }
+	.sj_apply a { background: url(__PUBLIC__/maoke/images/sj_icon.png) no-repeat left center; margin-left: 15px; font-size: 12px; color: #e44a42; display: block; width: 95px; height: 39px; line-height: 39px; text-align: center; }
+	#myform input[type="text"],#myform input[type="password"],#myform input[type="tel"]{ border: 1px solid #cccccc;height: 30px;line-height: 30px;padding: 0 5px; width:251px;}
+		</style>
+	</head>
+
+	<body class="xsqg_act">
+		<div class="wrap">
+			<!--                        顶部登录注册  start                      -->
+			<div style="background: #F2F2F2; width: 100%; height: 35px; border-bottom: 1px solid #e2e2e2;">
+				<a name="top1"></a>
+				<div class="header_top" style="margin-left: auto; margin-right: auto;">
+					<div class="header_leftt">
+						<div class="top_mb">
+							<!--<a href="javascript:"  style="color: #f25f55">QQ登录</a>
+				                <span class="color_fg">|</span>
+				                <a href="javascript:"  style="color: #f25f55;">用户登录</a>
+				                <span class="color_fg">|</span>-->
+							<a href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" style="color:#888" target="_blank">商家注册</a>
+							<span class="color_fg">|</span>
+							<a href="http://www.taofanxian.com/admin.php?m=Home&c=Index&a=login" style="color: #f25f55;" target="_blank">商家登录</a>
+						</div>
+						<div class="top_left">
+							<a href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true" target="_blank" class="on-service">在线客服</a>
+						</div>
+						<div class="shou_btn">
+							<em>&nbsp;&nbsp;收藏</em>
+							<div class="shou_toggle"><span>Ctrl</span>或<span>Cmd+D</span>收藏本站</div>
+						</div>
+					</div>
+			
+					<div class="header_right">
+						<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=index" title="领吧首页" target="_blank">领吧首页</a><span class="color_fg">|</span>
+						<a href="javascript:;" class="wx">
+							<i class="top-icon-ph"></i>微信公众号
+							<div class="wx-img">
+								<img src="__PUBLIC__/maoke/images/erweima.jpg" width="150px" />
+							</div>
+						</a>
+						<!--<span class="color_fg">|</span>
+				        	<a href="javascript:;" target="_blank">邀请好友<span style="color: #f25f55; font-weight: bold;">送80元</span></a>-->
+						<!--<span class="color_fg">|</span>
+				        	<a href="javascript:">做问卷送金币</a>-->
+						<span class="color_fg">|</span>
+						<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Help&a=userhelp" target="_blank">帮助中心</a><span class="color_fg">|</span>
+						<span class="wzdh">
+			                    <a href="" target="_blank" class="sbdjx" id="naviatetext" style="width: 70px;">网站导航</a>
+			                    <div class="oneto" id="naviate">
+			                        <div class="onetoa">
+			                            <p class="tcbt">
+			                                <a href="#">免费试用</a>
+			                            </p>
+			                            <p>
+			                                <a href="#" target="_blank">试用专区</a>&nbsp;&nbsp;<a href="" target="_blank">试用报告</a>
+			                            </p>
+			                        </div>
+			                        <div class="onetoa">
+			                            <p class="tcbt">
+			                                <a href="#">有奖竞猜</a>
+			                            </p>
+			                            <p>
+			                                <a href="#" target="_blank">有奖竞猜</a>
+			                            </p>
+			                        </div>
+			                        <div class="onetoa">
+			                            <p class="tcbt">
+			                                <a href="#">站内活动</a>
+			                            </p>
+			                            <p>
+			                                <a href="#" target="_blank">邀请有奖</a>&nbsp;&nbsp;<a href="" target="_blank">金币抽奖</a>
+			                            </p>
+			                        </div>
+			                        <div class="onetoa">
+			                            <p style="padding-top: 8px;">
+			                                <a href="#" target="_blank">商家报名</a>&nbsp;&nbsp;
+			                                <a href="#" target="_blank">意见反馈</a>
+			                            </p>
+			                        </div>
+			                    </div>
+			                </span>
+			
+					</div>
+				</div>
+			</div>
+			<!--                        顶部登录注册  end                               -->
+			
+			<!--                        商城导航  start                        -->
+			<div class="yonghu_top">
+				<div id="header" class="header" style="background: #fff;">
+					<div class="header_main">
+						<div class="header_center">
+							<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=index" class="qn-logo" style="width: 330px;"></a>
+							<!--logo-->
+							<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=yaoqing" target="_blank" class="qn-lg-right"></a>
+							<!--<div id="logo_right" class="logo_right">
+								<form class="kl" method="get" action="{:U('Classlist/keyclick')}">
+									<input type="hidden" name='m' value='Home' />
+									<input type="hidden" name='c' value='Classlist' />
+									<input type="hidden" name='a' value='keyclick' />
+									<input name="" type="button" class="dl" />
+									<input id="searchText" name="keywords" type="text" class="pl" value="<?php if(isset($keywords)&&!empty($keywords)&&!empty($keywords)) echo $keywords;?>" placeholder="搜索试用品" required/>
+									<input id="inputsearch" type="submit" class="fl" value="" style="height: 38px;" />
+								</form>
+							</div>-->
+						</div>
+					</div>
+					<div id="nav" class="nav" style="font-family: 微软雅黑;">
+						<div class="main">
+							<!--qiandaog-->
+							<ul>
+								<li class="showtrytype">
+									<div class="fication"><i></i>试用品分类</div>
+								</li>
+								<li class="main-li">
+									<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=index" class="<?php if($code!='jinping' && $code!='guide') echo 'selet';?>" target="_blank">首页</a>
+								</li>
+								<li class="main-li">
+									<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Classlist&a=index&code=jinping" class="jpSwip <?php if($code=='jinping') echo 'selet';?>" target="_blank">
+										精选试用
+										<span class="ntp-hot">
+			                                <img src="__PUBLIC__/maoke/images/new.gif" class="png_bg" />
+			                            </span>
+									</a>
+								</li>
+							
+			
+								<li class="main-li">
+									<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=guide" target="_blank" class="<?php if($code=='guide') echo 'selet';?>">
+										新手入门
+									</a>
+								</li>
+								<li class="main-li">
+									<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=yaoqing" class="" target="_blank">
+										邀请有奖
+									</a>
+								</li>
+							</ul>
+						
+							<div class="sj_apply" style="margin-right:0px;">
+								<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=business" target="_blank">商家报名</a>
+							</div>
+						</div>
+					</div>
+					<!--header_main-->
+				</div>
+				<!--header-->
+			</div>
+			
+			<div class="sec_main">
+				<div class="qt-banner">
+
+					<div class="qt-banner-lx">
+
+						<div class="qt-banner-js">提升关键词排名 / 提升转化率 / 增强购买体验</div>
+
+						<a href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true" target="_blank"><span></span>联系在线经理报名</a>
+
+					</div>
+					<form id="myform" method="post" action="{:U('Regist/regist')}" onsubmit="return checkForm();">
+						<div class="sellreg2-2">
+							<div class="qt-login-t">
+								<span>商家注册</span>
+							</div>
+							<p>
+								<span>用户名</span><input id="adminname" name="adminname" type="text" value="" tabindex="1" size="15" autocomplete="off" placeholder="长度3-15位字符，不能为纯数字" onblur="checkname()">
+								<span class="Validform_checktip"></span>
+							</p>
+							<p>
+								<span>QQ&nbsp;号</span><input name="qq" id="bisqq" type="text" value="" tabindex="4" autocomplete="off" onblur="checkqq()">
+								<span class="Validform_checktip"></span>
+							</p>
+							<p>
+								<span>微信号</span><input  name="wechat" id="biswx" type="text" value="" tabindex="4" autocomplete="off" onblur="checkwx()">
+								<span class="Validform_checktip"></span>
+							</p>
+							<p>
+								<span>登录密码</span><input id="psw" name="adminpass" type="password" tabindex="2" autocomplete="off" onblur="checkpass()" placeholder="密码长度6-16位">
+								<span class="Validform_checktip"></span>
+							</p>
+							<p>
+								<span>确认密码</span><input id="cpsw" name="repassword" type="password" tabindex="2" autocomplete="off" onblur="checkpsw()">
+								<span class="Validform_checktip"></span>
+							</p>
+							<p>
+								<span>手机号</span><input id="tel"  name="tel" type="text" value="" tabindex="3" maxlength="11" autocomplete="off" onblur="checktel()">
+								<span class="Validform_checktip"></span>
+							</p>
+							<p>
+								<span style="width: 68px;"></span>
+								<button type="button" id="btn" class="nav_but"  onclick="getcode()" style="width: 90px;height: 30px;line-height: 30px; background: #EAEAEA;border: 1px solid #B7B7B7;">获取验证码</button>
+								<input type="text" class="nat_ttv_code" name="code" id="code" placeholder="短信验证码" style="width: 76px; vertical-align: bottom;" >
+							</p>
+							<p>
+								<label><input id="protocol" type="checkbox" tabindex="7"> 我已仔细阅读并同意接受<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=agree" id="Agreement" target="_blank" style=" color:#3DC054;font-size: 14px">商家使用协议</a>。<span class="Validform_checktip"></span></label>
+							</p>
+							<p><input type="submit" class="sellreg2-a" value="立即注册"></p>
+						</div>
+					</form>
+				</div>
+
+				<div class="qt-j-w">
+
+					<div class="qt-j">
+
+						<dl class="qt-j-1">
+
+							<dt></dt>
+
+							<dt>商家等级</dt>
+
+							<dt>完成时间</dt>
+
+							<dt class="qt-j-dj">佣金单价说明</dt>
+
+							<dt>关键词</dt>
+
+							<dt>货比</dt>
+
+							<dt>浏览</dt>
+
+							<dt>双收藏</dt>
+
+							<dt>好评</dt>
+
+							<dt>指定评价</dt>
+
+							<dt>指定加购车</dt>
+
+							<dt>指定晒图</dt>
+
+							<dt>一对一在线客户经理</dt>
+
+							<dt>任务计划表</dt>
+
+							<dt>排名</dt>
+
+							<dt>100%赔付保障</dt>
+
+							<dt>单量</dt>
+
+							<dt>平台</dt>
+
+						</dl>
+
+						<dl class="qt-j-2">
+
+							<dt>试用拍A发A</dt>
+
+							<dd>自选</dd>
+
+							<dd>自选</dd>
+
+							<dd class="qt-j-dj">
+
+								<p>1~9元单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+								<p>10~19元单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+								<p>20~29元单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+								<p>30~49元单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+								<p>50~99元单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+								<p>100~199元单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+								<p>200~299元单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+								<p>300~499元单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+								<p>500~999元单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+								<p>1000元以上单价<span class="layui-btn layui-btn-primary layui-btn-mini">免佣金</span></p>
+
+							</dd>
+
+							<dd>商家提供</dd>
+
+							<dd>
+								<font color="#FF5722">1-3/宝贝</font>
+							</dd>
+
+							<dd>
+								<font color="#FF5722">1-3/宝贝</font>
+							</dd>
+
+							<dd>
+								<font color="#FF5722">收藏宝贝/收藏店铺</font>
+							</dd>
+
+							<dd>20字左右好评</dd>
+
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+
+							<dd>
+								<font color="#FF5722">5+</font>
+							</dd>
+
+							<dd>淘宝，天猫，京东</dd>
+
+						</dl>
+
+						<dl class="qt-j-3">
+
+							<dt>试用拍A发B</dt>
+
+							<dd>自选</dd>
+
+							<dd>自选</dd>
+
+							<dd class="qt-j-dj">
+
+								<p>1~9元单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+								<p>10~19元单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+								<p>20~29元单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+								<p>30~49元单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+								<p>50~99元单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+								<p>100~199元单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+								<p>200~299元单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+								<p>300~499元单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+								<p>500~999元单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+								<p>1000元以上单价<span class="layui-btn layui-btn-primary layui-btn-mini">1元佣金/单</span></p>
+
+							</dd>
+
+							<dd>商家提供</dd>
+
+							<dd>
+								<font color="#FF5722">1-3/宝贝</font>
+							</dd>
+
+							<dd>
+								<font color="#FF5722">1-3/宝贝</font>
+							</dd>
+
+							<dd>
+								<font color="#FF5722">收藏宝贝/收藏店铺</font>
+							</dd>
+
+							<dd>20字左右好评</dd>
+
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+
+							<dd>5+</dd>
+
+							<dd>淘宝，天猫，京东</dd>
+
+						</dl>
+
+						<dl class="qt-j-4">
+
+							<dt>佣金任务</dt>
+
+							<dd>自选</dd>
+
+							<dd>无筛选</dd>
+
+							<dd class="qt-j-dj">
+
+								<p>1~9元单价<span class="layui-btn layui-btn-primary layui-btn-mini">2元佣金/单</span></p>
+								<p>10~19元单价<span class="layui-btn layui-btn-primary layui-btn-mini">3元佣金/单</span></p>
+								<p>20~29元单价<span class="layui-btn layui-btn-primary layui-btn-mini">4元佣金/单</span></p>
+								<p>30~49元单价<span class="layui-btn layui-btn-primary layui-btn-mini">5元佣金/单</span></p>
+								<p>50~99元单价<span class="layui-btn layui-btn-primary layui-btn-mini">6元佣金/单</span></p>
+								<p>100~199元单价<span class="layui-btn layui-btn-primary layui-btn-mini">8元佣金/单</span></p>
+								<p>200~299元单价<span class="layui-btn layui-btn-primary layui-btn-mini">11元佣金/单</span></p>
+								<p>300~499元单价<span class="layui-btn layui-btn-primary layui-btn-mini">13元佣金/单</span></p>
+								<p>500~999元单价<span class="layui-btn layui-btn-primary layui-btn-mini">18元佣金/单</span></p>
+								<p>1000元以上单价<span class="layui-btn layui-btn-primary layui-btn-mini">20元佣金/单</span></p>
+
+							</dd>
+
+							<dd>商家提供</dd>
+
+							<dd>
+								<font color="#FF5722">1-3/宝贝</font>
+							</dd>
+
+							<dd>
+								<font color="#FF5722">1-3/宝贝</font>
+							</dd>
+
+							<dd>
+								<font color="#FF5722">收藏宝贝/收藏店铺</font>
+							</dd>
+
+							<dd>20字左右好评</dd>
+
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+							<dd><i class="layui-icon">√</i></dd>
+
+							<dd>5+</dd>
+
+							<dd>淘宝，天猫，京东</dd>
+
+						</dl>
+
+						<dl class="qt-j-5">
+
+							<dt>京东精刷单</dt>
+
+							<dd>自选</dd>
+
+							<dd>无筛选</dd>
+
+							<dd class="qt-j-dj">
+
+								<p>1~9元单价<span class="layui-btn layui-btn-primary layui-btn-mini">5元佣金/单</span></p>
+								<p>10~19元单价<span class="layui-btn layui-btn-primary layui-btn-mini">5元佣金/单</span></p>
+								<p>20~29元单价<span class="layui-btn layui-btn-primary layui-btn-mini">5元佣金/单</span></p>
+								<p>30~49元单价<span class="layui-btn layui-btn-primary layui-btn-mini">5元佣金/单</span></p>
+								<p>50~99元单价<span class="layui-btn layui-btn-primary layui-btn-mini">5元佣金/单</span></p>
+								<p>100~199元单价<span class="layui-btn layui-btn-primary layui-btn-mini">6元佣金/单</span></p>
+								<p>200~299元单价<span class="layui-btn layui-btn-primary layui-btn-mini">6元佣金/单</span></p>
+								<p>300~499元单价<span class="layui-btn layui-btn-primary layui-btn-mini">7元佣金/单</span></p>
+								<p>500~999元单价<span class="layui-btn layui-btn-primary layui-btn-mini">8元佣金/单</span></p>
+								<p>1000元以上单价<span class="layui-btn layui-btn-primary layui-btn-mini">13元佣金/单</span></p>
+
+							</dd>
+							<dd>商家提供</dd>
+
+							<dd>
+								<font color="#FF5722">5-10/宝贝</font>
+							</dd>
+
+							<dd>
+								<font color="#FF5722">5-10/宝贝</font>
+							</dd>
+
+							<dd>
+								<font color="#FF5722">收藏宝贝/收藏店铺</font>
+							</dd>
+
+							<dd>20字左右好评</dd>
+
+							<dd>
+								<font color="#FF5722">+0.5元/单</font>
+							</dd>
+
+							<dd><i class="layui-icon">√</i></dd>
+
+							<dd>
+								<font color="#FF5722">+0.5元/单</font>
+							</dd>
+
+							<dd><i class="layui-icon">√</i></dd>
+
+							<dd><i class="layui-icon">√</i></dd>
+
+							<dd><i class="layui-icon">√</i></dd>
+
+							<dd><i class="layui-icon">√</i></dd>
+
+							<dd>2+</dd>
+
+							<dd>京东</dd>
+
+						</dl>
+
+						<div class="clear"></div>
+
+					</div>
+
+				</div>
+
+				<div class="qt-xiaoguo">
+					<div class="qt-xiaoguo-t"></div>
+					<div class="qt-xiaoguo-c">
+						<div class="qt-xiaoguo-c-1">
+							会员自用账号 最安全
+							<p>你发布任务时可设定产品适合年龄、性别、消费层次，我们系统会智能为你匹配相符的账号为你操作，全面迎合淘宝个性化搜索规则，全面提升个性化规则</p>
+						</div>
+						<div class="qt-xiaoguo-c-2">
+							每个账号都严格审核
+							<p>每账号都须经身份证和手机实名认证，必须是会员自己常用的购物账号，每账号每月最多接15个任务，每会员最多只能使用1个账号</p>
+						</div>
+						<div class="qt-xiaoguo-c-3">
+							账号权重高 排名佳
+							<p>我们会员的账号每月都成交10-15笔左右，这种账号被淘宝视为优质账号，而优质账号权重会高很多</p>
+						</div>
+						<div class="qt-xiaoguo-c-4">
+							每个账号都严格审核
+							<p>专职刷手的电脑硬件ID早被淘宝监控了，因此我们不允许任何专职刷手混进来</p>
+						</div>
+						<div class="qt-xiaoguo-c-5">
+							全真会员购买权重高 排名好
+							<p>全真实会员购买，除你发的空包之外，其他与真实交易完全一样，而其他刷法大多会被淘宝识别，查实一单扣3单，谁的权重高，亲，自己判断。</p>
+						</div>
+						<div class="qt-xiaoguo-c-6">
+							先付垫付任选 无资金风险
+							<p>专职刷手的电脑硬件ID早被淘宝监控了，因此我们不允许任何专职刷手混进来</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="qt-al">
+
+					<div class="qt-al-c">
+
+						<div class="qt-al-t"><span>领吧网成功案例展示</span></div>
+
+						<ul>
+
+							<li><img src="__PUBLIC__/maoke/images/support/zs_case1.jpg">
+								<p>某店铺使用领吧网后销量稳步增长</p>
+							</li>
+
+							<li><img src="__PUBLIC__/maoke/images/support/zs_case2.jpg">
+								<p>某店铺使用领吧网后关键词排名至首页</p>
+							</li>
+
+							<li><img src="__PUBLIC__/maoke/images/support/zs_case3.jpg">
+								<p>某店铺使用领吧网后店铺UV得到明显改善</p>
+							</li>
+
+							<li><img src="__PUBLIC__/maoke/images/support/zs_case4.jpg"></li>
+
+							<li><img src="__PUBLIC__/maoke/images/support/zs_case5.jpg"></li>
+
+							<li><img src="__PUBLIC__/maoke/images/support/zs_case6.jpg"></li>
+
+							<li><img src="__PUBLIC__/maoke/images/support/zs_case7.jpg"></li>
+
+							<li><img src="__PUBLIC__/maoke/images/support/zs_case8.jpg"></li>
+
+							<li><img src="__PUBLIC__/maoke/images/support/zs_case9.jpg"></li>
+
+						</ul>
+
+					</div>
+
+				</div>
+
+				<div class="qt-zijin">
+
+					<div class="qt-zijin-t"></div>
+
+					<div class="qt-zijin-c">
+
+						<div class="qt-zijin-c-1">你可能经常听到2种说法或者你曾经还遭遇过</div>
+
+						<div class="qt-zijin-c-2">在我们这里，这些担心你都不会有</div>
+
+						<div class="qt-zijin-c-3">被人恶意退款</div>
+
+						<div class="qt-zijin-c-4">帮你接单的，都是我们的认证会员，不可能存在恶意退款，就算有，我们会负责追回</div>
+
+						<div class="qt-zijin-c-5">在支付过程中被刷手用黑客手段将你远程支付的款 "转移"到他的银行卡（俗称被骗了）</div>
+
+						<div class="qt-zijin-c-6">每一单都是由我们先汇款到会员的银行卡或支付宝， 他们再付款的，不可能存在黑客手段"转移"情况</div>
+
+						<div class="qt-zijin-c-7">刷单平台卷款私逃</div>
+
+						<div class="qt-zijin-c-8">领吧将全额保障客户的资金安全，给客户100%安全，如有资金问题，全额赔付！</div>
+
+					</div>
+
+				</div>
+				<!--S-底部-->
+<div class="footer">
+    <div class="footer_main">
+        <div class="footer_left" style="width: 500px;margin-left: 100px;">
+            <div class="footer_xy">
+                <p class="f-title" style="text-align: center; padding: 20px 0;">About <span style="font-size: 30px;">领吧</span> </p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;领吧：猫客网络旗下最新福利电商模式，邀请领奖品，试用领赠品，收徒有红包，网购领优惠券，加盟有分红，天天来领吧！轻松领不停！
+</p>
+            </div>
+            <div>
+            	<p style="padding: 10px 0;"><span>Copyright © 2013-2017 ling8.com</span> 鄂ICP备17007635号  武汉猫客科技网络有限公司</p>
+            	<div style="display: flex; justify-content: space-between;">
+            		<a href="javascript:;"><img src="__PUBLIC__/maoke/images/img_93_92.png"/></a>
+            		<a href="javascript:;"><img src="__PUBLIC__/maoke/images/img_93_94.png"/></a>
+            		<a href="javascript:;"><img src="__PUBLIC__/maoke/images/img_93_96.png"/></a>
+            		<a href="javascript:;"><img src="__PUBLIC__/maoke/images/img_93_98.png"/></a>
+            	</div>
+            </div>
+        </div>
+        <div class="footer_right" style="float: left; margin-left: 100px; padding-top: 10px; width: 460px;">
+            <!--<div class="footer-sp1">关注领吧</div>
+            <div class="footer-sp1">微信公众号</div>-->
+            <div style="color: #313131;font-size: 12px;line-height: 30px; margin-bottom: 20px;">
+            	<a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=contact" target="_blank" style="color: #313131;">联系我们</a><span style="margin: 0 10px;">|</span>
+                <a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=joint" target="_blank" style="color: #313131;">商务合作</a><span style="margin: 0 10px;">|</span>
+                <a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Index&a=agree" target="_blank" style="color: #313131;">用户协议</a><span style="margin: 0 10px;">|</span>
+                <a href="http://www.taofanxian.com/maoke/index.php?m=Home&c=Help&a=userhelp" target="_blank" style="color: #313131;">帮助中心</a>
+            </div>
+            <br />
+            <div style="float: left;">
+            	<img src="__PUBLIC__/maoke/images/erweima.jpg" width="120px">
+            	<p style="text-align: center">关注领吧公众号</p>
+            </div>
+            <div style="float: left;margin-left: 100px;padding-top: 10px;">
+	            <div class="footer-sp2">
+	                <p>shang@ling8.com</p>
+	                <p>发送反馈意见</p>
+	            </div>
+				 <div class="footer-sp2" style="background: url(__PUBLIC__/maoke/images/foot-span.png) -145px 8px no-repeat;">
+	                <p>027-87370898</p>
+	                <p>027-87370899</p>
+	            </div>
+
+        	</div>    
+        </div>
+          
+    </div>
+</div>
+<!--E-底部-->
+
+
+<!--E-JS-->
+
+</div>
+</div>
+<div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;background: rgba(0,0,0,0.5); display: none; z-index: 999;" class="zezhao"> </div>
+	<div style="position: fixed; top: 315px; left: 0;width: 100%; display: none; z-index: 1000;" class="zz-success">
+		<div style="margin: 0 auto; width: 370px; text-align: center; background: #fff; color: gray; line-height: 25px;border-radius: 15px; height: 180px; position: relative;">
+			<div style="width: 100%; border-bottom: 1px solid #E1E1E1; cursor: pointer;background: #F03C3F; color: #fff;    border-radius: 10px 10px 0 0; height: 40px;" onclick="hideDan()"><span style="float: left;padding-left: 20px; margin-top: 7px;"><img src="__PUBLIC__/maoke/images/logo-admin.png"/></span><span style=" float: right;font-size: 20px; display: inline-block; width: 30px; text-align: center; cursor: pointer; margin-top: 4px;">x</span></div>
+			<!--<p style="margin-top: 10px; text-align: center;padding: 0 5px;" id="coderror">请输入图形验证码</p>-->
+			<div style="margin-top: 5px;" id="valicode">
+				<span style="font-size: 13px; width: 115px; display: inline-block; text-align: right;">图像验证码 :</span>
+				<span id="checkCode" style="width: 84px; display: inline-block; height: 35px; line-height: 35px;  text-align: center;background: #efe8e8; cursor: pointer;font-size: 16px;" title="点击更换验证码" onclick="createCode()"></span>
+			</div>
+			<div style="margin-top: 10px;">
+				<span style="font-size: 13px; width: 115px; display: inline-block; text-align: right;">请输入图形验证码 :</span>
+				<input type="text" id="inputCode" type="text"  style=" float: none; height: 35px; width: 85px;margin: 0;border: 1px solid #B7B7B7;padding-left: 5px;" />
+			</div>
+			<div style="width: 100%; border-bottom: 1px solid #E1E1E1; text-align: center; ;background: #fff;color: #fff; position: absolute;left: 0; bottom: -1px;border-radius:0 0 10px 10px ; height: 40px;" ><button style="display: inline-block; height: 38px; line-height: 38px; padding: 0 18px; background-color: #F3564D; color: #fff;white-space: nowrap;text-align: center; font-size: 14px; border: none; border-radius: 2px;cursor: pointer;" onclick="validateCode()">确定</button><button style="display: inline-block; height: 38px; line-height: 38px; padding: 0 18px; background-color: #F1F1F1; color: gray;white-space: nowrap;text-align: center; font-size: 14px; border: none; border-radius: 2px;cursor: pointer; margin-left: 20px;" onclick="hideDan()">取消</button></div>
+		</div>
+	</div>
+	<div style="position: fixed; top: 315px; left: 0;width: 100%; display: none; z-index: 1000;" class="zz-error">
+		<div style="margin: 0 auto; width: 370px; text-align: center; background: #fff; color: gray; line-height: 25px;border-radius: 15px; height: 180px; position: relative;">
+			<div style="width: 100%; border-bottom: 1px solid #E1E1E1; cursor: pointer;background: #F03C3F; color: #fff;    border-radius: 10px 10px 0 0; height: 40px;" onclick="hideDan()"><span style="float: left;padding-left: 20px; margin-top: 7px;"><img src="__PUBLIC__/maoke/images/logo-admin.png"/></span><span style=" float: right;font-size: 20px; display: inline-block; width: 30px; text-align: center; cursor: pointer; margin-top: 4px;">x</span></div>
+			<p style="margin-top: 35px; text-align: center;padding: 0 5px; font-size: 16px;" id="error"></p>	
+			<div style="width: 100%; border-bottom: 1px solid #E1E1E1; text-align: center; ;background: #fff;color: #fff; position: absolute;left: 0; bottom: -1px;border-radius:0 0 10px 10px ; height: 40px;" ><button style="display: inline-block; height: 38px; line-height: 38px; padding: 0 18px; background-color: #F3564D; color: #fff;white-space: nowrap;text-align: center; font-size: 14px; border: none; border-radius: 2px;cursor: pointer;" onclick="hideDan()">确定</button></div>
+		</div>
+	</div>
+<!--S-JS-->
+<script>
+	createCode();
+    var InterValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+
+    flag1=true;   //用户名
+	flag2=true;   //手机号
+	flag3=true;   //密码一致
+	flag4=true;   //全部为空
+	flag5=true;   //密码
+	flag6=true;   //QQ
+	flag7=true;   //微信
+	function hideDan(){
+		$(".zezhao").hide();
+		$(".zz-success").hide();
+		$(".zz-error").hide();
+	}
+	function showDan(sta){
+		$(".zezhao").show()
+		$(".zz-error").show();
+	}
+	function checkname() {
+        var name = $.trim($("#adminname").val());
+        var reg = /^(?=.*[A-Za-z_\u4E00-\u9FA5])[A-Za-z0-9_\u4E00-\u9FA5]{3,15}$/;
+        if (name != '') {
+        	if(reg.test(name)){
+        		$.post(
+	                "{:U('AjaxCheckname')}",
+	                {adminname: name},
+	                function (data) {
+	                    console.log(data);
+	                    if (data.code == 1) {
+	                        $("#adminname").next().css('display','inline-block').css('display','inline-block').html(data.msg) ;
+	                        $("#adminname").next('span').attr("class", "Validform_checktip");
+	                        flag1 = true;
+	                    } else {
+	                        $("#adminname").next().css('display','inline-block').html(data.msg);
+	                        $("#adminname").next('span').attr("class", "Validform_checktip_1");
+	                        flag1 = false;
+	                    }
+	                }
+	            )
+        	}else{
+        		$("#adminname").next().css('display','inline-block').html('用户名不可用');
+        		$("#adminname").next('span').attr("class", "Validform_checktip_1");
+        		flag1 = false;
+        	}
+            
+        }else{
+        	$("#adminname").next().css('display','inline-block').html('用户名不能为空');
+        	$("#adminname").next('span').attr("class", "Validform_checktip_1");
+        	flag1 = false;
+        }
+    }
+	function  checktel() {
+       var  tel =$.trim($("#tel").val());
+        if (tel !=''){
+        	var myreg =/^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+	        if(!myreg.test(tel))
+	        {
+	        	$("#tel").val('');
+				alert('请输入有效的手机号码！');
+				flag2=false;
+	            return false;
+	        }else{
+	        	$.post(
+	                "{:U('AjaxChecktel')}",
+	                {tel:tel},
+	                function (res) {
+	                    if (res.code==1){
+	                        $("#tel").next('span').css('display','inline-block').html(res.msg);
+	                        $("#tel").next('span').css('display','inline-block').attr("class", "Validform_checktip");
+	                        flag2=true;
+	                    }else {
+	                        $("#tel").next('span').css('display','inline-block').html(res.msg);
+	                        $("#tel").next('span').css('display','inline-block').attr("class", "Validform_checktip_1");
+	                        flag2=false;
+	                    }
+	                }
+	            )
+	        }
+            
+        }
+    }
+	function checkpass(){
+		var  psw =$.trim($("#psw").val());
+		var reg = /^[a-zA-Z0-9]{6,16}$/;
+		if(psw!=''){
+			if(!reg.test(psw)){
+				$("#psw").next('span').css('display','inline-block').html("密码长度6-16位,由字母和数字组成");
+            	$("#psw").next('span').css('display','inline-block').attr("class", "Validform_checktip_1");
+            	flag5=false;
+			}else{
+				$("#psw").next('span').css('display','none').html("");
+				flag5=true;
+			}
+		}else{
+			$("#psw").next('span').css('display','inline-block').html("密码不能为空");
+            $("#psw").next('span').css('display','inline-block').attr("class", "Validform_checktip_1");
+            flag5=false;
+		}
+	}
+	function checkqq(){
+	    var bisqq =$.trim($("#bisqq").val());
+		var reg = /[1-9][0-9]{4,9}/;
+		if(bisqq!=''){
+			if(!reg.test(bisqq)){
+				$("#bisqq").next('span').css('display','inline-block').html("请填写正确的QQ号码");
+            	$("#bisqq").next('span').css('display','inline-block').attr("class", "Validform_checktip_1");
+            	flag6 = false;
+			}else{
+				$("#bisqq").next('span').css('display','none').html("");
+				flag6 = true;
+			}
+		}else{
+			$("#bisqq").next('span').css('display','inline-block').html("请填写QQ号码");
+            $("#bisqq").next('span').css('display','inline-block').attr("class", "Validform_checktip_1");
+            flag6=false;
+		}
+	}
+	function checkwx(){
+		var biswx =$.trim($("#biswx").val());
+		var reg = /^[A-Za-z0-9]+$/;
+		if(biswx!=''){
+			if(!reg.test(biswx)){
+				$("#biswx").next('span').css('display','inline-block').html("请填写正确的微信号");
+            	$("#biswx").next('span').css('display','inline-block').attr("class", "Validform_checktip_1");
+            	flag7=false;
+			}else{
+				$("#biswx").next('span').css('display','none').html("");
+				flag7 = true;
+			}
+		}else{
+			$("#biswx").next('span').css('display','inline-block').html("请填写微信号");
+            $("#biswx").next('span').css('display','inline-block').attr("class", "Validform_checktip_1");
+            flag7=false;
+		}
+	}
+    function checkpsw() {
+        var  psw =$.trim($("#psw").val());
+        var  cpsw =$.trim($("#cpsw").val());
+        if (psw!='' && cpsw!=''){
+	        if (psw!=cpsw){
+	            $("#cpsw").next('span').css('display','inline-block').html("密码前后不一致");
+	            $("#cpsw").next('span').css('display','inline-block').attr("class", "Validform_checktip_1");
+	            flag3=false;
+			}else{
+	            $("#cpsw").next('span').css('display','inline-block').html("密码一致");
+	            $("#cpsw").next('span').css('display','inline-block').attr("class", "Validform_checktip");
+	            flag3=true;
+			}
+        }
+    }
+
+    function getcode() {
+		var tel=$("#tel").val();
+        var myreg =/^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        if(!myreg.test(tel))
+        {
+//              alert('请输入有效的手机号码！');
+			$("#error").text('请输入有效的手机号码');
+			showDan(1);
+            return false;
+        }else {
+        	$(".zezhao").show()
+			$(".zz-success").show();
+        }
+            
+	}
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btn").removeAttr("disabled");//启用按钮
+            $("#btn").text("重新发送");
+        }
+        else {
+            curCount--;
+            $("#btn").text(curCount + "秒重新发送");
+        }
+    }
+
+    function checkForm() {
+        var psw=$("#psw").val();
+        //电话
+        var tel=$("#tel").val();
+        //复选框
+        var myreg =/^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        checkname();
+        checkqq();
+        checkwx();
+        checkpass();
+        checkpsw();
+        checktel();
+        
+        if($("#protocol").attr("checked")){
+        }else {
+//          alert("请认真读协议！");
+			$("#error").text('请仔细阅读《用户使用协议》!');
+				showDan(1);
+            return false;
+        }
+        if($("#code").val() == ''){
+        	$("#error").text('请输入短信验证码!');
+			showDan(1);
+            return false;
+        }
+        //密码
+		if (flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7){
+	            return true;
+		}else {
+		    return false;
+		}
+    }
+	
+	var code;
+	function createCode() 
+	{
+		 code = "";
+		 var codeLength = 4; //验证码的长度
+		 var checkCode = document.getElementById("checkCode");
+		 var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+		      'a','b','c','d','e','f','g','h','i','j','k','l','m','n','p','q','r','s','t','u','v','w','x','y','z',
+		      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //所有候选组成验证码的字符，当然也可以用中文的
+		 for(var i = 0; i < codeLength; i++) 
+		 {
+		  var charNum = Math.floor(Math.random() * 52);
+		  code += codeChars[charNum];
+		 }
+		 if(checkCode) 
+		 {
+		  checkCode.className = "code";
+		  checkCode.innerHTML = code;
+		 }
+	}
+	function validateCode() {
+		var tel=$("#tel").val();
+		 var inputCode=document.getElementById("inputCode").value;
+		 if(inputCode.length <= 0) 
+		 {
+			alert("请输入验证码！");	 
+//			$("#coderror").html("<span style='color: red;'>请输入验证码！</span>")
+			return false;
+		 }
+		 else if(inputCode.toUpperCase() != code.toUpperCase()) 
+		 {
+		   	alert("验证码输入有误！");
+//			$("#coderror").html("<span style='color: red;'>验证码输入有误！</span>")
+		   	createCode();
+		   	return false;
+		 }else{
+		 	hideDan();
+            $.post(
+				"{:U('AjaxGetcode')}",
+				{tel:tel},
+				function (data) {
+					if(data.code==1){
+						curCount = count;
+			            //设置button效果，开始计时
+			            $("#btn").attr("disabled", "true");
+			            $("#btn").text(curCount + "秒重新发送");
+			            InterValObj = window.setInterval(SetRemainTime, 1000);
+					    alert(data.msg);
+					}else{
+                        alert(data.msg);
+					}
+                }
+			)
+		 }
+				
+	}
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?eb77dfd2cb6feccdd36431a10b07e2d8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+
+</html>

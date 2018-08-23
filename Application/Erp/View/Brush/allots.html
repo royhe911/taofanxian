@@ -1,0 +1,82 @@
+<extend name="public/modal" />
+<block name="title"></block>
+<block name="menu">
+	<table class="table table-border table-bordered table-bg">
+		<thead>
+			<tr>
+				<th colspan="3">今日小额单总量：<font color="red">{$all_num}</font>单</th>
+			</tr>
+			<tr class="text-c">
+				<th>站长</th>
+				<th>每日小额单数量</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<foreach name="data" item="vo">
+		  	<tr class="text-c">
+		 		<td>{$vo.realname}</td>
+		 		<td class="order-num order-input"><?php if($vo['num']==0){echo '';}else{echo $vo['num'];}?></td>
+		 		<td>
+		 			<a href="javascript:;" class="order-a" onclick="orderNum(this,0)">分配数量</a>
+		 			<a href="javascript:;" class="sure-a" style="display: none;" onclick="orderSure(this,{$vo.id},0)">确定</a>
+		 			<a href="javascript:;" class="cancel-a" style="display: none;" onclick="orderCancel()">取消</a>
+		 		</td>
+		 	</tr>
+		 	</foreach>
+		</tbody>
+	</table>
+</block>
+<block name="js">
+<script type="text/javascript">
+//	function orderNum(el,type){
+//		var limit_num = $(el).parent().siblings('.order-num').text() || '';
+//		$(el).parent().siblings('.order-num').html('<input type="text" class="ordernum" value="'+limit_num+'" onfocusin="removeErr(this)" onkeyup="value=value.replace(/[^\\d]/g,\'\')">');
+//		$(el).parents('tr').siblings('tr').each(function(){
+//			if($(this).find('order-num').find('input')){
+//				var num = $(this).find('.order-num').find('input').val();
+//				$(this).find('.order-num').text(num);
+//				$(this).find(".order-a").show();
+//				$(this).find(".sure-a,.cancel-a").hide();
+//			}
+//
+//		})
+//		$(el).hide().siblings(".sure-a,.cancel-a").show();
+//	}
+	function orderNum(el,type){
+			var limit_num = $(el).parent().siblings('.order-num').text() || '';
+			$(el).parent().siblings('.order-num').html('<input type="text" class="ordernum" value="'+limit_num+'" onfocusin="removeErr(this)" onkeyup="value=value.replace(/[^\\d]/g,\'\')">');
+
+
+		$(el).hide().siblings(".sure-a,.cancel-a").show();
+	}
+
+	function orderSure(el,id,type){
+
+			var limit =$.trim($(el).parent().siblings('.order-num').find('input').val()); //额度
+			if(limit < 0){
+				$(el).parent().siblings('.order-num').find('input').addClass('error-input').attr('placeholder','请填写小额单数量');
+				return ;
+			}
+	        $.post("{:U('Brush/allots')}", {id:id,limit:limit,type:type}, function(data) {
+	        	if (1 == data.msg){
+	        		layer.msg(data.info,{icon:1,time:1000},function(){
+	        			window.location.reload()
+	        		})
+	        	} else {
+	        		layer.msg(data.info,{icon:2,time:1000},function(){
+	        			window.location.reload()
+	        		});
+	        	}
+	        },'json');
+		}
+		//取消
+		function orderCancel(){
+			window.location.reload();
+		}
+		function removeErr(el){
+			$(el).removeClass('error-input');
+		}
+</script>
+
+</block>

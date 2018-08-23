@@ -1,0 +1,113 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">充值记录</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+				<span class="l">
+						<a class="btn btn-success radius" onclick="recharge('充值','{:U('User/recharge')}','480','655')" href="javascript:;"> 充值</a>
+					</span>
+			<form action="" method="get" onsubmit="return checkForm()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="finance">
+				<input type="hidden" name="a" value="record">
+				<input type="hidden" name="status" value="{$status}">
+				<div class="text-c">
+					日期：<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" placeholder="起始时间" value="{$starttime}" >
+					<input type="text" id="datemax" name="endtime" class="input-text" style="width:150px;" placeholder="结束时间" value="{$endtime}">
+
+					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20" style="height: 34px; line-height: 34px;">
+				<ul class="l comm-ul" style="display: flex;">
+					<li class="<if condition="$_GET['status'] == 0">current</if>"><a href="{:U('finance/record','status=0')}&shopname={$shopname}">全部</a></li>
+					<li class="<if condition="$_GET['status'] == 1">current</if>"><a href="{:U('finance/record','status=1')}&shopname={$shopname}">待审核</a></li>
+					<li class="<if condition="$_GET['status'] == 2">current</if>"><a href="{:U('finance/record','status=2')}&shopname={$shopname}">已通过</a></li>
+					<li class="<if condition="$_GET['status'] == 3">current</if>"><a href="{:U('finance/record','status=3')}&shopname={$shopname}">已拒绝</a></li>
+				</ul>
+				
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th>充值时间</th>
+								<th width="80">充值截图</th>
+								<th>充值金额</th>
+								<th>交易单号</th>
+								<th>状态</th>
+							</tr>
+						</thead>
+						<tbody>
+						 <volist name="data" id="vo">
+							<tr class="text-c">
+								<td>{$vo.addtime|date="j/n H:i",###}</td>
+								<td>
+									<a href="javascript:;" title="鼠标右键复制图片"><img width="80" height="80" class="product-thumb" src="__ROOT__/upload/{$vo.addtime|date='Ymd',###}/{$vo.img}"></a>
+								</td>
+								<td><b style="font-size: 11px;">¥</b> {$vo.money}</td>
+								<td>{$vo.serialnum}</td>
+
+								<td class="td-status">
+									<if condition="$vo.msg == 0 ">
+										<span class="label label-warning radius">待审核</span>
+									<elseif condition="$vo.msg == 1 "/>
+										<span class="label label-success radius">已通过</span>
+									<else />
+										<span class="label label-danger radius">已拒绝</span>
+										<br />原因：{$vo.reason}
+										<br /><a href="javascript:;" class="label label-warning radius" onclick="updateAcount({$vo.id})">修改</a>
+									</if>
+								</td>
+							</tr>
+						 </volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+        $(function(){
+            var start_time = "{$starttime}",end_time = "{$endtime}";
+            laydate.render({
+                elem: '#datemin',
+                min: '2018-01-01',
+                max: +1,
+                done: function(value, date){
+                    start_time = value;
+                    if(new Date(value).getTime() > new Date(end_time).getTime()){
+                        $("#datemax").val(value)
+                    }
+                }
+            });
+            laydate.render({
+                elem: '#datemax',
+                min: '2018-01-01',
+                max: +1,
+                done: function(value, date){
+                    end_time = value;
+                    if(new Date(value).getTime() < new Date(start_time).getTime()){
+                        $("#datemin").val(value)
+                    }
+                }
+            });
+        })
+		//充值
+		function recharge(title, url, w, h){
+
+			layer_show(title, url, w, h);
+
+		}
+		//修改
+		function updateAcount(id){
+			layer_show('充值修改', "{:U('User/uprecharge')}&id="+id, '480', '635');
+			
+		}
+	</script>
+</block>

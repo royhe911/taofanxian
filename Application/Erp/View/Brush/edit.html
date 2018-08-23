@@ -1,0 +1,144 @@
+<extend name="public/modal" />
+<block name="title"></block>
+<block name="menu">
+	<form action="{:U('brush/edit')}" method="POST" class="form form-horizontal" id="form-admin-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">角色：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+				<select class="select" name="role" size="1">
+				    <option value="2" selected >刷单员</option>
+				</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$info.realname}" placeholder="请输入账号" id="realname" name="realname" required="required">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" placeholder="请输入手机号" id="phone" name="phone" value="{$info.name}" required="required" onkeyup="value=value.replace(/[^\d]/g,'')" pattern="^1[3456789]\d{9}$" oninvalid="setCustomValidity('请输入11位手机号');" oninput="setCustomValidity('');">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>初始密码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="password" class="input-text" autocomplete="off" value="{$info.password}" placeholder="密码" id="password" name="password" required="required">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>确认密码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="password" class="input-text" autocomplete="off" value="{$info.password}"  placeholder="确认新密码" id="password2" name="password2" required="required">
+			</div>
+		</div>
+		<volist name="info.wechat" id="v" >
+		<div class="row cl  <if condition='$key == 0' >info-wechat<else />info-wechat-new</if>">
+			<label class="form-label col-xs-4 col-sm-3"><if condition="$key == 0" ><span class="c-red">*</span>微信：	</if></label>
+
+			<div class="formControls col-xs-7 col-sm-8" >
+				<volist name="info.wechat" id="v" >
+				<input type="text" class="input-text"  placeholder="微信号" name="wechat[{$key}][num]" required="required" style="width: 20%;" value="{$v.num}">
+				<input type="text" class="input-text"  placeholder="微信昵称" name="wechat[{$key}][nick]" required="required" style=" width: 20%;"value="{$v.nick}">
+				<input type="text" class="input-text"  placeholder="银行卡号"  name="wechat[{$key}][card]" required="required" onkeyup="value=value.replace(/[^\d]/g,'')"  style="width: 36%;" oninvalid="setCustomValidity('请输入银行卡号');" oninput="setCustomValidity('');" value="{$v.card}">
+					<input type="text" class="input-text"  placeholder="银行卡姓名" name="wechat[{$key}][username]" required="required" style="width: 20%;" value="{$v.username}">
+
+
+			</div>
+			<if condition="$key != 0" >
+			<div class="formControls col-xs-1 col-sm-1"><input type="button" class="btn btn-danger radius" value="删除" onclick="removeWechat(this)" ></div>
+			</if>
+		</div>
+	</volist>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"></label>
+			<div class="formControls col-xs-4 col-sm-4">
+				<input type="button" class="btn btn-primary radius" value="添加微信" onclick="addMoreWechat()" >
+			</div>
+		</div>
+		<div class="row cl info-qq">
+			<label class="form-label col-xs-4 col-sm-3">QQ：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text"  placeholder="请输入QQ号码" value="{$info.qq}" id="qq" name="qq" onkeyup="value=value.replace(/[^\d]/g,'')">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">备注：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="info" cols="" rows="" class="textarea"  placeholder="选填......" dragonfly="true">{$info.info}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			    <input type="hidden" name="id" value="{$info.id}">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</block>
+<block name="js">
+<script src="__PUBLIC__/ajaxfileupload.js"></script>
+<script type="text/javascript">
+	$(".select").change(function(){
+		if(this.value == 6){
+			var html = '<div class="row cl new"><label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>微信号截图：</label><div class="formControls col-xs-8 col-sm-8 posi-rela"><button class="btn btn-success radius">上传图片</button><input class="file-input fileToUpload" type="file" accept="image/*" name="fileToUpload" id="fileToUpload" onclick="uploadFile(this,\'fileToUpload\');" value=""><br /><div id="img_preview_one"><input type="hidden" name="img" id="img" /><img src="__PUBLIC__/ERP/static/h-ui.admin/images/thumbnail.png" id="thumb-preview"></div></div></div>';
+			$(".info-qq").after(html);
+		}else{
+			$("#form-admin-add .new").empty();
+		}
+	});
+
+	function uploadFile(obj,file_id){
+	 	$("input[name='"+file_id+"']").bind("change",function(){
+	 		$.ajaxFileUpload({
+	 			url:"{:U('Welcome/ajaxUpload')}",//上传图片处理文件
+	 			secureuri:false,
+	 			fileElementId:file_id,
+	 			dataType: 'text',
+	 			success: function (data){
+	 				var data= strToObj(data);
+	 				if(1 == data.status){
+	 					$('#img').val(data.name);
+	 					$('#thumb-preview').attr('src', '__ROOT__/upload/'+data.savepath+'/'+data.name);
+	 				} else {
+	 					layer.msg(data.msg,{icon:2,time:1000});
+	 				}
+	 			},
+	 			error: function (data){
+	 				layer.msg('上传失败!',{icon:2,time:1000});
+	 			}
+	 		});
+	 	});
+	 }
+
+	 function strToObj(str) {
+		 return eval("(" + str + ")");
+	 }
+
+    var i={$count};
+    function addMoreWechat(){
+		layer.msg('此功能暂时禁用');
+//      var wechatStr = '<div class="row cl info-wechat-new">'+
+//          '<label class="form-label col-xs-4 col-sm-3"></label>'+
+//          '<div class="formControls col-xs-7 col-sm-8">'+
+//          '<input type="text" class="input-text"  placeholder="微信号"  name="wechat['+i+'][num]" required="required" style="width: 20%;"> '+
+//          '<input type="text" class="input-text"  placeholder="微信昵称"  name="wechat['+i+'][nick]" required="required" style=" width: 20%;"> '+
+//          '<input type="text" class="input-text"  placeholder="银行卡号"  name="wechat['+i+'][card]" required="required" onkeyup="value=value.replace(/[^\\d]/g,\'\')"  style="width: 36%;" oninvalid="setCustomValidity(\'请输入银行卡号\');" oninput="setCustomValidity(\'\');">'+
+//				'<input type="text" class="input-text"  placeholder="银行卡姓名" name="wechat['+i+'][username]" required="required" style="width: 20%;" value="">' +
+//          '</div>'+
+//          '<div class="formControls col-xs-1 col-sm-1"><input type="button" class="btn btn-danger radius" value="删除" onclick="removeWechat(this)" ></div>'+
+//          '</div>';
+//      $(".info-wechat").after(wechatStr);
+//      i++;
+    }
+	 function removeWechat(el){
+	 		$(el).parents('.info-wechat-new').empty();
+	 }
+</script>
+
+</block>

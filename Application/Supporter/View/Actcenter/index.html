@@ -1,0 +1,170 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style type="text/css">
+	/*.order_status>ul{ display: flex; justify-content: space-around;}
+	.order_status>ul li{ float: none !important;}*/
+</style>
+                <!-- 试用管理 -->
+                <div id="my_main" class="content left" style="background-color: rgb(255, 255, 255); min-height: 889px;">
+                    <div class="activity_manage">
+                        <h1 class="title">试用管理</h1>
+                        <!--所有订单的状态种类-->
+                        <div class="order_status">
+                            <ul>
+                                <li class="order"><a <empty name="state">class="personal_active"</empty> href="{:U('Actcenter/index')}">所有试用（<span>{$totalCount[0]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($state eq 2)'>class="personal_active"</if> href="{:U('Actcenter/index', array('state' => 2))}">待完善试用（<span>{$totalCount[2]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($state eq 7)'>class="personal_active"</if> href="{:U('Actcenter/index', array('state' => 7))}">待付款试用（<span>{$totalCount[7]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($state eq 10)'>class="personal_active"</if> href="{:U('Actcenter/index', array('state' => 10))}">待发布试用（<span>{$totalCount[10]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($state eq 11)'>class="personal_active"</if> href="{:U('Actcenter/index', array('state' => 11))}">活动中试用（<span>{$totalCount[11]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($state eq 20)'>class="personal_active"</if> href="{:U('Actcenter/index', array('state' => 20))}">已结束试用（<span>{$totalCount[20]}</span>）</a><b>|</b></li>
+                                <li class="order"><a <if condition='($state eq 12)'>class="personal_active"</if> href="{:U('Actcenter/index', array('state' => 12))}">已驳回试用（<span>{$totalCount[12]}</span>）</a></li>
+                            </ul>
+                        </div>
+                        <!--查询和回收站-->
+                        <div class="inquire_recycleBin clearfix">
+                            <!--查询搜索框-->
+                            <div class="left inquire_box">
+                              <form action="" method="GET" id="myform" />
+                                <ul class="clearfix">
+                                    <li class="goods_name">商品名称：</li>
+                                    <li class="input_box"><input type="text" id="gname" name="gname" placeholder="请输入商品名称" value="{$gname}"></li>
+                                    <li class="inquire_btn">
+                                     <input type="hidden" name="m" value="Supporter" />
+                                     <input type="hidden" name="c" value="Actcenter" />
+                                     <input type="hidden" name="a" value="index" />
+                                     <input type="submit" value="查询" />
+                                    </li>
+                                </ul>
+                              </form>  
+                            </div>
+                            <!--试用回收站-->
+                            <div class="right recycle_bin">
+                                <a class="iconfont icon-p-delet" href="{:U('Actcenter/trash')}">&nbsp;试用回收站</a>
+                            </div>
+                        </div>
+                        <!--商品发货状态-->
+                        <volist name="data" id="vo">
+                        <div class="delivery_status">
+                            <div class="title">
+                                <p class="left">
+                                    <span class="type{$vo.species}">&nbsp;{$vo.species|getSpecies}</span>
+                                    <!-- <span class="type3">&nbsp;新品提升那综合权重</span> -->
+                                    <span>发布时间：<if condition='($vo.starttime eq 0)'>还未发布<else/>{$vo.starttime|date="Y-m-d",###}</if></span>
+                                    <span>活动编号：{$vo.id}</span>
+                                    <span>押金合计：<b>{$vo.money|default="0"|number_format=2}</b></span>
+                                    <!--span>金币合计：<b>0.00</b></span-->
+                                </p>
+                                <p class="right"><eq name="vo.state" value="11"><a href="{:U('Actcenter/processdetail',array('id' => $vo['id']))}">进展详情</a></eq></p>
+                            </div>
+                            <div class="detalis">
+                                <ul>
+                                    <li><img style="width:80px;height:80px" src="../{$vo.image}"></li>
+                                    <li>
+                                        <p>商品名称：<span>{$vo.gname}</span></p>
+                                        <p>店铺名称：<span>{$vo.shopname}</span></p>
+                                        <p>商品来源：<span><if condition="($vo.type eq 1)">淘宝<elseif condition="$vo.type eq 2"/>天猫</if></span></p>
+                                        <p>商品分类：<span>{$category[$vo[cid]]}</span></p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <!-- 根据状态显示 -->
+                                             <span><if condition="($vo.state eq 7)">待支付
+                                                   <elseif condition="$vo.state eq 2"/>待完善 
+                                                   <elseif condition="$vo.state eq 10"/>审核中
+                                                   <elseif condition="$vo.state eq 12"/>{$vo.note}
+                                                   <elseif condition="$vo.state eq 11"/>
+                                                    <if condition="($vo.endtime ELT time())">已结束
+                                                    <elseif condition="$vo.starttime GT time()" />准备中
+                                                    <else />进行中
+                                                    </if>
+                                                   </if>
+                                             </span>
+                                            <!-- <span>待付款</span>-->
+                                            <!-- <span>待发布</span> -->
+                                            <!-- <span>活动中</span> -->
+                                            <!-- <span>已结束</span>  -->
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="table_cell">
+                                            <!-- 待完善 -->
+                                            <if condition="($vo.state eq 7)">
+                                              <p class="status"><span>信息有待完善<a href="{:U(\'Actcenter/publish7\',array(\'id\' => $vo['id']))}">去支付&gt;&gt;</a></span></p>
+                                             <elseif condition="$vo.state eq 2"/>
+                                              <p class="status"><span>信息有待完善<a href="{:U(\'Actcenter/publish2\',array(\'id\' => $vo['id']))}">去完善&gt;&gt;</a></span></p>
+                                             <elseif condition="$vo.state eq 12"/>
+                                              <p class="status"><span>信息有待修改<a href="{:U(\'Actcenter/publish7\',array(\'id\' => $vo['id']))}">去修改&gt;&gt;</a></span></p>
+                                             <elseif condition="$vo.state eq 10"/>
+                                              <p class="status"><span>试用活动待发布</span></p> 
+                                             <elseif condition="$vo.state eq 11"/>
+                                              <if condition="($vo.endtime ELT time())">
+                                               <p class="status"><span>试用活动已结束</span></p>
+                                              <elseif condition="$vo.starttime GT time()" /> 
+                                               <p class="status"><span>试用活动准备中</span></p>
+                                              <else />
+                                               <p class="status"><span>试用活动进行中</span></p>
+                                              </if>
+                                             <elseif condition="$vo.state eq 20"/>
+                                            </if>
+                                            <!-- 待支付  -->
+                                            <!-- <p class="status"> <span> 试用活动未支付，<a href="#">去支付&gt;&gt;</a> </span></p> -->
+                                            <!-- 已结束 -->
+                                            <!-- <p class="status"><span>试用活动已结束</span></p>
+                                            <p style="margin: 3px 0;"><a onclick="" href="javascript:void(0);" style="display: block;text-decoration: none;font-size: 14px;width: 140px;margin: 0 auto;border-radius: 5px;color: white;background-color: orange;">一键重新发布试用</a></p> -->
+                                        </div>
+                                    </li>                       
+                                </ul>
+                                <p class="tryNum_detail">
+                                    <span>试用总份数：<b>{$vo.num|default="0"}份</b></span>
+                                    <span>申请人数：<b>{$vo.count|default="0"}人</b></span>
+                                    <span>已中奖：<b>{$vo.zj|default="0"} 份</b></span>
+                                    <span>已领取：<b>{$vo.lq|default="0"} 份</b></span>
+                                    <notin name="vo.state" value="10,11,20">
+                                     <span class="right into_recycleBin"><a href="{:U('Actcenter/trash', array('id' => $vo['id']))}">放入回收站</a></span>
+                                    </notin> 
+                                </p>
+                                <!--新添 end 第三期-->
+                            </div> 
+                        </div>
+                        </volist>
+                    </div>
+                    <!------分页-------->
+                    <notempty name="pagination.totalCount">
+                    <if condition="($pagination.totalPages gt 1)">
+                     <div class="row">
+                      <div class="col-sm-12">
+                       <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate" style="text-align:center;"><ul class="pagination" id="list-pagination"></ul></div>
+                      </div>
+				     </div>
+				    </if>
+				    </notempty>
+				    <!------end----------->
+				</div>
+			</section>
+		<!-- page-wrapper end -->
+		</div>
+		<!-- wrapper -->
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		var paginationOptions= $.extend(true, {$pagination|json_encode} ,
+		{
+			onPageClick: function (event, page) {
+				var options = $(this).data('twbsPagination').options;
+				options.baseUrl = options.baseUrl.replace('','');
+				options.getParams.page = page;
+				//options.getParams.pagesize = options.getParams.pagesize;
+				var param = '';
+				for(var x in options.getParams ){
+					param += '&' + x + '=' + options.getParams[x];
+				}
+				//console.log(param);return;
+				window.location.href =  options.baseUrl + param + '';
+			}
+		});
+		$('#list-pagination').twbsPagination(paginationOptions);
+	
+	});
+	</script>
+	<include file="Layout:foot" />

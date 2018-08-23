@@ -1,0 +1,3929 @@
+/* Global Styles */
+
+ body {
+    background-color: #f8f8f8;
+    font-family: 'Microsoft YaHei';
+}
+html,body{height: 100%;}
+
+#page-wrapper {
+    background-color: #fff;
+}
+input[type=checkbox]{margin-top:10px;}
+@media(min-width:768px) {
+    #page-wrapper {
+        position: inherit;
+    }
+}
+#section {
+    width: 100%;
+    background-color: #e6e5e5;
+    padding-bottom: 20px;
+}
+#section .section_main {
+    width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+#section .section_main .content {
+    width: 1040px;
+    margin-left: 10px;
+    min-height: 555px;
+}
+#section .section_main .content {
+    background-color: #f5f5f5;
+}
+#section .section_main .content .member_power {
+    overflow: hidden;
+}
+#section .section_main .content .member_power .personal_details {
+    width: 393px;
+    height: 150px;
+    margin-right: 2px;
+    background-color: #fff;
+    overflow: hidden;
+}
+#section .section_main .content .member_power .personal_details .avatar {
+    padding: 40px 15px 0 25px;
+}
+#section .section_main .content .member_power .personal_details .avatar img {
+    width: 72px;
+    height: 73px;
+}
+#section .section_main .content .member_power .personal_details .username > h1 {
+    padding-top: 20px;
+    color: #323232;
+    font-size: 18px;
+}
+#section .section_main .content .member_power .personal_details .username > p {
+    padding: 7px 0;
+    font-size: 14px;
+}
+#section .section_main .content .member_power .personal_details .username > p span {
+    color: #f25f55;
+    padding-right: 5px;
+}
+#section .section_main .content .member_power .personal_details .username > input {
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #f25f55;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+    -webkit-appearance: button;
+    cursor: pointer;
+    margin-right: 10px;
+}
+#section .section_main .content .member_power .try_task {
+    width: 645px;
+    height: 150px;
+    background-color: #fff;
+    padding: 10px 28px;
+}
+#section .section_main .content .member_power .try_task .try_monery {
+    font-size: 14px;
+    color: #323232;
+}
+#section .section_main .content .member_power .try_task .try_monery p > span {
+    color: #ef2528;
+    font-weight: normal;
+    font-size: 20px;
+}
+#section .section_main .content .member_power .try_task .try_monery p > a {
+    padding: 0 18px 0 8px;
+    color: #f25f55;
+    font-size: 12px;
+    cursor: pointer;
+}
+#section .section_main .content .task_specification {
+    width: 780px;
+    background-color: #fff;
+    margin-top: 10px;
+    padding-bottom: 50px;
+}
+.content .task_specification h2 {
+    font-size: 20px;
+    color: #323232;
+    margin: 30px 30px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+.content .task_specification .task_list {
+    margin: 0 30px;
+}
+.content .task_list .task {
+    margin-top: 30px;
+}
+.content .task .task_title {
+    font-size: 16px;
+    color: #323232;
+    background: url(../../images/merchant/line.png) left no-repeat;
+    padding-left: 25px;
+}
+:before, :after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.clearfix:before, .clearfix:after, .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after, .form-horizontal .form-group:before, .form-horizontal .form-group:after, .btn-toolbar:before, .btn-toolbar:after, .btn-group-vertical>.btn-group:before, .btn-group-vertical>.btn-group:after, .nav:before, .nav:after, .navbar:before, .navbar:after, .navbar-header:before, .navbar-header:after, .navbar-collapse:before, .navbar-collapse:after, .pager:before, .pager:after, .panel-body:before, .panel-body:after, .modal-footer:before, .modal-footer:after {
+    content: " ";
+    display: table;
+}
+.content .task .shop_list .shop {
+    width: 240px;
+    height: 82px;
+    border: 1px solid #f5f5f5;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-left: -1px;
+    padding: 15px;
+}
+.content .shop_list .shop .shop_name {
+    font-size: 14px;
+    color: #646464;
+    width: 208px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.content .shop_list .shop .shop_name img {
+    width: 15px;
+    height: 15px;
+    float: right;
+}
+.content .shop_list .shop .shop_order {
+    font-size: 12px;
+    color: #969696;
+    margin-top: 15px;
+}
+.task_specification b {
+    color: #f25f55;
+}
+.content .news-list {
+    width: 250px;
+    background-color: #fff;
+    margin-top: 10px;
+    padding-bottom: 20px;
+}
+.content .news-list h2 {
+    font-size: 20px;
+    color: #323232;
+    margin: 30px 20px 15px 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+.content .news-list h2 > .more {
+    font-size: 12px;
+    color: #646464;
+    margin-top: 6px;
+}
+.content .news-list>p {
+    margin: 5px 20px;
+    font-size: 14px;
+    color: #646464;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.navbar-static-side ul li {
+    border-bottom: 1px solid #e7e7e7;
+}
+
+#section .section_main h1.title {
+    color: #323232;
+    font-size: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f5f5f5;
+}
+#section .section_main .store_content .binding_shops {
+    padding: 20px 0;
+}
+#section .section_main .store_content .binding_shops input {
+    height: 30px;
+    width: 100px;
+    line-height: 30px;
+    border-radius: 5px;
+    background-color: #f25f55;
+    margin-right: 10px;
+    color: #fff;
+    -webkit-appearance: button;
+    cursor: pointer;
+
+}
+#section .section_main .store_content .shops_details .detalis ul {
+    height: 118px;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 18px;
+    overflow: hidden;
+}
+#section .section_main .store_content .shops_details .detalis ul li {
+    float: left;
+    color: #323232;
+    font-size: 14px;
+    height: 80px;
+}
+#section .section_main .store_content .shops_details .detalis ul li:first-of-type {
+    width: 80px;
+}
+#section .section_main .store_content .shops_details .detalis ul li:first-of-type img {
+    width: 80px;
+    height: 74px;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(2) {
+    width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 25px;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(2), #section .section_main .store_content .shops_details .detalis ul li:nth-of-type(3) {
+    padding-left: 30px;
+    border-right: 1px solid #f5f5f5;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(2) p.clothes_name, #section .section_main .store_content .shops_details .detalis ul li:nth-of-type(3) p.clothes_name {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(2) p span, #section .section_main .store_content .shops_details .detalis ul li:nth-of-type(3) p span {
+    color: #969696;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(2) p.two, #section .section_main .store_content .shops_details .detalis ul li:nth-of-type(3) p.two {
+    padding: 9px 0;
+}
+
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(3) {
+    color: #969696;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(3) {
+    width: 229px;
+}
+
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(4) {
+    width: 160px;
+    border-right: 1px solid #f5f5f5;
+    text-align: center;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(4) p {
+    height: 80px;
+    line-height: 80px;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(4) p input {
+    height: 30px;
+    width: 100px;
+    line-height: 30px;
+    border-radius: 5px;
+    border: 1px solid #f25f55;
+    background-color: #fff;
+    font-size: 12px;
+    color: #f25f55;
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(5) {
+    width: 190px;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(5) {
+    padding: 0 7px 0 25px;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(5) p {
+    height: 80px;
+    line-height: 80px;
+    color: #969696;
+}
+#section .section_main .store_content .shops_details .detalis ul li:nth-of-type(5) p b {
+    color: #323232;
+}
+#section .section_main .content .activity_manage {
+    background-color: #fff;
+    padding: 30px;
+}
+#section .section_main h1.title {
+    color: #323232;
+    font-size: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f5f5f5;
+}
+#section .section_main .content .activity_manage .order_status {
+    padding-top: 10px;
+}
+#section .section_main .content .activity_manage .order_status ul {
+    overflow: hidden;
+    height: 38px;
+    background-color: #f5f5f5;
+    width: 100%;
+    margin: 18px 0;
+}
+#section .section_main .content .activity_manage .order_status ul li {
+    float: left;
+    font-size: 14px;
+    padding-left: 18px;
+    line-height: 38px;
+}
+
+.personal_active {
+    color: #f25f55 !important;
+}
+#section .section_main .content .activity_manage .order_status ul li > a span {
+    color: #f25f55;
+}
+#section .section_main .content .activity_manage .order_status ul li > b {
+    font-weight: normal;
+    color: #969696;
+    margin-left: 8px;
+}
+.inquire_recycleBin {
+    padding: 20px 0;
+}
+.inquire_box ul li {
+    float: left;
+    height: 34px;
+    line-height: 34px;
+}
+.inquire_box ul .goods_name {
+    font-size: 14px;
+    color: #333;
+}
+.inquire_box ul li {
+    float: left;
+    height: 34px;
+    line-height: 34px;
+}
+.inquire_box ul .input_box>input {
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #f5f5f5;
+}
+.inquire_box ul li {
+    float: left;
+    height: 34px;
+    line-height: 34px;
+}
+.inquire_box ul .inquire_btn>input {
+    width: 100px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 5px;
+    border: 1px solid #f25f55;
+    background-color: #f25f55;
+    color: #fff;
+    font-size: 14px;
+    -webkit-appearance: button;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.recycle_bin>a {
+    display: block;
+    width: 120px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    border: 1px solid #c8c8c8;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#section .section_main .content .activity_manage .delivery_status {
+    margin-bottom: 35px;
+}
+#section .section_main .content .activity_manage .delivery_status .title {
+    overflow: hidden;
+    padding: 10px;
+}
+#section .section_main .content .activity_manage .delivery_status .title p {
+    font-size: 14px;
+    height: 16px;
+}
+#section .section_main .content .activity_manage .delivery_status .title .type1 {
+    background: url(../../images/merchant/04.png) left no-repeat;
+    padding-left: 25px;
+    color: #f25f55;
+}
+#section .section_main .content .activity_manage .delivery_status .title .type2 {
+    background: url(../../images/merchant/03.png) left no-repeat;
+    padding-left: 25px;
+    color: #ed6e1f;
+}
+#section .section_main .content .activity_manage .delivery_status .title p:first-of-type span {
+    margin-right: 40px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+#section .section_main .content .activity_manage .delivery_status .title p:first-of-type span:first-of-type {
+    display: inline-block;
+    width: 200px;
+    margin-right: 0px;
+}
+.delivery_status .title p span b {
+    color: #e61e28;
+}
+#section .section_main .content .activity_manage .delivery_status .title p a {
+    color: #005ea7;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul {
+    height: 115px;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 15px 0;
+    overflow: hidden;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li {
+    box-sizing: border-box;
+    float: left;
+    color: #323232;
+    height: 80px;
+    padding: 0 25px;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(1) {
+    width: 120px;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(2), #section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(3) {
+    border-right: 1px solid #f5f5f5;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(2) {
+    width: 350px;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li p {
+    font-size: 12px;
+    color: #969696;
+    line-height: 20px;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(2) p {
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li p span {
+    color: #323232 !important;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(3) {
+    width: 200px;
+    text-align: center;
+    padding-top: 30px;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(3) p {
+    font-size: 14px;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(4) {
+    text-align: center;
+    width: 290px;
+    padding: 10px;
+    display: table;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li .table_cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+#section .section_main .content .activity_manage .delivery_status .detalis ul li .table_cell p {
+    line-height: 28px;
+}
+
+#section .section_main .content .activity_manage .delivery_status .detalis ul li:nth-of-type(4) p:first-of-type {
+    font-size: 14px;
+}
+.delivery_status .detalis ul li .status span a {
+    color: #005ea7;
+}
+.delivery_status .detalis .tryNum_detail {
+    padding: 10px 0 30px 0;
+    border-bottom: 5px solid #f5f5f5;
+}
+.delivery_status .detalis .tryNum_detail span {
+    display: inline-block;
+    margin-right: 40px;
+    font-size: 16px;
+    color: #333;
+}
+.delivery_status .detalis .tryNum_detail span b {
+    color: #e61e28;
+}
+.into_recycleBin {
+    cursor: pointer;
+    font-size: 14px !important;
+    color: #969696 !important;
+    margin-right: 9px !important;
+}
+.seachform {
+    overflow: hidden;
+    float: right;
+    margin-bottom: 15px;
+}
+
+.seachform li {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+}
+.seachform li input[type='text'] {
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #f1f1f1;
+    margin-right: 10px;
+}
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.seachform li input[type='button'], .seachform li input[type='submit'] {
+    width: 100px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 5px;
+    border: 1px solid #f25f55;
+    background-color: #f25f55;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 5px;
+}
+#pl {
+    display: block;
+    width: 130px;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #f25f55;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #f25f55;
+    font-size: 14px;
+    margin-left: 15%;
+    float: right;
+    padding-left: 10px;
+    text-align: center;
+}
+#section .section_main .funds_record .seachform {
+    overflow: hidden;
+    margin-top: 20px;
+}
+#section .section_main .funds_record .seachform li {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+}
+
+#section .section_main .funds_record .seachform li input[type='text'] {
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #f5f5f5;
+}
+#section .section_main .store_content, #section .section_main .basic_setup, #section .section_main .bound_bankCard, #section .section_main .add_bankCard, #section .section_main .member_manage, #section .section_main .deposit_recharge, #section .section_main .deposit_withdraw, #section .section_main .funds_record, #section .section_main .message_notification {
+    width: 1040px;
+    margin-left: 10px;
+    padding: 30px;
+    background-color: #fff;
+    min-height: 555px;
+}
+#section .section_main .funds_record .seachform li input[type='button'] {
+    width: 100px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 5px;
+    border: 1px solid #f25f55;
+    background-color: #f25f55;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.table-title {
+    padding-top: 15px;
+}
+.table-title ul {
+    position: relative;
+    width: 100%;
+    height: 38px;
+    background-color: #f5f5f5;
+}
+.table-title ul li {
+    float: left;
+    font-size: 14px;
+    line-height: 38px;
+    text-align: center;
+}
+#section .section_main .location_title {
+    padding: 30px;
+    border-bottom: 1px solid #f5f5f5;
+    background: white;
+}
+#section .section_main .location_title ul {
+    overflow: hidden;
+}
+#section .section_main .location_title ul li {
+    float: left;
+    font-size: 14px;
+    padding-right: 10px;
+}
+#section .section_main .location_title ul li a:hover {
+    color: #f25f55;
+}
+
+
+#section .section_main .store_content {
+    width: 1200px;
+    margin-left: 0;
+    background-color: #fff;
+    padding: 30px;
+}
+#section .activity_details .location_title {
+    padding: 30px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+#section .section_main .store_content .title{
+    border-bottom: 1px solid #f5f5f5;
+}
+
+
+#section .section_main .store_content .title h1 {
+    color: #323232;
+    font-size: 20px;
+    padding-bottom: 8px;
+
+}
+
+#section .section_main .store_content .title .desc {
+    margin-left: 10px;
+    padding-top: 7px;
+}
+.table-title .product-name {
+    width: 280px;
+}
+.table-title .member-bindTB {
+    width: 160px;
+}
+.table-title .order-num-TB {
+    width: 200px;
+}
+.table-title .pay {
+    width: 130px;
+}
+.filter {
+    height: 70px;
+    padding-top: 20px;
+}
+.choose-shop {
+    overflow: hidden;
+}
+.choose-shop li {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+}
+.choose-shop li:nth-of-type(2) select {
+    height: 36px;
+    line-height: 36px;
+    width: 110px;
+    padding-left: 10px;
+    color: #646464;
+    border: 1px solid #f5f5f5;
+}
+#section .section_main .store_content .table-title {
+    padding-top: 10px;
+}
+#section .section_main .store_content .table-title .select-all {
+    position: absolute;
+    left: 20px;
+}
+.radio, .checkbox {
+    display: inline-block;
+    min-height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    float: left;
+}
+.store_content .product-name {
+    width: 400px;
+}
+.store_content .member-bindTB {
+    width: 160px;
+}
+.store_content .order-num-TB {
+    width: 150px;
+}
+.store_content .pay {
+    width: 130px;
+}
+.store_content .pic {
+    width: 145px;
+}
+.store_content .operation {
+    width: 145px;
+}
+#section .section_main .store_content .table-title ul li {
+    float: left;
+    font-size: 14px;
+    line-height: 38px;
+    text-align: center;
+}
+#section .activity_details {
+    width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding-bottom: 50px;
+}
+#section .activity_details .location_title {
+    padding: 30px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  #section .activity_details .location_title ul {
+    overflow: hidden;
+  }
+  #section .activity_details .location_title ul li {
+    float: left;
+    font-size: 14px;
+    padding-right: 10px;
+  }
+  #section .activity_details .location_title ul li a:hover {
+    color: #f25f55;
+  }
+  #section .activity_details .commodity_information {
+    padding: 0 30px;
+  }
+  #section .activity_details .commodity_information > h1 {
+    padding-top: 30px;
+    font-size: 16px;
+    color: #323232;
+  }
+  #section .activity_details .commodity_information .title {
+    overflow: hidden;
+    padding: 10px;
+  }
+  #section .activity_details .commodity_information .title p {
+    font-size: 14px;
+    height: 16px;
+  }
+  #section .activity_details .commodity_information .title p a {
+    color: #005ea7;
+  }
+  #section .activity_details .commodity_information .title p:first-of-type {
+    background: url(../../images/line.png) left no-repeat;
+    padding-left: 25px;
+  }
+  #section .activity_details .commodity_information .title p:first-of-type span {
+    margin-right: 40px;
+  }
+  #section .activity_details .commodity_information .details ul {
+    height: 115px;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 15px 0;
+    overflow: hidden;
+  }
+  #section .activity_details .commodity_information .details ul li {
+    box-sizing: border-box;
+    float: left;
+    color: #323232;
+    height: 80px;
+    width: 260px;
+  }
+  #section .activity_details .commodity_information .details ul li p {
+    width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    color: #969696;
+    line-height: 20px;
+  }
+  #section .activity_details .commodity_information .details ul li p span {
+    color: #323232;
+  }
+  #section .activity_details .commodity_information .details ul li p b {
+    color: #f25f55;
+  }
+  #section .activity_details .commodity_information .details ul li p a {
+    color: #005ea7;
+  }
+  #section .activity_details .commodity_information .details ul li:nth-of-type(1) {
+    width: 120px;
+    padding: 0 20px;
+  }
+  #section .activity_details .commodity_information .details ul li:nth-of-type(2),
+  #section .activity_details .commodity_information .details ul li:nth-of-type(3),
+  #section .activity_details .commodity_information .details ul li:nth-of-type(4) {
+    border-right: 1px solid #f5f5f5;
+    padding-left: 30px;
+  }
+  #section .activity_details .commodity_information .details ul li:nth-of-type(5) {
+    padding-left: 30px;
+    width: 240px;
+  }
+  #section .activity_details .commodity_information .details ul li:nth-of-type(3) p {
+    line-height: 28px;
+  }
+
+  #details ul li{
+    display: table !important;
+    /*border-right: 1px solid #f5f5f5 !important;*/
+    padding-left: 30px !important;
+  }
+
+  #section .activity_details .commodity_information .details ul li:nth-of-type(1){
+    border-right: 0;
+  }
+  #section .activity_details .commodity_information .details ul li:nth-of-type(4){
+    border-right: 0;
+  }
+
+  #section .activity_details .commodity_information .details ul li:nth-of-type(3) p{
+    line-height: 20px !important;
+  }
+  #details ul li{
+    display: table !important;
+    /*border-right: 1px solid #f5f5f5 !important;*/
+    padding-left: 30px !important;
+  }
+
+  #section .activity_details .commodity_information .details ul li:nth-of-type(1){
+    border-right: 0;
+  }
+  #section .activity_details .commodity_information .details ul li:nth-of-type(4){
+    border-right: 0;
+  }
+
+  #section .activity_details .commodity_information .details ul li:nth-of-type(3) p{
+    line-height: 20px !important;
+  }
+
+  #details ul li div{
+    display: table-cell;
+    vertical-align: middle;
+    /*line-height: 20px !important;*/
+  }
+  #section .activity_details .commodity_information .evolve_dateil {
+    border: 1px solid #f5f5f5;
+    margin-top: 30px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .evolve_dateil_tab {
+    background-color: #f5f5f5;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .evolve_dateil_tab ul {
+    overflow: hidden;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .evolve_dateil_tab ul li {
+    float: left;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #323232;
+    cursor: pointer;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state {
+    padding: 12px 20px 14px 20px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .title,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .title {
+    color: #323232;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  #try_2 >.title{
+    float: left;
+  }
+
+  .try_content >.title3{
+    float: left;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content {
+    overflow: hidden;
+    padding: 20px;
+    border: 1px solid #f5f5f5;
+    padding-right:0;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .left_information ul,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .left_information ul {
+    width: 530px;
+    padding-right: 20px;
+    border-right: 2px solid #f5f5f5;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .left_information ul li,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .left_information ul li {
+    padding-top: 20px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .left_information ul li h2,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .left_information ul li h2 {
+    padding-bottom: 18px;
+    font-size: 16px;
+    color: #323232;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .left_information ul li p,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .left_information ul li p {
+    font-size: 14px;
+    color: #646464;
+    padding-bottom: 18px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .left_information ul li p span:first-of-type,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .left_information ul li p span:first-of-type {
+    margin-right: 30px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .left_information ul li p b,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .left_information ul li p b {
+    color: #323232;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .left_information ul li p b i,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .left_information ul li p b i {
+    color: #e61e28;
+    font-style: normal;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .left_information ul li:not(:first-child),
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .left_information ul li:not(:first-child) {
+    border-top: 1px dashed #c8c8c8;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .right_state,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .right_state {
+    display: table;
+    width: 546px;
+    height: 450px;
+    margin: 0 auto;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .right_state .status_alert,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .right_state .status_alert {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .right_state .status_alert .status_content h3,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .right_state .status_alert .status_content h3 {
+    font-size: 18px;
+    color: #323232;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .right_state .status_alert .status_content p,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .right_state .status_alert .status_content p {
+    font-size: 14px;
+    color: #323232;
+    text-align: center;
+    padding-bottom: 5px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .right_state .status_alert .status_content p span,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .right_state .status_alert .status_content p span {
+    color: #646464;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .right_state .status_alert .status_content p i,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .right_state .status_alert .status_content p i {
+    color: #e61e28;
+    font-style: normal;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details .details_content .right_state .status_alert .status_content p a,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .details_content .right_state .status_alert .status_content p a {
+    color: #005ea7;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details h2.try_plan,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve h2.try_plan {
+    color: #323232;
+    font-size: 16px;
+    padding: 28px 0 10px 0;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details table,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table {
+    width: 1098px;
+    border: 1px solid #f5f5f5;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details table th,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table th,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details table td,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table td {
+    border: 1px solid #f5f5f5;
+    height: 50px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 14px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details table th,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table th {
+    background-color: #f5f5f5;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details table td b,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table td b {
+    color: #323232;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_details table td span,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table td span {
+    color: #e61e28;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table tr td {
+    color: #323232;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table tr td a {
+    color: #005ea7;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > p.total {
+    font-size: 16px;
+    text-align: right;
+    color: #323232;
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > p.total span {
+    color: #e61e28;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table {
+    width: 1098px;
+    border: 1px solid #f5f5f5;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table td,
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table th {
+    border: 1px  solid #f5f5f5;
+    text-align: center;
+    height: 50px;
+    font-size: 14px;
+    color: #646464;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table tr.other td:nth-of-type(1) p {
+    font-size: 12px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table td {
+    padding: 10px 0 20px 0;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table td p {
+    padding-top: 10px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table td span {
+    color: #e61e28;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table td b {
+    color: #323232;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table td:nth-of-type(2) p {
+    font-size: 12px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table th:nth-of-type(1) {
+    width: 260px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table th:nth-of-type(2) {
+    width: 614px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .cost_information > table th:nth-of-type(3) {
+    width: 260px;
+  }
+  #section .activity_details .commodity_information .evolve_dateil .try_state .try_content {
+    display: none;
+  }
+  .bg_active {
+    background-color: #f25f55;
+    color: #fff!important;
+}
+#section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table {
+    width: 1098px;
+    border: 1px solid #f5f5f5;
+}
+#section .activity_details .commodity_information .evolve_dateil .try_state .try_details .title, #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve .title {
+    color: #323232;
+    font-size: 14px;
+    padding: 10px 0;
+}
+ #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table th, #section .activity_details .commodity_information .evolve_dateil .try_state .try_evolve table td {
+    /* background-color: #f5f5f5; */
+    border: 1px solid #f5f5f5;
+    height: 50px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 14px;
+}
+.vocation {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+.vocation>select {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+#section .section_main .basic_setup .setup_content ul {
+    overflow: hidden;
+    padding: 20px;
+    height: 90px;
+    border-bottom: 1px solid #f5f5f5;
+}
+#section .section_main .basic_setup .setup_content ul li {
+    box-sizing: border-box;
+    float: left;
+    line-height: 50px;
+    height: 50px;
+}
+#section .section_main .basic_setup .setup_content ul li:nth-of-type(1) {
+    width: 43px;
+}
+#section .section_main .basic_setup .setup_content ul li:nth-of-type(2) {
+    padding: 0 25px;
+    border-right: 1px solid #f5f5f5;
+    width: 115px;
+}
+#section .section_main .basic_setup .setup_content ul li:nth-of-type(2) span {
+    color: #323232;
+    font-size: 16px;
+    font-weight: bold;
+}
+#section .section_main .basic_setup .setup_content ul li:nth-of-type(3) {
+    padding-left: 25px;
+    width: 647px;
+}
+#section .section_main .basic_setup .setup_content ul li:nth-of-type(4) {
+    width: 135px;
+    text-align: center;
+}
+#section .section_main .basic_setup .setup_content ul li:nth-of-type(4) a {
+    color: #005ea7;
+}
+#section .section_main .basic_setup .setup_content ul li:nth-of-type(4) input {
+    height: 28px;
+    width: 80px;
+    line-height: 28px;
+    border-radius: 5px;
+    background-color: #f25f55;
+    color: #fff;
+}
+#section .section_main .basic_setup .setup_content ul:last-of-type li:nth-of-type(3), #section .section_main .basic_setup .setup_content ul:last-of-type li:nth-of-type(4) {
+    line-height: 25px;
+}
+#section .section_main .basic_setup .revamp_content {
+    padding: 50px 0 30px 0;
+}
+#section .section_main .basic_setup .revamp_content label {
+    display: inline-block;
+    width: 420px;
+    text-align: right;
+    font-size: 14px;
+    color: #969696;
+    font-weight: normal;
+}
+#section .section_main .basic_setup .revamp_content input {
+    width: 200px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #969696;
+    border-radius: 5px;
+}
+#section .section_main .basic_setup .revamp_content p {
+    height: 30px;
+    padding-top: 3px;
+}
+#section .section_main .basic_setup .revamp_content p span {
+    font-size: 12px;
+    color: #e61e28;
+    padding-left: 420px;
+}
+#section .section_main .basic_setup .revamp_content input[type='button'] {
+    width: 100px;
+    margin-left: 6px;
+    color: #646464;
+}
+#section .section_main .basic_setup .revamp_content p.btns {
+    width: 100%;
+    padding-left: 92px;
+    text-align: center;
+}
+#section .section_main .basic_setup .revamp_content p.btns input {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 32px;
+    color: #f25f55;
+    border: 1px solid #f25f55;
+    background-color: #fff;
+}
+#section .section_main .basic_setup .revamp_content p.btns input:first-of-type {
+    color: #fff;
+    background-color: #f25f55;
+}
+#section .section_main .basic_setup .revamp_content input#authCode {
+    width: 90px;
+}
+#section .section_main .basic_setup .revamp_content p.btns input {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 32px;
+    color: #f25f55;
+    border: 1px solid #f25f55;
+    background-color: #fff;
+}
+#section .section_main .member_manage h2 {
+    color: #323232;
+    font-size: 16px;
+    padding: 30px 0 10px 0;
+}
+#section .section_main .member_manage table {
+    width: 980px;
+}
+#section .section_main .member_manage table th, #section .section_main .member_manage table td {
+    border: 1px solid #f5f5f5;
+    line-height: 50px;
+    height: 50px;
+    font-size: 14px;
+    text-align: center;
+    color: #323232;
+}
+#section .section_main .member_manage table th {
+    color: #646464;
+    background-color: #f5f5f5;
+}
+#section .section_main .member_manage table.member_state th, #section .section_main .member_manage table.member_state td {
+    width: 323px;
+}
+#section .section_main .activity_pannel {
+    width: 1040px;
+    margin-left: 10px;
+    padding: 30px;
+    background-color: #fff;
+    min-height: 555px;
+}
+#section .section_main .activity_pannel .seachform {
+    overflow: hidden;
+    margin-top: 20px;
+}
+#section .section_main .activity_pannel .seachform li {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+}
+#section .section_main .activity_pannel .seachform li span {
+    font-size: 15px;
+}
+#section .section_main .activity_pannel .seachform select[name="act_state"] {
+    width: 90px;
+    height: 34px;
+    line-height: 34px;
+    padding-left: 2px;
+    border: 1px solid #f5f5f5;
+    margin-right: 10px;
+}
+#section .section_main .activity_pannel .seachform li input[type='text'] {
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #f5f5f5;
+}
+#section .section_main .activity_pannel .seachform li input[type='button'] {
+    width: 100px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 5px;
+    border: 1px solid #f25f55;
+    background-color: #f25f55;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.item {
+    margin-top: 30px;
+}
+.item .activity_list_title {
+    line-height: 38px;
+    font-size: 14px;
+    background-color: #f5f5f5;
+}
+.item .activity_list_title .state_over {
+    margin-left: 10px;
+    color: #f77413;
+}
+.item .activity_list_title .act, .item .activity_list_title .activity_productName {
+    margin-left: 40px;
+    color: #646464;
+}
+.item b {
+    color: #323232;
+}
+.item .activity_list_title .goDetail {
+    color: #005ea7;
+    padding-right: 10px;
+}
+.item .activity_list_info .brief_info_top {
+    margin-bottom: 15px;
+}
+.item .activity_list_info {
+    font-size: 14px;
+    border: 1px solid #f5f5f5;
+    padding: 28px 36px 28px 20px;
+}
+.item .activity_list_info .brief_info .brief_info_top > span {
+    margin-right: 20px;
+}
+.item em {
+    font-style: normal;
+}
+.item .activity_list_info .brief_info_bottom .bzj {
+    margin-top: 10px;
+}
+.item .activity_list_info .brief_info_bottom .bzj_over {
+    background-color: #74e4ab;
+}
+.item .activity_list_info .brief_info_bottom .bzj >em {
+    border: 1px solid transparent;
+    padding: 2px 5px;
+    color: #fff;
+    border-radius: 10px;
+}
+.item .activity_list_info .total_info {
+    width: 200px;
+    border-left: 1px solid #f5f5f5;
+    padding-left: 31px;
+}
+.item .activity_list_info .total_info > p {
+    margin-bottom: 8px;
+}
+#section .section_main .store_content {
+    padding-bottom: 20px;
+    width: 1040px;
+    margin-left: 10px;
+    padding: 30px;
+    background-color: #fff;
+    min-height: 555px;
+}
+#section .section_main .store_content .have_bindingShops h2.title, #section .section_main .store_content .no_bindingShops h2.title {
+    font-size: 16px;
+    padding: 18px 0;
+}
+#section .section_main .store_content .have_bindingShops h3.title, #section .section_main .store_content .no_bindingShops h3.title {
+    font-size: 14px;
+    padding-bottom: 18px;
+    padding-left: 14px;
+    padding-top: 12px;
+    color: #323232;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded {
+    padding-left: 25px;
+    padding-bottom: 40px;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop {
+    overflow: hidden;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall {
+    /* width: 367px;
+    min-height: 250px;
+    border: 1px solid #ffe3e6;
+    padding: 10px 50px 30px 50px;
+    background-color: #fffcfc;
+    margin-right: 60px; */
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao p, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao p, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall p, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall p {
+    text-align: center;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao p img, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao p img, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall p img, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall p img {
+    margin-bottom: 10px;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao p b, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao p b, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall p b, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall p b {
+    font-size: 14px;
+    color: #323232;
+}
+.shop_name_active {
+    background-color: rgba(241,1,128,.05) !important;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name {
+    width: 265px;
+    height: 60px;
+    border: 1px solid #c8c8c8;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-top: 10px;
+    cursor: pointer;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name_active, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name_active, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name_active, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name_active {
+    border: 1px solid #f25f55;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name .shopName, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name .shopName, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name .shopName, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name .shopName {
+    width: 208px;
+    border-right: 1px dashed #c8c8c8;
+    margin: 5px 0;
+    height: 50px;
+    padding: 0 10px;
+}
+
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name_active .shopName, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name_active .shopName, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name_active .shopName, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name_active .shopName {
+    border-right: 1px dashed #f25f55;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name .shopName p, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name .shopName p, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name .shopName p, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name .shopName p {
+    width: 188px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 24px;
+    text-align: left;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name .shopName p b, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name .shopName p b, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name .shopName p b, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name .shopName p b {
+    font-size: 14px;
+    color: #323232;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name .select_btn, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name .select_btn, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name .select_btn, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name .select_btn {
+    width: 55px;
+    height: 60px;
+    background: url(../../images/merchant/release_icon_choice_default.png) center no-repeat;
+}
+#section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name_active .select_btn, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_taobao .shop_name_active .select_btn, #section .section_main .store_content .have_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name_active .select_btn, #section .section_main .store_content .no_bindingShops .bounded_and_unbounded .bounded_select_shop .shopType_tmall .shop_name_active .select_btn {
+    background: url(../../images/merchant/release_icon_choice_selected.png) center no-repeat;
+}
+#section .section_main .store_content .have_bindingShops .select_tryType, #section .section_main .store_content .no_bindingShops .select_tryType {
+    padding-left: 25px;
+}
+#section .section_main .store_content .no_bindingShops .select_tryType {
+    padding-left: 25px;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .select_title,
+  #section .section_main .store_content .no_bindingShops .select_tryType .select_title {
+    position: relative;
+    top: 1px;
+    padding-left: 10px;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .select_title a,
+  #section .section_main .store_content .no_bindingShops .select_tryType .select_title a {
+    font-size: 14px;
+    margin: 0 5px;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #ffe3e6;
+    border-bottom: 1px solid #f25f55;
+    border-radius: 5px 5px 0 0;
+    background-color: #fffcfc;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .select_title a span,
+  #section .section_main .store_content .no_bindingShops .select_tryType .select_title a span {
+    display: inline-block;
+    padding-left: 20px;
+    background: url(../../images/merchant/checkbox_default.png) left center no-repeat;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .select_title .a_active,
+  #section .section_main .store_content .no_bindingShops .select_tryType .select_title .a_active {
+    border: 1px solid #f25f55;
+    border-bottom: 1px solid #fffcfc;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .select_title .a_active span,
+  #section .section_main .store_content .no_bindingShops .select_tryType .select_title .a_active span {
+    color:#333;
+    background: url(../../images/merchant/checkbox.png) left center no-repeat;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content {
+    width: 822px;
+    min-height: 225px;
+    border: 1px solid #ffe3e6;
+    border-top: 1px solid #f25f55;
+    background-color: #fffcfc;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highValue_try,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highValue_try,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highSynthesize_try,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highSynthesize_try {
+    display: none;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highPopularity_try,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highPopularity_try,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highValue_try,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highValue_try,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highSynthesize_try,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highSynthesize_try {
+    padding: 20px 0 20px 20px;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highPopularity_try table th,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highPopularity_try table th,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highValue_try table th,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highValue_try table th,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highSynthesize_try table th,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highSynthesize_try table th {
+    background-color: #f5f5f5;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highPopularity_try table td,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highPopularity_try table td,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highValue_try table td,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highValue_try table td,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highSynthesize_try table td,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highSynthesize_try table td {
+    background-color: #fff;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highPopularity_try table th,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highPopularity_try table th,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highValue_try table th,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highValue_try table th,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highSynthesize_try table th,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highSynthesize_try table th,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highPopularity_try table td,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highPopularity_try table td,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highValue_try table td,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highValue_try table td,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highSynthesize_try table td,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highSynthesize_try table td {
+    text-align: center;
+    border: 1px solid #f5f5f5;
+    height: 50px;
+    padding: 0 14px;
+    color: #323232;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highPopularity_try p,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highPopularity_try p,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highValue_try p,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highValue_try p,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highSynthesize_try p,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highSynthesize_try p {
+    color: #323232;
+    line-height: 20px;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highPopularity_try p span,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highPopularity_try p span,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highValue_try p span,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highValue_try p span,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highSynthesize_try p span,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highSynthesize_try p span {
+    display: inline-block;
+    color: #f25f55;
+    margin-top: 15px;
+  }
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highPopularity_try p b,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highPopularity_try p b,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highValue_try p b,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highValue_try p b,
+  #section .section_main .store_content .have_bindingShops .select_tryType .tryType_content .highSynthesize_try p b,
+  #section .section_main .store_content .no_bindingShops .select_tryType .tryType_content .highSynthesize_try p b {
+    padding-left: 40px;
+  }
+  #section .section_main .store_content .have_bindingShops .nextStep_btn input,
+  #section .section_main .store_content .no_bindingShops .nextStep_btn input {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 30px;
+    background-color: #f25f55;
+    margin-left: 25px;
+  }
+  #section .section_main .store_content .progress_bar {
+    padding: 50px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  #section .section_main .store_content .fill_information h2.title {
+    font-size: 16px;
+    padding: 18px 0;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information label {
+    display: inline-block;
+    width: 115px;
+    text-align: right;
+    font-size: 14px;
+    font-weight:normal;
+    color:#323232;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information label span{
+    display: inline-block;
+    padding-right: 3px;
+    color: #f25f55;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information input,
+  #section .section_main .store_content .fill_information .shop_information .commodity_information select {
+    width: 600px;
+    height: 28px;
+    line-height: 28px;
+    margin: 15px 0 0 5px;
+    border: 1px solid #969696;
+    border-radius: 5px;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information span {
+    color: #e61e28;
+    display:inline-block;
+    line-height:24px;
+    margin-left: 5px;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information span span{
+    display:inline-block;
+    float:left;
+    margin-top:1.5px;
+    margin-right:5px;
+    font-size: 16px;
+
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information select {
+    width: 100px;
+    color: #646464;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information input.norms {
+    width: 100px;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information p {
+    padding-left: 120px;
+    color: #969696;
+    margin: 4px 0;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information p a {
+    cursor: text;
+    font-weight: bold;
+    color: #646464;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information p.total_money {
+    padding-left: 350px;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information p.total_money span {
+    color: #e61e28;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information span.pinkage {
+    display: inline-block;
+
+    font-size: 14px;
+
+    color: #646464;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information span.freight {
+    margin-left: 57px;
+  }
+  #section .section_main .store_content .fill_information .nextStep_btn input {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    padding-left: 0;
+    border: 1px solid #f25f55;
+    margin: 50px 30px 30px 0;
+    background-color: #f25f55;
+    color: #fff;
+  }
+  #section .section_main .store_content .fill_information .nextStep_btn input:first-of-type {
+    margin-left: 43px;
+    color: #f25f55;
+    background-color: #fff;
+  }
+  #section .section_main .store_content .fill_information .note {
+    padding: 15px 0 0 43px;
+    line-height: 24px;
+  }
+  #section .section_main .store_content .fill_information .note b {
+    font-size: 14px;
+    color: #323232;
+  }
+
+
+  /*商品规格*/
+  #section .section_main .store_content .fill_information .goods_standard {
+    overflow: hidden;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .norms {
+    width: 115px;
+    text-align: right;
+    font-size: 14px;
+    color: #323232;
+    padding-top:4px;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .norms span {
+    display: inline-block;
+    padding-right: 3px;
+    color: #f25f55;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details p {
+    padding: 4px 0;
+    color:#646464;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details .goods_standard_content {
+    width: 600px;
+    border: 1px solid #fce5ea;
+    background-color: #fffcfd;
+    padding: 15px 0 12px 15px;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details .goods_standard_content ul {
+    overflow: hidden;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details .goods_standard_content ul li {
+    float: left;
+    width: 130px;
+    height: 86px;
+    border: 1px solid #99a1a7;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 0 15px 10px 0;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details .goods_standard_content ul li input {
+    width: 128px;
+    padding-left: 0;
+    text-align: center;
+    height: 56px;
+    margin:0;
+    border:none;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details .goods_standard_content ul li p.title {
+    text-align: center;
+    color: #fff;
+    line-height: 28px;
+    height: 28px;
+    background-color: #99a1a7;
+    font-size: 14px;
+    padding: 0;
+    margin:0;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details .goods_standard_content ul li p.price{
+    padding:0;
+    margin:0;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details .goods_standard_content p span {
+    color: #f25f55;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details .goods_standard_content p img {
+    cursor:pointer;
+  }
+  #section .section_main .store_content .fill_information .goods_standard .goods_standard_details .goods_standard_content p{
+    color: #646464;
+  }
+  /*设置商品授权码运费的方式*/
+  #section .section_main .store_content .fill_information .goodsFare_try p.title {
+    font-size: 14px;
+    color: #323232;
+    padding-left: 33px;
+    padding-top: 20px;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try p.title span {
+    display: inline-block;
+    padding-right: 3px;
+    color: #f25f55;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try {
+    overflow: hidden;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice {
+    font-size: 14px;
+    color: #f25f55;
+    padding-left: 43px;
+    padding-top: 4px;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content p {
+    font-size: 14px;
+    color: #646464;
+    padding-top:5px;
+    padding-left:0;
+    margin:0;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content p span {
+    color: #f25f55;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way {
+    width: 600px;
+    border: 1px solid #fce5ea;
+    background-color: #fffcfd;
+    padding: 15px;
+    margin-left: 26px;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way h1 {
+    color: #323232;
+    background: url(../../images/merchant/sj_fbsy_icon_quan_default.png) left center no-repeat;
+    padding-left: 20px;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way h1 input {
+    width: 100px;
+    height: 28px;
+    border: 1px solid #969696;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    margin-top:0;
+  }
+  h1.chargeShipping{
+    padding-top:15px;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way .h1_active {
+    background: url(../../images/merchant/spot.png) left center no-repeat;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way .goods_noPost {
+    padding-top: 15px;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way p {
+    color: #969696;
+    background: url(../../images/merchant/sj_fbsy_icon_quan_default.png) left center no-repeat;
+    padding: 0;
+    padding-left: 20px;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way p b {
+    color: #646464;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way p i {
+    display: inline-block;
+    font-style: normal;
+    padding: 10px 0 0 20px;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way .p_active {
+    background: url(../../images/merchant/spot.png) left center no-repeat;
+  }
+  #section .section_main .store_content .fill_information .goodsFare_try .fare_try .notice_content .select_way > span {
+    color: #969696;
+    display: inline-block;
+    margin: 7px 0 10px 40px;
+  }
+/* 本地上传图片 */
+
+
+.upload_image{
+    overflow:hidden;
+  }
+  .upload_image label {
+    padding-top: 45px ;
+  }
+  .upload_image_hint{
+    font-size: 14px;
+    color: #646464 !important ;
+    line-height:28px;
+  }
+  .upload_image_hint b{
+    color: #f25f55;
+  }
+
+
+  .goods_picture i.error{
+    display:inline-block !important;
+  }
+
+  .upload_image #picture_url_error{
+    padding-top:92px;
+  }
+
+  .icon-cuowu::before{
+    display:inline-block;
+    margin-right:5px;
+  }
+
+  .correct{
+    display:inline-block !important;
+  }
+  .trial_table_style{
+    text-align: center;
+    margin: 0 auto;
+    width: 92%;
+  }
+  .trial_table_style th{
+    text-align: center;
+    height: 30px;
+    color: black;
+  }
+  #section .section_main .store_content .fill_information .shop_information .commodity_information .trial_table_input{
+    border: none;
+    width: 100%;
+    margin: 5px 0;
+    text-align: center;
+  }
+  .is_huabei_checkbox {
+    color: #323232 !important;
+    font-size: 14px;
+}
+
+  .toggle_active {
+    background: url(../../images/merchant/release_icon_stop_default.png) right center no-repeat !important;
+  }
+  #section .section_main .store_content {
+    padding-bottom: 20px;
+  }
+  #section .section_main .store_content .progress_bar {
+    padding: 50px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  #section .section_main .store_content .settings_search h2.title {
+    font-size: 16px;
+    padding: 20px 0 15px 0;
+  }
+  #section .section_main .store_content .settings_search .search_content {
+    padding-left: 20px;
+  }
+  #section .section_main .store_content .settings_search .search_content .by_taobao,
+  #section .section_main .store_content .settings_search .search_content .by_PCtaobao,
+  #section .section_main .store_content .settings_search .search_content .by_PCtmall {
+    cursor: pointer;
+    padding-left: 21px;
+    font-size: 16px;
+    color: #323232;
+    padding-bottom: 2px;
+    background: url(../../images/merchant/checkbox_default.png) left center no-repeat;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  #section .section_main .store_content .settings_search .search_content .by_taobao span,
+  #section .section_main .store_content .settings_search .search_content .by_PCtaobao span,
+  #section .section_main .store_content .settings_search .search_content .by_PCtmall span {
+    color: #f25f55;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent {
+    padding-left: 23px;
+    display: none;
+  }
+
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_keywords h2,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_keywords h2,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_keywords h2,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling h2,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling h2,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling h2 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-top:25px;
+    padding-left:20px;
+    background: url(../../images/merchant/checkbox_default.png) left center no-repeat;
+    cursor:pointer;
+  }
+
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_keywords h2.actived,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_keywords h2.actived,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_keywords h2.actived,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling h2.actived,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling h2.actived,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling h2.actived {
+
+    background: url(../../images/merchant/checkbox.png) left center no-repeat;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_keywords h2 b,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_keywords h2 b,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_keywords h2 b,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling h2 b,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling h2 b,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling h2 b {
+    font-weight: bold;
+    color:#f80083;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling div span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling div span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling div span,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling div b,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling div b,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling div b {
+    display: inline-block;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling div span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling div span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling div span {
+    color: #323232;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling div b,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling div b,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling div b {
+    font-size: 14px;
+    color: #323232;
+    font-weight: bold;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling_pannel div textarea,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling_pannel div textarea,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling_pannel div textarea {
+    width: 380px;
+    height: 100px;
+    border: 1px solid #f5f5f5;
+    border-radius: 5px;
+    padding: 10px;
+    resize: none;
+    margin-top:10px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling_pannel div i,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling_pannel div i,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling_pannel div i {
+    font-style: normal;
+    margin-left: 10px;
+    color: #e61e28;
+  }
+
+
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_taokouling_pannel .taokouling_box,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_taokouling_pannel .taokouling_box,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_taokouling_pannel .taokouling_box{
+    width: 420px;
+    height: 170px;
+    padding: 15px 20px;
+    background: #fffcfc;
+    border:1px solid #faf2f2;
+    margin-right:20px;
+    margin-bottom:20px;
+  }
+
+  .taokouling_pannel{
+    margin-top:20px;
+  }
+
+  .taokouling_box .title{
+    font-size:12px;
+    color:#323232;
+  }
+
+  .taokouling_box .title .error{
+    font-size:12px;
+    color:#323232;
+  }
+
+
+  .taokouling_box .title::before{
+    content:"*";
+    color:#f25f55;
+  }
+
+  .taokouling_box .detele{
+    font-size: 12px;
+    color:#005ea7;
+    font-family:normal;
+    text-decoration:none;
+    cursor:pointer;
+  }
+
+
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture {
+    border-bottom: 1px solid #c8c8c8;
+    padding-bottom: 20px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture h2,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture h2,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture h2 {
+    font-size: 14px;
+    color: #323232;
+    padding: 10px 0;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture h2 b,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture h2 b,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture h2 b {
+    font-weight: bold;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture p.xing span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture p.xing span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture p.xing span {
+    color: #f25f55;
+    /*font-size: 16px;*/
+    font-weight: bold;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture p {
+    font-size: 14px;
+    color: #323232;
+    padding-top: 10px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture p b,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture p b,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture p b {
+    font-weight: bold;
+    color:#f25f55;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture p span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture p span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture p span {
+    color: #646464;
+    font-size: 12px;
+  }
+  /* #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture p input,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture p input,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture p input {
+    border: 1px solid #969696;
+    border-radius: 5px;
+    width: 600px;
+    height: 28px;
+    line-height: 28px;
+  } */
+
+  /* #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture p a,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture p a,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture p a {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      border-radius: 5px;
+      position: relative;
+      cursor: pointer;
+      margin-right: 19.5px;
+      border: 1px solid #969696;
+      text-align: center;
+  }
+
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture p a input[type='file'],
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture p a input[type='file'],
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture p a input[type='file'] {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      opacity: 0;
+      filter: alpha(opacity=0);
+      cursor: pointer;
+  }
+
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture p a img.img,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture p a img.img,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture p a img.img {
+      margin-top: 0px;
+      border-radius: 5px;
+      width: 98px;
+      height: 98px;
+  } */
+
+
+  /* æœ¬åœ°ä¸Šä¼ å›¾ç‰‡ */
+  .up_img{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-top: 10px;
+    border: 1px solid #969696;
+    text-align: center;
+  }
+
+  .up_img input[type='file']{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+
+  }
+
+  .up_img img.img{
+    margin-top: 0px;
+    border-radius: 5px;
+    width: 98px;
+    height: 98px;
+  }
+
+  .img_tips{
+    display:none;
+    font-size:16px;
+    vertical-align: bottom;
+
+  }
+
+  .goods_picture i.error{
+    display:inline-block !important;
+  }
+
+  .error{
+    padding-left:8px;
+  }
+
+  .icon-cuowu::before{
+    display:inline-block;
+    margin-right:5px;
+  }
+
+  .correct{
+    display:inline-block !important;
+  }
+
+
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword {
+    padding: 25px 0;
+    border-bottom: 1px dashed #c8c8c8;
+    margin-bottom: 15px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_title span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_title span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_title span {
+    color: #f25f55;
+    /*font-size: 16px;*/
+    font-weight: bold;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_title label,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_title label,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_title label {
+    color: #323232;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_title label i,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_title label i,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_title label i {
+    font-style: normal;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_title input,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_title input,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_title input {
+    border: 1px solid #969696;
+    border-radius: 5px;
+    width: 200px;
+    height: 28px;
+    line-height: 28px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_title b,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_title b,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_title b {
+    display: inline-block;
+    margin: 8px 5px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .add_box,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .add_box,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .add_box {
+    padding-left: 25px; padding-top: 10px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .add_box a,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .add_box a,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .add_box a {
+    display: inline-block;
+    background: url(../../images/merchant/release_icon_open_default.png) right center no-repeat;
+    font-size: 14px;
+    color: #005ea7;
+    padding-right: 21px;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .add_box b,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .add_box b,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .add_box b {
+    font-size: 12px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .add_box span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .add_box span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .add_box span {
+    color: #005ea7;
+    cursor: pointer;
+    margin-top: -50px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp {
+    display: none;
+    border: 1px solid #ffe3e6;
+    background-color: #fffcfc;
+    margin-top: 15px;
+    padding: 20px 15px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write > p.title,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write > p.title,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write > p.title,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp > p.title,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp > p.title,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp > p.title {
+    overflow: hidden;
+    font-size: 14px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write > p.title span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write > p.title span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write > p.title span,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp > p.title span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp > p.title span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp > p.title span,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write > p.title a,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write > p.title a,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write > p.title a,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp > p.title a,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp > p.title a,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp > p.title a {
+    display: inline-block;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write > p.title span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write > p.title span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write > p.title span,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp > p.title span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp > p.title span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp > p.title span {
+    float: left;
+    color: #323232;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write > p.title a,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write > p.title a,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write > p.title a,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp > p.title a,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp > p.title a,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp > p.title a {
+    color: #005ea7;
+    float: right;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box {
+    padding: 15px 0;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box ul,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box ul,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box ul,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box ul,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul {
+    overflow: hidden;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box ul li,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box ul li,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box ul li,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box ul li,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li {
+    float: left;
+    padding: 0 10px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box ul li .box,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box ul li .box,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box {
+    width: 120px;
+    height: 140px;
+    border: 1px solid #949ea8;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box ul li .box h1,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box h1,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box h1,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box ul li .box h1,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box h1,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    background-color: #949ea8;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box ul li .box p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box ul li .box p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p {
+    text-align: center;
+    line-height: 20px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box ul li .box p span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p span,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box ul li .box p span,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p span,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p span {
+    display: inline-block;
+    width: 80px;
+    border-bottom: 1px dashed #949ea8;
+    font-size: 14px;
+    color: #323232;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box ul li .box p span input,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p span input,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p span input,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box ul li .box p span input,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p span input,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p span input {
+    width: 100%;
+    padding-left: 0;
+    text-align: center;
+    background-color: #fff;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box ul li .box p.username,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p.username,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p.username,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box ul li .box p.username,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p.username,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p.username,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .keyword_write_box ul li .box p.keyword,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p.keyword,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .keyword_write_box ul li .box p.keyword,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .keyword_write_box ul li .box p.keyword,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p.keyword,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .keyword_write_box ul li .box p.keyword {
+    padding-top: 5px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way {
+    overflow: hidden;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .title,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .title,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .title {
+    color: #323232;
+    font-size: 14px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p.paixu,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p.paixu {
+    padding-top: 9px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .server_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .server_content p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .server_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .server_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .server_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .server_content p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .server_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .server_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p {
+    padding-top: 3px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p span.checkbox,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p span.checkbox {
+    display: inline-block;
+    padding-left: 21px;
+    background: url(../../images/merchant/checkbox_default.png) left center no-repeat;
+    color: #646464;
+    margin-left: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p select,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p select {
+    width: 120px;
+    height: 28px;
+    border: 1px solid #969696;
+    border-radius: 5px;
+    color: #969696;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .server_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .discount_server .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .discount_server .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .discount_server .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .discount_server .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p select option,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .arrange_content p select option {
+    color: #323232;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way {
+    padding: 10px 0 20px 0;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .arrange_way .title,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .arrange_way .title {
+    padding-top: 7px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_write .submit_btn input,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_write .submit_btn input,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_write .submit_btn input,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword .keyword_revamp .submit_btn input,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword .keyword_revamp .submit_btn input,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword .keyword_revamp .submit_btn input {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    background-color: #f25f55;
+    border-radius: 5px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .add_search_keyword a,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .add_search_keyword a,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .add_search_keyword a,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .add_search_taokouling a,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .add_search_taokouling a,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .add_search_taokouling a{
+    display: inline-block;
+    padding: 10px 10px 10px 23px;
+    background: url(../../images/merchant/release_icon_new_default.png) left center no-repeat;
+    font-size: 14px;
+    color: #005ea7;
+    text-decoration: none;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .shrink_searchScope,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .shrink_searchScope,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .shrink_searchScope {
+    padding: 20px 0;
+    margin: 15px 0 30px 0;
+    border-top: 1px solid #c8c8c8;
+    border-bottom: 1px solid #c8c8c8;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .shrink_searchScope h1,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .shrink_searchScope h1,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .shrink_searchScope h1 {
+    font-size: 14px;
+    color: #323232;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .shrink_searchScope p,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .shrink_searchScope p,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .shrink_searchScope p {
+    font-size: 14px;
+    color: #646464;
+    padding-top: 10px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .shrink_searchScope p input,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .shrink_searchScope p input,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .shrink_searchScope p input {
+    border: 1px solid #969696;
+    height: 28px;
+    line-height: 28px;
+    width: 100px;
+    border-radius: 5px;
+  }
+  #section .section_main .store_content .settings_search .search_content .taobao_content .keyword_revamp,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .keyword_revamp,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .keyword_revamp {
+    display: none;
+  }
+  #section .section_main .store_content .settings_search .nextStep_btn input {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid #f25f55;
+    margin: 20px 30px 30px 0;
+    background-color: #f25f55;
+    color: #fff;
+  }
+  #section .section_main .store_content .settings_search .nextStep_btn input:first-of-type {
+    background-color: #fff;
+    margin-left: 43px;
+    color: #f25f55;
+  }
+
+  #section .section_main .store_content .settings_search .search_content .taobao_content .goods_picture span.keywords_error,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .goods_picture span.keywords_error,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .goods_picture span.keywords_error,
+  #section .section_main .store_content .settings_search .search_content .taobao_content .search_keyword span.keywords_error,
+  #section .section_main .store_content .settings_search .search_content .taobao_PCcontent .search_keyword span.keywords_error,
+  #section .section_main .store_content .settings_search .search_content .tmall_PCcontent .search_keyword span.keywords_error
+  {
+    font-weight:normal;
+    color: #e61e28;
+    margin-left: 5px;
+  }
+  .close{
+    font-weight:normal;
+    font-size:12px;
+    opacity:1;
+    text-shadow:none;
+    float:none;
+  }
+  .close:hover{
+    opacity:1;
+    color:#fff;
+  }
+  .setPlan-exchange p,
+  .set p{
+      font-size:14px;
+  }
+  .search_active {
+      background: url(../../images/merchant/spot.png) left center no-repeat !important;
+  }
+  #section{ font-size: 14px;}
+  #section .section_main .store_content {
+      padding-bottom: 20px;
+  }
+
+  #section .section_main .store_content .progress_bar {
+      padding: 50px 0;
+      border-bottom: 1px solid #f5f5f5;
+  }
+
+  #section .section_main .store_content .settings_trialNumber h2.title {
+      font-size: 16px;
+      padding: 18px 0;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul {
+      height: 118px;
+      border-top: 1px solid #f5f5f5;
+      border-bottom: 1px solid #f5f5f5;
+      padding: 18px 0;
+      overflow: hidden;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li {
+      box-sizing: border-box;
+      float: left;
+      color: #323232;
+      height: 80px;
+      padding: 0 20px;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li p {
+      font-size: 12px;
+      color: #969696;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li p span {
+      color: #323232;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(2),
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(3),
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(4) {
+      width: 400px;
+      border-right: 1px solid #f5f5f5;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(2) p,
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(3) p,
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(4) p {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(2) p,
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(4) p {
+      line-height: 20px;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(3) p,
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:nth-of-type(5) p {
+      line-height: 20px;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul .li:first-of-type {
+      padding-left: 10px;
+      width: 110px;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .trial_content ul li:last-of-type {
+      width: 170px;
+  }
+
+
+  /* 设置上线时间 */
+
+  .settings_trialNumber .set-title {
+      font-size: 14px;
+      font-family: "Microsoft YaHei";
+      color: #323232;
+      margin-bottom: 15px;
+  }
+
+  .settings_trialNumber .set-title::before {
+      content: "*";
+      color: #f25f55;
+  }
+
+  .settings_trialNumber b {
+      color: #f25f55;
+  }
+
+  .setTime {
+      margin-top: 20px;
+      margin-bottom: 40px;
+      position: relative;
+  }
+
+
+  /* data-tryType=2  高价值类型*/
+
+  .setTime[data-tryType="2"] {
+      display: none;
+  }
+
+  .setTime[data-tryType="2"] .choice {
+      margin-top: 10px;
+      position: relative;
+  }
+
+  .setTime[data-tryType="2"] .choice input {
+      position: absolute;
+      z-index: -9999;
+  }
+
+  .setTime[data-tryType="2"] .choice label.delay {
+      margin-right: 35px;
+      padding-left: 25px;
+      cursor: pointer;
+      color: #333;
+      background: url(../../images/merchant/sj_fbsy_icon_quan_default.png) no-repeat left center;
+  }
+
+  .setTime[data-tryType="2"] .choice input:checked+label {
+      background: url(../../images/merchant/spot.png) no-repeat left center;
+  }
+
+
+  /* data-tryType=3  综合类型 */
+
+  .setTime[data-tryType="3"] {
+      display: none;
+  }
+
+  .setTime[data-tryType="3"] p {
+      line-height: 24px;
+  }
+
+
+  /* 日历插件样式 */
+
+  #chooseTime {
+      width: 120px;
+      padding: 4px;
+      border: 2px solid #f1f1f1;
+      border-radius: 5px;
+      background: url(/js/issue_try/skins/default/icon.png) no-repeat right center;
+  }
+
+
+  /* 设置投放计划 */
+
+  .setPlan-sum p {
+      margin-bottom: 15px;
+  }
+
+
+  /* 试用总份数日历 */
+
+  .calendar {
+      border: 1px solid #ffe5e9;
+      background-color: #fffcfd;
+  }
+
+
+  /* 日历主体 */
+
+  .calendar .calendar-main {
+      width: 898px;
+      margin: 40px auto;
+      background-color: #fff;
+  }
+
+  .calendar-main .timeScope {
+      width: 897px;
+      font-size: 14px;
+      line-height: 54px;
+      border: 1px solid #f1f1f1;
+      margin-left: -1px;
+      text-align: center;
+  }
+
+  .calendar-main .row li {
+      width: 129px;
+      height: 130px;
+      border: 1px solid #f1f1f1;
+      float: left;
+      margin-left: -1px;
+      margin-top: -1px;
+      text-align: center;
+      position: relative;
+  }
+
+  .calendar-main .week-day li {
+      height: 50px;
+      line-height: 50px;
+      border: 1px solid #f1f1f1;
+      float: left;
+      margin-left: -1px;
+      margin-top: -1px;
+      text-align: center;
+  }
+
+
+  /* 日期单元格 */
+
+  .calendar-main .date .row .date-day {
+      font-size: 30px;
+      color: #005ea7;
+  }
+
+  /* 兑换日历的表格的字 */
+  .calendar-exchange .date .row .date-day {
+      color: #dc5028;
+  }
+
+  .calendar-main .date .row .p-choose {
+      width: 114px;
+      font-size: 0;
+      margin: 0 auto 5px;
+  }
+
+  .calendar-main .date .row .p-choose .p-btn {
+      width: 66px;
+      height: 24px;
+      font-size: 12px;
+      border: 1px solid #f5f5f5;
+      text-align:center;
+      vertical-align: middle;
+  }
+
+  .calendar-main .date .row .p-choose .change-num {
+      width: 24px;
+      height: 24px;
+      font-size: 12px;
+      display: inline-block;
+      background-color: #f5f5f5;
+      vertical-align: middle;
+  }
+
+  .calendar-main .date .row .rate-box {
+      position: relative;
+      margin-bottom: 5px;
+  }
+
+  .calendar-main .date .row .rate {
+      width: 112px;
+      height: 24px;
+      font-size: 12px;
+      padding-left: 5px;
+      padding-right: 20px;
+      text-align:center;
+      border: 1px solid #f5f5f5;
+  }
+
+  .calendar-main .date .row .rate-box i {
+      position: absolute;
+      top: 4px;
+      right: 14px;
+  }
+
+  .calendar-main .date .row .only-show {
+      background-color: #f5f5f5;
+  }
+
+  .calendar-main .date .row .only-show p:nth-of-type(2) {
+      font-size: 12px;
+      color: #646464;
+  }
+
+  .calendar-main .date .row .only-show .only-show-day {
+      font-size: 30px;
+      margin-top: 24px;
+      margin-bottom: 6px;
+      color: #969696;
+  }
+
+  .calendar-main .date .row .only-show .only-show-day {
+      font-size: 30px;
+      margin-top: 24px;
+      margin-bottom: 6px;
+      color: #969696;
+  }
+
+
+  /* 兑换订单不能编辑状态 */
+
+  .calendar-exchange li.disable {
+      position: relative;
+  }
+
+
+  .calendar-try li.validDay .box-mask,
+  .calendar-exchange li.disable .box-mask {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #f5f5f5;
+      opacity: 0.5;
+      z-index: 2;
+  }
+
+  .calendar-exchange li.disable .box-main {
+      position: relative;
+      top: 0;
+      left: 0;
+  }
+
+  .calendar-exchange .row li.disable .date-day {
+      color: #969696;
+  }
+
+  /* 不允许兑换日历的输入框输入 */
+  .calendar-exchange .calendar-main .date .row .p-choose .p-btn {
+      cursor:not-allowed;
+  }
+
+
+  /* 合计订单 */
+
+  .calendar .sum-tryOrder {
+      font-size: 16px;
+      color: #323232;
+      margin: 20px 0 20px 40px;
+  }
+
+  .calendar .tips {
+      font-size: 14px;
+      color: #323232;
+      margin-left: 40px;
+      margin-bottom: 40px;
+  }
+
+
+  /* 兑换试用计划 */
+
+  .setPlan-exchange .sum-exchangeOrder {
+      margin-top: 40px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #323232;
+  }
+
+  .setPlan-exchange .exchange-tips {
+      font-size: 14px;
+      color: #646464;
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+
+
+  /* 设置兑换投放计划 */
+
+  .setPlan-exchange {
+      background-color: #fff;
+  }
+
+
+  /* 试用兑换日历 */
+
+  .calendar-exchange {}
+
+  .calendar-exchange .row p.date-day {
+      margin-top: 10px;
+  }
+
+
+  /* 温馨提示 */
+
+  .all-tips {
+      margin-top: 20px;
+      font-size: 14px;
+  }
+
+  .all-tips .tips-title {
+      margin-bottom: 20px;
+  }
+
+  .all-tips p {
+      margin-bottom: 6px;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .nextStep_btn input {
+      width: 150px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 5px;
+      font-size: 16px;
+      border: 1px solid #f25f55;
+      margin: 20px 30px 30px 0;
+      background-color: #f25f55;
+      color: #fff;
+  }
+
+  #section .section_main .store_content .settings_trialNumber .nextStep_btn input:first-of-type {
+    background-color: #fff;
+    color: #f25f55;
+  }
+
+  #section .section_main .store_content .mission_info_set h2 {
+    font-size: 16px;
+    padding-top: 18px;
+}
+
+.mission_info_set b {
+    font-size: 12px;
+    color: #f25f55;
+}
+
+.mission_info_set .apply_set,
+.mission_info_set .order_set,
+.mission_info_set .service_chat {
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.mission_info_set .apply_set .set_box,
+.mission_info_set .order_set .set_box {
+    background-color: #fffcfc;
+    border: 1px solid #ffe3e6;
+    margin-top: 15px;
+    padding: 20px 15px;
+}
+
+em {
+    font-style: normal;
+    color: #999;
+}
+
+/*申请任务*/
+
+.apply_set .apply_set_option,
+.service_chat .is_chat_option{
+    cursor: pointer;
+
+    padding-bottom: 2px;
+    color: #333;
+    /* background: url(../../images/merchant/sj_fbsy_icon_quan_default.png) left center no-repeat; */
+    margin: 10px 0;
+}
+
+.apply_set .apply_active,
+.service_chat .chat_active{
+    /* background: url(../../images/merchant/spot.png) left center no-repeat; */
+}
+
+.apply_set_custom .op_title {
+    width: 150px;
+    cursor: pointer;
+    margin-left: 20px;
+    padding-left: 20px;
+    background: url(../../images/merchant/checkbox_default.png) left center no-repeat;
+}
+
+.apply_set_custom .addCart {
+    margin-bottom: 10px;
+}
+
+.apply_set_custom .op_active {
+    background: url(../../images/merchant/checkbox.png) left center no-repeat;
+}
+
+.apply_set_custom select {
+    border: 1px solid #c8c8c8;
+    color: #666;
+}
+
+.apply_set_custom select[name="per_collect"] {
+    background-color: #f5f5f5;
+}
+
+/*下单任务设置*/
+.order_set_box {
+    margin-top: 5px;
+}
+
+.order_set_box .order_set_title {
+    width: 400px;
+    line-height: 30px;
+    cursor: pointer;
+    padding-left: 20px;
+    color: #333;
+    background: url(../../images/merchant/checkbox_default.png) left center no-repeat;
+}
+
+.order_set_box  .op_active {
+    background: url(../../images/merchant/checkbox.png) left center no-repeat;
+}
+
+.order_set_box input[type="text"],
+.service_chat input[type="text"]{
+    width: 100px;
+    height: 30px;
+    padding: 5px 30px 5px 5px;
+    font-size: 12px;
+    color: #333;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+.order_set_box em,
+.service_chat .set_box em{
+    margin-left: -28px;
+    color: #666;
+}
+
+/*设置宝贝问题*/
+.look_time_qa{
+    margin-left: 74px;
+}
+
+.look_time_qa .qa_box{
+    margin: 15px 0;
+}
+
+.look_time_qa .qa_box input{
+    width: 380px;
+    line-height: 28px;
+    padding-left: 10px;
+}
+
+.order_set_tips{
+    margin-top: 20px;
+}
+/*客服聊天*/
+
+.service_chat .is_chat_option{
+    line-height: 30px;
+}
+
+.service_chat .has_chat{
+    margin-left: 60px;
+    margin-right: 10px;
+}
+.service_chat input[type="text"]{
+    margin: 10px 0;
+}
+
+/*下一步*/
+.nextStep_btn input{
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid #f25f55;
+    margin: 50px 30px 30px 0;
+    background-color: #f25f55;
+    color: #fff;
+}
+.nextStep_btn input:first-child{
+    background-color: #fff;
+    color: #f25f55;
+}
+
+.plan_description>p{
+    line-height:20px;
+}
+
+.per_chatlog{
+    border: 1px solid #c8c8c8;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+
+/*功能开发 遮罩样式*/
+.mission_info_set{
+    position:relative;
+}
+.in_development_modal{
+    text-align:center;
+    display: table;
+    top:50px;
+    left:0px;
+    width:980px;
+    height:415px;
+    position:absolute;
+    z-index:9;
+    background:rgba(255,255,255,0.95);
+    border:1px solid #f5f5f5;
+}
+.in_development_modal>p{
+    display:table-cell;
+    vertical-align: middle;
+    color:#e61e28;
+    font-size:28px;
+}
+#section .section_main .store_content .settings_search h2.title {
+    font-size: 16px;
+    padding-top: 18px;
+  }
+  #section .section_main .store_content .settings_search .search_content {
+    padding-left: 20px;
+  }
+  #section .section_main .store_content .settings_search .search_content .part_one,
+  #section .section_main .store_content .settings_search .search_content .part_two {
+    overflow: hidden;
+  }
+  #section .section_main .store_content .settings_search .search_content .part_one h3,
+  #section .section_main .store_content .settings_search .search_content .part_two h3 {
+    float: left;
+    font-size: 14px;
+    color: #323232;
+    margin-top: 22.5px;
+  }
+  #section .section_main .store_content .settings_search .search_content .part_one .part_content,
+  #section .section_main .store_content .settings_search .search_content .part_two .part_content {
+    float: left;
+  }
+  #section .section_main .store_content .settings_search .search_content p.keyword {
+    padding: 15px 0 10px 16px;
+  }
+  #section .section_main .store_content .settings_search .search_content p.keyword span {
+    color: #646464 !important ;
+  }
+  #section .section_main .store_content .settings_search .search_content p.checkbox_title {
+    padding-bottom: 0;
+    color: #323232;
+  /*  background: url(../..../../images/merchant/checkbox_default.png) left center no-repeat;*/
+    margin-top: 21px;
+    padding-top: 0;
+  }
+  #section .section_main .store_content .settings_search .search_content p.checkbox_title>i {
+    display:inline-block;
+    float:left;
+    width:20px;
+    height:20px;
+    background: url(../../images/merchant/checkbox_default.png) left center no-repeat;
+    cursor:pointer;
+    margin-left: -23px;
+
+  }
+  #section .section_main .store_content .settings_search .search_content .search_active {
+    background: url(../../images/merchant/checkbox.png) left center no-repeat !important;
+  }
+  #section .section_main .store_content6 .settings_search .search_content p {
+    font-size: 14px;
+    color: #969696;
+    padding-top: 7px;
+     padding-left: 24px;
+  }
+  .checkbox_title_top,#visit,#imageContent,#safe{
+    padding-left: 24px;
+  }
+  #section .section_main .store_content .settings_search .search_content p span {
+    display: inline-block;
+    color: #f25f55;
+    margin-left: 8px;
+  }
+  #section .section_main .store_content .settings_search .search_content p b {
+    display: inline-block;
+    font-weight: bold;
+    color: #646464;
+  }
+  #section .section_main .store_content6 .settings_search .search_content p input {
+    border: 1px solid #969696;
+    border-radius: 5px;
+    width: 100px;
+    height: 28px;
+  }
+  #section .section_main .store_content .settings_search .nextStep_btn input {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid #f25f55;
+    margin: 50px 30px 30px 0;
+    background-color: #f25f55;
+    color: #fff;
+  }
+  #section .section_main .store_content .settings_search .nextStep_btn input:first-of-type {
+    background-color: #fff;
+    margin-left: 0px;
+    color: #f25f55;
+  }
+  input.fillIn_num{
+    margin-right:10px;
+    color:#333;
+  }
+  .Ad_slot{
+    margin-top:12px;
+  }
+  .Ad_slot p.title{
+    line-height:24px;
+    color:#333 !important ;
+    font-size:14px;
+  }
+  .Ad_slot .Ad_slotSite{
+    padding-left:25px;
+  }
+  .Ad_slot .Ad_slotSite p img{
+    cursor:pointer;
+  }
+  .Ad_slot .Ad_slotSite p a{
+    color:#00a0e9 !important ;
+    text-decoration: underline;
+    margin-right:20px;
+  }
+  .error{
+    font-size:12px;
+  }
+  .error span{
+    display:inline-block;
+    float:left;
+    margin-top:1.5px;
+    margin-right:5px;
+    font-size:14px;
+  }
+
+
+
+
+  .mask_layer{
+    background-color: #000;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 88;
+  }
+
+
+  .adSlot_content {
+    padding-bottom: 40px;
+    position: fixed;
+    z-index: 99;
+    top: 40%;
+    left: 50%;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .adSlot_PCmodal .adSlot_content{
+    margin-left:-386px;
+    margin-top:-279px;
+  }
+
+  .adSlot_H5modal .adSlot_content{
+    margin-left:-182px;
+    margin-top:-285px;
+  }
+
+  .adSlot_content .title{
+    text-align:right;
+    padding-right:50px;
+    cursor:pointer;
+
+  }
+
+  #section .section_main .store_content .settings_search .search_content p span.error_hint{
+    color:#e61e28 !important ;
+  }
+  #section .section_main .store_content .settings_search .search_content p span.error_hint .icon-cuowu{
+    color:#e61e28 !important ;
+  }
+
+  .part_one p{
+    padding:5px 0;
+  }
+  #section .section_main .store_content .confirm_payment h2.title {
+    font-size: 16px;
+    padding-top: 18px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content {
+    padding: 20px 20px 10px 20px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content h3 {
+    font-size: 16px;
+    color: #323232;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table {
+    width: 940px;
+    margin-top: 10px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table td,
+  #section .section_main .store_content .confirm_payment .payment_content > table th {
+    border: 1px  solid #c8c8c8;
+    text-align: center;
+    height: 50px;
+    font-size: 14px;
+    color: #646464;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table td {
+    padding: 15px 0;
+    vertical-align: middle;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table td p {
+   line-height:24px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table td span {
+    color: #e61e28;
+    margin: 0 5px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table td b {
+    color: #323232;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table tr.other td:nth-of-type(1) p {
+    font-size: 12px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table td:nth-of-type(2) p {
+    font-size: 12px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table th:nth-of-type(1) {
+    width: 160px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table th:nth-of-type(2) {
+    width: 614px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content > table th:nth-of-type(3) {
+    width: 160px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content p.total {
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 20px;
+    font-size: 16px;
+    color: #323232;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content p.total span {
+    color: #e61e28;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content p.deposit {
+    font-size: 14px;
+    color: #646464;
+    padding: 8px 0;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content p.deposit b {
+    color: #e61e28;
+    font-size: 18px;
+    margin-right: 5px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content p.deposit span {
+    color: #e61e28;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content p.recharge {
+    color: #e61e28;
+    font-size: 12px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content p.recharge a {
+    color: #2685d5;
+    text-decoration: underline ;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content p {
+    color: #969696;
+    font-size: 14px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content div.payment_code {
+    padding-top: 20px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content div.payment_code p {
+    font-size: 14px;
+    color: #646464;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content div.payment_code > table {
+    margin-top: 5px;
+    width: 187px;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content div.payment_code > table td {
+    /*width: 30px;*/
+    height: 30px;
+    /*border: 1px solid #c8c8c8;*/
+  }
+  #section .section_main .store_content .confirm_payment .payment_content div.payment_code > table td input {
+    /*width: 30px;*/
+    height: 30px;
+    padding-left: 12px;
+  }
+
+  #passwd{
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    width:200px;
+  }
+
+  #pwderror{
+    padding-left:20px;
+    color:#e61e28;
+  }
+  #section .section_main .store_content .confirm_payment .payment_content div.payment_code > table td input:focus {
+    border: 2px solid #a6cef1;
+  }
+  #section .section_main .store_content .confirm_payment .nextStep_btn input {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid #f25f55;
+    margin: 30px 30px 30px 0;
+    background-color: #f25f55;
+    color: #fff;
+  }
+  #section .section_main .store_content .confirm_payment .nextStep_btn input:first-of-type {
+    margin-left: 21px;
+    background-color: #fff;
+    color: #f25f55;
+  }
+  .payment_modal,
+  .paymentFailure_modal {
+    display: none;
+  }
+  .payment_modal .succeed_content,
+  .paymentFailure_modal .succeed_content {
+    padding-top: 20px;
+  }
+  .payment_modal .succeed_content p.payment_succeed,
+  .paymentFailure_modal .succeed_content p.payment_succeed {
+    color: #323232;
+    font-size: 16px;
+    padding: 15px 0 10px 0;
+  }
+  .payment_modal .succeed_content p,
+  .paymentFailure_modal .succeed_content p {
+    font-size: 14px;
+  }
+  .payment_modal .modal_submit,
+  .paymentFailure_modal .modal_submit {
+    padding-top: 15px;
+  }
+  .payment_modal .modal_submit input,
+  .paymentFailure_modal .modal_submit input {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    background-color: #f25f55;
+    border-radius: 5px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page-header{margin:20px 0;}
+
+ .navbar-top-links li {
+    display: inline-block;
+}
+
+.navbar-top-links li:last-child {
+    margin-right: 15px;
+}
+
+.navbar-top-links li a {
+    padding: 15px;
+    min-height: 50px;
+}
+
+.navbar-top-links .dropdown-menu li {
+    display: block;
+}
+
+.navbar-top-links .dropdown-menu li:last-child {
+    margin-right: 0;
+}
+
+.navbar-top-links .dropdown-menu li a {
+    padding: 3px 20px;
+    min-height: 0;
+}
+
+.navbar-top-links .dropdown-menu li a div {
+    white-space: normal;
+}
+
+.navbar-top-links .dropdown-messages,
+.navbar-top-links .dropdown-tasks,
+.navbar-top-links .dropdown-alerts {
+    width: 310px;
+    min-width: 0;
+}
+
+.navbar-top-links .dropdown-messages {
+    margin-left: 5px;
+}
+
+.navbar-top-links .dropdown-tasks {
+    margin-left: -59px;
+}
+
+.navbar-top-links .dropdown-alerts {
+    margin-left: -123px;
+}
+
+.navbar-top-links .dropdown-user {
+    right: 0;
+    left: auto;
+}
+
+/* Sidebar Menu Styles */
+
+ .sidebar-search {
+    padding: 15px;
+}
+
+.arrow {
+    float: right;
+}
+
+.fa.arrow:before {
+    content: "\f104";
+}
+
+.active > a > .fa.arrow:before {
+    content: "\f107";
+}
+
+.nav-second-level li,
+.nav-third-level li {
+    border-bottom: none !important;
+}
+
+.nav-second-level li a {
+    padding-left: 37px;
+}
+
+.nav-third-level li a {
+    padding-left: 52px;
+}
+
+@media(min-width:768px) {
+    .navbar-static-side {
+        z-index: 1;
+        position: absolute;
+        width: 250px;
+    }
+
+    .navbar-top-links .dropdown-messages,
+    .navbar-top-links .dropdown-tasks,
+    .navbar-top-links .dropdown-alerts {
+        margin-left: auto;
+    }
+}
+
+
+
+/* DataTables Overrides */
+
+ table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+    background: transparent;
+}
+
+table.dataTable thead .sorting_asc:after {
+    content: "\f0de";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting_desc:after {
+    content: "\f0dd";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting:after {
+    content: "\f0dc";
+    float: right;
+    font-family: fontawesome;
+    color: rgba(50,50,50,.5);
+}
+
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+}
+
+.btn{margin-left: 8px;}
+
+/*-------------------------涓婁紶缂╃暐鍥炬牱寮� start----------------------------*/
+#picker {
+    display: inline-block;
+    line-height: 1.428571429;
+    vertical-align: middle;
+    margin: 0 12px 0 0;
+}
+#picker .webuploader-pick {
+    padding: 6px 12px;
+    display: block;
+}
+
+
+#uploader-demo .thumbnail {
+    width: 110px;
+    height: 110px;
+}
+#uploader-demo .thumbnail img {
+    width: 100%;
+}
+.uploader-list {
+    width: 100%;
+    overflow: hidden;
+}
+.file-item {
+    float: left;
+    position: relative;
+    margin: 0 20px 20px 0;
+    padding: 4px;
+}
+.file-item .error {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    background: red;
+    color: white;
+    text-align: center;
+    height: 20px;
+    font-size: 14px;
+    line-height: 23px;
+}
+.file-item .info {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    right: 4px;
+    height: 20px;
+    line-height: 20px;
+    text-indent: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow : ellipsis;
+    font-size: 12px;
+    z-index: 10;
+}
+.upload-state-done:after {
+    content:"\f00c";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 32px;
+    position: absolute;
+    bottom: 0;
+    right: 4px;
+    color: #4cae4c;
+    z-index: 99;
+}
+.file-item .progress {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    height: 3px;
+    left: 4px;
+    height: 4px;
+    overflow: hidden;
+    z-index: 15;
+    margin:0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+}
+.file-item .progress span {
+    display: block;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    background: #d14 url(../../images/progress.png) repeat-x;
+    -webit-transition: width 200ms linear;
+    -moz-transition: width 200ms linear;
+    -o-transition: width 200ms linear;
+    -ms-transition: width 200ms linear;
+    transition: width 200ms linear;
+    -webkit-animation: progressmove 2s linear infinite;
+    -moz-animation: progressmove 2s linear infinite;
+    -o-animation: progressmove 2s linear infinite;
+    -ms-animation: progressmove 2s linear infinite;
+    animation: progressmove 2s linear infinite;
+    -webkit-transform: translateZ(0);
+}
+@-webkit-keyframes progressmove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 17px 0;
+    }
+}
+@-moz-keyframes progressmove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 17px 0;
+    }
+}
+@keyframes progressmove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 17px 0;
+    }
+}

@@ -1,0 +1,206 @@
+
+	<include file="Layout:head" />
+	<include file="Layout:nav" />
+	<include file="Layout:navside" />
+		<!--mian_left-->
+		<div class="mian_right">
+			<div class="mian_topt">
+				<div class="mtt_pt clearfix">
+					<dl>
+						<dt>试客入门</dt>
+						<dd>
+							<ol class="clearfix">
+								<li>
+									<a href="javascript:;" target="_blank">申请试用</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">获得试用</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">到指定平台</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">提交订号</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">提交试告</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">获取担保金</a>
+								</li>
+							</ol>
+							<div class="mit_pl">
+								<div class="mtt_plt">
+								</div>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						$('ol li', '.mtt_pt').hover(function() {
+							var that = $(this);
+							$('.mtt_plt', '.mit_pl').attr("class", "mtt_plt sat" + that.index());
+						});
+						$('ol li', '.mtt_pt').hover(function() {
+							var that = $(this);
+							$('.mtt_plt', '.mit_pl').attr("class", "mtt_plt sat" + that.index());
+						});
+					})
+				</script>
+				<div class="mtt_pts clearfix">
+					<dl>
+						<dt>商家入门</dt>
+						<dd>
+							<ol class="clearfix">
+								<li>
+									<a href="javascript:;" target="_blank">申请试用</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">获得试</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">到指定平台</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">提交订号</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">提交试告</a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank">获取担保金</a>
+								</li>
+							</ol>
+							<div class="mit_pls">
+								<div class="mtt_plts">
+								</div>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						$('ol li', '.mtt_pts').hover(function() {
+							var that = $(this);
+							$('.mtt_plts', '.mit_pls').attr("class", "mtt_plts sats" + that.index());
+						});
+						$('ol li', '.mtt_pts').hover(function() {
+							var that = $(this);
+							$('.mtt_plts', '.mit_pls').attr("class", "mtt_plts sats" + that.index());
+						});
+					})
+				</script>
+			</div>
+			<div class="zhu_ce">
+				<div class="rh_z">
+					用户中心
+				</div>
+				<!--rh_z-->
+				<div class="rt_yhd">
+					<div class="er_g">
+						<a href="{:U('Help/userhelp',array('page'=>'apply'))}" target="_self">
+							<img src="__PUBLIC__/maoke/images/help/hl_ce1.jpg">
+						</a>
+						<a href="{:U('Help/userhelp',array('page'=>'getassure'))}" target="_self">
+							<img src="__PUBLIC__/maoke/images/help/hl_ce2.jpg">
+						</a>
+					</div>
+					<!--er_g-->
+					<div class="left_ts">
+						<span>用户常见问题</span>
+					</div>
+					<!--left_ts-->
+					<div class="yh_zcf">
+						<ul>
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'login'))}" target="_self">如何注册与登录</a>
+							</li>
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'condition'))}" target="_self">参与试用的条件</a>
+							</li>
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'getgold'))}" target="_self">如何获取金币</a>
+							</li>
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'order'))}" target="_self">如何搜索试用下单</a>
+							</li>
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'look'))}" target="_self">如何查看我的试用情况</a>
+							</li>
+							
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'apply'))}" target="_self">如何申请试用商品</a>
+							</li>
+							
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'ruler'))}" target="_self"><strong>领吧试用规则</strong></a>
+							</li>
+						</ul>
+					</div>
+					<!--yh_zcf-->
+				</div>
+				<!--rt_yhd-->
+			</div>
+			<div class="zhu_ce">
+				<div class="rh_z">
+					商家中心
+				</div>
+				<!--rh_z-->
+				<div class="rt_yhd">
+					<div class="er_g">
+						<a href="{:U('Help/sellerhelp',array('page'=>'reg'))}" target="_self">
+							<img src="__PUBLIC__/maoke/images/help/sj_c1.jpg">
+						</a>
+						<a href="{:U('Help/sellerhelp',array('page'=>'sellerlogin'))}" target="_self">
+							<img src="__PUBLIC__/maoke/images/help/sj_c2.jpg">
+						</a>
+					</div>
+					<!--er_g-->
+					<div class="left_ts">
+						<span>商家常见问题</span>
+					</div>
+					<!--left_ts-->
+					<div class="yh_zcf">
+						<ul>
+							<li>
+								<a href="{:U('Help/sellerhelp',array('page'=>'about'))}" target="_self">什么是试用？</a>
+							</li>
+							<li style="width: 343px;">
+								<a href="{:U('Help/userhelp',array('page'=>'putassure'))}" target="_self">何时发放试用担保金</a>
+							</li>
+							<li>
+								<a href="{:U('Help/sellerhelp',array('page'=>'publish'))}" target="_self">如何发布试用？</a>
+							</li>
+							<li>
+								<a href="{:U('Help/sellerhelp',array('page'=>'seniority'))}" target="_self">发布试用需要什么资格？</a>
+							</li>
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'auditing'))}" target="_self">何时审核试用报告？</a>
+							</li>
+							<li>
+								<a href="{:U('Help/sellerhelp',array('page'=>'time'))}" target="_self">试用活动的时间为多长？</a>
+							</li>
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'check'))}" target="_self">如何验收试用报告？</a>
+							</li>
+							<li>
+								<a href="{:U('Help/sellerhelp',array('page'=>'assure'))}" target="_self">什么是试用担保金？</a>
+							</li>
+							<li>
+								<a href="{:U('Help/userhelp',array('page'=>'sellerruler'))}" target="_self"><strong>领吧商家管理规则</strong></a>
+							</li>
+						</ul>
+					</div>
+					<!--yh_zcf-->
+				</div>
+				<!--rt_yhd-->
+			</div>
+		</div>
+		<!--mian_right-->
+	</div>
+		<!--main-->
+</div>
+<script src="__PUBLIC__/maoke/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/maoke/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
+<include file="Layout:foot" />

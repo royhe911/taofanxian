@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <title>领吧</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/base.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/maoke/css/zs.css">
+	<script src="__PUBLIC__/maoke/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PUBLIC__/maoke/js/index.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+		.header_right a {
+		    width: auto;
+		}
+	</style>
+</head>
+<body>
+<div style="background: #F2F2F2; width: 100%; height: 35px; border-bottom: 1px solid #e2e2e2;">
+	<a name="top"></a>
+    <div class="header_top" style="margin-left: auto; margin-right: auto;">
+        <div class="header_leftt">
+            <div class="top_mb">
+                <a href="http://www.taofanxian.com/admin.php?m=Home&c=Index&a=login" style="color:#888" target="_blank">商家登录</a>
+                <span class="color_fg">|</span>
+                <a href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" style="color: #ea5546;" target="_blank">免费注册</a>
+            </div>
+            <div class="top_left">
+                <a href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true" target="_blank" class="on-service">在线客服</a>
+            </div>
+            <div class="shou_btn">
+                <em>&nbsp;&nbsp;收藏</em>
+                <div class="shou_toggle"><span>Ctrl</span>或<span>Cmd+D</span>收藏本站</div>
+            </div>
+        </div>
+        <div class="header_right">
+	        	<a href="{:U('Index/index')}" title="领吧首页">领吧首页</a><span class="color_fg">|</span>
+	        	<a href="javascript:;" class="wx">
+	        		<i class="top-icon-ph"></i>微信公众号
+	        		<div class="wx-img"> 
+            			<img src="__PUBLIC__/maoke/images/erweima.jpg" width="150px"/>
+            		</div>
+	        	</a>
+	        	<!--<span class="color_fg">|</span>
+	        	<a href="javascript:;" target="_blank">邀请好友<span style="color: #f25f55; font-weight: bold;">送80元</span></a>-->
+	        	<!--<span class="color_fg">|</span>
+	        	<a href="javascript:">做问卷送金币</a>-->
+	        	<span class="color_fg">|</span>
+	        	<a href="" target="_blank">帮助中心</a><span class="color_fg">|</span>
+	        	<span class="wzdh">
+                    <a href="" target="_blank" class="sbdjx" id="naviatetext" style="width: 70px;">网站导航</a>
+                    <div class="oneto" id="naviate">
+                        <div class="onetoa">
+                            <p class="tcbt">
+                                <a href="">免费试用</a>
+                            </p>
+                            <p>
+                                <a href="" target="_blank">试用专区</a>&nbsp;&nbsp;<a href="" target="_blank">试用报告</a>
+                            </p>
+                        </div>
+                        <div class="onetoa">
+                            <p class="tcbt">
+                                <a href="">有奖竞猜</a>
+                            </p>
+                            <p>
+                                <a href="" target="_blank">有奖竞猜</a>
+                            </p>
+                        </div>
+                        <div class="onetoa">
+                            <p class="tcbt">
+                                <a href="">站内活动</a>
+                            </p>
+                            <p>
+                                <a href="" target="_blank">邀请有奖</a>&nbsp;&nbsp;<a href="" target="_blank">金币抽奖</a>
+                            </p>
+                        </div>
+                        <div class="onetoa">
+                            <p style="padding-top: 8px;">
+                                <a href="" target="_blank">商家报名</a>&nbsp;&nbsp;
+                                <a href="" target="_blank">意见反馈</a>
+                            </p>
+                        </div>
+                    </div>
+                </span>
+	        
+	        </div>
+    </div>
+</div>
+
+<div class="zs_left animated">
+    <a href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" class="zs_left_menu zs_left4" target="_blank"><span class="ljzc l-disno">立即注册</span></a>
+    <a href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true" class="zs_left_menu zs_left2" target="_blank"><span class="l-disno">在线咨询</span></a>
+    <a href="#top" class="zs_left_menu zs_left3" ><span class="l-disno">返回顶部</span></a>
+</div>
+<div class="zs_nav">
+    <div class="zs_center">
+        <a href="{:U('Index/index')}" style="float:left;margin-top:18px;"><img src="__PUBLIC__/maoke/images/lingke-logo.png"></a>
+        <a href="http://www.taofanxian.com/admin.php?m=Home&c=Index&a=login" target="_blank" class="zs_nav_register" style="margin-left: 8px; background: #F35C53;">商家登录</a>
+        <a href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" target="_blank" class="zs_nav_register">商家注册</a>
+        <!--<a href="#baom" class="zs_menu">商家报名</a>-->
+        <a href="#anli" class="zs_menu">试用流程</a>
+        <a href="#sx" class="zs_menu">选择领吧</a>
+        <a href="#zs_center" class="zs_menu">常见问题</a>
+        <a href="" class="zs_menu zs_menu_choosed sy">首页</a>
+    </div>
+</div>
+<div style="width: 100%; height: 390px; position: relative; overflow: hidden;" id="banner">
+	<div class="ban-l"><img src="__PUBLIC__/maoke/images/index/jt-l.png" width="50%"/></div>
+	<div class="ban-r"><img src="__PUBLIC__/maoke/images/index/jt-r.png" width="50%"/></div>
+	<ul class="ban">
+		<li style="position: absolute;  width: 100%;">
+            <div class="zs_banner zs_banner2" ><a href="javascript:;"></a></div>
+		</li>
+		<li style="position: absolute;  width: 100%;">
+            <div class="zs_banner zs_banner3" ><a href=""></a></div>
+		</li>
+	</ul>
+</div>
+
+<div class="zs_center" >
+	<!--<a name="zs_center" class="maoA"></a>-->
+    <div class="zs_title">
+    	<a name="zs_center" class="maoA"></a>
+        <div class="zs_line"></div>
+        <span><em style="margin-right: 20px;">•</em>运营店铺时你是否会经常遇到这样的问题？<em style="margin-left: 20px;">•</em></span>
+    </div>
+    <div style="text-align: center;"><img src="__PUBLIC__/maoke/images/index/zs_common_question.jpg"></div>
+    <a class="zs_try_btn">领吧，为您解决以上烦恼</a>
+</div>
+<div style="background: #f6f6f6;">
+	
+    <div class="zs_center">
+        <div class="zs_page_icon"><img src="__PUBLIC__/maoke/images/index/zs_page_icon2.png"></div>
+        <div class="zs_title" style="margin-bottom:110px;">
+      		<a name="sx" class="maoA"></a>
+            <div class="zs_line"></div>
+            <span style="background: #f6f6f6;"><em style="margin-right: 20px;">•</em>为什么首选领吧？<em style="margin-left: 20px;">•</em></span>
+        </div>
+        <ul class="zs_choose_reason clearfix">
+            <li>
+                <img src="__PUBLIC__/maoke/images/index/zs_reason1.png">
+                <h1>■ 100%真实买家</h1>
+                <p>领吧均为日常淘宝买家账号</p>
+            </li>
+            <li style="width: 34%">
+                <img src="__PUBLIC__/maoke/images/index/zs_reason2.png">
+                <h1>■ 提升关键词排名</h1>
+                <p>通过试用方式有效提升关键词排名</p>
+            </li>
+            <li>
+                <img src="__PUBLIC__/maoke/images/index/zs_reason3.png">
+                <h1>■ 商家选择领吧</h1>
+                <p>商家可根据自身需求选择领吧</p>
+            </li>
+            <li>
+                <h1>■ 一对一专业指导</h1>
+                <img src="__PUBLIC__/maoke/images/index/zs_reason4.png">
+                <p>有多年店铺运营经验的专业运营提供一对一指导</p>
+            </li>
+            <li style="width: 34%">
+                <img src="__PUBLIC__/maoke/images/index/zs_reason5.png">
+                <h1>■ 提升宝贝权重</h1>
+                <p>能有效提升宝贝权重，打造爆款</p>
+            </li>
+            <li>
+                <img src="__PUBLIC__/maoke/images/index/zs_reason6.png">
+                <h1>■ 提升宝贝人气</h1>
+                <p>多种方式提升宝贝人气</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="liuchengshuoming">
+    <div class="zs_center">
+        <div class="zs_page_icon"><img src="__PUBLIC__/maoke/images/index/zs_page_icon3.png"></div>
+    </div>
+    <div class="zs_title">
+    	<a name="anli" class="maoA"></a>
+        <img src="__PUBLIC__/maoke/images/index/lc_tit_03.png">
+    </div>
+    <div class="zs_center zs_content">
+        <div class="lc_up">
+            <div class="lc_left">
+                <span>商<br>家</span>
+            </div>
+            <div class="lc_right">
+                <ul class="lc_icon">
+                    <li class="firstli"><img src="__PUBLIC__/maoke/images/index/lc_1.png"></li>
+                    <li><img src="__PUBLIC__/maoke/images/index/lc_5.png"></li>
+                    <li><img src="__PUBLIC__/maoke/images/index/lc_3.png"></li>
+                    <li><img src="__PUBLIC__/maoke/images/index/lc_4.png"></li>
+                    <li class="lastli"><img src="__PUBLIC__/maoke/images/index/lc_2.png"></li>
+                </ul>
+                <ul class="lc_font">
+                    <li><span>商家发布活动</span><img src="__PUBLIC__/maoke/images/index/lc_jiantou_03.png"></li>
+                    <li class="jianju fir"><span>平台审核活动</span><img src="__PUBLIC__/maoke/images/index/lc_jiantou_03.png"></li>
+                    <li class="jianju"><span>活动发布成功</span><img src="__PUBLIC__/maoke/images/index/lc_jiantou_03.png"></li>
+                    <li><span>商家审核客户</span><img src="__PUBLIC__/maoke/images/index/lc_jiantou_03.png"></li>
+                    <li class="erfont"><span>试用完成<br />返还试用金
+</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="lc_down">
+            <div class="lc_left">
+                <span>领<br>客</span>
+            </div>
+            <div class="lc_right">
+                <ul class="lc_icon">
+                    <li class="firstli"><img src="__PUBLIC__/maoke/images/index/lc_6.png"></li>
+                    <li><img src="__PUBLIC__/maoke/images/index/lc_7.png"></li>
+                    <li><img src="__PUBLIC__/maoke/images/index/lc_8.png"></li>
+                    <li><img src="__PUBLIC__/maoke/images/index/lc_9.png"></li>
+                    <li class="lastli"><img src="__PUBLIC__/maoke/images/index/lc_10.png"></li>
+                </ul>
+                <ul class="lc_font">
+                    <li class="jianju"><span>客户下单</span><img src="__PUBLIC__/maoke/images/index/lc_jiantou_03.png"></li>
+                    <li><span>商家发货</span><img src="__PUBLIC__/maoke/images/index/lc_jiantou_03.png"></li>
+                    <li class="erfont"><span>客户收到货<br>评价提交试用报告</span><img src="__PUBLIC__/maoke/images/index/lc_jiantou_03.png"></li>
+                    <li><span>商家通过报告</span><img src="__PUBLIC__/maoke/images/index/lc_jiantou_03.png"></li>
+                    <li><span>返款给客户</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="background: url(__PUBLIC__/maoke/images/index/zs_other_stage.jpg) center no-repeat;width: 100%;height: 570px;">
+    <div class="zs_center">
+        <div class="zs_page_icon"><img src="__PUBLIC__/maoke/images/white_03.png"></div>
+        <div class="zs_title">
+            <div class="zs_line"></div>
+            <span style="background: #e6d4a0;"><em style="margin-right: 20px;">•</em>其他平台<em style="margin-left: 20px;">•</em></span>
+        </div>
+        <div style="padding: 10px 30px">
+            <div class="zs_other_stage myfl">
+                <h1>领吧试用</h1>
+                <p>日常淘宝买家，100%真实</p>
+                <p>领吧有300,000活跃用户</p>
+                <p>有多年实战经验的淘宝店铺运营</p>
+                <p>领吧属性标签，快速匹配淘宝千人千面规则</p>
+            </div>
+            <div class="zs_other_stage myfr">
+                <h1>其他平台</h1>
+                <p>试客质量参差不齐</p>
+                <p>试客数量有限</p>
+                <p>没有淘宝店铺运营实战经验</p>
+                <p>试客无属性标签，无法匹配淘宝千人千面规则</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="background: #ffffff;">
+    <div class="zs_center">
+        <div class="zs_page_icon"><img src="__PUBLIC__/maoke/images/index/zs_page_icon4.png"></div>
+        <div class="zs_title">
+            <div class="zs_line"></div>
+            <span style="background: #ffffff;"><em style="margin-right: 20px;">•</em>店铺全面升级<em style="margin-left: 20px;">•</em></span>
+        </div>
+        <div class="" style="text-align: center; width: 100%; font-size: 33px;margin-bottom: 40px;font-weight: lighter;">
+        	活动1-3期,核心数据全面提升...
+        </div>
+        <ul class="zs_aptitude clearfix">
+            <li>
+                <div class="progress pink">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value"><span class="animateNum1" data-animatetarget="120">120</span>%</div>
+                </div>
+                <p>关键词排名</p>
+                
+            </li>
+            <li>
+                <div class="progress green">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value"><span class="animateNum2" data-animatetarget="48">48</span>%</div>
+                </div>
+                <p>搜索点击率</p>
+                
+            </li>
+            <li>
+                <div class="progress yellow">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value"><span class="animateNum3" data-animatetarget="188">188</span>%</div>
+                </div>
+                <p>收藏/加购量</p>
+                
+            </li>
+            <li>
+                <div class="progress blue">
+                    <span class="progress-left">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <span class="progress-right">
+                        <span class="progress-bar"></span>
+                    </span>
+                    <div class="progress-value"><span class="animateNum4" data-animatetarget="258">258</span>%</div>
+                </div>
+                <p>店铺回访量</p>
+                
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--<div style="background: #f6f6f6;padding-bottom: 100px;">
+    <div class="zs_center">
+        <div class="zs_page_icon"><img src="__PUBLIC__/maoke/images/index/zs_page_icon2.png"></div>
+        <div class="zs_title">
+        	<a name="baom" class="maoA"></a>
+            <div class="zs_line"></div>
+            <span style="background: #f6f6f6;"><em style="margin-right: 20px;">•</em>新商家报名<em style="margin-left: 20px;">•</em></span>
+        </div>
+        <p style="color: #5e6062;font-size: 50px;text-align: center;font-weight: lighter">新商家报名入驻</p>
+        <p style="color: #626262;font-size: 18px;text-align: center;margin: 20px 0 40px 0">留下您店铺的基本信息，我们将第一时间为您服务</p>
+        <form action="" method="post" class="bmform">
+            <div class="zs_bis_msg" style="width: 908px;">
+                <span>您的店铺链接：</span>
+                <input type="text" style="width: 750px;" >
+            </div>
+            <div class="zs_bis_msg" style="width: 908px;">
+                <span><em>* </em>联系人姓名：</span>
+                <input type="text" required style="width: 750px;" pattern="^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$">
+            </div>
+            <div class="clearfix">
+                <div class="zs_bis_msg myfl">
+                    <span><em>* </em>联系人QQ：</span>
+                    <input id="sk_qq" required type="text">
+                </div>
+                <div class="zs_bis_msg myfl">
+                    <span>联系人旺旺：</span>
+                    <input id="sk_alipay" type="text">
+                </div>
+            </div>
+            <input type="submit" id="Instantly" class="zs_bis_msg_btn" value="立即提交">
+            <p style="width: 260px;margin: 12px 0 0 325px;text-align: center;font-size: 14px;">我已与业务员接洽，<a href="" style="color:#f25f55" target="_blank">点此签约开通账号&gt;</a></p>
+        </form>
+    </div>
+</div>-->
+
+<div class="zs_center">
+    <!--<div class="zs_page_icon"><img src="__PUBLIC__/maoke/images/index/zs_page_icon3.png"></div>-->
+    <div class="zs_title">
+    	<a name="problems" class="maoA"></a>
+        <div class="zs_line"></div>
+        <span ><em style="margin-right: 20px;">•</em>常见问题<em style="margin-left: 20px;">•</em></span>
+    </div>
+    <div class="zs_FAQ">
+        <h1>1.你们的客户来源是哪里？</h1>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;我们的客户都是在淘宝、天猫、京东等平台进行日常购物的买家。领吧网通过外部广告渠道以及领吧口碑传播，以商品吸引客户。目前每天累计约300,000的真实买家在线活跃。</p>
+        
+        <h1>2.如何帮助商家提高宝贝排名？</h1>
+        <p style="margin-bottom: 0;">&nbsp;&nbsp;&nbsp;&nbsp;商家在领吧网发布任务并设定购买流程。客户通过商家的任务流程，匹配淘宝排名所需要的搜索权重因素。同时，商家可设置成交方式多渠道多维度化（如关键词搜索、二维码、淘口令、直通车、U站、淘外链接等方式）。</p>
+      
+        <div class="std-btn">
+            <!--<a href="" target="_blank" class="contact-mer">成为VIP会员</a>-->
+            <a href="http://q.url.cn/cdyRVJ?_type=wpa&qidian=true" target="_blank" class="ssue"><span>在线咨询</span></a>
+            <a href="http://www.taofanxian.com/admin.php?m=Home&c=Regist&a=index" target="_blank" class="rgt-shopissue">商家注册</a>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer_main">
+        <div class="footer_left" style="width: 500px;margin-left: 100px;">
+            <div class="footer_xy">
+                <p class="f-title" style="text-align: center; padding: 20px 0;">About <span style="font-size: 30px;">领吧</span> </p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;领吧是获得央视报道的免费使用网站,是领吧首选的试用平台,通过免费使用活动帮助商家打开知名度,为商品打开销路,同时为商家挖掘潜在消费者的精准试用营销推广平台.</p>
+            </div>
+            <div>
+            	<p style="padding: 10px 0;"><span>Copyright © 2013-2017 ling8.com</span> 鄂ICP备17007635号  武汉猫客科技网络有限公司</p>
+            	<div style="display: flex; justify-content: space-between;">
+            		<a href="javascript:;"><img src="__PUBLIC__/maoke/images/img_93_92.png"/></a>
+            		<a href="javascript:;"><img src="__PUBLIC__/maoke/images/img_93_94.png"/></a>
+            		<a href="javascript:;"><img src="__PUBLIC__/maoke/images/img_93_96.png"/></a>
+            		<a href="javascript:;"><img src="__PUBLIC__/maoke/images/img_93_98.png"/></a>
+            	</div>
+            </div>
+        </div>
+        <div class="footer_right" style="float: left; margin-left: 100px; padding-top: 10px; width: 460px;">
+            <!--<div class="footer-sp1">关注领吧</div>
+            <div class="footer-sp1">微信公众号</div>-->
+            <div style="color: #313131;font-size: 12px;line-height: 30px; margin-bottom: 20px;">
+            	<a href="{:U('Index/contact')}" target="_blank" style="color: #313131;">联系我们</a><span style="margin: 0 10px;">|</span>
+                <a href="{:U('Index/joint')}" target="_blank" style="color: #313131;">商务合作</a><span style="margin: 0 10px;">|</span>
+                <a href="{:U('Index/agree')}" target="_blank" style="color: #313131;">用户协议</a><span style="margin: 0 10px;">|</span>
+                <a href="{:U('Index/guide')}" target="_blank" style="color: #313131;">帮助中心</a>
+            </div>
+            <br />
+            <div style="float: left;">
+            	<img src="__PUBLIC__/maoke/images/erweima.jpg" width="120px">
+            	<p style="text-align: center">关注领吧公众号</p>
+            </div>
+            <div style="float: left;margin-left: 100px;padding-top: 10px;">
+	            <div class="footer-sp2">
+	                <p>shang@ling8.com</p>
+	                <p>发送反馈意见</p>
+	            </div>
+				 <div class="footer-sp2" style="background: url(__PUBLIC__/maoke/images/foot-span.png) -145px 8px no-repeat;">
+	                <p>027-87370898</p>
+	                <p>027-87370899</p>
+	            </div>
+
+        	</div>    
+        </div>
+          
+    </div>
+</div>
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1060026' style='display:none;'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/stat.php%3Fid%3D1060026' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

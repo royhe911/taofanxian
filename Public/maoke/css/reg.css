@@ -1,0 +1,156 @@
+*{ margin: 0; padding: 0; box-sizing: border-box;}
+a{ text-decoration: none;}
+img{border: none;}
+.zs_nav {
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #e2e2e2;
+    background: #fff;
+}
+.zs_center {
+    width: 1100px;
+    margin: 0 auto;
+}
+.merc_content{ width: 100%; background: #ffffff;padding-top: 25px;}
+
+.mert_main {
+    height: 530px;
+    border: 9px solid #f0f0f0;
+    width: 942px;
+    margin: 0 auto;
+    position: relative;
+}
+.mer_top {
+    position: absolute;
+    left: -9px;
+    top: 15px;
+    width: 812px;
+    height: 35px;
+}
+.mer_center {
+    position: absolute;
+    left: 55px;
+    top: 100px;
+    width: 780px;
+}
+.mer_pc {
+    height: 32px;
+    line-height: 30px;
+    margin-top: 5px;
+}
+.mer_pc span {
+    float: left;
+}
+.mer_pc span.nat_px {
+    color: #666666;
+    font-size: 12px;
+    width: 73px;
+    display: block;
+    height: 30px;
+    float: left;
+    text-align: right;
+}
+.Validform_checktip {
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    color: #999;
+    font-size: 12px;
+}
+.nat_ttv {
+    width: 164px;
+    height: 28px;
+    padding-left: 3px;
+    float: left;
+    border: 1px solid #7f9db9;
+    margin: 0 5px;
+    color: #999;
+    line-height: 28px;
+}
+.mina_ti {
+    color: #999999;
+    font-size: 12px;
+    line-height: 25px;
+    margin-left: 78px;
+}
+.mer_psc {
+    color: #666666;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 75px;
+}
+.mer_psc a {
+    color: #007db7;
+}
+.mer_pct {
+	margin-left: 75px;
+    margin-top: 25px;
+}
+.merchant-protocol{float: left; margin-top: 9px;}
+.mer_pct a {
+     display: inline-block;
+     width: 60px;
+     height: 25px;
+     border: 1px solid #d2d0d0;
+     background: #f7f7f7;
+     text-align: center;
+     line-height: 25px;
+     color: #666;
+     border-radius: 2px;
+     font-weight: bold;
+     margin-left: 6px;
+     cursor: pointer;
+     font-size: 12px;
+ }
+ .qu_pxc {
+    cursor: pointer !important;
+    display: block;
+    width: 115px;
+    height: 33px;
+    border: 1px solid #940403;
+    background: #db1d1d;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    line-height: 33px;
+}
+.bis-icon {
+	border:9px solid #f0f0f0;
+    height: 181px;
+    width: 942px;
+    margin: 10px auto;
+}
+.online_service {
+    margin-left: 441px;
+    margin-top: 118px;
+}
+.online_service a {
+    background-color: #f3564d;
+    background-image: url(../images/qq_zixun1.jpg);
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    position: relative;
+    display: block;
+    width: 174px;
+    height: 36px;
+    margin-left: -21px;
+    margin-top: -3px;
+    background-position: 36px 6px;
+    color: #fff;
+    font-size: 18px;
+}
+.online_service span {
+    display: inline-block;
+    margin-left: 65px;
+    margin-top: 7px;
+}
+.online_service p {
+    margin-top: 7px;
+    color: #666666;
+    margin-left: -3px;
+	font-size: 12px;    
+}
+.online_service .img-tab{float: left;margin-left: 200px;margin-top: -180px;}
+

@@ -1,0 +1,223 @@
+#section {width: 100%;background-color: #f5f5f5;padding-bottom: 50px;}
+#section .order_details {  width: 1200px;  margin: 0 auto;  background-color: #fff;  padding-bottom: 50px;}
+#section .order_details .location_title {  padding: 30px;  border-bottom: 1px solid #f5f5f5;}
+#section .order_details .location_title ul {  overflow: hidden;}
+#section .order_details .location_title ul li {   float: left;   font-size: 14px;   padding-right: 10px;}
+#section .order_details .commodity_information {   padding: 0 30px;}
+#section .order_details .commodity_information h1 {padding-top: 30px;font-size: 16px;color: #323232;padding-bottom: 20px;}
+#section .order_details .commodity_information .title { overflow: hidden; padding: 10px;}
+#section .order_details .commodity_information .title p { font-size: 14px; height: 16px;}
+#section .order_details .commodity_information .title p a {
+  color: #005ea7;}
+#section .order_details .commodity_information .title p:first-of-type { background: url(../../images/line.png) left no-repeat; padding-left: 25px;}
+#section .order_details .commodity_information .title p:first-of-type span { margin-right: 40px;}
+#section .order_details .commodity_information .details ul { height: 115px; border-top: 1px solid #f5f5f5; border-bottom: 1px solid #f5f5f5; padding: 15px 0; overflow: hidden;}
+#section .order_details .commodity_information .details ul li { box-sizing: border-box; float: left; color: #323232; height: 80px; width: 300px;}
+#section .order_details .commodity_information .details ul li p { width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; color: #969696; line-height: 26px;}
+#section .order_details .commodity_information .details ul li p span { color: #323232;}
+#section .order_details .commodity_information .details ul li p span b {color: #f25f55;}
+#section .order_details .commodity_information .details ul li p a { color: #005ea7;}
+#section .order_details .commodity_information .details ul li:nth-of-type(1) { width: 120px; padding: 0 20px;}
+#section .order_details .commodity_information .details ul li:nth-of-type(2) { border-right: 1px solid #f5f5f5; padding-left: 30px;}
+#section .order_details .commodity_information .details ul li:nth-of-type(3) { padding-left: 30px; border-right: 1px solid #f5f5f5;}
+#section .order_details .commodity_information .details ul li:nth-of-type(4) { padding-left: 30px;}
+#section .order_details .apply_information {  padding: 30px;}
+#section .order_details .apply_information h1 {font-size: 16px;color: #323232;padding-bottom: 20px;}
+#section .order_details .apply_information h1>span.right a,#section .order_details .apply_information h1>span.right i{  font-size:14px;  color:#646464;}
+#section .order_details .apply_information h1>span.complaints_buyers_active i,#section .order_details .apply_information h1>span.complaints_buyers_active a{color:#e61e28;}
+#section .order_details .apply_information .information_detail .progress_bar_yes {position: relative;margin-left: 80px;width: 40px;height:1225px;}
+#section .order_details .apply_information .information_detail .progress_bar_yes .default_bar { position: absolute; z-index: 1; background: url(../../images/merchant/progression_bg_no_start_default.png) top center no-repeat; width: 40px; height: 1455px;}
+#section .order_details .apply_information .information_detail .progress_bar_yes .selected_bar { position: absolute; z-index: 2; width: 40px; background: url(../../images/merchant/progression_bg_no_end_default.png) top center no-repeat;}
+#section .order_details .apply_information .information_detail .progress_bar_no { position: relative;height: 1223px; margin-left: 80px; width: 40px;}
+#section .order_details .apply_information .information_detail .progress_bar_no .default_bar { position: absolute; z-index: 1; background: url(../../images/merchant/progression_bg_no_start_default.png) top center no-repeat; width: 40px; height: 1223px;}
+#section .order_details .apply_information .information_detail .progress_bar_no .selected_bar { position: absolute; z-index: 2; width: 40px; background: url(../../images/merchant/progression_bg_no_end_default.png) top center no-repeat;}
+#section .order_details .apply_information .information_detail .progress_description { padding-left: 10px; width: 1015px;}
+#section .order_details .apply_information .information_detail .progress_description > .title p span { color: #f25f55; font-size: 16px; font-weight: bold;}
+#section .order_details .apply_information .information_detail .progress_description > .title p i { font-style: normal; color: #969696; font-size: 12px; margin-top: 5px; display: inline-block;}
+#section .order_details .apply_information .information_detail .progress_description > .default_title > p {width: 90px;font-size: 16px;color: #c8c8c8;font-weight: bold;}
+#section .order_details .apply_information .information_detail .progress_description > .default_title .caption_default { display: none; font-size: 12px; color: #323232; width: 915px; border-bottom: 1px solid #f5f5f5; padding-bottom: 5px; padding-left: 121px; font-weight: normal;}
+#section .order_details .apply_information .information_detail .progress_description > .default_title .caption_default input { width: 90px; cursor:pointer; height: 28px; line-height: 26px; border: 1px solid #f25f55; border-radius: 5px; font-size: 14px; color: #fa0180; background-color: #fff; margin-top: -12px; margin-left: 20px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate0 > p.title_active { padding-top: 61px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate1 > p.title_active { padding-top: 96px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate2 > p.title_active,
+#section .order_details .apply_information .information_detail .progress_description .evaluate3 > p.title_active,
+#section .order_details .apply_information .information_detail .progress_description .evaluate5 > p.title_active,
+#section .order_details .apply_information .information_detail .progress_description .evaluate6 > p.title_active {padding-top: 95px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate4 > p.title_active { padding-top: 95px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate7 > p.title_active {font-size: 14px;padding-top: 77px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate8 > p.title_active { padding-top: 84px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate0 > p.caption_default { padding-top: 62px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate1 > p.caption_default { padding-top: 84px; height: 108px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate2 > p.caption_default { padding-top: 84px; height: 108px;}
+#section .order_details .apply_information .information_detail .progress_description .evaluate3 > p.caption_default {
+  padding-top: 84px;
+  height: 108px;
+}
+#section .order_details .apply_information .information_detail .progress_description .evaluate4 > p.caption_default {
+  padding-top: 84px;
+  height: 108px;
+}
+#section .order_details .apply_information .information_detail .progress_description .evaluate5 > p.caption_default {
+  padding-top: 84px;
+  height: 108px;
+}
+#section .order_details .apply_information .information_detail .progress_description .evaluate6 > p.caption_default {
+  padding-top: 84px;
+  height: 108px;
+}
+#section .order_details .apply_information .information_detail .progress_description .evaluate7 > p.caption_default {
+  padding-top: 84px;
+  height: 108px;
+  font-size: 14px;
+}
+#section .order_details .apply_information .information_detail .progress_description .evaluate8 > p.caption_default {
+  padding-top: 84px;
+  height: 108px;
+  font-size: 14px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_one,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_three,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_four {
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 5px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_one p b,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two p b,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_three p b,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_four p b {
+  color: #323232;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_one p.left_title,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two p.left_title,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_three p.left_title,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_four p.left_title {
+  width: 210px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_one p.left_title b,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two p.left_title b,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_three p.left_title b,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_four p.left_title b {
+  font-size: 14px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_one .right_content,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two .right_content,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_three .right_content,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_four .right_content {
+  text-align: left;
+  width: 790px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_one .right_content b,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two .right_content b,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_three .right_content b,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_four .right_content b {
+  font-size: 12px;
+  margin-right: 30px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_one .right_content b a,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two .right_content b a,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_three .right_content b a,
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_four .right_content b a {
+  color: #005ea7;
+  cursor:pointer;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_one {
+  padding-top: 50px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two {
+  padding-top: 65px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two .left_title {
+  padding-top: 85px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_two .right_content p {
+  padding-top: 10px;
+  width: 790px;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_three {
+  padding-top: 58px;
+}
+#section .order_details .apply_information .information_detail .progress_description .placeOrder .placeOrder_four {
+  padding-top: 58px;
+}
+#section .order_details .apply_information .information_detail .progress_description .ship_title .caption_left,
+#section .order_details .apply_information .information_detail .progress_description .evaluate_content .caption_left {
+  width: 130px;
+  padding-top: 68px;
+}
+#section .order_details .apply_information .information_detail .progress_description .ship_title .caption_right,
+#section .order_details .apply_information .information_detail .progress_description .evaluate_content .caption_right {
+  width: 860px;
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 8px;
+  padding-left: 82px;
+  padding-top: 68px;
+}
+#section .order_details .apply_information .information_detail .progress_description .ship_title .caption_right b,
+#section .order_details .apply_information .information_detail .progress_description .evaluate_content .caption_right b {
+  color: #323232;
+  font-size: 12px;
+  margin-right: 30px;
+}
+#section .order_details .apply_information .information_detail .progress_description .ship_title .caption_right b a,
+#section .order_details .apply_information .information_detail .progress_description .evaluate_content .caption_right b a {
+  color: #005ea7;
+  cursor:pointer;
+}
+#section .order_details .apply_information .information_detail .progress_description .ship_title .caption_right input,
+#section .order_details .apply_information .information_detail .progress_description .evaluate_content .caption_right input {
+  width: 80px;
+  height: 28px;
+  line-height: 26px;
+  border: 1px solid #f25f55;
+  border-radius: 5px;
+  margin-left: 575px;
+  font-size: 14px;
+  color: #fa0180;
+  background-color: #fff;
+}
+#section .order_details .apply_information .information_detail .progress_description .checkEvaluate .caption_left,
+#section .order_details .apply_information .information_detail .progress_description .copyEvaluate .caption_left,
+#section .order_details .apply_information .information_detail .progress_description .carryOut .caption_left {
+  padding-top: 77px;
+}
+#section .order_details .apply_information .information_detail .progress_description .checkEvaluate .caption_right,
+#section .order_details .apply_information .information_detail .progress_description .copyEvaluate .caption_right,
+#section .order_details .apply_information .information_detail .progress_description .carryOut .caption_right {
+  padding-top: 77px;
+}
+#section .order_details .apply_information .information_detail .progress_description .confirmEvaluate .caption_left,
+#section .order_details .apply_information .information_detail .progress_description .addEvaluate .caption_left {
+  padding-top: 75px;
+}
+#section .order_details .apply_information .information_detail .progress_description .confirmEvaluate .caption_right,
+#section .order_details .apply_information .information_detail .progress_description .addEvaluate .caption_right {
+  padding-top: 75px;
+}
+#section .order_details .apply_information .information_detail .progress_description .try_rebate {
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 5px;
+  padding-top: 54px;
+}
+#section .order_details .apply_information .information_detail .progress_description .try_rebate p b {
+  color: #323232;
+}
+#section .order_details .apply_information .information_detail .progress_description .try_rebate p.left_title {
+  width: 210px;
+}
+#section .order_details .apply_information .information_detail .progress_description .try_rebate p.left_title b {
+  font-size: 14px;
+}
+#section .order_details .apply_information .information_detail .progress_description .try_rebate .right_content {
+  text-align: left;
+}
+#section .order_details .apply_information .information_detail .progress_description .try_rebate .right_content b {
+  font-size: 12px;
+  margin-right: 30px;
+}
+#section .order_details .apply_information .information_detail .progress_description .try_rebate .right_content b a {
+  color: #005ea7;
+}

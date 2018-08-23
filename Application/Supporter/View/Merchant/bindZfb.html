@@ -1,0 +1,57 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+                <!--押金提现-->
+                <div id="my_main" class="deposit_withdraw left" style="min-height: 732px;">
+                    <h1 class="title">押金提现</h1>
+                    <!-- 未绑定支付宝显示 -->
+                    <div id="noBind">
+                        <p style="font-size:14px;padding:10px 0;">亲~！绑定支付宝帐号才可以提现哦!</p>
+                        <form action="{:U('Recharge/doalipay')}" method="post" id="charge_form" onsubmit="return checkCharge()">
+                            <ul style="margin-left:30px;margin-top:10px;">
+                                <li>
+                                    <label for="zfb" style="font-size:14px;font-weight:100;">支付宝帐号：</label>
+                                    <span><input type="text" id="realname" name="zfb" style="width: 200px; height: 28px;line-height: 28px; border: 1px solid #969696; border-radius: 5px; padding-left: 5px;" onblur="getZfb()"></span>
+                                    <span class="error" style="color:red;"></span>    
+                                </li>
+                                <li>
+                                    <input type="submit" value="提交绑定" style="width:150px; height: 40px;line-height: 40px;border: 1px solid #f25f55; border-radius: 5px; font-size: 16px;background-color: #f25f55; color: #fff;margin-left:87px;margin-top:20px;">
+                                </li>
+                            </ul>
+                        </form>
+                    </div>      
+                </div>
+                <!-- my_main end -->
+            </div>
+        </section>
+    <!-- page-wrapper end -->
+    </div>
+    <!-- wrapper -->
+</div>
+<script>
+    function checkCharge(){
+        if(getZfb()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    function getZfb(){
+        var regEmail =/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;  //验证支付宝邮箱
+        var regPhone = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;  //验证支付宝手机号
+        var zfb = $.trim($("#realname").val());
+        if(zfb != ''){
+            if(regEmail.test(zfb) || regPhone.test(zfb)){
+                return true;
+            }else{
+                $("#realname").parent('span').next('.error').text('请输入正确的支付宝帐号');
+                return false;
+            }
+        }else{
+            $("#realname").parent('span').next('.error').text('请输入支付宝帐号');
+            return false;
+        }
+        
+    }
+</script>
+<include file="Layout:foot" />

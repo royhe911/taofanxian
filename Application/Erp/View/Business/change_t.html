@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更换导师</title>
+    <style type="text/css">
+        td
+        {
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post">
+    商家id：<input onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" name="shop_id" placeholder="输入商家id" value="{$shop_id}"/> &nbsp;
+    <input type="submit" value="确定">
+</form>
+<br>
+<table border="1" rules="all">
+   <tr>
+       <th>id</th>
+       <th width="120px">商家名</th>
+       <th width="120px">导师(QQ)</th>
+       <th width="120px">导师id</th>
+       <th width="120px">导师昵称</th>
+       <th width="120px">导师名</th>
+       <th width="200px">操作</th>
+   </tr>
+    <tr>
+        <td>{$data.uid}</td>
+        <td>{$data.shopname}</td>
+        <td>{$data.tutor}</td>
+        <td>{$data.tid}</td>
+        <td>{$data.info}</td>
+        <td>{$data.realname}</td>
+        <td>
+            <notempty name="data">
+            <select id="teacher_change">
+            <option value="0">选择更换导师</option>
+            <volist name="teacher" id="vo">
+                <option value="{$vo.id}" <eq name="data.tid" value="$vo.id">selected</eq> >{$vo.realname} id:{$vo.id}</option>
+            </volist>
+            </select>
+                <a href="javascript:;" id="btn" onclick="change_teacher({$data.uid})">提交</a>
+            </notempty>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+<script type="text/javascript" src="__PUBLIC__/ERP/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/ERP/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript">
+
+    function change_teacher(id) {
+        var tid=$('#btn').prev().val();
+        var uid=id;
+        $.post("{:U('business/change_teacher')}",{uid:uid,tid:tid},function (data) {
+            if(data.msg == 1){
+                layer.msg(data.info,{icon:1,time:1000},function(){
+                    window.location.reload();
+                })
+            }else{
+                layer.msg(data.info,{icon:2,time:1000},function(){
+                    window.location.reload();
+                })
+            }
+        });
+    }
+</script>

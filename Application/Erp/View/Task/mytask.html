@@ -1,0 +1,209 @@
+<extend name="public/modal" />
+<block name="nav">
+	<span class="c-666">任务管理</span><span class="c-999 en">&gt;</span><span class="c-666">我的任务</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" style="top: -10px;">
+
+	<div class="dataTables_wrapper">
+		<table class="table table-border table-bordered table-bg table-hover table-sort">
+			<thead>
+				<tr class="text-c">
+					<th>id</th>
+					<th>关键词</th>
+					<th>备注</th>
+					<th>单价</th>
+					<th>佣金</th>
+					<th>订单号</th>
+					<th>旺旺号</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			<volist name="data" id="vo">
+				<tr class="text-c va-m">
+					<th width="100">{$vo.id}</th>
+					<td class="text-l">{$vo.keyword}</td>
+					<td class="text-l">{$vo.sku|default='无'}</td>
+					<td class="text-l"><b style="font-size: 11px;">¥ </b>{$vo.price}</td>
+					<td class="text-l order-commision order-input"><b style="font-size: 11px;">¥ </b>{$vo.commision}</td>
+					<td class="text-l order-num order-input">{$vo.tb_item}</td>
+					<td class="text-l order-wang order-input">{$vo.wangwang}</td>
+					<!--商家没有操作权限-->
+					<td class="td-manage">
+						<if condition="$vo.commision == ''">
+						<a onClick="orderNum(this,0)" href="javascript:;" class="order-a" title="输入订单号">输入订单号</a>
+						<a href="javascript:;" class="sure-a" style="display: none;" onclick="orderSure(this,{$vo.id},0)">确定</a>
+						<else />
+
+							<if condition="$vo.uid == $_SESSION['user']['id']">
+						<a onClick="orderNum(this,1)" href="javascript:;" class="order-a" title="输入订单号">修改</a>
+						</if>
+
+						<a href="javascript:;" class="sure-a" style="display: none;" onclick="orderSure(this,{$vo.id},1)">确定</a>
+						</if>
+						<a href="javascript:;" class="cancel-a" style="display: none;" onclick="orderCancel(this)">取消</a>
+						<!--<a style="text-decoration:none" class="ml-5" onClick="showOrder('请填写订单信息','{:U('task/orderentry','id='.$vo['id'].'&goods_id='.$vo['goods_id'])}','300','350')" href="javascript:;" title="输入订单号"><i class="Hui-iconfont">输入做单信息</i></a>-->
+					</td>
+				</tr>
+			</for>
+			</volist>
+				<!--<tr class="text-c va-m">-->
+					<!--<td class="text-l">{$data.keyword}</td>-->
+					<!--<td class="text-l">{$data.sku|default='无'}</td>-->
+					<!--<td class="text-l">{$data.price}元</td>-->
+					<!--<td class="text-l order-wang">{$vo.wangwang|default="暂无"}</td>-->
+					<!--<td class="text-l order-num">{$vo.tb_item|default="暂无"}</td>-->
+					<!--<td class="text-l"></td>-->
+					<!--<td class="text-l"></td>-->
+					<!--<td class="text-l"><notempty name="vo.edittime">{$vo.edittime|date="Y-m-d H:i:s",###}</notempty></td>-->
+					<!--&lt;!&ndash;商家没有操作权限&ndash;&gt;-->
+					<!--<td class="td-manage">-->
+						<!--<a style="text-decoration:none" class="ml-5" onClick="orderNum(this,{$vo.id})" href="javascript:;" title="输入订单号"><i class="Hui-iconfont">输入订单号</i></a>-->
+					<!--</td>-->
+				<!--</tr>-->
+			</tbody>
+		</table>
+	</div>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	//输入订单号
+	function orderNum(el,type){
+		if(!type){
+			$(el).parent().siblings('.order-commision').html('<select class="commision select"><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>');
+			$(el).parent().siblings('.order-wang').html('<input type="text" class="wang" value="" placeholder="请输入旺旺号" onfocusin="removeErr(this)">');
+//			$(el).parent().siblings('.order-wechatnum').html('<input type="text" class="wechatnum" value="" placeholder="请输入微信备注" onfocusin="removeErr(this)">');
+			$(el).parent().siblings('.order-num').html('<input type="number" class="ordernum" maxlength="18" value=""  placeholder="请输入18位订单号" onfocusin="removeErr(this)">');
+		}else{
+			var order_num = $(el).parent().siblings('.order-num').text();
+			var wang = $(el).parent().siblings('.order-wang').text();
+//			var wechatnum = $(el).parent().siblings('.order-wechatnum').text();
+			var commision = $(el).parent().siblings('.order-commision').text();
+			$(el).parent().siblings('.order-commision').html('<select class="commision select"><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>');
+			$(".commision option").each(function(){
+				if(this.value == parseInt(commision)){
+					$(this).prop('selected','true');
+				}
+			})
+			$(el).parent().siblings('.order-wang').html('<input type="text" value="'+wang+'" placeholder="请输入旺旺号" class="wang" onfocusin="removeErr(this)">');
+//			$(el).parent().siblings('.order-wechatnum').html('<input type="text" value="'+wechatnum+'" placeholder="请输入微信备注" class="wechatnum" onfocusin="removeErr(this)">');
+			$(el).parent().siblings('.order-num').html('<input type="number" value="'+order_num+'" placeholder="请输入18位订单号" class="ordernum" onfocusin="removeErr(this)">');
+		}
+		$(el).hide().siblings(".sure-a,.cancel-a").show();
+
+	}
+	//提交
+	function orderSure(el,id,type){
+		var ordernum =$.trim($(el).parent().siblings('.order-num').find('input').val()); //订单号
+		var wangnum =$.trim($(el).parent().siblings('.order-wang').find('input').val());  //旺旺号
+//		var wechatnum =$.trim($(el).parent().siblings('.order-wechatnum').find('input').val());  //微信号
+		var commision =$.trim($(el).parent().siblings('.order-commision').find('select').val());  //佣金
+		if(!commision){
+			$(el).parent().siblings('.order-commision').find('input').addClass('error-input');
+			return;
+		}
+		if(!ordernum){
+			$(el).parent().siblings('.order-num').find('input').addClass('error-input').attr('placeholder','请填写订单号');
+			return ;
+		}
+		if(ordernum.length !== 18){
+			$(el).parent().siblings('.order-num').find('input').val('').addClass('error-input').attr('placeholder','订单号为18位');
+			return ;
+		}
+//		if(!wangnum){
+//			$(el).parent().siblings('.order-wang').find('input').addClass('error-input');
+//			return;
+//		}
+//		if(!wechatnum){
+//			$(el).parent().siblings('.order-wechatnum').find('input').addClass('error-input');
+//			return;
+//		}
+
+	  	//提交表单
+        $.post("{:U('Task/myOrder')}", {id:id,wangwang:wangnum,tb_item:ordernum,commision:commision,type:type}, function(data) {
+        	if (1 == data.msg){
+        		layer.msg(data.info,{icon:1,time:1000});
+        		setTimeout(function(){window.location.reload()},1000)
+        	} else {
+        		layer.msg(data.info,{icon:2,time:1000});
+        		//setTimeout(function(){window.location.reload()},1000)
+
+        	}
+        },'json');
+	}
+	//取消
+	function orderCancel(el){
+		var ordernum =$.trim($(el).parent().siblings('.order-num').find('input').val()); //订单号
+		var wangnum =$.trim($(el).parent().siblings('.order-wang').find('input').val());  //旺旺号
+//		var wechatnum =$.trim($(el).parent().siblings('.order-wechatnum').find('input').val());  //微信号
+		var commision =$.trim($(el).parent().siblings('.order-commision').find('select').val());  //佣金
+		$(el).parent().siblings('.order-num').html(ordernum);
+		$(el).parent().siblings('.order-wang').html(wangnum);
+//		$(el).parent().siblings('.order-wechatnum').html(wechatnum);
+		$(el).parent().siblings('.order-commision').html(commision);
+		$(el).hide().siblings(".sure-a").hide().siblings('.order-a').show();
+		window.location.reload();
+
+	}
+//	function orderNum(el,id,type){
+//		if(!type){
+//			var $html = '<div class="order-con"><input placeholder="请填写订单号" class="orderInput ordernum" name="ordernum" onfocusin="removeErr(this)"><br/><br/><input placeholder="请填写旺旺号" class="orderInput wang" name="wang" onfocusin="removeErr(this)"><br/><br/><input placeholder="请填写微信备注名" class="orderInput wechatnum" name="wechatnum" onfocusin="removeErr(this)"><br/><br/><input placeholder="请填写佣金" class="orderInput commision" name="commision" onfocusin="removeErr(this)" type="number" step="1"></div>';
+//		}else{
+//			var order_num = $(el).parent().siblings('.order-num').text();
+//			var wang = $(el).parent().siblings('.order-wang').text();
+//			var wechatnum = $(el).parent().siblings('.order-wechatnum').text();
+//			var commision = $(el).parent().siblings('.order-commision').text();
+//			var $html = '<div class="order-con"><input placeholder="请填写订单号" class="orderInput ordernum" name="ordernum" onfocusin="removeErr(this)" value="'+order_num+'"><br/><br/><input placeholder="请填写旺旺号" class="orderInput wang" name="wang" onfocusin="removeErr(this)" value="'+wang+'"><br/><br/><input placeholder="请填写微信备注名" class="orderInput wechatnum" name="wechatnum" onfocusin="removeErr(this)" value="'+wechatnum+'"><br/><br/><input placeholder="请填写佣金" class="orderInput commision" name="commision" type="number" step="1" onfocusin="removeErr(this)" value="'+commision+'"></div>';
+//		}
+//
+//		layer.confirm($html, {
+//		  btn: ['提交','取消'] //按钮
+//		}, function(){
+//			var ordernum =$.trim($(".ordernum").val()); //订单号
+//			var wangnum =$.trim($(".wang").val());  //旺旺号
+//			var wechatnum =$.trim($(".wechatnum").val());  //微信号
+//			var commision =$.trim($(".commision").val());  //佣金
+//			if(!ordernum){
+//				$(".ordernum").addClass('error-input').attr('placeholder','请填写订单号');
+//				return false;
+//			}
+//			if(ordernum.length !== 18){
+//				$(".ordernum").val('').addClass('error-input').attr('placeholder','订单号为18位');
+//				return false;
+//			}
+//			if(!wangnum){
+//				$(".wang").addClass('error-input');
+//				return;
+//			}
+//			if(!wechatnum){
+//				$(".wechatnum").addClass('error-input');
+//				return;
+//			}
+//			if(!commision){
+//				$(".commision").addClass('error-input');
+//				return;
+//			}
+//		  	//提交表单
+//	        $.post("{:U('Task/myOrder')}", {id:id,wangwang:wangnum,tb_item:ordernum,wechatnum:wechatnum,commision:commision}, function(data) {
+//	        	if (1 == data.msg){
+//	        		layer.msg(data.info,{icon:1,time:1000});
+//	        		setTimeout(function(){window.location.reload()},1000)
+//	        	} else {
+//	        		layer.msg(data.info,{icon:2,time:1000});
+//	        	}
+//	        },'json');
+//		}, function(index){
+//		  layer.close(index);
+//		});
+//	}
+	function removeErr(el){
+		$(el).removeClass('error-input');
+	}
+//	function showOrder(title, url, w, h) {
+//		layer_show(title, url, w, h);
+//	}
+
+</script>
+</block>

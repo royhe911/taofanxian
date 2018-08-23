@@ -1,0 +1,153 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">任务管理</span><span class="c-999 en">&gt;</span><span class="c-666">任务反馈</span>
+</block>
+<block name="menu">
+	<div class="Hui-article" >
+		<div class="pd-20">
+			<form action="" method="get" onsubmit="return checkSearch()">
+				<div class="text-c" style="margin-bottom: 10px;">
+					<input type="hidden" name="m" value="Erp">
+					<input type="hidden" name="c" value="product">
+					<input type="hidden" name="a" value="taskfeedback">
+					日期：<input type="text" id="datemin" name="time" class="input-text" style="width:130px;" placeholder="起始时间">
+					<input type="text" id="datemax" name="endtime" class="input-text" style="width:130px;" placeholder="结束时间">
+					<if condition="$_SESSION['user']['role'] eq 1 or $_SESSION['user']['role'] eq 6">
+					<select name="choicezz" class="select select-box" style="width: 160px;">
+						<option value="">请选择站长</option>
+						<volist name="zz" id="vo">
+						<option value="{$vo.id}" <eq name="Think.get.choicezz" value="$vo.id">selected="selected"</eq>>{$vo.realname}</option>
+						</volist>
+					</select>
+					</if>
+					<if condition="$_SESSION['user']['role'] eq 1 or $_SESSION['user']['role'] eq 3">
+					<select name="choiceyw" class="select select-box" style="width: 160px;">
+						<option value="">请选择业务员</option>
+						<volist name="yw" id="vo">
+							<option value="{$vo.id}" <eq name="Think.get.choiceyw" value="$vo.id">selected="selected"</eq>>{$vo.info}</option>
+						</volist>
+					</select>
+					</if>
+
+					<!--&lt;!&ndash; 站长 &ndash;&gt;-->
+					<!--<if condition="$_SESSION['user']['role'] == 3 ">-->
+						<!--<select name="choicesd" class="select select-box" style="width: 160px;">-->
+							<!--<option value="">请选择刷单员</option>-->
+							<!--<volist name="sd" id="vo">-->
+								<!--<option value="{$vo.id}" <eq name="Think.get.choicesd" value="$vo.id">selected="selected"</eq>>{$vo.realname}</option>-->
+							<!--</volist>-->
+						<!--</select>-->
+					<!--</if>-->
+					<button type="submit" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="r">共有数据：{$count}条</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-bg table-hover table-sort">
+						<thead>
+							<tr class="text-c">
+								<th width="5%">id</th>
+								<th width="5%">反馈日期</th>
+								<th width="80px">主图</th>
+								<th width="9%">店铺名</th>
+								<th width="10%">宝贝详情</th>
+								<th width="5%">下单价</th>
+								<th width="9%">订单编号</th>
+								<th width="9%">旺旺</th>
+								<if condition="$_SESSION['user']['role'] !=6">
+								<th>业务员</th>
+								</if>
+								<if condition="$_SESSION['user']['role'] neq 3">
+								<th width="7%">站长</th>
+								</if>
+								<if condition="$_SESSION['user']['role'] eq 6">
+								<th width="7%">刷单员</th>
+								</if>
+								<if condition="$_SESSION['user']['role'] neq 6">
+									<th width="7%">刷单员</th>
+								</if>
+								<th>反馈信息</th>
+								<th width="80px">反馈截图</th>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="data" id="vo">
+							<tr class="text-c va-m">
+								<td>{$vo.id}</td>
+								<td>{$vo.feedback_time|date="j/n H:i",###}</td>
+								<td>
+									<a href="javascript:;" title="鼠标右键复制图片"><img width="80" height="80" class="product-thumb" src="{$vo.goods_pic}"></a>
+								</td>
+								<td>{$vo.shopname}</td>
+								<td>
+									<a href="{$vo.goods_url}" style="color: #06c;" target="_blank" title="点击查看详情">	{$vo.goods_title}</a>
+								</td>
+								<td style="color: red;"><b style="font-size: 11px;">¥</b> {$vo.actual_price}</td>
+								<td>
+									<span class="<if condition='$vo.abn neq null'>label label-danger radius</if>">{$vo.tb_item}</span>
+								</td>
+								<td>{$vo.wangwang}</td>
+								<if condition="$_SESSION['user']['role'] !=6">
+								<td>{$vo.yw_info}</td>
+								</if>
+								<if condition="$_SESSION['user']['role'] neq 3">
+								<td>{$vo.zz_realname}</td>
+								</if>
+								<if condition="$_SESSION['user']['role'] eq 6">
+								<td>{$vo.sd_realname}</td>
+								</if>
+								<if condition="$_SESSION['user']['role'] neq 6">
+									<td>{$vo.sd_realname}</td>
+								</if>
+								<td>{$vo.feedback}</td>
+								<td>
+									<if condition="!empty($vo['feedimg'])">
+									<a href="javascript:;"><img width="80" height="80" class="product-thumb" src="{$vo.feedimg}"></a>
+									</if>
+								</td>
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			var start_time = "{$starttime}",end_time = "{$endtime}";
+			laydate.render({
+			  	elem: '#datemin',
+			   	min: '2018-01-01',
+				value:"{$starttime}",
+			   	max: '',
+			   	done: function(value, date){
+					start_time = value;
+					if(new Date(value).getTime() > new Date(end_time).getTime()){
+						$("#datemax").val(value)
+					}
+			  	}
+			});
+			laydate.render({
+			  	elem: '#datemax',
+			  	min: '2018-01-01',
+                value:"{$endtime}",
+		   		max: '',
+			  	done: function(value, date){
+			  		end_time = value;
+					if(new Date(value).getTime() < new Date(start_time).getTime()){
+						$("#datemin").val(value)
+					}
+			  	}
+			});
+
+		})
+
+	</script>
+</block>

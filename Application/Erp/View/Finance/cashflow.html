@@ -1,0 +1,108 @@
+<extend name="public/base" />
+<block name="nav"><span class="c-666">财务管理</span><span class="c-999 en">&gt;</span><span class="c-666">收支汇总</span></block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action="" method="get">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="finance">
+				<input type="hidden" name="a" value="cashflow">
+				<input type="hidden" name="status" value="{$Think.get.status}">
+				<div class="text-c" >
+					日期：
+					<input  type="text" id="datemin" name="time" class="input-text" placeholder="起始时间" style="width:160px;"> -
+					<input  type="text" id="datemax" name="endtime" class="input-text" placeholder="结束时间" style="width:160px;" >
+					<if condition="$_SESSION['user']['role'] neq 5">
+						<input  type="text" name="shopname" class="input-text" placeholder="店铺名搜索（全称）" style="width:160px;" value="{$shopname}" >
+					</if>					
+					<button type="submit" class="btn btn-success"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl bg-1 bk-gray mt-20" style="height: 34px; line-height: 34px;">
+				<ul class="l comm-ul" style="display: flex;">
+					<li class="<if condition="$_GET['status'] == 0">current</if>"><a href="{:U('finance/cashflow','status=0')}&time={$starttime}&endtime={$endtime}">全部</a></li>
+					<li class="<if condition="$_GET['status'] == 1">current</if>"><a href="{:U('finance/cashflow','status=1')}&time={$starttime}&endtime={$endtime}">收入</a></li>
+					<li class="<if condition="$_GET['status'] == 2">current</if>"><a href="{:U('finance/cashflow','status=2')}&time={$starttime}&endtime={$endtime}">支出</a></li>
+				</ul>
+				<span class="r">共有数据：<strong>{$count|default=0}</strong> 条</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th>id</th>
+								<th>时间</th>
+								<th>店铺名称</th>
+								<th>操作前金额</th>
+								<th>变动金额</th>
+								<th>操作后金额</th>
+								<th>说明</th>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="data" id="vo">
+							<tr class="text-c">
+								<td>{$vo.id}</td>
+								<td>{$vo.addtime}</td>
+								<td>{$vo.shopname}</td>
+								<td><b>{$vo.before_money}</b></td>
+								<td><b><eq name="vo.status" value="2">+</eq><eq name="vo.status" value="1">-</eq>{$vo.change_money}</b></td>
+								<td><b>{$vo.after_money}</b></td>
+								<td>
+									<eq name="vo.msg" value="1">提现</eq>
+									<eq name="vo.msg" value="2">充值</eq>
+									<eq name="vo.msg" value="3">发布任务费用扣除</eq>
+									<eq name="vo.msg" value="4">订单退款</eq>
+									<eq name="vo.msg" value="5">下架自动退款</eq>
+									<eq name="vo.msg" value="6">订单异常返款</eq>
+									<eq name="vo.msg" value="7">审核拒绝返款</eq>
+									<eq name="vo.msg" value="8">
+										<if condition="$vo.status == 2">实际下单价小于单价，补偿差价</if>
+										<if condition="$vo.status == 1">实际下单价大于单价，扣除差价</if>
+									</eq>
+									<eq name="vo.msg" value="9">空包补偿费用</eq>
+
+								</td>
+							</tr>
+						</volist>
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+	<script src="__PUBLIC__/ERP/lib/laydate/laydate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			var start_time = "{$starttime}",end_time = "{$endtime}";
+			laydate.render({
+			  	elem: '#datemin',
+                value:"{$starttime}",
+			   	min: '2018-01-01',
+			   	max: '',
+			   	done: function(value, date){
+					start_time = value;
+					if(new Date(value).getTime() > new Date(end_time).getTime()){
+						$("#datemax").val(value)
+					}
+			  	}
+			});
+			laydate.render({
+			  	elem: '#datemax',
+			  	value:"{$endtime}",
+			  	min: '2018-01-01',
+		   		max: '',
+			  	done: function(value, date){
+			  		end_time = value;
+					if(new Date(value).getTime() < new Date(start_time).getTime()){
+						$("#datemin").val(value)
+					}
+			  	}
+			});
+		})
+	</script>
+</block>

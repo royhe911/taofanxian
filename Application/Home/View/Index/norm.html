@@ -1,0 +1,182 @@
+
+	
+	
+	<include file="Layout:head" />
+	<include file="Layout:nav" />
+<!--                        试客规范  start                   -->
+<div class="info">
+	<div class="recommend mt24" style="float: left;margin-left: 108px;">
+	<h2>推荐试用</h2>
+	<ul class="recom-con">
+		<foreach name="tuijian" item="vo" key="k">
+		<li>
+			<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>" target="_blank">
+			<img src="../{$vo['img']}" alt=""/>
+			<span style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis; width: 100%; color: #666; display: inline-block;text-align: center;">{$vo['goods_name']}</span>
+			</a>
+		</li>
+		</foreach>
+	</ul>
+</div>
+<div class="detail_right ar-detail">
+                <div class="ar-container">
+                    <div class="ar-top">
+                        <p class="ar-tl">领吧试客规范</p>
+                    </div>
+                    <div class="ar-content">
+                        <a target="_blank">
+                        	<p>
+                        		<table width="728" height="1225" style="width:546pt;">
+                        			<colgroup>
+                        <col width="106" />
+                        <col width="410" />
+                        <col width="212" />
+                        			</colgroup>
+                    <tbody>
+                        <tr height="28">
+                        	<td class="et11" x:str="" height="28" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;background:#D9D9D9;height:21pt;width:79.5pt;">领吧试用
+                        	</td>
+                        	<td class="et11" x:str="" height="28" width="410" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;background:#D9D9D9;height:21pt;width:307.5pt;">注意事项
+                        	</td>
+                        	<td class="et11" x:str="" height="28" width="212" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;background:#D9D9D9;height:21pt;width:159pt;">处罚类型
+                        	</td>			
+                        </tr>
+                        <tr height="59"><td class="et12" x:str="" height="59" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:44.25pt;width:79.5pt;">注册
+                        </td>
+                        	<td class="et13" x:str="" height="59" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:44.25pt;width:307.5pt;">	&nbsp;新用户注册，用户名需自行设定，不设定者将自动使用电话号码代替 &nbsp;且不能再更改	
+                        	</td>
+                        	<td class="et14" x:str="" height="59" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:44.25pt;width:159pt;">&nbsp;无
+                        	</td>			
+                        </tr>			
+                        	<tr height="34"><td class="et15" rowspan="7" x:str="" height="236" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:177pt;width:79.5pt;">申请试用</td>
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">&nbsp;1、同一个领吧会员不能使用多个帐号参与同一个试用活动</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;二类违规
+                        		</td>			
+                        	</tr>			
+                        	<tr height="34">
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">&nbsp;2、申请活动与下单的淘宝号必须一致
+                        		</td>
+                        		<td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;损失会员自行承担
+                        		</td>			
+                        	</tr>			
+                        	<tr height="34">
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;3、未获得资格不得威胁商家索取资格或试用品</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;二类违规或封号
+                        		</td>			
+                        	</tr>			
+                        	<tr height="34">
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;4、未获得资格不得拍下后以退货退款为借口威胁商家</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;封号，损失会员自行承担
+                        		</td>			
+                        	</tr>			
+                        	<tr height="34">
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;5、不允许通过旺旺直接咨询商家非购买交易咨询信息</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;二类违规或封号
+                        		</td>	
+                        	</tr>			
+                        	<tr height="32"><td class="et13" x:str="" height="32" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:24pt;width:307.5pt;">	&nbsp;6、领吧不认可会员私下通过旺旺、QQ等方式和商家达成的所有约定</td><td class="et13" x:str="" height="32" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:24pt;width:159pt;">	&nbsp;损失会员自行承担
+                        	</td>			
+                        	</tr>			
+                        	<tr height="34">
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;7、试客不允许自建QQ群在群内进行额外试用任务</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;二类违规，所有损失会员承担
+                        		</td>			
+                        	</tr>			
+                        	<tr height="34">
+                        		<td class="et15" rowspan="8" x:str="" height="272" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:204pt;width:79.5pt;">	下单领取</td>
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;1、会员未核对信息导致拍错店铺</td>
+                        		<td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;损失会员自行承担</td>			
+                        	</tr>			
+                        	<tr height="34">
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;2、商家要求会员代拍其他产品，会员照做导致无法返款</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;损失会员自行承担
+                        		</td>			
+                        	</tr>			
+                        	<tr height="34">
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;3、擅自使用淘宝客下单</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;返回淘宝客佣金并禁号3天
+                        		</td>			
+                        	</tr>	
+                    		<tr height="34">
+                    			<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;4、威胁商家索要试用品以外的其他赠品</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;一类违规并自行承担损失
+                    			</td>			
+                    		</tr>	
+                        	<tr height="34">
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;5、购买试用单品中包含该单品的关联套餐</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;一类违规并自行承担损失
+                        		</td>			
+                        	</tr>			
+                        	<tr height="34">
+                        		<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;6、搜索下单不按照流程操作，直接用其他渠道下单购买</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;一类违规并自行承担损失
+                        		</td>			
+                        	</tr>			
+                    		<tr height="34"><td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;7、会员使用问题旺旺号下单</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;一类违规并自行承担损失</td>			
+                    		</tr>			
+                    		<tr height="34">
+                    			<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;8、使用优惠券、天猫积分、淘金币、红包、集分宝</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;会员补偿差价
+                    			</td>			
+                    		</tr>	
+                    		<tr height="34">
+                    			<td class="et15" rowspan="5" x:str="" height="214" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:160.5pt;width:79.5pt;">	填写订单号
+                    			</td>
+                    			<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;1、获得资格需要1天内回填订单编号，逾期不填写</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;取消资格并自行承担损失
+                    			</td>			
+                    		</tr>			
+                    		<tr height="34">
+                    			<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;2、订单号有误时，会员须3天内修改，逾期不修改</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;取消资格并自行承担损失
+                    		</td>			
+                    		</tr>			
+                    		<tr height="56">
+                    			<td class="et13" x:str="" height="56" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:42pt;width:307.5pt;">	&nbsp;3、会员提交无效订单号（包括：未付款的订单号、非本试用产品的 &nbsp;订单号、已交易关闭的订单号等）或盗用他人订单号</td><td class="et13" x:str="" height="56" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:42pt;width:159pt;">	&nbsp;三类违规
+                    			</td>			
+                    		</tr>			
+                    		<tr height="34">
+                    			<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;4、商家结算前未提交订单号或未修改订单号，资格将自动被取消</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;损失会员自行承担
+                    			</td>			
+                    		</tr>			
+                    		<tr height="56">
+                    			<td class="et13" x:str="" height="56" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:42pt;width:307.5pt;">	&nbsp;5、商家结算前未提交订单号或未修改订单号，资格被商家或系统取 &nbsp;消，去商家店铺威胁等行为</td><td class="et13" x:str="" height="56" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:42pt;width:159pt;">	&nbsp;二类违规处理，损失会员自行承担
+                    			</td>			
+                    		</tr>			
+                    		<tr height="34">
+                    			<td class="et15" rowspan="5" x:str="" height="190" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:142.5pt;width:79.5pt;">	填写试用报告</td><td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;1、超14天未提交试用报告，商家结算活动资格被自动取消</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;所有损失会员自行承担
+                    			</td>	
+                    		</tr>	
+                    		<tr height="56">
+                    			<td class="et13" x:str="" height="56" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:42pt;width:307.5pt;">	&nbsp;2、超14天未提交试用报告，商家结算活动资格被自动取消，威胁商 &nbsp;家申请退货退款</td><td class="et13" x:str="" height="56" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:42pt;width:159pt;">	&nbsp;二类违规，所有损失会员承担
+                    			</td>			
+                    		</tr>			
+                    		<tr height="32">
+                    			<td class="et13" x:str="" height="32" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:24pt;width:307.5pt;">	&nbsp;3、试用报告不合格，需尽快修改，逾期不修改</td><td class="et13" x:str="" height="32" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:24pt;width:159pt;">	&nbsp;商家取消资格，所有损失会员承担
+                    			</td>	
+                    		</tr>			
+                    		<tr height="34">
+                    			<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;4、提交试用报告后申请退货退款</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;二类违规，所有损失会员承担</td>			
+                    		</tr>	
+                    		<tr height="34">
+                    			<td class="et13" x:str="" height="34" width="410" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:307.5pt;">	&nbsp;5、未收到货的情况下，确认收货好评并提交试用报告</td><td class="et13" x:str="" height="34" width="212" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:159pt;">	&nbsp;三类违规</td>			
+                    		</tr>			
+                    		<tr height="34">
+                    			<td class="et18" colspan="3" x:str="" height="34" width="622" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;background:#D9D9D9;height:25.5pt;width:466.5pt;">	违规处罚标准</td>			
+                    		</tr>			
+                    		<tr height="34"><td class="et15" x:str="" height="34" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:79.5pt;">	一类违规</td><td class="et21" colspan="2" x:str="" height="34" width="820" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:615pt;">	&nbsp;取消试用资格</td>			
+                    		</tr>			
+                    		<tr height="34">
+                    			<td class="et15" x:str="" height="34" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:79.5pt;">	二类违规</td><td class="et21" colspan="2" x:str="" height="34" width="820" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:615pt;">	&nbsp;禁号15-30天</td>
+                    		</tr>			
+                    		<tr height="56">
+                    			<td class="et15" x:str="" height="56" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:42pt;width:79.5pt;">	三类违规</td><td class="et21" colspan="2" x:str="" height="56" width="820" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:42pt;width:615pt;">	&nbsp;30天屏蔽调查，领吧所有资金冻结处理，视情节严重情况可予以延长屏蔽、封号。有骗取行为的，直接 &nbsp;扣除该会员账号对应所有资金并提交公安机关备案处理</td>			
+                    		</tr>			
+                    		<tr height="34">
+                    			<td class="et15" x:str="" height="34" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:79.5pt;">	多次违规</td><td class="et21" colspan="2" x:str="" height="34" width="820" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:615pt;">	&nbsp;多次违规，永久禁用，不予解封</td>			
+                    		</tr>			
+                    		<tr height="34"><td class="et15" x:str="" height="34" width="106" style="font-size:10pt;font-weight:700;text-align:center;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:79.5pt;">	解释权</td><td class="et21" colspan="2" x:str="" height="34" width="820" style="font-size:10pt;vertical-align:middle;border-width:0.5pt;border-style:solid;border-color:#000000;height:25.5pt;width:615pt;">	&nbsp;最终解释权归领吧网所有</td>			
+                    		</tr>		
+                    </tbody>	
+            		</table>
+            		<span style="font-size:small;"><br /></span></p><p>	<span style="font-size:small; line-height: 21px;"><span style="font-family:&quot;font-size:12px;"><strong>关于淘宝客的违规使用及违规使用的处罚方案</strong></span><br /><span style="font-family:&quot;font-size:12px;">1、领吧网禁止使用淘宝客，若因使用淘宝客产生佣金，则从用户账户扣除相应淘宝客佣金并禁号3天</span><br /><span style="font-family:&quot;font-size:12px;">2、多次使用拒不承认者且违规者，永久禁号处理</span><br /><span style="font-family:&quot;font-size:12px;">3、若用户因此申请售后，永久禁号处理</span><br /><span style="font-family:&quot;font-size:12px;">4、关于淘宝客的解释说明：用淘宝客有多种方式，例如阿里妈妈、秒杀群优惠券、折800、 蘑菇街、淘宝联盟等自带了插件等都有可能导致淘宝客的。另外还有一些通过qq群或者是微信群里发布的链接进入下单，虽下单金额一致，但也是淘宝客，都会产生相应的佣金，且作为第三方淘宝客，都会从佣金部分扣除相应的金额作为盈利，导致用户收到的返利少于从商家账户中扣除的返利（例如：用户收到的佣金是5%，那么商家后台显示的佣金部分可能是10%，那么剩余的5%则被淘宝客收取）</span><br /></span>
+            			
+            		</p>
+                    </a>
+                    </div>
+</div>
+
+</div>
+<div style="clear: both;"></div>
+</div>
+
+<!--                        试客规范  end                   -->
+
+<include file="Layout:foot" />

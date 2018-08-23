@@ -1,0 +1,120 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">商家管理</span><span class="c-999 en">&gt;</span><span class="c-666">服务费审核</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action="" method="get" onsubmit="return checkSearch()">
+				<input type="hidden" name="m" value="Erp">
+				<input type="hidden" name="c" value="business">
+				<input type="hidden" name="a" value="service">
+				<div class="text-c" style="margin-bottom: 10px;">
+					<input type="text"  name="shop_name" class="input-text" style="width:150px;" placeholder="店铺名搜索" value="{$shop_name}">
+					<if condition="$_SESSION['user']['role'] eq 1">
+						<select name="choice_yw" class="select select-box" style="width:160px;">
+							<option value="0">请选择业务员</option>
+							<volist name="yw" id="vo">
+								<option value="{$vo.id}" <eq name="Think.get.choice_yw" value="$vo.id">selected="selected"</eq> >{$vo.realname}</option>
+							</volist>
+						</select>
+					</if>
+					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th>id</th>
+								<th>店铺名称</th>
+								<th>业务员</th>
+								<th>申请时间</th>
+								<th>0~99</th>
+								<th>100~200</th>
+								<th>200~300</th>
+								<th>300~400</th>
+								<th>400以上</th>
+								<th>状态</th>
+								<if condition="$_SESSION['user']['role'] == 1">
+								<th>操作</th>
+								</if>
+							</tr>
+						</thead>
+						<tbody>
+						 <volist name="data" id="vo">
+							<tr class="text-c">
+								<td>{$vo.id}</td>
+								<td>{$vo.shopname}</td>
+								<td>{$vo.realname}</td>
+								<td>{$vo.addtime|date="Y-m-d H:i:s ",###}</td>
+								<td>{$vo.price_1}</td>
+								<td>{$vo.price_2}</td>
+								<td>{$vo.price_3}</td>
+								<td>{$vo.price_4}</td>
+								<td>{$vo.price_5}</td>
+								<td>
+									<eq name="vo.status" value="0"><span class="label label-warning radius">待审核</span></eq>
+									<eq name="vo.status" value="1"><span class="label label-success radius">已通过</span></eq>
+									<eq name="vo.status" value="2"><span class="label label-danger radius">拒绝</span><br>拒绝理由：{$vo.reason|default='重复提交'}</eq>
+								</td>
+								<if condition="$_SESSION['user']['role'] == 1">
+								<td>
+									<eq name="vo.status" value="0"><a href="javascript:;" onclick="checkOverDraft({$vo.id})">审核</a></eq>
+								</td>
+								</if>
+							</tr>
+						 </volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	//审核
+	function checkOverDraft(id){
+		layer.confirm('审核通过吗？', {
+			btn: ['通过', '不通过', '取消'],
+			shade: false,
+			closeBtn: 0
+		}, function(index) {
+	        $.post("{:U('business/checkOverDraft')}", {id:id,type:1}, function(data) {
+	        	if (1 == data.msg){
+        			layer.msg(data.info, {icon:1,time: 1000},function(){
+        				window.location.reload()
+        			})
+	        	} else {
+	    			layer.msg(data.info,{icon: 5,time:1000},function(){
+        				window.location.reload()
+        		})
+	        	}
+	        },'json');
+		}, function(index) {
+            layer.prompt({
+                formType: 2,
+                title: '请输入驳回原因'
+            }, function(value, index, elem) {
+                layer.close(index);
+
+                $.post("{:U('business/checkOverDraft')}", {id: id, type: 2,reason:value}, function (data) {
+                    if (1 == data.msg) {
+                        layer.msg(data.info, {icon: 1, time: 1000}, function () {
+                            window.location.reload()
+                        })
+                    } else {
+                        layer.msg(data.info, {icon: 2, time: 1000}, function () {
+                            window.location.reload()
+                        })
+                    }
+                }, 'json');
+            })
+		});
+	}
+
+</script>
+</block>

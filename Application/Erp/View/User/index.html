@@ -1,0 +1,87 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">个人中心</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+					<a class="btn btn-primary radius" href="javascript:;"  onclick="isAdd()"><i class="Hui-iconfont">&#xe600;</i> 发布任务</a>
+					<a href="javascript:;" class="btn btn-success radius" onclick="bindShop()">添加店铺</a>
+					<a href="javascript:;" class="btn btn-secondary radius" onclick="cash()">提现</a>
+
+				</span>
+			</div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<th width="130">加入时间</th>
+								<!--<th width="200">店铺名称</th>
+								<th width="200">旺旺</th>
+								<th width="200">店铺网址</th>-->
+								<th width="90">手机</th>
+								<th width="100">QQ/微信</th>
+								<th width="100">所在地</th>
+								<th width="130">余额</th>
+								<th width="120">服务导师（QQ）</th>
+								<th width="100">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="text-c">
+								<td>{$info.addtime|date="j/n H:i",###}</td>
+								<!--<td>{$info.shopname}</td>
+								<td>{$info.wangwang}</td>
+								<td><a href="{$info.url}" title="点击查看" target="_blank">点击查看</a></td>-->
+								<td>{$info.iphone}</td>
+								<td>{$info.qq}</td>
+								<td class="text-l">{$info.address}</td>
+
+								<td><b style="font-size: 14px;">¥ </b>{$info.money}</td>
+								<td class="td-status"><a href="tencent://message/?uin={$info.tutor}&Site=&menu=yes">{$info.tutor}</a></td>
+								<td class="td-manage">
+									<a title="发布任务" href="javascript:;"  onclick="isAdd()" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">发布任务</i></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript">
+	//绑定店铺
+	function bindShop(){
+		layer_show('绑定店铺', "{:U('User/shop')}", '800', '300');
+	}
+
+	function isAdd() {
+		var status = 0,remainder = 0,rechar = 0;
+		$.ajax({
+			url:"{:U('product/check_money')}",
+			data:{ },
+			type:'post',
+            async: false,
+			success:function(data){
+                status = data.msg;
+                remainder = data.money;
+                rechar  = data.arrearage;
+            }
+		});
+		if(status == 1){
+			var str = '您的当前余额为'+ remainder +'元，需充值'+rechar+'元，才可发布任务';
+			layer.msg(str);
+		}else{
+			window.location.href="{:U('product/addproductnew')}";
+		}
+    }
+	function cash(){
+		layer_show('申请提现', "{:U('User/cash')}", '500', '260');
+	}
+</script>
+</block>

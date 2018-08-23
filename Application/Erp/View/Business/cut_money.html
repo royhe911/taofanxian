@@ -1,0 +1,30 @@
+<extend name="public/modal" />
+<block name="title">扣款</block>
+<block name="menu">
+	<form action="{:U('business/cut_money')}" method="POST" class="form form-horizontal" id="form-admin-add">
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>扣款：</label>
+			<div class="formControls col-xs-10 col-sm-10">
+				<input type="number" class="input-text" value="" step="0.01" min="0.01" name="money" required="required" style="width: 100%;">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>备注：</label>
+			<div class="formControls col-xs-10 col-sm-10">
+				<textarea name="info" cols="" rows="" class="textarea"  placeholder="" required="required"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-2 col-sm-offset-2">
+			<input type="hidden" name="id" value="{$id}">
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</block>
+<block name="js">
+<script type="text/javascript">
+
+</script>
+</block>

@@ -1,0 +1,269 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<!-- 新增样式代码 -->
+<style>
+    .part_one,
+    .part_two h3 {
+        /* text-align: right; */
+        display: inline-block;
+        padding-left: 45px;
+    }
+</style>
+
+<div class="left" style="width: 1040px;overflow: hidden;background-color: #ffffff;margin: 0 0 8px 10px;">
+    <img src="__PUBLIC__/maoke/images/merchant/release_header_show.png" alt="">
+</div>
+<!-- 发布优惠券3-->
+<div class="store_content left store_content6 ">
+    <h1 class="title">上传优惠券</h1>
+    <!--6.选择服务项-->
+    <div class="settings_search">
+        <h2 class="title">4.选择服务项</h2>
+        <div class="search_content" style="border-bottom:1px solid #c8c8c8;padding-bottom:20px;">
+            <div class="part_one">
+                <h3>基础服务 ：<br>（必选）</h3>
+                <div class="part_content" style="padding-top: 18px;">
+                    <p class="checkbox_title_top search_active" style="color:#323232;">快速返款
+                        <span>(每单收取服务费1元)</span>
+                    </p>
+                    <p style="color:#969696;">试客完成试用后，平台将直接使用商家押金操作返款（商家无需耗费时间人力处理退款，省时省力）</p>
+                </div>
+            </div>
+        </div>
+        <h2 style="font-size: 16px;color: #323232;padding-left: 20px;padding-top: 20px">选择增值服务</h2>
+        <form action="{:U('Coupon/publish3')}" method="POST" id="myform" />
+        <div class="search_content">
+            <div class="part_two" style="color: #969696">
+                <h3>好评服务：</h3>
+                <div class="part_content">
+                    <div>
+                        <p class="checkbox_title search_active" id="imageContent">默认五星好评<span>(免费)</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="part_two">
+                <h3>安全防护：</h3>
+                <div class="part_content">
+                    <div>
+                        <p class="checkbox_title search_active" id="safe">
+                            防IP重复，防小号<span>(免费)</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="checkbox_title" id="safe_day_all"><i class="search_active"></i>禁止老用户申请：<b style="padding-left: 5px;font-size: 14px;font-weight:normal;color: #969696;">选择此服务不会影响试客申请人数，仅推荐重复购买率低的商品使用，如：家居、家电、高价值的商品等</b></p>
+                        <div style="overflow:hidden;zoom: 1;margin-bottom: 5px;padding-left: 5px;">
+                            <p class="checkbox_title" style="float: left;" id="safe_day_free"><i class="search_active"></i>15天<span>(免费)</span></p>
+                            <p class="checkbox_title" style="float: left;margin-left: 20px;" id="safe_day_fee"><i class=""></i>30天<span>(免费)</span></p>
+                        </div>
+                        <p style="padding-left: 28px; display: block;" id="safe_day_notice">选择此服务后，<span id="set_safe_day">15天内</span> 中过您店铺任一商品的试客将不会获得本次试用品的申请机会</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="part_two">
+                <h3 style="width: 115px;padding-left:0; text-align: right;">优惠券金额：</h3>
+                <div class="part_content">
+                    <div>
+                        <p style="padding-top: 15px;">
+                            <input id="coupon_value" name="coupon_value" type="number" value="<egt name='goods.red_price' value='1'>{$goods.red_price}</egt>" step="0.01" min="0.01" style="margin-right: 10px; padding-left: 10px;">元
+                            <span class="error_hint" id="hp_kwds_error"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="part_two">
+                <h3>发放份数：</h3>
+                <div class="part_content">
+                    <div>
+                        <p style="padding-top: 15px;">
+                            <input id="goods_num" name="goods_num" type="number" value="<egt name='goods.kucun' value='1'>{$goods.kucun}</egt>" step="1" min="1" style="margin-right: 10px; padding-left: 10px;">份
+                            <span class="error_hint" id="ff_kwds_error"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="part_two">
+                <h3>结束时间：</h3>
+                <div class="part_content">
+                    <div>
+                        <p style="padding-top: 15px;">
+                            <input id="chooseTime" name="endtime" type="text" value="{$goods.etime|default=date('Y-m-d H:i:s', time())}" style="margin-right: 10px; padding-left: 10px; width: 200px;">
+                            <span class="error_hint" id="end_time_kwds_error"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                <h2>填写任务补充信息：</h2>
+                <textarea name="info" id="extInfo" cols="30" rows="10" placeholder="需要额外补充写什么呢...." style="padding-left: 10px;border: 1px solid #E7E7E7; width: 600px;font-family: unset; padding-top:10px; margin-top:10px;">{$goods.step_one}</textarea>
+            </div>
+            <div class="nextStep_btn">
+                <input type="hidden" name="id" value="{$id}" />
+                <input onclick="location.href='{:U(\'Coupon/publish2\',array(\'id\' => $id))}'" type="button" value="上一步">
+                <!--<input onclick="next_step();" type="button" value="下一步">-->
+                <input onclick="next_step();" type="button" value="下一步">
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</section>
+<!-- page-wrapper end -->
+</div>
+<!-- wrapper -->
+</div>
+<script src="__PUBLIC__/maoke/js/laydate/laydate.js"></script>
+<script>
+    $(function() {
+        laydate.render({
+            elem: '#chooseTime',
+            type: 'datetime',
+            min: new Date().getTime().toLocaleString()
+        });
+    })
+</script>
+<!-- 新增点击操作代码 -->
+<script>
+    // 取消禁止老用户中奖
+    $('#safe_day_all>i').bind('click', function() {
+        $(this).toggleClass('search_active');
+        safe_day_all = ($(this).hasClass('search_active')) ? 1 : 0;
+        $('#safe_day_all>i').addClass('search_active');
+        if (safe_day_all) {
+            safe_day_15();
+        } else {
+            cancel_safe_day();
+        }
+    });
+    // 禁止老用户中奖45天防护
+    $('#safe_day_ten>i').bind('click', function() {
+        safe_day_45();
+    });
+
+    // 禁止老用户中奖30天防护
+    $('#safe_day_fee>i').bind('click', function() {
+        safe_day_30();
+    });
+
+    // 禁止老用户中奖15天防护
+    $('#safe_day_free>i').bind('click', function() {
+        safe_day_15();
+    });
+    var is_first_add = 15; //禁止老用户中奖设置勾选
+    var safe_day = 0; //禁止老用户中奖天数
+    var specification = 0; //精准投放
+
+    // 初始禁止老用户中奖设置
+    if (is_first_add) {
+        safe_day_15();
+    } else {
+        if (0 == safe_day) {
+            cancel_safe_day();
+        } else if (15 == safe_day) {
+            safe_day_15();
+        } else {
+            safe_day_30();
+        }
+    }
+    // 取消禁止老用户中奖防护设置
+    function cancel_safe_day() {
+        $('#safe_day_all>i').removeClass('search_active');
+        $('#safe_day_fee>i').removeClass('search_active');
+        $('#safe_day_free>i').removeClass('search_active');
+        $('#safe_day_ten>i').removeClass('search_active');
+        $('#safe_day').val(0);
+        $('#safe_day_notice').css('display', 'none');
+    }
+
+
+    // 启用禁止老用户中奖 15 天防护设置
+    function safe_day_15() {
+        $('#safe_day_all>i').addClass('search_active');
+        $('#safe_day_free>i').addClass('search_active');
+        $('#safe_day_fee>i').removeClass('search_active');
+        $('#safe_day_ten>i').removeClass('search_active');
+        $('#safe_day').val(15);
+        $('#set_safe_day').text('15天内');
+        $('#safe_day_notice').css('display', 'block');
+    }
+
+    // 启用禁止老用户中奖 30 天防护设置
+    function safe_day_30() {
+        $('#safe_day_all>i').addClass('search_active');
+        $('#safe_day_fee>i').addClass('search_active');
+        $('#safe_day_free>i').removeClass('search_active');
+        $('#safe_day_ten>i').removeClass('search_active');
+        $('#safe_day').val(30);
+        $('#set_safe_day').text('30天内');
+        $('#safe_day_notice').css('display', 'block');
+    }
+</script>
+<script>
+    function showSearch(id) {
+        var oDiv = $("#" + id);
+        var t = document.createElement("input");
+        t.type = "text";
+        oDiv.prepend(t);
+        t.focus();
+        t.remove();
+    }
+
+    function next_step() {
+        //新增逻辑代码
+        //验证输入优惠卷金额
+        var coupon_name = $("#coupon_value").val();
+        if (!coupon_name) {
+            $("#hp_kwds_error").html("<span class='icon iconfont icon-cuowu'></span>" + "优惠卷金额不得为空");
+            showSearch('focus');
+            return;
+        }else if(coupon_name <= 0){
+			$("#hp_kwds_error").html("<span class='icon iconfont icon-cuowu'></span>" + "优惠卷金额不得小于0");
+            showSearch('focus');
+            return;
+        }else {
+            $("#hp_kwds_error").html("");
+        }
+        //验证输入发放份数
+        var goods_name = $("#goods_num").val();
+        if (!goods_name) {
+            $("#ff_kwds_error").html("<span class='icon iconfont icon-cuowu'></span>" + "发放份数不得为空");
+            showSearch('focus');
+            return;
+        }else if(goods_name < 1){
+			$("#ff_kwds_error").html("<span class='icon iconfont icon-cuowu'></span>" + "发放份数至少1份");
+            showSearch('focus');
+            return;
+        }else {
+            $("#ff_kwds_error").html("");
+        }
+
+        //验证输入发放份数
+        var chooseTime_name = $("#chooseTime").val();
+        if (chooseTime_name == "") {
+            $("#end_time_kwds_error").html("<span class='icon iconfont icon-cuowu'></span>" + "结束时间不得为空");
+            showSearch('focus');
+            return;
+        } else {
+            $("#ff_kwend_time_kwds_errords_error").html("");
+        }
+
+        //验证提交时间与设置结束时间比较
+        var end_time_val = $("#chooseTime").val();
+        var check_time_1 = new Date(end_time_val.replace(/-/g, '/')).getTime();
+        var get_now_time = new Date().getTime();
+        if (get_now_time > check_time_1) {
+            $("#end_time_kwds_error").html("<span class='icon iconfont icon-cuowu'></span>" + "结束时间不得小于当前时间");
+            showSearch('focus');
+            return;
+        } else {
+            $("#ff_kwend_time_kwds_errords_error").html("");
+        }
+        $('#myform').submit();
+        //window.location.href = '{:U(\'publishfourth\')}';
+    }
+</script>
+<include file="Layout:foot" />

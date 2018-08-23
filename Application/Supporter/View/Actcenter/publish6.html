@@ -1,0 +1,237 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+    <div class="left" style="width: 1040px;overflow: hidden;background-color: #ffffff;margin: 0 0 8px 10px;">
+        <img src="__PUBLIC__/maoke/images/merchant/release_header_show.png" alt="">
+    </div>
+                <!-- 发布试用6 -->
+                <div class="store_content left store_content6 ">
+                        <h1 class="title">发布试用</h1>
+                        <!--进度条-->
+                        <div class="progress_bar">
+                            <img src="__PUBLIC__/maoke/images/merchant/sj_fbsy_bg_jdt_06_default.png" alt="">
+                        </div>
+                        <!--6.选择服务项-->
+                        <div class="settings_search">
+                            <h2 class="title">6.选择服务项</h2>
+                            <div class="search_content" style="border-bottom:1px solid #c8c8c8;padding-bottom:20px;">
+                                <div class="part_one">
+                                    <h3>基&nbsp;&nbsp;&nbsp;础&nbsp;&nbsp;&nbsp;服&nbsp;&nbsp;&nbsp;务 ：
+                                        <br>
+                                        &nbsp;&nbsp;（&nbsp;&nbsp;必&nbsp;&nbsp;&nbsp;选&nbsp;&nbsp;）&nbsp;&nbsp;
+                                    </h3>
+                                    <div class="part_content" style="padding-top: 18px;">
+                                        <p class="checkbox_title_top search_active" style="color:#323232;">快速返款
+                                            <span>(每单收取商品押金2%)</span>
+                                        </p>
+                                        <p style="color:#969696;">试客完成试用后，平台将直接使用商家押金操作返款（商家无需耗费时间人力处理退款，省时省力）</p>
+                                        <p class="checkbox_title_top search_active" style="color:#323232;">系统自动抽奖(<span>每单收取2元</span>)</p>
+                                        <p style="color:#969696;">系统将自动抽选出更合适商家商品品类的试客，节约商家运营成本和时间，也有利于试客中奖分布更广泛,每单收取2元</p>
+                                        <p style="color:#f25f55;font-weight:bold">备注：试用成功发布后，基础服务费概不退还！</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 style="font-size: 16px;color: #323232;padding-left: 20px;padding-top: 20px">选择增值服务</h2>
+							<form action="{:U('Actcenter/publish6')}" method="POST" id="myform" />
+                            <div class="search_content">
+                                <div class="part_one">
+                                    <h3>提升试客积极性：&nbsp;</h3>
+                                    <div class="part_content">
+                                        <i id="focus1"></i>
+                                        <div>
+                                            <p id="red_packet" class="checkbox_title"><i class="<notempty name='reward'>search_active</notempty>"></i>试用红包加赏</p>
+                                            <p>选此服务后，试客完成试用将会有额外的红包赏金奖励，能够刺激试客申请和下单</p>
+                                            <p class="keyword"><span>请填写红包金额：</span><input class="fillIn_num" name="reward" value="{$reward}" onkeypress="onlyNum()" type="text" id="red_packet_pre_price" value="" placeholder="" disabled="disabled"><span>元/单</span> (每单金额不得小于2元)
+                                                <span class="error_hint" id="red_packet_price_pre_error"></span>
+                                            </p>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="part_two" style="color: #969696">
+                                    <h3>好&nbsp;&nbsp;&nbsp;评&nbsp;&nbsp;&nbsp;服&nbsp;&nbsp;&nbsp;&nbsp;务：&nbsp;</h3>
+                                    <div class="part_content">
+                                        <!--**********************默认五星好评***************************-->
+                                        <div>
+                                            <p class="checkbox_title search_active" id="imageContent">默认五星好评<span>(免费)</span>
+                                            </p>
+                                        </div>
+                                        <!--**********************普通文字好评***************************-->
+                                        <div>
+                                            <p id="pic_text" class="checkbox_title"><i class="search_active"></i>普通文字好评<span>(免费)</span></p>
+                                            <p>选此服务后，试客进行收货评价时需要填写20字以上的文字好评，<span>若不勾选该项，试客只会进行五星好评，没有任何文字评价</span>。</p>
+                                        </div>
+                                        <!--**********************嗮图好评***************************-->
+            
+                                        <!--<div>
+                                        	<i id="focus2"></i>
+                                            <p id="pictures_praise" class="checkbox_title"><i class="<notempty name='service.good'>search_active</notempty>"></i>晒图好评<span>(2元/单)（仅晒图，如需要文字好评请勾选“普通文字好评”）</span></p>
+                                            <p>选此服务后，试客评价时需要上传<span>晒宝贝</span>的照片，此选项仅为<span>普通晒图</span>，<span>不可</span>用做买家秀晒图要求。</p>
+                                            <p class="keyword">
+                                                <span>设置晒图好评单数：</span><input class="fillIn_num" name="service[good]" id="print_praise_num" onkeypress="onlyNum()" value="{$service.good}" type="text" placeholder="单" disabled="disabled">单数不得大于总试用单数。
+                                                <span class="error_hint" id="print_praise_num_error"></span>
+                                            </p>
+            
+                                            <p><b>平台会随机从中奖试用和兑换试用中抽取<span class="set_pictures_praise_num">{$service.good|default="0"}单</span>，要求其进行晒图评价。</b></p>
+                                        </div>-->
+                                        <!--**********************买家秀***************************-->
+                                        
+            
+                                        <!--**********************设置好评关键词***************************-->
+            
+                                        <div>
+                                            <p id="hp_kwds" class="checkbox_title"><i class="<notempty name='service.keyword'>search_active</notempty>"></i>
+                                                设置好评关键词<span>(1元/单)</span><b id="choose_pic_text" style="color: #f25f55;font-weight: normal;padding-left: 15px;font-size: 13px;"></b>
+                                            </p>
+                                            <p>选择此服务后，部分试客进行评价时，需要在评价中加入要求的关键词，<span>关键词会随机分配给试客，每个关键词不得超过5个字。</span></p>
+            
+                                            <p>
+                                                <input id="hp_kwds1" name="service[keyword][]" maxlength="5" type="text" value="{$service[keyword][0]}" placeholder="填写关键词" disabled="disabled">
+                                                <input id="hp_kwds2" name="service[keyword][]" maxlength="5" type="text" value="{$service[keyword][1]}" placeholder="填写关键词" disabled="disabled">
+                                                <input id="hp_kwds3" name="service[keyword][]" maxlength="5" type="text" value="{$service[keyword][2]}" placeholder="填写关键词" disabled="disabled">
+                                                <span class="error_hint" id="hp_kwds_error">
+                                            </span></p>
+                                            <p class="keyword">
+                                                <span>设置加好评关键词单数：</span>
+                                                <input class="fillIn_num" name="service[good_num]" id="hp_num" onkeypress="onlyNum()" value="{$service.good_num}" type="text" placeholder="单" disabled="disabled">单数不得大于总试用单数。
+                                                <span class="error_hint" id="hp_num_error"></span>
+                                            </p>
+            
+                                            <p>
+                                                <b style="margin-top:7px;">平台会随机从中奖试用和兑换试用中抽取 <span class="set_hp_num">{$service.good_num|default="0"}单</span>，要求其在好评中加入关键词。</b>
+                                            </p>
+                                        </div>
+            
+            
+                                        <!--**********************追加评价***************************-->
+                                        <!-- <div>
+                                            <p id="add_comment" class="checkbox_title"><i class=""></i>追加评价<span>(2元/单)</span>
+                                            </p>
+                                            <p>选此服务，部分试客在进行淘宝评价后会要求其进行追评，关键词选填，<span>每个关键词不得超过5个字。</span></p>
+                                            <p><b>设置追评关键词：</b></p>
+                                            <p>
+                                                <input id="add_comment_kwds1" maxlength="5" value="" type="text" placeholder="填写关键词" disabled="disabled">
+                                                <input id="add_comment_kwds2" maxlength="5" value="" type="text" placeholder="填写关键词" disabled="disabled">
+                                                <input id="add_comment_kwds3" maxlength="5" value="" type="text" placeholder="填写关键词" disabled="disabled">
+                                            </p>
+                                            <p class="keyword">
+                                                <span>设置进行追加评价单数：</span>
+                                                <input class="fillIn_num" id="add_comment_num" onkeypress="onlyNum()" value="" type="text" placeholder="单" disabled="disabled">
+                                                单数不得大于总试用单数。
+                                                <span class="error_hint" id="add_comment_num_error"></span>
+                                            </p>
+            
+                                            <p>
+                                                <b>平台会随机从中奖试用和兑换试用中抽取
+                                                    <span class="set_add_comment_num">0单</span>
+                                                    ，要求其进行追评任务。
+                                                </b>
+                                            </p>
+                                        </div> -->
+                                    </div>
+                                </div>
+                               
+                                <!--**********************安全防护***************************-->
+                                <div class="part_two">
+                                    <h3>安&nbsp;&nbsp;&nbsp;全&nbsp;&nbsp;&nbsp;防&nbsp;&nbsp;&nbsp;&nbsp;护：&nbsp;</h3>
+                                    <div class="part_content">
+                                        <div>
+                                            <p class="checkbox_title search_active" id="safe">
+                                                防IP重复，防小号<span>(免费)</span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="checkbox_title" id="safe_day_all"><i class="search_active"></i>禁止老用户中奖：<b style="padding-left: 5px;font-size: 14px;font-weight:normal;color: #969696;">选择此服务不会影响试客申请人数，仅推荐重复购买率低的商品使用，如：家居、家电、高价值的商品等</b></p>
+                                            <div style="overflow:hidden;zoom: 1;margin-bottom: 5px;padding-left: 5px;"><p class="checkbox_title" style="float: left;" id="safe_day_free"><i class="search_active"></i>15天<span>(免费)</span></p><p class="checkbox_title" style="float: left;margin-left: 20px;" id="safe_day_fee"><i class=""></i>30天<span>(免费)</span></p><p class="checkbox_title" style="float: left;margin-left: 20px;" id="safe_day_ten"><i class=""></i>45天<span>(10元)</span></p> <input type="hidden" id="safe_day" name="service[safe_day]" value="" /></div>
+                                            <p style="padding-left: 28px; display: block;" id="safe_day_notice">选择此服务后，<span id="set_safe_day">15天内</span> 中过您店铺任一商品的试客将不会获得本次试用品的中奖机会</p>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="part_two">
+                                    <h3>精准投放人群&nbsp;&nbsp;&nbsp;：&nbsp;</h3>
+                                    <div class="part_content">
+                                        <p id="specification" class="checkbox_title"><i class="<notempty name='service.people'>search_active</notempty>"></i>精准投放<span>(20元)</span></p>
+                                        <p>选此服务后，平台会根据淘宝账户信用、地区、性别、收入、职业筛选精准试用人群。</p>
+                                        <input type="hidden" id="people" name="service[people]" value="{$service.people}" />
+                                    </div>
+                                </div>
+                                <div class="nextStep_btn">
+                                 <input type="hidden" name="id" value="{$id}" />   
+                                 <input onclick="location.href='{:U(\'Actcenter/publish5\',array(\'id\' => $id))}'" type="button" value="上一步">
+                                 <input onclick="next_step();" type="button" value="下一步">
+                                </div>
+                            </div>
+                            </form>
+						</div>
+                    </div>    
+            </div>
+        </div>
+    </section>
+		<!-- page-wrapper end -->
+</div>
+		<!-- wrapper -->
+</div>
+<script>
+    var apply_amount = {$num|default="0"}; //总试用单数，以下都是瞎写的值
+    var red_packet = {$reward|default="0"};//试用红包加赏
+    var red_packet_pre_price = 0;//红包金额
+    var pic_text = 1;//普通文字好评
+    var print_praise = {$service.good|default="0"}; //晒图好评勾选
+    var print_praise_num = {$service.good|default="0"};//晒图好评单数   
+    var hp_kwds = {$service.keyword|count};//好评关键字勾选
+    var hp_num= {$service.good_num|default="0"};//好评关键字单数
+    
+    var is_first_add = 0;//禁止老用户中奖设置勾选
+    var safe_day = {$service.safe_day|default="0"};//禁止老用户中奖天数
+    var specification = 0;//精准投放
+</script>
+<script src="__PUBLIC__/maoke/js/pub5.js"></script>
+    <script>
+        
+        // function next_step() {
+        //     window.location.href="{:U('Actcenter/publish7')}";
+        // }
+        function next_step(){
+            $('#hp_num').blur();  //好评关键字
+            $('#red_packet_pre_price').blur(); //红包金额
+            $('#print_praise_num').blur(); //晒评单数
+            var hp_num_error = $('#hp_num_error').text();
+            var red_packet_price_pre_error = $('#red_packet_price_pre_error').text();
+            var print_praise_num_error = $('#print_praise_num_error').text();
+            var safe_day = $('#safe_day').val();
+            var hp_kwds1 = '';
+            var hp_kwds2 = '';
+            var hp_kwds3 = '';
+            if(hp_kwds)
+            {
+                hp_kwds1 = $("#hp_kwds1").val();
+                hp_kwds2 = $("#hp_kwds2").val();
+                hp_kwds3 = $("#hp_kwds3").val();
+
+                if(!hp_kwds1 && !hp_kwds2 && !hp_kwds3)
+                {
+                    $("#hp_kwds_error").html("<span class='icon iconfont icon-cuowu'></span>请填写好评关键词");
+                    return
+                }else
+                {
+                    $("#hp_kwds_error").html("");
+                }
+            }else
+            {
+                hp_num = 0;
+            }
+        
+            if(hp_num_error || red_packet_price_pre_error || print_praise_num_error)
+            {
+                return
+            }
+            
+            if(1 == specification){
+            	$('#people').val(specification);
+            }
+            $('#myform').submit();
+            
+        }
+    </script>
+	<include file="Layout:foot" />

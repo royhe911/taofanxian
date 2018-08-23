@@ -1,0 +1,37 @@
+
+	<include file="Layout:head" />
+	<include file="Layout:nav" />
+
+<!--                        严禁绑定刷单号  start                   -->
+<div class="info">
+	<div class="recommend mt24" style="float: left;margin-left: 108px;">
+	<h2>推荐试用</h2>
+	<ul class="recom-con">
+		<foreach name="tuijian" item="vo" key="k">
+		<li>
+			<a href="<?php echo U('Index/detail' , array('id'=>$vo['id']) );?>" target="_blank">
+			<img src="../{$vo['img']}" alt=""/>
+			<span style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis; width: 100%; color: #666; display: inline-block;text-align: center;">{$vo['goods_name']}</span>
+			</a>
+		</li>
+		</foreach>
+	</ul>
+</div>
+<div class="detail_right ar-detail" style="height:600px;">
+    <div class="ar-container">
+        <div class="ar-top">
+            <p class="ar-tl">严禁绑定在任何渠道的刷单淘宝号</p>
+        </div>
+        <div>
+        	<p style="text-align:center; font-size:14px; padding:20px 0; color:red;">严禁绑定在任何渠道的刷单淘宝号 , 违者封号</p>
+
+        </div>
+   	</div>
+</div>
+<div style="clear: both;"></div>
+</div>
+
+<!--                        严禁绑定刷单号  end                   -->
+
+
+<include file="Layout:foot" />

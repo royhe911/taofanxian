@@ -1,0 +1,159 @@
+<extend name="public/base" />
+<block name="nav">
+	<span class="c-666">商家管理</span><span class="c-999 en">&gt;</span><span class="c-666">商家列表</span>
+</block>
+<block name="menu">
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action=" " method="post" onsubmit="return checkSearch()">
+				<div class="text-c" style="margin-bottom: 10px;">
+					<input type="text" class="input-text " style="width:250px" placeholder="店铺名" id="" name="shopname" value="{$shopname}" >
+					或
+					<input type="text" class="input-text " style="width:250px" placeholder="手机号搜索" id="" name="phone" value="{$phone}">
+					或
+					<input type="text" class="input-text " style="width:250px" placeholder="旺旺号搜索" id="" name="wangwang" value="{$wangwang}">
+
+					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+				</div>
+			</form>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+				<if condition="$_SESSION['user']['role'] == 1">
+				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+				</if>
+
+			</span> <span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+			<div class="mt-20">
+				<div class="dataTables_wrapper">
+					<table class="table table-border table-bordered table-hover table-bg table-sort">
+						<thead>
+							<tr class="text-c">
+								<if condition="$_SESSION['user']['role'] == 1">
+								<th ><input type="checkbox" name="" value=""></th>
+								</if>
+								<th>id</th>
+								<th>店铺名称</th>
+								<th>旺旺</th>
+								<th>手机</th>
+								<th>QQ/微信</th>
+								<th>微信备注</th>
+								<th>所在地</th>
+								<th>加入时间</th>
+								<th>余额</th>
+								<th>透支额度</th>
+								<th>已透支</th>
+								<th>透支额度状态</th>
+								<if condition="$_SESSION['user']['role'] != 6">
+								<th >服务导师（QQ）</th>
+								</if>
+								<th >操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						 <volist name="data" id="vo">
+							<tr class="text-c">
+								<if condition="$_SESSION['user']['role'] == 1">
+								<td><input type="checkbox" value="{$vo.id}" name="ids[]"></td>
+								</if>
+								<td>{$vo.id}</td>
+								<td >
+									<if condition="$vo.url != ''">
+										<a href="{$vo.url}" title="点击查看" target="_blank"><label class="label <if condition='$vo.msg eq 1'>label-success<else />label-warning</if> radius" style="cursor: pointer; font-size: 14px; font-weight: 100;"><if condition="$vo.shopname == ''">{$vo.wangwang}<else />{$vo.shopname}</if></label></a>
+											<if condition="$vo.msg eq 1">
+											   <!--审核通过显示 -->
+											  <!-- <span class="label label-success radius">已通过</span>-->
+											  <elseif condition="$vo.msg eq 2"/>
+											   <span class="label radius" style="font-weight: 100; cursor: pointer;">未通过</span>
+											  <elseif condition="$vo.msg eq 0"/>
+											   <span class="label radius" style="background: #ffc107;font-weight: 100; cursor: pointer;" onclick="shopCheck(this,{$vo.id})">去审核</span>
+											   <!--未提交店铺地址显示-->
+											   <!--<span class="label label-warning radius">未绑定</span>-->
+											 </if>
+										<else />待认证
+									</if>
+								</td>
+								<td>
+									{$vo.wangwang}
+								</td>
+								<td>{$vo.iphone}</td>
+								<td>{$vo.qq}</td>
+								<td class="order-input wechat-remarks">{$vo.remarks}</td>
+								<td>{$vo.address}</td>
+								<td>{$vo.addtime|date="j/n H:i",###}</td>
+								<td><b style="font-size: 11px;">¥ </b>{$vo.money}</td>
+								<td><b style="font-size: 11px;">¥ </b>{$vo.credit_money}</td>
+								<td><b style="font-size: 11px;">¥ </b>{$vo.exp_credit}</td>
+								<td>
+									<eq name="vo.credit_status" value="3">
+									<span class="label label-danger radius">已拒绝</span>
+										<br>
+										拒绝理由{$vo.reason}
+									</eq>
+									<eq name="vo.credit_status" value="1">
+									<span class="label label-warning radius">待审核</span>
+									</eq>
+									<eq name="vo.credit_status" value="2">
+									<span class="label label-success radius">已通过</span>
+									</eq>
+								</td>
+								<if condition="$_SESSION['user']['role'] != 6">
+								<td class="td-status">{$vo.tutor}</td>
+								</if>
+								<td class="td-manage">
+									<a href="javascript:;" title="扣款" onclick="withhold('扣款','{:U('business/cut_money','id='.$vo['uid'])}','500','300')">扣款</a>
+								</td>
+							</tr>
+						 </volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</article>
+	</div>
+</block>
+<block name="js">
+<script type="text/javascript" src="__PUBLIC__/ERP/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('.table-sort tbody').on('click', 'tr', function() {
+			if($(this).hasClass('selected')) {
+				$(this).removeClass('selected');
+			} else {
+				$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+			}
+		});
+	});
+	//店铺审核
+	function shopCheck(obj,id) {
+		window.location.href="{:U('business/shopcheck')}";
+	}
+
+	/*批量删除*/
+	function datadel(){
+		var lenght = $("td input[type='checkbox']:checked").length;//勾选个数
+		if (lenght > 0){
+			var arr=[];
+		       $("td input[type='checkbox']:checked").each(function(){
+		          	if(!isNaN(this.value)){
+		          		arr.push(this.value);
+		          	}
+		       });
+
+	       	   $.post("{:U('Business/delAll')}", {arr:arr},function(data){
+	       		    if (1 == data.msg){
+	       		    	layer.msg(data.info,{icon:1,time:1000}, function(){window.location.reload();});
+	       		    } else {
+	       		    	layer.msg(data.info,{icon:2,time:1000});
+	       		    }
+	           });
+		} else {
+			layer.alert('请勾选数据');
+		}
+	}
+
+	//扣款
+	function withhold(title,url,w,h){
+		layer_show(title,url,w,h)
+	}
+</script>
+</block>

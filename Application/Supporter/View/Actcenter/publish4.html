@@ -1,0 +1,344 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+<style>
+    .row {margin-left: 0;margin-right: 0;}
+</style>
+<link rel="stylesheet" href="__PUBLIC__/maoke/css/laydate.css">
+    <div class="left" style="width: 1040px;overflow: hidden;background-color: #ffffff;margin: 0 0 8px 10px;">
+        <img src="__PUBLIC__/maoke/images/merchant/release_header_show.png" alt="">
+    </div>
+                <!-- 发布试用4 -->
+                <div id="my_main" class="store_content left" style="min-height: 1067px;">
+                        <h1 class="title">发布试用</h1>
+                        <!--进度条-->
+                        <div class="progress_bar">
+                            <img src="__PUBLIC__/maoke/images/merchant/sj_fbsy_bg_jdt_04_default.png" alt="">
+                        </div>
+                        <!--4.设置试用份数-->
+                        <div class="settings_trialNumber">
+                            <h2 class="title">4.设置试用份数</h2>
+                            <div class="trial_content">
+                                <ul>
+                                    <li>
+                                        <img style="width: 80px;height: 80px" src="..{$goods.image}" alt="加载中">
+                                    </li>
+                                    <li>
+                                        <p>商品名称：<span>{$goods.gname}</span></p>
+                                        <p>商品分类：<span>{$category}</span>
+                                        </p>
+                                        <p>商品规格：<span>{$goods.format.thecolor}</span></p>
+                                        <p>商品链接：<a href="{$goods.url}" target="_blank" title="点击查看">{$goods.url}</a></p>
+                                    </li>
+                                    <li style="width: 230px;">
+                                        <p>店铺名称：<span>{$data.shopname}</span></p>
+                                        <p>平台：<span><if condition='($data.type eq 1)'>淘宝<elseif condition="$data.type eq 2"/>天猫</if></span></p>
+                                        <p>价格：<span>¥{$goods.unit_price}</span></p>
+                                        <p>商品运费：<span><if condition='($goods.scosts eq 0)'>全国包邮<else />¥{$goods.scosts}</if></span></p>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                            <form action="{:U('Actcenter/publish4')}" method="POST" id="myform" />
+                            <!-- 设置活动展示时间 -->
+                            <div class="setTime set" data-trytype="2">
+                                <h3 class="set-title">设置活动展示时间：</h3>
+                                <p>试用活动截止后，平台将会为您在参与活动的试客中进行抽奖，并发放所有试用商品给获得试用资格的试客</p>
+                                <p>设置越长的抽奖时间可以增加试客收藏宝贝和店铺，增加重复访问率，从而优化宝贝和店铺权重</p>
+                                <div class="choice">
+                                    <input type="radio" name="delay" value="4" id="delay4">
+                                    <label class="delay" for="delay4" data-value="4">4天（网站新上线，暂时免费）<b>推荐</b></label>
+                                    <input type="radio" value="6" name="delay" id="delay6">
+                                    <label class="delay" for="delay6" data-value="6">6天（网站新上线，暂时免费）</label>
+                                </div>
+                            </div>
+                            <!-- 设置上线时间 -->
+                            <div class="setTime set">
+                                <h3 class="set-title" style="color:#f25f55;font-weight:bold;font-style: normal">设置上线时间：</h3>
+                                    <p>请设置任务上线的时间：
+                                    <input type="text" id="chooseTime" name="starttime" value="{$starttime|date='Y-m-d',###}" />（请设置每天试用投放份数，总计发放总单数不得低于<b id="limit_order">10单</b>，建议投放天数大于<b>2天</b>）
+                                </p>
+                            </div>
+                            <!-- 新品提升综合权重显示 -->
+                            <!-- <div class="setTime set">
+                                <p><b>商家发布任务时间提醒：</b></p>
+                                <p>每日16:00前发布的试用活动审核通过后将于<b>当天</b>上线展示，并当天开奖，有试客来下单。</p>
+                                <p>每日16:00后发布的试用活动审核通过后将于<b>次日</b>上线展示，并当天开奖，有试客来下单。</p>
+                            </div> -->
+                            <!-- 设置投放计划 -->
+                            <div class="setPlan-sum set">
+                                <h3 class="set-title">设置试用投放计划：</h3>
+                                <p><b>转化率设置说明：</b></p>
+                                <p>（1）平台转化率是用来限制平台的最高申请人数，也就是平台给你店铺当日带来的最高访客数。访客数预计会有<b>5%-10%</b>偏差，无法精确控制到个位数。建议商家根据店铺的数据来设置，以免出现流量不够或者流量过多的情况。<br>
+                                    （2）投放试用第3日起，平台将不限制所有试客申请人数，因此将保障商家的流量、收藏、加购、转化率保持健康稳定的增长，将极大的提高宝贝和店铺的权重。如果您依然需要控制进店流量请自定义转化率，领吧将帮你控制。
+                                </p>
+                            </div>
+                            <!-- 试用总份数日历 -->
+                            <div class="calendar-try">
+                                <div class="calendar">
+                                    <div class="calendar-main">
+                                        <p class="timeScope _timeScope">年<b>月</b></p>
+                                        <ul class="date">
+                                            <li class="row week-day">
+                                                <ul class="clearfix">
+                                                    <li>日</li>
+                                                    <li>一</li>
+                                                    <li>二</li>
+                                                    <li>三</li>
+                                                    <li>四</li>
+                                                    <li>五</li>
+                                                    <li>六</li>
+                                                </ul>
+                                            </li>
+                                            <li class="row row-one">
+												<ul class="clearfix" id="row_one_sum">
+													<li></li>
+													<li></li>
+													<li></li>
+													<li></li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+												</ul>
+											</li>
+                                            <li class="row row-two">
+												<ul class="clearfix" id="row_two_sum">
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+												</ul>
+											</li>
+                                            <li class="row row-three">
+												<ul class="clearfix" id="row_three_sum">
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+												</ul>
+											</li>
+                                            <li class="row row-four">
+												<ul class="clearfix" id="row_four_sum">
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li class="validDay">
+														<p class="date-day dateNum"></p>
+														<div class="p-choose"><input type="button" href="javascript:;" class="change-num min_btn" value="-"><input type="text" class="p-btn" placeholder="投放数量"><input type="button" href="javascript:;" class="change-num add_btn" value="+"></div>
+														<div class="rate-box"><input type="text" class="rate" placeholder="日转化率：不限"><i>%</i></div>
+														<p class="limit_people">进店人数<b>最大化</b></p>
+													</li>
+													<li></li>
+													<li></li>
+												</ul>
+											</li>
+                                        </ul>
+                                    </div>
+                                    <p class="sum-tryOrder" id="sum-tryOrder">合计试用单数：<b id="apply_amount">0单</b></p>
+                                    <p class="tips"><b>注意：</b>因商品受欢迎程度各异，领吧不承诺一定完成当日商家设定的最高进店人数。</p>
+                                </div>
+                            </div>
+
+                            <!-- 温馨提示 -->
+                            <div class="all-tips">
+                                <p class="tips-title"><b>温馨提示：</b></p>
+                                <p>1.根据多位利用领吧试用打造爆款的商家分享的经验，我们建议您每款商品至少发布4-6次；</p>
+                                <p>2.如使用猎豹、360等浏览器无法正常发布试用，请选择修改浏览器模式为极速模式，或更换使用谷歌和火狐浏览器</p>
+                                <p>3.请在发布试用推广期间，暂停淘宝客等返利设置，避免不必要的损失；</p>
+                            </div>
+
+                            <div class="nextStep_btn">
+                                <input type="hidden" name="id" value="{$id}" />
+                                <input onclick="location.href='{:U(\'Actcenter/publish3\',array(\'id\' => $id))}'" type="button" value="上一步">
+                                <input id="next_btn" type="button" value="下一步" onclick="next_step();" />
+                            </div>
+							</form>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+		<!-- page-wrapper end -->
+</div>
+		<!-- wrapper -->
+</div>
+<script src="__PUBLIC__/maoke/js/date.js"></script>
+
+<script type="text/javascript">
+	var my_amount = 0;//单数
+    var now_time = {$starttime};
+    now_time = parseInt(now_time);
+	var tryType = {$goods.type};
+</script>
+<script src="__PUBLIC__/maoke/js/pub4.js"></script>
+<script>
+	$(function(){
+    	<notempty name="goods.days">
+    	<volist name="goods.days" id="vo">
+    	 <if condition='($vo.num gt 0)'>
+    	  $('#d_'+{$vo.day}).val({$vo.num});
+    	  $('#r_'+{$vo.day}).val({$vo.rate});
+    	  my_amount += {$vo.num};//单数累加
+    	  $('#apply_amount').text(my_amount+'单');
+    	 </if>
+    	</volist>
+    	</notempty>
+    	limitPeople();
+    });
+    //下一步
+    function next_step() {
+        // var type = 1;
+        //var show_day = 1;
+        //暂时注释掉
+        // if (type == 1 ) {
+        //     show_day = 1;
+        // }
+        // else if (type == 3) {
+        //     show_day = ($("#delay4").is(':checked')) ? 4 : 6;
+        // }
+        var apply_amount = parseInt($("#apply_amount").text());//总单数
+        var toPublish_time = $("#chooseTime").val();  //任务上线时间
+
+		var timestamp = new Date().getTime();
+	    var now_hour = new Date(timestamp).getHours();
+	    if(Date.parse(new Date(toPublish_time)) > Date.parse(new Date(timestamp))){
+			if (apply_amount < 10){
+	            alert('总计发放单数不得低于10单');
+	            return false;
+	        } else {
+	        	$('#myform').submit();
+	        }
+    	}else{
+    		if(now_hour > 12){
+				alert('每日12:00后发布的试用活动审核通过后将于次日上线展示，请重新选择上线时间');
+	            return false;
+		    }else if (toPublish_time == '0000-00-00'){
+	            alert('请设置任务上线时间');
+	            return false;
+	        } else if (toPublish_time.length == 0){
+	            alert('请设置任务上线时间');
+	            return false;
+	        } else if (apply_amount<10){
+	            alert('总计发放单数不得低于10单');
+	            return false;
+	        } else {
+	        	$('#myform').submit();
+	        }
+    	}
+
+    }
+</script>
+<include file="Layout:foot" />

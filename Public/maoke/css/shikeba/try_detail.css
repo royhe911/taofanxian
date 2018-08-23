@@ -1,0 +1,226 @@
+body {
+    background-color: #f5f5f5;
+}
+.content{
+    background-color:#f5f5f5;
+    width:100%;
+    padding-bottom: 50px;
+}
+.main {
+    width: 1200px;
+    padding: 0 30px;
+    margin: 0 auto;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: "Microsoft Yahei"
+}
+
+
+/* é¢åŒ…å±‘ */
+
+/*.crumbs {
+    line-height: 69px;
+    border-bottom: 1px solid #f5f5f5;
+}*/
+.location_title {
+    padding: 30px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.location_title ul {
+    overflow: hidden;
+}
+.location_title ul li {
+    float: left;
+    font-size: 14px;
+    padding-right: 10px;
+}
+.location_title ul li a:hover {
+    color: #f10180;
+}
+
+/* è¯•ç”¨åŸºæœ¬ä¿¡æ¯ */
+
+.basic_info {}
+
+.basic_info h2 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 60px;
+}
+
+.basic_info > .info_table table {
+    border: 1px solid #f5f5f5;
+    color: #646464;
+    line-height: 49px;
+    text-align: center;
+}
+
+.basic_info > .info_table table td {
+    width: 230px;
+}
+
+.basic_info > .info_table table td + td {
+    border-left: 1px solid #f5f5f5;
+}
+
+.basic_info > .info_table table tr:first-child {
+    border-bottom: 1px solid #f5f5f5;
+    background-color: #f8f8f8;
+}
+
+.basic_info > .info_table table tr:last-child {
+    color: #323232;
+}
+
+
+/* è¯•ç”¨è¿›å±•ä¿¡æ¯ */
+
+.progress_info h2 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 60px;
+}
+
+
+/* è¿›å±•å›¾ç¤º */
+
+.progress_info > .progress_pannel >.progress_map {
+    width: 400px;
+    height: 750px;
+    background-color: #fffcfc;
+    padding: 30px 75px;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.progress_info > .progress_pannel >.progress_map > .default_map {
+    width: 250px;
+    height: 691px;
+    position: absolute;
+    background: url('../../images/merchant/progress_bg_process_default.png') no-repeat center top;
+}
+
+.progress_info > .progress_pannel >.progress_map > .selected_map {
+    width: 250px;
+    height: 0;
+    position: absolute;
+    background: url('../../images/merchant/progress_bg_process_selected.png') no-repeat center top;
+}
+
+.progress_map > .result_icon > .map_result_icon {
+    position: absolute;
+    left: 180px;
+
+}
+
+#default_win {
+    top: 126px;
+    display: none;
+
+}
+
+#default_no {
+    top: 196px;
+    display: none;
+}
+
+#first_win {
+    top: 371px;
+    display: none;
+}
+
+#first_no {
+    top: 436px;
+    display: none;
+}
+
+#never_no {
+    top: 607px;
+    display: none;
+}
+
+
+/* è¿›å±•å‡­è¯ */
+
+.progress_info > .progress_pannel >.progress_main {
+    width: 720px;
+    height: 750px;
+}
+
+.progress_info > .progress_pannel >.progress_main > .progress_item {
+    margin-bottom: 20px;
+}
+
+.progress_info > .progress_pannel >.progress_main > .progress_item table {
+    width: 720px;
+    border: 1px solid #f5f5f5;
+}
+
+.progress_info > .progress_pannel >.progress_main > .progress_item table td {
+    text-align:center;
+    color:#323232;
+    padding: 0 20px;
+    border: 1px solid #f5f5f5;
+}
+
+.progress_info > .progress_pannel >.progress_main > .progress_item table tr:first-child {
+    line-height: 49px;
+    background-color: #f5f5f5;
+}
+.progress_info > .progress_pannel >.progress_main > .progress_item table tr:nth-child(3) {
+    line-height: 49px;
+    background-color: #f5f5f5;
+}
+.progress_info > .progress_pannel >.progress_main > .progress_item table tr:last-child{
+    color: #323232;
+}
+.progress_info > .progress_pannel >.progress_main > .progress_item table tr:last-child td:first-of-type{
+    color:#646464;
+}
+
+
+/* è¿›å±•å‡­è¯-ç”³è¯·é“¾æŽ¥ */
+
+.progress_info > .progress_pannel >.progress_main > .progress_item table .links {
+    width: 100%;
+    line-height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* è¿›å±•å‡­è¯-æµè§ˆåº—é“º */
+
+.progress_info > .progress_pannel >.progress_main > .progress_item table .state {
+    line-height: 50px;
+}
+
+.progress_info > .progress_pannel >.progress_main > .progress_item table .links_shop {
+    width: 515px;
+    margin: 15px 0;
+    color: #323232;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* è¿›å±•å‡­è¯-æ”¶è—å®è´åº—é“º */
+
+.progress_info > .progress_pannel >.progress_main > .progress_favorite .fav_box {
+    height: 356px;
+    padding: 35px 0px;
+}
+
+.progress_info > .progress_pannel >.progress_main > .progress_favorite img {
+    width: 250px;
+    height: 250px;
+    cursor:pointer;
+}
+
+.progress_info > .progress_pannel >.progress_main > .progress_favorite .fav_box .fav_title {
+    margin-top: 6px;
+    text-align: center;
+}

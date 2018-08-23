@@ -1,0 +1,74 @@
+      <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse collapse">
+                <ul class="nav" id="side-menu">
+                   <!-- <li>
+                        <a href="<?=U('Index/index')?>"><i class="fa fa-dashboard fa-fw"></i> 主页</a>
+                    </li>-->
+                    <li>
+                        <a href="#"><i class="fa fa-table fa-fw"></i>专题管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?=U('Subj/index')?>">专题列表</a>
+                            </li>
+                            <li>
+                                <a href="<?=U('SubjGoods/index')?>">商品列表</a>
+                            </li>
+                            <li>
+                                <a href="<?=U('SubjData/index')?>">专题商品</a>
+                            </li>
+                            </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-list-alt fa-fw"></i>淘宝客订单管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo U('Alimamadata/index');?>">订单列表</a>
+                                <a href="<?php echo U('Alimamadata/order_load');?>">淘宝客订单上传</a>
+                            </li>
+                        </ul>
+                    </li>
+					<li>
+                        <a href="#"><i class="fa fa-list-ul fa-fw"></i>试用管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                         		<a href="<?php echo U('Probation/goods_list');?>">商品审核</a>
+                         		<a href="<?php echo U('Probation/goods_lottery');?>">开奖</a>
+                         		<a href="<?php echo U('Probation/audit_pass');?>">订单号审核</a>
+                         		<a href="<?php echo U('Probation/finish');?>">返款审核</a>
+                         		<a href="<?php echo U('Probation/alter_data');?>">人气、库存优化</a>
+                         		<!--<a href="<?php echo U('Probation/orderid_reject');?>">订单号驳回</a>
+                         		<a href="<?php echo U('Probation/eval_reject');?>">评价驳回</a>
+                            --></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-list-ol fa-fw"></i>试客管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="<?php echo U('Member/customer');?>">试客列表</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo U('Member/index');?>">身份证审核</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo U('Member/blacklist');?>">添加黑名单</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="#"><i class="fa fa-flag fa-fw"></i>商家管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                            	<a href="<?php echo U('Seller/index');?>">商家列表</a>
+                                <a href="<?php echo U('Probation/index');?>">提现审核</a>
+                         		<a href="<?php echo U('Probation/play_money');?>">充值审核</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>

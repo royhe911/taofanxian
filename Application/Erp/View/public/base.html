@@ -1,0 +1,278 @@
+﻿<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="Bookmark" href="favicon.ico">
+		<link rel="Shortcut Icon" href="favicon.ico" />
+		<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/ERP/static/h-ui/css/H-ui.min.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/ERP/static/h-ui.admin/css/H-ui.admin.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/ERP/lib/Hui-iconfont/1.0.8/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/ERP/static/h-ui.admin/skin/blue/skin.css" id="skin" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/ERP/static/h-ui.admin/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/ERP/static/h-ui.admin/css/checktb.css" />
+		<!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+		<!--/meta 作为公共模版分离出去-->
+
+		<title>猫客堂后台管理系统</title>
+
+
+	</head>
+
+	<body <if condition="(($msg.role eq 5) and (empty($info['url']) or ($info.msg neq 1)) or ($msg.role eq 5) and ($info.status eq 0))">class="big-page"</if>>
+		<!--_header 作为公共模版分离出去-->
+		<header class="navbar-wrapper">
+			<div class="navbar navbar-fixed-top">
+				<div class="container-fluid cl">
+					<a href="{:U('welcome/index')}" class="logo navbar-logo f-l mr-10"><i class="icon Hui-iconfont Hui-iconfont-home"></i>&nbsp;首页&nbsp;&nbsp;|</a>
+					<a class="logo navbar-logo f-l mr-10 hidden-xs" href="{:U('welcome/index')}">尊敬的会员
+						<if condition="$_SESSION['user']['role'] == 5">
+							<!--商家登入显示旺旺名，其他用户登入显示用户昵称-->
+							{$_SESSION['user']['wangwang']}
+							<else />
+							{$_SESSION['user']['realname']}
+						</if>
+						：{$_SESSION['user']['now']}好</a>
+					<!--<a class="logo navbar-logo-m f-l mr-10 visible-xs" href="">尊敬的会员xxxx：下午好</a>-->
+					<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+					<if condition="$_SESSION['user']['role'] == 5">
+						<span style="position: absolute;right: 150px; line-height:44px ; color: #fff;font-size: 16px;">
+							ID：{$_SESSION['user']['id']}，&nbsp;
+							您的专属服务导师：
+							<span class=" noindent" >{$_SESSION['user']['info']}<a href="tencent://message/?uin={$_SESSION['user']['tutor']}&Site=&menu=yes" style="text-decoration: underline; color: #06c;" title="点击联系"><img src="__PUBLIC__/ERP/static/h-ui.admin/images/qqchat.png" alt=""/></a></span>
+							<span class="tutor-wechat noindent" style="overflow: visible;">微信&nbsp;&nbsp;<img src="__PUBLIC__/ERP/static/h-ui.admin/images/wechat.png" alt="" width="25px" class="wechat"/><span class="wechat-img"><img src="__ROOT__/upload/{$_SESSION['user']['img']}" width="100%" height="100%"/></span></span>
+							<span class="noindent" style="height: 26px; line-height: 26px; ">手机号 : {$_SESSION['user']['phone']}</span> |
+						</span>
+
+					</if>
+					<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+
+						<ul class="cl">
+							<!--<li>您好!</li>-->
+							<li class="dropDown dropDown_hover">
+								MK 2.0 &nbsp;|<a href="#" class="dropDown_A">个人中心<i class="Hui-iconfont">&#xe6d5;</i></a>
+								<ul class="dropDown-menu menu radius box-shadow">
+									<li>
+										<a href="javascript:;" onClick="changepassword('修改密码','{:U(\'welcome/uppassword\')}','600','300')">修改密码</a>
+									</li>
+									<li>
+										<a href="javascript:;" onClick="changepassword('修改资料','{:U(\'welcome/message\')}','500','300')">修改资料</a>
+									</li>
+									<li>
+										<a href="{:U('login/loguot')}">退出</a>
+									</li>
+								</ul>
+							</li>
+							<li id="Hui-skin" class="dropDown right dropDown_hover">
+								<a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+								<ul class="dropDown-menu menu radius box-shadow">
+									<li>
+										<a href="javascript:;" data-val="orange" title="默认（橙色）">默认（橙色）</a>
+									</li>
+									<li>
+										<a href="javascript:;" data-val="blue" title="蓝色">蓝色</a>
+									</li>
+									<li>
+										<a href="javascript:;" data-val="green" title="绿色">绿色</a>
+									</li>
+									<li>
+										<a href="javascript:;" data-val="red" title="红色">红色</a>
+									</li>
+									<li>
+										<a href="javascript:;" data-val="yellow" title="黄色">黄色</a>
+									</li>
+									<li>
+										<a href="javascript:;" data-val="default" title="黑色">黑色</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+		<!--/_header 作为公共模版分离出去-->
+
+		<!--_menu 作为公共模版分离出去-->
+		<aside class="Hui-aside">
+			<div class="menu_dropdown bk_2">
+              <!--<volist name="_SESSION['user']['column'][0]" id="vo">
+                <dl id="menu-{$vo.c}">
+			 		<dt class="<eq name='_SESSION[user][menu][fid]' value='$vo[id]'>selected</eq>"><i class="Hui-iconfont">&#xe620;</i> {$vo.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			 		<dd style="<eq name='_SESSION[user][menu][fid]' value='$vo[id]'>display:block</eq>">
+			 			<ul>
+			 			  <volist name="_SESSION['user']['column'][$vo['id']]" id="v">
+			 			 	<li class="<eq name='_SESSION[user][menu][id]' value='$v[id]'>current</eq>"><a href="{:U($v[c].'/'.$v[a])}" title="{$vo.name}">{$v.name}</a></li>
+			 			  </volist>
+						</ul>
+			 		</dd>
+				</dl>
+			  </volist>-->
+			  <volist name="_SESSION['user']['column'][0]" id="vo">
+                <dl id="menu-{$vo.c}">
+			 		<dt class="selected"><i class="Hui-iconfont">&#xe620;</i> {$vo.name}</dt>
+			 		<dd style="display:block">
+			 			<ul>
+			 			  <volist name="_SESSION['user']['column'][$vo['id']]" id="v">
+			 			 	<li class="<eq name='_SESSION[user][menu][id]' value='$v[id]'>current</eq>"><a href="{:U($v[c].'/'.$v[a])}" title="{$vo.name}">{$v.name}</a></li>
+			 			  </volist>
+						</ul>
+			 		</dd>
+				</dl>
+			  </volist>
+			</div>
+		</aside>
+		<if condition="(($msg.role eq 5) and (empty($info['url']) or ($info.msg neq 1) or ($info.status eq 0)))">
+		  <else/>
+			<div class="dislpayArrow hidden-xs">
+				<a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>
+			</div>
+		</if>
+		<!--/_menu 作为公共模版分离出去-->
+		<section class="Hui-article-box" style="overflow: scroll;">
+		 <nav class="breadcrumb"><i class="Hui-iconfont"></i>
+			<a href="{:U('welcome/index')}" class="maincolor">首页</a>
+			<span class="c-999 en">&gt;</span>
+			<block name="nav"></block>
+			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+		 </nav>
+		 <block name="menu">内容</block>
+		 <notempty name="pagination.totalCount">
+		  <gt name="pagination.totalPages" value="1">
+		   <div class="clearfix pd-20">
+			 <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">显示  {$pagination.startRecord} 至 {$pagination.endRecord} 全部 {$pagination.totalCount} 条</div>
+			 <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+				<ul class="pagination" id="list-pagination"></ul>
+			 </div>
+		   </div>
+		  </gt>
+         </notempty>
+		</section>
+
+		<!--_footer 作为公共模版分离出去-->
+		<script type="text/javascript" src="__PUBLIC__/ERP/lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/ERP/lib/layer/2.4/layer.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/ERP/lib/imgBig.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/ERP/static/h-ui/js/H-ui.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/ERP/static/h-ui.admin/js/H-ui.admin.page.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/bootstrapplugin/pagination/jquery.twbsPagination.js"></script>
+		<script type="text/javascript">
+
+			$(function(){
+				if(sessionStorage.lastname){
+					$(".pngfix").addClass("open");
+					$("body").addClass("big-page");
+				} else {
+					$(".pngfix").removeClass("open");
+					$("body").removeClass("big-page");
+				}
+				$("body").on('click',".layui-layer-shade",function(){
+					layer.closeAll();
+				})
+				var paginationOptions= $.extend(true, {$pagination|json_encode} ,{
+						onPageClick: function (event, page) {
+						var options = $(this).data('twbsPagination').options;
+				        options.baseUrl = options.baseUrl.replace('.html','');
+				        options.getParams.page = page;
+                        var param = '';
+						for(var x in options.getParams ){
+				        		param += '&' + x + '=' + options.getParams[x];
+				       	}
+				        window.location.href =  options.baseUrl + param + '.html';
+				   		}
+					});
+				$('#list-pagination').twbsPagination(paginationOptions);
+
+				$(".menu_dropdown dl").each(function(){
+					var id = $(this).attr('id');
+					var houzhui = id.slice(5);
+					switch(houzhui){
+						case 'product':
+							$(this).find("i:first-of-type").html('&#xe620;');
+							break;
+						case 'business':
+							$(this).find("i:first-of-type").html('&#xe60d;');
+							break;
+						case 'finance':
+							$(this).find("i:first-of-type").html('&#xe61a;');
+							break;
+						case 'task':
+							$(this).find("i:first-of-type").html('&#xe616;');
+							break;
+						case 'manager':
+							$(this).find("i:first-of-type").html('&#xe62e;');
+							break;
+						case 'user':
+							$(this).find("i:first-of-type").html('&#xe62d;');
+							break;
+					}
+				})
+			});
+			/*
+				参数解释：
+				title	标题
+				url		请求的url
+				id		需要操作的数据id
+				w		弹出层宽度（缺省调默认值）
+				h		弹出层高度（缺省调默认值）
+			*/
+			/*管理员-增加*/
+			function changepassword(title, url, w, h) {
+				layer_show(title, url, w, h);
+			}
+
+
+
+            (function (){
+                var role = {$_SESSION['user']['role']};
+                if( role == 3){
+                	var sss = GetRequest();
+                	if((sss.a == 'refundorder' && sss.c == 'product') || (sss.a == 'abnormalorder' && sss.c == 'product')){
+
+                	}else if("{$_SESSION['error']}"){
+                        layer.alert('您有退款订单待处理！',function(){
+                            window.location.href = "{:U('product/refundorder')}";
+                        });
+                   }else if("{$_SESSION['error_abn']}"){
+                   		layer.alert('您有异常订单待处理！',function(){
+                            window.location.href = "{:U('product/abnormalorder')}";
+                        });
+                   }
+                }
+            })();
+			function GetRequest() {
+			   var url = location.search; //获取url中"?"符后的字串
+			   var theRequest = new Object();
+			   if (url.indexOf("?") != -1) {
+			      var str = url.substr(1);
+			      strs = str.split("&");
+			      for(var i = 0; i < strs.length; i ++) {
+			         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+			      }
+			   }
+			   return theRequest;
+			}
+		</script>
+
+
+		</script>
+		<!--/_footer /作为公共模版分离出去-->
+
+		<!--请在下方写此页面业务相关的脚本-->
+		<block name="js"></block>
+		<!--/请在上方写此页面业务相关的脚本-->
+	</body>
+
+</html>

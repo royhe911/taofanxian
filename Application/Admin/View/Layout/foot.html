@@ -1,0 +1,33 @@
+
+	<script src="__PUBLIC__/underscore.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__PUBLIC__/sb-admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="__PUBLIC__/sb-admin/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <!--<script src="__PUBLIC__/sb-admin/vendor/raphael/raphael.min.js"></script>
+    <script src="__PUBLIC__/sb-admin/vendor/morrisjs/morris.min.js"></script>-->
+    <!--<script src="__PUBLIC__/sb-admin/data/morris-data.js"></script>-->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="__PUBLIC__/sb-admin/dist/js/sb-admin-2.js"></script>
+    <script src="__PUBLIC__/bootstrapplugin/bootstrap-dialog/bootstrap-dialog.min.js"></script>
+
+<script src="__PUBLIC__/bootstrapplugin/pagination/jquery.twbsPagination.js"></script>
+<script>
+	$(function(){
+		$('#page-wrapper').css('min-height', $(window).height() - $('body').css('margin-top').replace('px','') );
+		BootstrapDialog.alert = function(message, title , type){
+			
+			BootstrapDialog.show({
+				 		type: type|| BootstrapDialog.TYPE_DANGER ,
+				 		title:title || '提示',
+			            message: message
+			});
+		}	
+	});
+	
+</script>
+    <block name="otherfoot"></block>

@@ -1,0 +1,109 @@
+<include file="Layout:meta" />
+<include file="Layout:headc" />
+<style>
+#section .section_main .activity_pannel { width: 1200px; margin-left: 0; padding: 30px; background-color: #fff;}
+#section .section_main .activity_pannel h1.title, #section .section_main .activity_pannel h2.title { font-size: 16px; color: #323232; border: 0; margin-top: 20px;}
+.item { margin-top: 20px;}
+#section .section_main .search { width: 100px; height: 36px; line-height: 36px; border-radius: 5px; border: 1px solid #f10180; background-color: #f10180; color: #fff; font-size: 14px; margin: 20px 0 5px;}
+.order_list_table { width: 1140px; table-layout: fixed; margin-top: 20px;}
+.order_list_table tr th, .order_list_table tr td { line-height: 50px; text-align: center; border: 1px solid #f1f1f1;}
+.order_list_table tr th {background-color: #f1f1f1;}
+.order_list_table tr td {  font-size: 14px;  color: #323232;  white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;  padding: 0 6px;}
+</style>
+<!-- 待确认追评订单 -->
+<section id="section">
+        
+    <div class="section_main">
+        <!--所在位置-->
+        <div class="location_title">
+            <ul>
+                <li>你所在的位置：</li>
+                <li class="order">
+                    <a class="" href="#">首页</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a class="" href="{:U('Usercenter/index')}">商家中心</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">
+                    <a href="{:U('Merchant/actlist')}">活动明细</a>
+                </li>
+                <li class="order"><img src="__PUBLIC__/maoke/images/merchant/sj_hdgl_icon_arrow_default.png" alt=""></li>
+                <li class="order">  活动详情</li>
+            </ul>
+        </div>
+
+        <!--活动信息-->
+        <div class="activity_pannel left">
+            <h1 class="title">活动信息：</h1>
+            <!-- 明细列表 -->
+            <div class="item">
+                <div class="activity_list_title clearfix">
+                    <p class="state iconfont icon-yixiaxian state_over left">已结束</p>
+                    <p class="act left">活动编号：<b class="act_id">4501</b></p>
+                    <p class="activity_productName left">oppor9手机壳 r9plus保护套</p>
+                </div>
+                <div class="activity_list_info clearfix">
+                    <div class="brief_info left">
+                        <div class="brief_info_top">
+                            <span><em>总单数：</em><b class="total_order">50单</b></span>
+                            <span><em>未开奖：</em><b class="not_open_order">0单</b></span>
+                            <span><em>已开奖：</em><b class="has_open_order">50单</b></span>
+                            <span><em class="open_order_detail">（进行中<b>0</b>单，已完成<b>48</b>单，已取消<b>2</b>单）</em></span>
+                        </div>
+                        <div class="brief_info_bottom">
+                            <span><em>试用已返款：</em><b class="has_return_money">20.10元</b></span>
+                            <span><em class="return_money_detail">（未开出试用返款：<b>0.00</b>元，已取消试用返款：<b>19.80</b>元，已完成试用差价返款：<b>0.30</b>元）</em></span>
+                            <p class="bzj">
+                                <em class="bzj_over">保证金已返</em>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="total_info right">
+                        <p><em>试用单价：</em><b class="trial_unit_price">9.90元</b></p>
+                        <p><em>商品押金：</em><b class="deposit_price">495.00元</b></p>
+                        <p><em>保证金：</em><b class="security_price">24.75元</b></p>
+                    </div>
+                </div>
+            </div>
+            <!-- 订单信息表格 -->
+            <div class="order_list">
+                <h2 class="title fl">订单信息：</h2>
+                <input type="submit" class="search fr" value="导出订单信息" onclick="">
+                <table class="order_list_table">
+                    <tbody>
+                        <tr>
+                            <th style="width: 120px">订单号</th>
+                            <th style="width: 110px">中奖时间</th>
+                            <th style="width: 160px">试客账号</th>
+                            <th style="width: 160px">淘宝账号</th>
+                            <th style="width: 180px">淘宝订单号</th>
+                            <th style="width: 110px">活动单价</th>
+                            <th style="width: 110px">实际付款金额</th>
+                            <th style="width: 90px">差价</th>
+                            <th style="width: 100px">状态</th>
+                        </tr>
+                        <tr>
+                            <td>55117</td>
+                            <td>2017.07.01</td>
+                            <td>代淋玲</td>
+                            <td>为自己的理想</td>
+                            <td></td>
+                            <td>9.90</td>
+                            <td>0.00</td>
+                            <td>9.90</td>
+                            <td>已取消</td>
+                        </tr>
+                                            
+                        </tbody>
+                    </table>
+            </div>
+            <!-- 分页 -->
+            <div style="text-align:center;"></div>            
+        </div>
+    </div>
+</section>          
+          
+    
+<include file="Layout:foot" />

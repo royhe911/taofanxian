@@ -1,0 +1,182 @@
+<include file="Layout:meta" />
+<include file="Layout:head" />
+<include file="Layout:nav" />
+                <!-- 订单管理 -->
+                <div id="my_main" class="content left" style="background-color: rgb(255, 255, 255); min-height: 889px;">
+                    <div class="activity_manage">
+                        <h1 class="title">优惠券订单管理</h1>
+                        <!--所有订单的状态种类-->
+                        <div class="order_status">
+                            <ul>
+                                <li class="order" data-type="wait"><a class="personal_active" href="javascript:void(0);">商家待处理（<span>{$msg['sq'] + $msg['xd'] + $msg['pj']}</span>）</a><b>|</b>
+                                </li>
+                                <li class="order" data-type="progress"><a href="javascript:void(0);" class="">试客进行中（<span>{$msg['dxd'] + $msg['dpj']}</span>）</a><b>|</b>
+                                </li>
+                                <li class="order" data-type="end"><a href="javascript:void(0);" class=""> 订单已结束（<span>{$msg['qx'] + $msg['fk']}</span>）</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="task_specification" id="wait" style="display: block;">
+                        	<div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">试客已申请，待审核：</p>
+                                    <notempty name="data">
+                                    <ul class="shop_list clearfix">
+                                       <volist name="data" id="vo">
+                                        <a href="{:U('Couponorder/order', array('state' => 1, 'sid' => $vo['sid']))}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}<img src="__PUBLIC__/maoke/images//merchant/bg_<if condition='($vo.laiyuan eq 1)'>tb<else />tm</if>_default.png" /></p>
+                                                <p class="shop_order">待处理：（<b>{$vo.sq}</b>）</p>
+                                            </li>
+                                        </a>
+                                       </volist>
+                                    </ul>
+                                    </notempty>
+                                </div>
+                            </div>
+							<div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">试客已提交订单号，待审核：</p>
+                                    <notempty name="data">
+                                    <ul class="shop_list clearfix">
+                                       <volist name="data" id="vo">
+                                        <a href="{:U('Couponorder/order', array('state' => 4, 'sid' => $vo['sid']))}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}<img src="__PUBLIC__/maoke/images//merchant/bg_<if condition='($vo.laiyuan eq 1)'>tb<else />tm</if>_default.png" /></p>
+                                                <p class="shop_order">待处理：（<b>{$vo.xd}</b>）</p>
+                                            </li>
+                                        </a>
+                                       </volist>
+                                    </ul>
+                                    </notempty>
+                                </div>
+                            </div>
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">试客已在淘宝评价，待确认评价返款：</p>
+                                    <notempty name="data">
+                                    <ul class="shop_list clearfix">
+                                       <volist name="data" id="vo">
+                                        <a href="{:U('Couponorder/order', array('state' => 7, 'sid' => $vo['sid']))}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}<img src="__PUBLIC__/maoke/images//merchant/bg_<if condition='($vo.laiyuan eq 1)'>tb<else />tm</if>_default.png" /></p>
+                                                <p class="shop_order">待处理：（<b>{$vo.pj}</b>）</p>
+                                            </li>
+                                        </a>
+                                       </volist>
+                                    </ul>
+                                    </notempty>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task_specification" id="progress" style="display: none;">
+
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">商品已通过申请，待试客下单：</p>
+                                    <notempty name="data">
+                                    <ul class="shop_list clearfix">
+                                       <volist name="data" id="vo">
+                                        <a href="{:U('Couponorder/order', array('state' => 3, 'sid' => $vo['sid']))}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}<img src="__PUBLIC__/maoke/images//merchant/bg_<if condition='($vo.laiyuan eq 1)'>tb<else />tm</if>_default.png" /></p>
+                                                <p class="shop_order">待处理：（<b>{$vo.dxd}</b>）</p>
+                                            </li>
+                                        </a>
+                                       </volist>
+                                    </ul>
+                                    </notempty>
+                                </div>
+                            </div>
+                            <div class="task_list">
+								<div class="task">
+									<p class="task_title">商品已发货，待试客收货评价：</p>
+                                    <notempty name="data">
+                                    <ul class="shop_list clearfix">
+                                       <volist name="data" id="vo">
+                                        <a href="{:U('Couponorder/order', array('state' => 6, 'sid' => $vo['sid']))}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}<img src="__PUBLIC__/maoke/images//merchant/bg_<if condition='($vo.laiyuan eq 1)'>tb<else />tm</if>_default.png" /></p>
+                                                <p class="shop_order">待处理：（<b>{$vo.dpj}</b>）</p>
+                                            </li>
+                                        </a>
+                                       </volist>
+                                    </ul>
+                                    </notempty>
+								</div>
+							</div>
+                        </div>
+                        <div class="task_specification" id="end" style="display: none;">
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">试客取消订单：</p>
+                                    <notempty name="data">
+                                    <ul class="shop_list clearfix">
+                                       <volist name="data" id="vo">
+                                        <a href="{:U('Couponorder/order', array('sid' => $vo['sid']))}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}<img src="__PUBLIC__/maoke/images//merchant/bg_<if condition='($vo.laiyuan eq 1)'>tb<else />tm</if>_default.png" /></p>
+                                                <p class="shop_order">待处理：（<b>{$vo.qx}</b>）</p>
+                                            </li>
+                                        </a>
+                                       </volist>
+                                    </ul>
+                                    </notempty>
+                                </div>
+                            </div>
+                            <div class="task_list">
+                                <div class="task">
+                                    <p class="task_title">订单已完成，已返款给试客：</p>
+                                    <notempty name="data">
+                                    <ul class="shop_list clearfix">
+                                       <volist name="data" id="vo">
+                                        <a href="{:U('Couponorder/order', array('state' => 10, 'sid' => $vo['sid']))}">
+                                            <li class="shop actived left">
+                                                <p class="shop_name">{$vo.shopname}<img src="__PUBLIC__/maoke/images//merchant/bg_<if condition='($vo.laiyuan eq 1)'>tb<else />tm</if>_default.png" /></p>
+                                                <p class="shop_order">待处理：（<b>{$vo.fk}</b>）</p>
+                                            </li>
+                                        </a>
+                                       </volist>
+                                    </ul>
+                                    </notempty>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+		<!-- page-wrapper end -->
+</div>
+		<!-- wrapper -->
+</div>
+    <script>
+        $(function(){
+            $(".order_status>ul>.order").click(function(){
+
+                switch($(this).attr("data-type"))
+                {
+                    case 'wait':
+                        $(this).siblings("li").children("a").removeClass("personal_active");
+                        $(this).children("a").addClass("personal_active");
+                        $(".task_specification").hide();
+                        $("#wait").show();
+                        break;
+                    case 'progress':
+                        $(this).siblings("li").children("a").removeClass("personal_active");
+                        $(this).children("a").addClass("personal_active");
+                        $(".task_specification").hide();
+                        $("#progress").show();
+                        break;
+                    case 'end':
+                        $(this).siblings("li").children("a").removeClass("personal_active");
+                        $(this).children("a").addClass("personal_active");
+                        $(".task_specification").hide();
+                        $("#end").show();
+                        break;
+                }
+            });
+        })
+    </script>
+	<include file="Layout:foot" />
