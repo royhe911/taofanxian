@@ -370,7 +370,7 @@ class TaskController extends BaseController {
                 }
             }
             //商家扣费
-            // if($type == 0){
+             if($type == 0){
                 //新增
                 $actual_cost = $actual_price + cost($task_info['price']) + $task_info['empty_cost'];
 
@@ -384,37 +384,37 @@ class TaskController extends BaseController {
                 }elseif(f_round($cha) < 0){
                     $balances_status=save_available($task_info['user_id'],abs($cha),$id,8,2);
                 }
-            // } elseif ($type == 1){
-            //     $actual_cost = $actual_price + cost($task_info['price']) - $task_info['actual_price'] - $task_info['cost'];
-            //     $cha = $actual_cost;
-            //     if(f_round($cha) > 0 ){
-            //         $balances_status=save_available($task_info['user_id'],abs($cha),$id,8,1);
-            //     }elseif(f_round($cha) < 0){
-            //         $balances_status=save_available($task_info['user_id'],abs($cha),$id,8,2);
-            //     }
-            //     if($task_info['p_empty_cost'] == 0){
-            //         if( $redbag > 0 && $task_info['empty_cost'] == 0){
-            //             $cost_redbag=cost_redbag($actual_price);
-            //             $balances_status=save_available($task_info['user_id'],$cost_redbag,$id,9,1);
-            //             $actual_cost += $cost_redbag;
-            //             $data['empty_cost']= $cost_redbag;
-            //         }elseif($redbag > 0 && $task_info['empty_cost'] > 0){
-            //             $cha = cost_redbag($actual_price) - $task_info['empty_cost'];
-            //             $actual_cost += $cha;
-            //             $data['empty_cost'] = cost_redbag($actual_price);
-            //             if(f_round($cha) > 0){
-            //                 $balances_status=save_available($task_info['user_id'],abs($cha),$id,9,1,$actual_cost * -1 + $cha);
-            //             }elseif (f_round($cha) < 0 ){
-            //                 $balances_status=save_available($task_info['user_id'],abs($cha),$id,9,2,$actual_cost * -1 + $cha);
-            //             }
-            //         }elseif ($redbag == 0 && $task_info['empty_cost'] >0){
-            //             $cost_redbag = $task_info['empty_cost'];
-            //             $balances_status=save_available($task_info['user_id'],$cost_redbag,$id,9,2,$actual_cost * -1);
-            //             $actual_cost -= $cost_redbag;
-            //             $data['empty_cost'] = 0;
-            //         }
-            //     }
-            // }
+             } elseif ($type == 1){
+                 $actual_cost = $actual_price + cost($actual_price) - $task_info['actual_price'] - $task_info['cost'];
+                 $cha = $actual_cost;
+                 if(f_round($cha) > 0 ){
+                     $balances_status=save_available($task_info['user_id'],abs($cha),$id,8,1);
+                 }elseif(f_round($cha) < 0){
+                     $balances_status=save_available($task_info['user_id'],abs($cha),$id,8,2);
+                 }
+//                 if($task_info['p_empty_cost'] == 0){
+//                     if( $redbag > 0 && $task_info['empty_cost'] == 0){
+//                         $cost_redbag=cost_redbag($actual_price);
+//                         $balances_status=save_available($task_info['user_id'],$cost_redbag,$id,9,1);
+//                         $actual_cost += $cost_redbag;
+//                         $data['empty_cost']= $cost_redbag;
+//                     }elseif($redbag > 0 && $task_info['empty_cost'] > 0){
+//                         $cha = cost_redbag($actual_price) - $task_info['empty_cost'];
+//                         $actual_cost += $cha;
+//                         $data['empty_cost'] = cost_redbag($actual_price);
+//                         if(f_round($cha) > 0){
+//                             $balances_status=save_available($task_info['user_id'],abs($cha),$id,9,1,$actual_cost * -1 + $cha);
+//                         }elseif (f_round($cha) < 0 ){
+//                             $balances_status=save_available($task_info['user_id'],abs($cha),$id,9,2,$actual_cost * -1 + $cha);
+//                         }
+//                     }elseif ($redbag == 0 && $task_info['empty_cost'] >0){
+//                         $cost_redbag = $task_info['empty_cost'];
+//                         $balances_status=save_available($task_info['user_id'],$cost_redbag,$id,9,2,$actual_cost * -1);
+//                         $actual_cost -= $cost_redbag;
+//                         $data['empty_cost'] = 0;
+//                     }
+//                 }
+             }
             if(abs($cha) != 0){
                 //商家扣费
                 $shop_money=D('user')->where('uid='.$task_info['user_id'])->setDec('money',$cha);
