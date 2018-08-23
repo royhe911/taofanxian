@@ -58,8 +58,8 @@
 									<eq name="vo.msg" value="6">订单异常返款</eq>
 									<eq name="vo.msg" value="7">审核拒绝返款</eq>
 									<eq name="vo.msg" value="8">
-										<if condition="$vo.status == 2">实际下单价小于单价，补偿差价</if>
-										<if condition="$vo.status == 1">实际下单价大于单价，扣除差价</if>
+										<if condition="$vo.status == 2">实际下单价小于发布价，补偿差价</if>
+										<if condition="$vo.status == 1">实际下单价大于发布价，扣除差价</if>
 									</eq>
 									<eq name="vo.msg" value="9">空包补偿费用</eq>
 
