@@ -309,7 +309,10 @@ class BusinessController extends BaseController {
                 if(!empty($main_shop)) $where .= " and b.shopname like '%$main_shop%'";
                 if(!empty($shopname))  $where .= " and a.shopname like '%$shopname%'";
             	$count = D('shop a')->join('left join erp_user b on a.uid=b.uid')->where($where)->count();
-	            $info = D('shop a')->field('a.*,b.shopname as b_shopname')->join('left join erp_user b on a.uid=b.uid')->where($where)->limit($page*$page_size,$page_size)->order('a.status,a.addtime desc')->select();
+	            $info = D('shop a')->field('a.*,b.shopname as b_shopname,ac.info')
+                    ->join('left join erp_user b on a.uid=b.uid')
+                    ->join('left join erp_account ac on b.tid=ac.id')
+                    ->where($where)->limit($page*$page_size,$page_size)->order('a.status,a.addtime desc')->select();
             }elseif ( $roleId == 6){
                 //业务员
                 //$where = "uid=".$user_id;
@@ -319,7 +322,10 @@ class BusinessController extends BaseController {
     			$info = M()->Query($query);
     			$count = count($info);
     			
-            	$query = 'SELECT a.*,b.shopname as b_shopname FROM erp_shop a LEFT JOIN erp_user b on a.uid=b.uid where a.uid in(select uid from erp_user where tid='.$user_id.')';
+            	$query = 'SELECT a.*,b.shopname as b_shopname,ac.info FROM erp_shop a 
+                          LEFT JOIN erp_user b on a.uid=b.uid 
+                          LEFT JOIN erp_account ac on b.tid=ac.id 
+                          where a.uid in(select uid from erp_user where tid='.$user_id.')';
                 if(!empty($main_shop)) $query .= " and b.shopname like '%$main_shop%'";
                 if(!empty($shopname))  $query .= " and a.shopname like '%$shopname%'";
             	$query .='order by a.status , a.addtime desc limit '.$page*$page_size.', '.$page_size;

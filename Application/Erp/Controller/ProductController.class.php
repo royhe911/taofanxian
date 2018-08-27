@@ -1007,13 +1007,17 @@ class ProductController extends BaseController
             }
 
             if (!empty($sjname)) {
-                $sid = D('user')->where("shopname like '%$sjname%'")->getField('uid');
+                $sid = D('user')->field('uid')->where("shopname like '%$sjname%'")->select();
                 // if ($_SESSION['user']['id'] == 1) {
                 //     echo $sid;exit;
                 // }
-                // $where .= " and e.shopname like '%$sjname%'";
+//                 $where .= " and e.shopname like '%$sjname%'";
                 if ($sid) {
-                    $where .= " and b.user_id=$sid";
+                    $whereid = '';
+                    foreach($sid as $tid){
+                        $whereid.= $tid['uid'].',';
+                    }
+                    $where .= " and b.user_id in(".substr($whereid, 0, -1).")";
                 }
             }
 
@@ -1431,7 +1435,7 @@ class ProductController extends BaseController
             exit;
         }
         M()->commit();
-        $this->ajaxReturn(array('msg' => 0, 'info' => '退款成功'));
+        $this->ajaxReturn(array('msg' => 0, 'info' => '退款失败'));
     }
     public function reject()
     {

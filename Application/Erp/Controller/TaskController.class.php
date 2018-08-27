@@ -359,10 +359,19 @@ class TaskController extends BaseController {
             $data['cost']         = cost($task_info['price']);
             $data['redbag']       = $redbag;
 
+            // 2018-08-27  解决扣减冻结金额计算错误的问题
+            $taskCost = $task_info['cost'];
+            if($taskCost == 0){ // 验证是否存在服务费
+                $proAttr = D('ProductAttr')->where('id = ' . $task_info['sid'])->find();
+                if(!empty($proAttr) && $proAttr['cost'] > 0){
+                    $taskCost = cost($task_info['price']);
+                }
+            }
             //实际扣款
             if($type ==0){
                 //预付金安实际扣除
-                $cost    = $task_info['price'] + $task_info['cost'] + $task_info['empty_cost'];
+//                $cost    = $task_info['price'] + $task_info['cost'] + $task_info['empty_cost'];           //20180827
+                $cost    = $task_info['price'] + $taskCost + $task_info['empty_cost'];
                 $yufujin = D('User')->where('uid='.$task_info['user_id'])->setDec('yufujin',$cost);
                 if(!$yufujin)  {
                     M()->rollback();
@@ -374,10 +383,12 @@ class TaskController extends BaseController {
                 //新增
                 $actual_cost = $actual_price + cost($task_info['price']) + $task_info['empty_cost'];
 
-                $cost = $task_info['cost'];
-                if ($cost == 0) {
-                    $cost = cost($task_info['price']);
-                }
+                // 20180827
+//                $cost = $task_info['cost'];
+//                if ($cost == 0) {
+//                    $cost = cost($task_info['price']);
+//                }
+                 $cost = $taskCost;     // 20180827
                 $cha = $actual_price + cost($actual_price) - $cost- $task_info['price'];
                 if(f_round($cha) > 0 ){
                     $balances_status=save_available($task_info['user_id'],abs($cha),$id,8,1);
@@ -777,6 +788,13 @@ class TaskController extends BaseController {
         $list_all2 = array();
         // 多少小时领完
         $cs = 10;
+        $h = intval(date('H'));
+        if ($h < 19) {
+            $cs = 19 - $h;
+        }
+        if ($h > 12) {
+            $cs = 6;
+        }
         foreach ($list_all as $item_all) {
             $list_all2[$item_all['gid']] = $item_all['c'];
             $pj = floor(intval($item_all['c'])/$cs);
@@ -788,10 +806,6 @@ class TaskController extends BaseController {
         $uid_pri_no = $this->shuffle_assoc($uid_pri_no);
         $uid_pri_no = $this->shuffle_assoc($uid_pri_no);
         $uid_pri_no = $this->shuffle_assoc($uid_pri_no);
-        $h = intval(date('H'));
-        if ($h < 19) {
-            $cs = 19 - $h;
-        }
         $gid = 0;
         $id = 0;
         if ($h > 8 || ($h >= 0 && $h < 3)) {
