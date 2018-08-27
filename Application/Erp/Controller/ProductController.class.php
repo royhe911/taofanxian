@@ -8,6 +8,7 @@
 namespace Erp\Controller;
 
 use Common\Util\Util;
+use Erp\Model\TaskModel;
 use Think\Controller;
 
 class ProductController extends BaseController
@@ -1519,9 +1520,12 @@ class ProductController extends BaseController
         M()->startTrans();
 
         $res  = D('task')->where('id=' . $id)->setField('xiajia', 2); //同意下架
-        $info = D('task')->field('user_id,price,empty_cost,cost')->where('id=' . $id)->find();
+        $info = D('task')->field('sid,user_id,price,empty_cost,cost')->where('id=' . $id)->find();
         //预付金减少
-        $money           = $info['price'] + $info['cost'] + $info['empty_cost']; //商品价格加上费用
+        // 2018-08-27  解决扣减冻结金额计算错误的问题
+        $taskCost = TaskModel::getCost($info);
+//        $money           = $info['price'] + $info['cost'] + $info['empty_cost']; //商品价格加上费用   // 2018-08-27
+        $money           = $info['price'] + $taskCost + $info['empty_cost']; //商品价格加上费用        2018-08-27
         $balances_status = save_available($info['user_id'], $money, $id, 5, 2);
         $yufujinres      = D('user')->where('   uid=' . $info['user_id'])->setDec('yufujin', $money);
         $moneyres        = D('user')->where('uid=' . $info['user_id'])->setInc('money', $money);
@@ -1604,6 +1608,8 @@ class ProductController extends BaseController
         $starttime = I('get.time');
         $endtime   = I('get.endtime');
         $shopname  = trim(I('get.shopname'));
+        $sjname  = trim(I('get.sjname'));
+        $choicepr  = I('get.choicepr', 0, 'intval');
         $choicezz  = I('get.choicezz', 0, 'intval');
         $choiceyw  = I('get.choiceyw', 0, 'intval');
         $type      = I('get.type');
@@ -1666,12 +1672,38 @@ class ProductController extends BaseController
             $where .= " and c.shopname like '%$shopname%'";
         }
 
-        if (!empty($choicezz)) {
-            $where .= " and d.user_id=" . $choicezz;
+        if (!empty($sjname)) {
+            $sid = D('user')->field('uid')->where("shopname like '%$sjname%'")->select();
+            // if ($_SESSION['user']['id'] == 1) {
+            //     echo $sid;exit;
+            // }
+//                 $where .= " and e.shopname like '%$sjname%'";
+            if ($sid) {
+                $whereid = '';
+                foreach($sid as $tid){
+                    $whereid.= $tid['uid'].',';
+                }
+                $where .= " and b.user_id in(".substr($whereid, 0, -1).")";
+            }
         }
 
-        if (!empty($choiceyw)) {
-            $where .= " and a.tid=" . $choiceyw;
+        switch ($choicepr) {
+            // 1 100以下 2 100 - 200 3 200 - 300 4 300-400 5 400以上
+            case 1:
+                $where .= " and a.actual_price < 100";
+                break;
+            case 2:
+                $where .= " and a.actual_price >= 100 and a.actual_price < 200";
+                break;
+            case 3:
+                $where .= " and a.actual_price >= 200 and a.actual_price < 300";
+                break;
+            case 4:
+                $where .= " and a.actual_price >= 300 and a.actual_price < 400";
+                break;
+            case 5:
+                $where .= " and a.actual_price >= 400 ";
+                break;
         }
 
         /*************************************************/
@@ -1682,6 +1714,7 @@ class ProductController extends BaseController
             ->join('left join erp_shop c on a.shop_id=c.id')
             ->join('left join erp_account d on a.uid=d.id')
             ->where($where)
+            ->order('a.edittime desc')
             ->select();
 
 //        foreach ( $task as $key =>$value){
@@ -2794,8 +2827,10 @@ class ProductController extends BaseController
 
                 $total_price = $total_cost = $total_empty_cost = 0;
                 foreach ($task as $key => $value) {
+                    $taskCost = TaskModel::getCost($value);
+                    $total_cost += $taskCost;           // 2018-08-27
                     $total_price += $value['price'];
-                    $total_cost += $value['cost'];
+//                    $total_cost += $value['cost'];    // 2018-08-27
                     $total_empty_cost += $value['empty_cost'];
                 }
                 $yufujin = $total_price + $total_cost + $total_empty_cost;

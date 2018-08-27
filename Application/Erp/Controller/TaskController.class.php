@@ -6,6 +6,7 @@
  * Time: 15:00
  */
 namespace Erp\Controller;
+use Erp\Model\TaskModel;
 use Think\Controller;
 use Common\Util\Util;
 
@@ -360,13 +361,7 @@ class TaskController extends BaseController {
             $data['redbag']       = $redbag;
 
             // 2018-08-27  解决扣减冻结金额计算错误的问题
-            $taskCost = $task_info['cost'];
-            if($taskCost == 0){ // 验证是否存在服务费
-                $proAttr = D('ProductAttr')->where('id = ' . $task_info['sid'])->find();
-                if(!empty($proAttr) && $proAttr['cost'] > 0){
-                    $taskCost = cost($task_info['price']);
-                }
-            }
+            $taskCost = TaskModel::getCost($task_info);
             //实际扣款
             if($type ==0){
                 //预付金安实际扣除
@@ -788,13 +783,6 @@ class TaskController extends BaseController {
         $list_all2 = array();
         // 多少小时领完
         $cs = 10;
-        $h = intval(date('H'));
-        if ($h < 19) {
-            $cs = 19 - $h;
-        }
-        if ($h > 12) {
-            $cs = 6;
-        }
         foreach ($list_all as $item_all) {
             $list_all2[$item_all['gid']] = $item_all['c'];
             $pj = floor(intval($item_all['c'])/$cs);
@@ -806,6 +794,10 @@ class TaskController extends BaseController {
         $uid_pri_no = $this->shuffle_assoc($uid_pri_no);
         $uid_pri_no = $this->shuffle_assoc($uid_pri_no);
         $uid_pri_no = $this->shuffle_assoc($uid_pri_no);
+        $h = intval(date('H'));
+        if ($h < 19) {
+            $cs = 19 - $h;
+        }
         $gid = 0;
         $id = 0;
         if ($h > 8 || ($h >= 0 && $h < 3)) {
