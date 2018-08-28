@@ -1,11 +1,11 @@
 <extend name="public/modal" />
 <block name="title">绑定店铺</block>
 <block name="menu">
-	<form action="{:U('User/shopmanage')}" method="post" class="form form-horizontal" id="form-admin-role-add">
+	<form action="{:U('User/shopmanage')}" method="post" class="form form-horizontal" id="form-admin-role-add" onsubmit="return checkForm()">
 		<div class="row cl">
 			<label class="form-label col-xs-2 col-sm-2" style="text-align: right;"><span class="c-red">*</span>店铺名称：</label>
 			<div class="formControls col-xs-10 col-sm-10">
-				<input type="text" class="input-text" placeholder="请输入店铺名称" name="shopname" required oninvalid="setCustomValidity('请输入店铺名称');" oninput="setCustomValidity('');">
+				<input type="text" class="input-text" placeholder="请输入店铺名称" id="shopname" name="shopname" required oninvalid="setCustomValidity('请输入店铺名称');" oninput="setCustomValidity('');">
 			</div>
 		</div>
 		<div class="row cl">
@@ -29,6 +29,17 @@
 			</div>
 		</div>
 	</form>
+
+	<script type="text/javascript">
+        function checkForm(){
+            if(/[^\u4e00-\u9fa5\w]/.test(document.getElementById('shopname').value)){
+                layer.msg('店铺名称存在非法字符');
+                return false;
+            }
+            return true;
+        }
+
+	</script>
 </block>
 <block name="js">
 

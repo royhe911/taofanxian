@@ -6,6 +6,7 @@
  * Time: 15:00
  */
 namespace Erp\Controller;
+use Erp\Model\LogModel;
 use Think\Controller;
 use Common\Util\Util;
 
@@ -256,11 +257,17 @@ class UserController extends BaseController {
                 'name'=>$name
             );
             $res=D('cash')->add($data);
+            $cashid = D('cash')->getLastInsID();
             $user_card=array(
                 'card'=>$card,
                 'name'=>$name
             );
             D('user')->where('uid='.intval($_SESSION['user']['id']))->setField($user_card);
+            // 扣減用戶余额，增加用户冻结金额   20180828
+            // D('user')->where('uid='.intval($_SESSION['user']['id']))->setDec('money', $money);
+            D('user')->where('uid='.intval($_SESSION['user']['id']))->setInc('freeze_free', $money);
+            addLog(LogModel::TYPE_APPLY_CASH, '商家申请提现，提现金额：'.$money.'，提现记录ID：'. $cashid);
+
             $balances_status=save_available($_SESSION['user']['id'],$money,0,1,1);
             if (!$balances_status) {
                 M()->rollback();

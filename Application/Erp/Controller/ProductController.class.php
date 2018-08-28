@@ -8,6 +8,7 @@
 namespace Erp\Controller;
 
 use Common\Util\Util;
+use Erp\Model\LogModel;
 use Erp\Model\TaskModel;
 use Think\Controller;
 
@@ -596,6 +597,7 @@ class ProductController extends BaseController
                 );
                 $res  = D('Product')->where('id=' . $id)->setField($array);
                 $task = D('task')->where('gid=' . $id)->setField('status', 1);
+                addLog(LogModel::TYPE_CONFIRM_PRODUCT_PASS, '商品审核通过，商品ID：'.$id);
                 if (!$res || !$task) {
                     M()->rollback();
                     //修改失败
@@ -668,7 +670,7 @@ class ProductController extends BaseController
             M()->rollback();
             $this->ajaxReturn(array('status' => 0, 'msg' => '系统错误2'));
         }
-
+        addLog(LogModel::TYPE_CONFIRM_PRODUCT_FAIL, '商品审核不通过，拒绝原因：'.$reason.'，商品ID：'.$id);
         M()->commit();
         $this->ajaxReturn(array('status' => 1, 'msg' => '操作成功'));
     }
@@ -1496,6 +1498,7 @@ class ProductController extends BaseController
             'xiajiareason' => null,
         );
         $res = D('task')->where('id=' . $id)->setField($array); //申请下架
+        addLog(LogModel::TYPE_TASK_APPLY_DOWN, '商家申请下架任务，任务id:'.$id);
         if ($res) {
             $this->ajaxReturn(array('msg' => 1, 'info' => '申请成功'));
         } else {
@@ -1527,8 +1530,9 @@ class ProductController extends BaseController
 //        $money           = $info['price'] + $info['cost'] + $info['empty_cost']; //商品价格加上费用   // 2018-08-27
         $money           = $info['price'] + $taskCost + $info['empty_cost']; //商品价格加上费用        2018-08-27
         $balances_status = save_available($info['user_id'], $money, $id, 5, 2);
-        $yufujinres      = D('user')->where('   uid=' . $info['user_id'])->setDec('yufujin', $money);
+        $yufujinres      = D('user')->where('uid=' . $info['user_id'])->setDec('yufujin', $money);
         $moneyres        = D('user')->where('uid=' . $info['user_id'])->setInc('money', $money);
+        addLog(LogModel::TYPE_TASK_APPLY_DOWN_PASS, '通过商家申请的下架任务，任务id:'.$id);
         if ($balances_status && $res && $moneyres && $yufujinres) {
             M()->commit();
             $this->ajaxReturn(array('msg' => 1, 'info' => '同意下架'));
@@ -1555,6 +1559,7 @@ class ProductController extends BaseController
             'xiajia'       => 0,
         );
         $res = D('task')->where('id=' . $id)->setField($array);
+        addLog(LogModel::TYPE_TASK_APPLY_DOWN_FAIL, '拒绝商家申请的下架任务，拒绝原因：'.$reason.'，任务id:'.$id);
         if ($res) {
             $this->ajaxReturn(array('msg' => 1, 'info' => 'success'));
         } else {
@@ -2810,10 +2815,13 @@ class ProductController extends BaseController
                 'xiajiareason' => null,
             );
             $where  = "uid is null and tb_item is null and xiajia = 0 and gid=" . $goods_id;
+            $task = D('task')->field('id')->where($where)->select();
             $status = D('task')->where($where)->setField($array);
             if (!$status) {
                 $this->ajaxReturn(array('msg' => 0, 'info' => '没有可下架任务'));
             }
+
+            addLog(LogModel::TYPE_TASK_APPLY_DOWN_ALL, '商家申请批量下架任务，任务id:'.implode(',',array_column($task, 'id')));
 
             $this->ajaxReturn(array('msg' => 1, 'info' => '申请成功'));
         } elseif ($type == 2) {
@@ -2843,6 +2851,7 @@ class ProductController extends BaseController
                     'xiajiareason' => null,
                 );
                 $task_status = D('task')->where($where)->setField($array);
+                addLog(LogModel::TYPE_TASK_DOWN_ALL, getUserType().'批量下架任务，任务id:'.implode(',',array_column($task, 'id')));
                 if (!$yufujin_status || !$money_status || !$task_status || !$balances_status) {
                     M()->rollback();
                     $this->ajaxReturn(array('msg' => 0, 'info' => '系统错误，审核失败'));
@@ -2895,6 +2904,7 @@ class ProductController extends BaseController
                 'xiajiareason' => null,
             );
             $task_status = D('task')->where($where)->setField($array);
+            addLog(LogModel::TYPE_TASK_APPLY_DOWN_ALL_PASS, getUserType().'通过商家申请的批量下架任务，任务id:'.implode(',',array_column($task, 'id')));
             if (!$yufujin_status || !$money_status || !$task_status || !$balances_status) {
                 M()->rollback();
                 $this->ajaxReturn(array('msg' => 0, 'info' => '系统错误，审核失败'));
@@ -2930,7 +2940,9 @@ class ProductController extends BaseController
                 'xiajiareason' => $reason,
                 'xiajia'       => 0,
             );
+            $task = D('task')->where($where)->select();
             $res = D('task')->where($where)->setField($array);
+            addLog(LogModel::TYPE_TASK_APPLY_DOWN_ALL_FAIL, getUserType().'拒绝商家申请的批量下架任务，拒绝原因：'.$reason.'，任务id:'.implode(',',array_column($task, 'id')));
             if (!$res) {
                 $this->ajaxReturn(array('msg' => 0, 'info' => '没有可拒绝的任务'));
             }

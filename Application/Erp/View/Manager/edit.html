@@ -80,7 +80,7 @@
 			<div class="formControls col-xs-8 col-sm-9 posi-rela">
 				<button class="btn btn-success radius">上传图片</button>
 				<input class="file-input fileToUpload" type="file" accept="image/*" name="fileToUpload" id="fileToUpload" onclick="uploadFile(this,'fileToUpload');"  value=""><br />
-				<div id="img_preview_one"><input type="hidden" name="img" id="img" value="{$info.img}" /><img src="upload/{$info.addtime|date='Ymd',###}/{$info.img}" id="thumb-preview"></div>
+				<div id="img_preview_one"><input type="hidden" name="img" id="img" value="{$info.img}" /><img src="{$info.img}" id="thumb-preview"></div>
 			</div>
 		</div>
 		</if>

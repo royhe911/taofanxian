@@ -786,8 +786,8 @@ class TaskController extends BaseController {
         foreach ($list_all as $item_all) {
             $list_all2[$item_all['gid']] = $item_all['c'];
             $pj = floor(intval($item_all['c'])/$cs);
-            if ($pj == 0) {
-                $pj = 1;
+            if ($pj <= 0) {
+                $pj = 0;
             }
             $uid_pri_all[$item_all['gid']] = $pj;
         }

@@ -6,6 +6,7 @@
  * Time: 15:00
  */
 namespace Erp\Controller;
+use Erp\Model\LogModel;
 use Think\Controller;
 use Common\Util\Util;
 
@@ -875,6 +876,7 @@ class FinanceController extends BaseController {
             if($msg == 1){
                 //通过
                 $res=D('cash')->where(array('id'=>$id))->setField('status',4);
+                addLog(LogModel::TYPE_APPLY_CASH_PASS, '业务员审核通过商家申请提现，提现记录ID：'. $id);
                 if(!$res)  $this->ajaxReturn(array('msg'=>0,'info'=>'审核错误'));
                 $this->ajaxReturn(array('msg'=>1,'info'=>'审核通过'));
             }elseif($msg ==2){
@@ -896,7 +898,9 @@ class FinanceController extends BaseController {
                     $this->ajaxReturn(array('msg'=>0,'info'=>'返款错误'));
                 }
                 $re_money=D('user')->where(array('uid'=>$cash['uid']))->setInc('money',$cash['money']);
-                if (!$re_money) {
+                $free = D('user')->where(array('uid'=>$cash['uid']))->setDec('freeze_free',$cash['money']);
+                addLog(LogModel::TYPE_APPLY_CASH_FAIL, '业务员拒绝商家申请提现，拒绝原因：'.$reason.'，提现记录ID：'. $id);
+                if (!$re_money || !$free) {
                     M()->rollback();
                     $this->ajaxReturn(array('msg'=>0,'info'=>'返款错误'));
                 }
@@ -924,11 +928,18 @@ class FinanceController extends BaseController {
                     'status'=>1,
                     'money_pic'=>$money_pic,
                 );
+
+                M()->startTrans();
+                $cash=D('cash')->where(array('id'=>$id))->find();
                 $res=D('cash')->where('id='.$id)->setField($array);
-                if(!$res) {
+                $res_free = D('user')->where('uid = ' . $cash['uid'])->setDec('freeze_free', $cash['money']);   // 扣减用户冻结提现余额
+                if(!$res || !$res_free) {
+                    M()->rollback();
                     $this->error('提交失败');
                     exit;
                 }
+                addLog(LogModel::TYPE_APPLY_CASH_PASS, getUserType().'审核商家申请提现，提现记录ID：'. $id);
+                M()->commit();
                 $this->success('提交成功','javascript:parent.location.reload();');
             }elseif($status ==2){
                 //拒绝
@@ -950,8 +961,9 @@ class FinanceController extends BaseController {
                     exit;
                 }
                 $re_money=D('user')->where(array('uid'=>$cash['uid']))->setInc('money',$cash['money']);
-
-                if(!$res || !$re_money) {
+                $res_free = D('user')->where('uid = ' . $cash['uid'])->setDec('freeze_free', $cash['money']);   // 扣减用户冻结余额
+                addLog(LogModel::TYPE_APPLY_CASH_FAIL, getUserType().'拒绝商家申请提现，拒绝原因：'.$reason.'，提现记录ID：'. $id);
+                if(!$res || !$re_money || !$res_free) {
                     M()->rollback();
                     $this->error('提交失败');
                     exit;

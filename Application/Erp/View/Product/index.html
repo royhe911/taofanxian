@@ -15,8 +15,8 @@
 						日期：<input type="text" id="datemin" name="time" class="input-text" style="width:150px;" placeholder="起始时间" value="{$starttime}" >
 						<input type="text" id="datemax" name="endtime" class="input-text" style="width:150px;" placeholder="结束时间" value="{$endtime}">
 						<if condition="$_SESSION['user']['role'] neq 5">
-						<input type="text" class="input-text brushname" style="width:200px" placeholder="输入店铺名" id="" name="shopname" value="{$shopname}">
-						<input type="text" class="input-text" style="width:200px" placeholder="商家搜索" id="" name="sjname" value="{$sjname}">
+						<input type="text" class="input-text brushname" style="width:200px" placeholder="输入店铺名(单个店铺)" id="" name="shopname" value="{$shopname}">
+						<input type="text" class="input-text" style="width:200px" placeholder="输入商家名(所有店铺)" id="" name="sjname" value="{$sjname}">
 							<if condition="$_SESSION['user']['role'] neq 5 and $_SESSION['user']['role'] neq 6">
 						<select name="choiceyw" class="select select-box " style="width: 120px;">
 							<option value="">请选择业务员</option>

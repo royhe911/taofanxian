@@ -125,6 +125,7 @@ class ManagerController extends BaseController {
 			if (!$data){
 				$this->error($account->getError());
 			}else{
+			    $data['img'] = "upload/".date('Ymd').'/'.$data['img'];
 				$msg = $account->add($data);
 				if ($msg){
 					$this->success('操作成功!', 'javascript:parent.location.reload();');
@@ -168,7 +169,7 @@ class ManagerController extends BaseController {
 			if (!$data){
 				$this->error($account->getError());
 			}else{
-
+                $data['img'] = "upload/".date('Ymd').'/'.$data['img'];
 				$msg = $account->save($data);
 				if ($msg){
 					$this->success('操作成功!', 'javascript:parent.location.reload();');

@@ -181,3 +181,38 @@ function get_mi(){
     return true;
 
 }
+
+/**
+ * 创建操作日志
+ * @param $content
+ */
+function addLog($type, $content){
+    $log = new \Erp\Model\LogModel();
+    $log->createLog($type, $content);
+}
+
+function getUserType(){
+    switch($_SESSION['user']['role']){
+        case 1:
+            $name = '超级管理员';
+            break;
+        case 2:
+            $name = '刷单员';
+            break;
+        case 3:
+            $name = '站长';
+            break;
+        case 4:
+            $name = '财务';
+            break;
+        case 5:
+            $name = '商家';
+            break;
+        case 6:
+            $name = '业务员';
+            break;
+        default:
+            $name = '未知身份';
+    }
+    return $name;
+}

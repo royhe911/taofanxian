@@ -152,6 +152,7 @@
 
               }
           }
+          addLog(LogModel::TYPE_PRODUCT_ADD,'商家新增商品任务，商品id:'.$id);
 
           //扣款
           $user_id=$_SESSION['user']['id'];
@@ -204,6 +205,7 @@
                       $this->error='系统错误';
                       return false;
                   }
+                  addLog(LogModel::TYPE_PRODUCT_PAY,'商家对商品任务进行付款，付款金额：'.$totalmoney.'，商品id:'.$id);
                   M()->commit();
                   $this->success='发布成功';
               }
@@ -228,6 +230,7 @@
                   $resm=D('User')->where('uid='.$user_id)->setDec('money',$totalmoney);
 
                   $status=D('product')->where('id='.$id)->setField('status',0);
+                  addLog(LogModel::TYPE_PRODUCT_PAY,'商家对商品任务进行付款，付款金额：'.$totalmoney.'，商品id:'.$id);
                   if ($res===false || $resm===false || $status===false) {
                       M()->rollback();
                       $this->error='系统错误';
@@ -433,6 +436,7 @@
                   }
               }
           }
+          addLog(LogModel::TYPE_PRODUCT_UPDATE,'商家修改商品任务，商品id:'.$id);
 
           //扣款
           $user_id=$_SESSION['user']['id'];
@@ -483,6 +487,7 @@
                   $res=D('User')->where('uid='.$user_id)->setInc('yufujin',$totalmoney);
                   $res=D('User')->where('uid='.$user_id)->setDec('money',$totalmoney);
                   $status=D('product')->where('id='.$id)->setField('status',0);
+                  addLog(LogModel::TYPE_PRODUCT_PAY,'商家对商品任务进行付款，付款金额：'.$totalmoney.'，商品id:'.$id);
                   if ( !$res || !$status) {
                       M()->rollback();
                       $this->error='系统错误3';
@@ -515,6 +520,7 @@
                   $res=D('User')->where('uid='.$user_id)->setInc('yufujin',$totalmoney);
                   $res=D('User')->where('uid='.$user_id)->setDec('money',$totalmoney);
                   $status=D('product')->where('id='.$id)->setField('status',0);
+                  addLog(LogModel::TYPE_PRODUCT_PAY,'商家对商品任务进行付款，付款金额：'.$totalmoney.'，商品id:'.$id);
                   if ( !$res || !$status) {
                       M()->rollback();
                       $this->error='系统错误5';
