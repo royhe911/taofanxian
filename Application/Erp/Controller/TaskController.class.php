@@ -804,14 +804,8 @@ class TaskController extends BaseController {
             foreach ($uid_pri_no as $key => $cc) {
                 if ($cs > 1 && $h >=3 && $h < 18) {
                     if ($cc > 0) {
-                        if ($cc > (intval($uid_pri_all[$key]) * (18 - $h))) {
+                        if ($cc > (intval($uid_pri_all[$key]) * (19 - $h))) {
                             $gid = $key;
-                        }else{
-                            // 如果任务量小于 $cs
-                            $dj = intval($list_all2[$key]) - intval($h) + 9;
-                            if ($cc > $dj) {
-                                $gid = $key;
-                            }
                         }
                     }
                 }else{

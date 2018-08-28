@@ -9,6 +9,7 @@
 namespace Erp\Controller;
 
 
+use Erp\Model\TaskModel;
 use Think\Controller;
 
 class CliController extends Controller
@@ -24,7 +25,9 @@ class CliController extends Controller
         $user[] = array();
         foreach ( $task as $key =>$value){
             M()->startTrans();
-            $yufujin= $value['price'] + $value['cost'] + $value['empty_cost'];
+            $taskCost = TaskModel::getCost($value);
+            $yufujin= $value['price'] + $taskCost + $value['empty_cost'];
+//            $yufujin= $value['price'] + $value['cost'] + $value['empty_cost'];        // 20180827
 
             // 金额处理
             if(!isset($user[$value['user_id']])){

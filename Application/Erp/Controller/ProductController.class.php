@@ -2701,12 +2701,12 @@ class ProductController extends BaseController
             $data['uid']          = $_SESSION['user']['id'];
             $data['name']         = $_SESSION['user']['name'];
             $data['actual_price'] = $actual_price;
-            $data['cost']         = cost($actual_price, $task_info['user_id'], $pub_time);
+            $data['cost']         = cost($actual_price);
             $data['redbag']       = $redbag;
 
             //商家扣费
 
-            $actual_cost = $actual_price + cost($actual_price, $task_info['user_id'], $pub_time) - $task_info['actual_price'] - $task_info['cost'];
+            $actual_cost = $actual_price + cost($actual_price) - $task_info['actual_price'] - $task_info['cost'];
             $cha         = $actual_cost;
             if (f_round($cha) > 0) {
                 $balances_status = save_available($task_info['user_id'], abs($cha), $id, 8, 1);
@@ -2878,8 +2878,10 @@ class ProductController extends BaseController
 
             $total_price = $total_cost = $total_empty_cost = 0;
             foreach ($task as $key => $value) {
+                $taskCost = TaskModel::getCost($value);
+                $total_cost += $taskCost;           // 2018-08-27
                 $total_price += $value['price'];
-                $total_cost += $value['cost'];
+//                $total_cost += $value['cost'];    // 2018-08-27
                 $total_empty_cost += $value['empty_cost'];
             }
 

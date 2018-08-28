@@ -7,6 +7,7 @@
  */
 
 namespace Erp\Controller;
+use Erp\Model\TaskModel;
 use Think\Controller;
 
 class BaseController extends Controller{
@@ -63,7 +64,9 @@ class BaseController extends Controller{
 
                         foreach ($task as $key =>$value){
                             M()->startTrans();
-                            $yufujin= $value['price'] + $value['cost'] + $value['empty_cost'];
+                            $taskCost = TaskModel::getCost($value);
+                            $yufujin= $value['price'] + $taskCost + $value['empty_cost'];
+//                            $yufujin= $value['price'] + $value['cost'] + $value['empty_cost'];       // 20180827
                             $task_status=D('task')->where("id =".$value['id'])->setField('xiajia',3);
 
                             $balances_status=save_available($user_id,$yufujin,$value['id'],5,2);

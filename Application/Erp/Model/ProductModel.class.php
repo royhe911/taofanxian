@@ -421,6 +421,7 @@
                   'user_id'=>$_SESSION['user']['id'],
                   'tid'    =>$info['tid'],
                   'shop_id'=>$data['shop_id'],
+                  'cost'   =>$value['cost'] / $value['n'],//xxx
                   'empty_cost'=>$data['empty_cost'],
               );
 
