@@ -169,12 +169,13 @@ class ManagerController extends BaseController {
 			if (!$data){
 				$this->error($account->getError());
 			}else{
+                $user_info=D('Account')->field('password')->where('id='.$id)->find();
+                if($user_info['role'] != $data['role'])$this->error('角色不能变更');
                 $data['img'] = "upload/".date('Ymd').'/'.$data['img'];
 				$msg = $account->save($data);
 				if ($msg){
 					$this->success('操作成功!', 'javascript:parent.location.reload();');
 				} else {
-				    $user_info=D('Account')->field('password')->where('id='.$id)->find();
 				    if(md5($password) == $user_info['password']) $this->error('密码不能和以前一样');
 
 					$this->error('操作失败!');

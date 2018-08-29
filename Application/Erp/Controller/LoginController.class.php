@@ -78,7 +78,7 @@ class LoginController extends Controller {
 			
 			$info   = D('user')   ->where(array('iphone' => $phoneNumber))->find();
 			if (!empty($info))    $this->ajaxReturn(array('msg' => 11, 'info' => '手机号已存在'));
-			$account= D('account')->where(array('phone'  => $phoneNumber))->find();
+			$account= D('account')->where("phone='$phoneNumber' or `name`='$phoneNumber'")->find();
             if (!empty($account)) $this->ajaxReturn(array('msg' => 11, 'info' => '手机号已存在'));
 			$info = D('user')->where(array('qq' => $qqorWechat))->find();
 			if (!empty($info)) $this->ajaxReturn(array('msg' => 2, 'info' => 'QQ/微信已存在'));
