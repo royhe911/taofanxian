@@ -276,6 +276,7 @@ class TaskController extends BaseController {
 
             $task_info=D('task a')->field('a.*,b.empty_cost as p_empty_cost')->join('left join erp_product b on a.gid=b.id')->where('a.id='.$id)->find();  //当前任务信息
 
+            if($task_info['xiajia'] == 3)$this->ajaxReturn(array('msg' => 0, 'info' => '当前任务已经下架，无法完成'));   // 2018-08-29 解决脚本吧任务下架，但是任务任然可以完成的问题
 
             //佣金区间
             if($type == 0 || ($type == 1 && ($commision != intval($task_info['commision'])))){
