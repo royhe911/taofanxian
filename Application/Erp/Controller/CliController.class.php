@@ -67,7 +67,7 @@ class CliController extends Controller
         //产品下架
         $where_p="endtime <".time()." and status=0";
         $data=M('product')->where($where_p)->setField('status',4);
-        echo "success";exit;
+        echo "success".date('YmdHis').'\n';exit;
 
     }
     public function test_a(){

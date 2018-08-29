@@ -783,6 +783,10 @@ class TaskController extends BaseController {
         $list_all2 = array();
         // 多少小时领完
         $cs = 10;
+        $h = intval(date('H'));
+        if ($h > 12) {
+            $cs = 6;
+        }
         foreach ($list_all as $item_all) {
             $list_all2[$item_all['gid']] = $item_all['c'];
             $pj = floor(intval($item_all['c'])/$cs);
@@ -794,10 +798,6 @@ class TaskController extends BaseController {
         $uid_pri_no = $this->shuffle_assoc($uid_pri_no);
         $uid_pri_no = $this->shuffle_assoc($uid_pri_no);
         $uid_pri_no = $this->shuffle_assoc($uid_pri_no);
-        $h = intval(date('H'));
-        if ($h < 19) {
-            $cs = 19 - $h;
-        }
         $gid = 0;
         $id = 0;
         if ($h > 8 || ($h >= 0 && $h < 3)) {
