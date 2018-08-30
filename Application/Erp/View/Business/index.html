@@ -137,7 +137,7 @@
 
 										<a title="确定" href="javascript:;" style="text-decoration:none; display: none;" class="sure-a" onclick="wechatSure(this,{$vo.id})">确定</a>
 										<a title="取消" href="javascript:;" style="text-decoration:none;display: none;" class="cancel-a" onclick="wechatCancel(this)">取消</a>
-										<if condition="$_SESSION['user']['role'] == 6">
+										<if condition="$_SESSION['user']['role'] == 6 || $_SESSION['user']['role'] == 1">
 											<a title="透支额度" href="javascript:;" onclick="setOverDraft({$vo.id})">透支额度</a>
 											<a title="设置服务费" href="javascript:;" onclick="setService({$vo.id})">设置服务费</a>
 										</if>		
@@ -301,7 +301,7 @@
 				type: 1,
 				title: '设置透支额度',
 				area: ['300px', '150px'], //宽高
-				content: '<div style="padding: 10px;box-sizing: border-box;"><select class="select select-box" id="overdraft"><option value="1">8000</option><option value="2">15000</option><option value="3">30000</option><option value="4">50000</option><option value="5">100000</option><option value="0">清零</option></select></div><div style="text-align:right; padding:0 10px;"><a class="btn btn-success radius" style="margin-right:20px" onclick="sureOverDraft(' +
+				content: '<div style="padding: 10px;box-sizing: border-box;"><select class="select select-box" id="overdraft"><option value="1">5000</option><option value="2">10000</option><option value="3">15000</option><option value="4">20000</option><option value="0">清零</option></select></div><div style="text-align:right; padding:0 10px;"><a class="btn btn-success radius" style="margin-right:20px" onclick="sureOverDraft(' +
 					id + ')">确定</a><a class="btn btn-info radius" onclick="cancel()">取消</a></div>'
 			});
 		}

@@ -231,7 +231,8 @@ class UserController extends BaseController {
     public function cash(){
 	    if(IS_GET){
 	        $user_info=D('user')->where(array('uid'=>intval($_SESSION['user']['id'])))->find();
-            $av_balance=$user_info['money'] - $user_info['yufujin'];
+//            $av_balance=$user_info['money'] - $user_info['yufujin'];
+            $av_balance=$user_info['money'];        // 2018-08-30
             $this->assign('info',$user_info);
             $this->assign('av_balance',$av_balance);
 	        $this->display();
@@ -243,7 +244,8 @@ class UserController extends BaseController {
 	        if(empty($name)) $this->ajaxReturn(array('msg'=>0,'info'=>'姓名必须填写'));
 	        if ( empty($money) || $money<=0 )  $this->ajaxReturn(array('msg'=>0,'info'=>'金额必须填写'));
             $user_info=D('user')->where(array('uid'=>intval($_SESSION['user']['id'])))->find();
-            $av_balance=$user_info['money'] - $user_info['yufujin'];
+//            $av_balance=$user_info['money'] - $user_info['yufujin'];
+            $av_balance=$user_info['money'];    // 2018-08-30
             if($money > $av_balance) $this->ajaxReturn(array('msg'=>0,'info'=>'提现金额不可大于可用余额'));
             M()->startTrans();
             //可用提现
@@ -264,7 +266,6 @@ class UserController extends BaseController {
             );
             D('user')->where('uid='.intval($_SESSION['user']['id']))->setField($user_card);
             // 扣減用戶余额，增加用户冻结金额   20180828
-            // D('user')->where('uid='.intval($_SESSION['user']['id']))->setDec('money', $money);
             D('user')->where('uid='.intval($_SESSION['user']['id']))->setInc('freeze_free', $money);
             addLog(LogModel::TYPE_APPLY_CASH, '商家申请提现，提现金额：'.$money.'，提现记录ID：'. $cashid);
 

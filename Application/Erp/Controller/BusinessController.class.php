@@ -350,27 +350,26 @@ class BusinessController extends BaseController {
 	    $id=I('post.id',0,'intval');   //商家id  user表的id
 	    $overdraft_type=I('post.overdraft',0,'intval');  //透支额度
         if(!in_array($overdraft_type,array(0,1,2,3,4,5))) $this->ajaxReturn(array('msg'=>0,'info'=>'参数不对'));
-        // 1 8000 2 15000 3 30000 4 50000 5 100000   0为清零
+        // 1 5000 2 10000 3 15000 4 20000   0为清零        2018-08-30调整
         switch ($overdraft_type)
         {
             case 0:
                 $overdraft = 0;
                 break;
             case 1:
-                $overdraft = 8000;
+                $overdraft = 5000;
                 break;
             case 2:
-                $overdraft = 15000;
+                $overdraft = 10000;
                 break;
             case 3:
-                $overdraft = 30000;
+                $overdraft = 15000;
                 break;
             case 4:
-                $overdraft = 50000;
+                $overdraft = 20000;
                 break;
-            case 5:
-                $overdraft = 100000;
-                break;
+            default:
+                $overdraft = 0;
         }
 	    if( empty($id) || $id <0)  $this->ajaxReturn(array('msg'=>0,'info'=>'商家信息不存在'));
 	    $user_info=D('user')->where('id='.$id)->find();
