@@ -46,7 +46,7 @@
 								<th>旺旺</th>
 								<th>手机</th>
 								<th>QQ/微信</th>
-								<th>微信备注</th>
+								<!--<th>微信备注</th>-->
 								<th>所在地</th>
 								<th>加入时间</th>
 								<th>余额</th>
@@ -94,7 +94,7 @@
 									</td>
 									<td>{$vo.iphone}</td>
 									<td>{$vo.qq}</td>
-									<td class="order-input wechat-remarks">{$vo.remarks}</td>
+									<!--<td class="order-input wechat-remarks">{$vo.remarks}</td>-->
 									<td>{$vo.address}</td>
 									<td>{$vo.addtime|date="j/n H:i",###}</td>
 									<td>
@@ -129,17 +129,17 @@
 										</if>
 
 
-										<if condition="$vo.remarks == ''">
-											<a title="添加微信备注" href="javascript:;" style="text-decoration:none" class="order-a" onclick="wechatRemarks(this,{$vo.id},0)">添加备注</a>
-											<else />
-											<a title="修改微信备注" href="javascript:;" style="text-decoration:none" class="order-a" onclick="wechatRemarks(this,{$vo.id},1)">修改备注</a>
-										</if>
+										<!--<if condition="$vo.remarks == ''">-->
+											<!--<a title="添加微信备注" href="javascript:;" style="text-decoration:none" class="order-a" onclick="wechatRemarks(this,{$vo.id},0)">添加备注</a>-->
+											<!--<else />-->
+											<!--<a title="修改微信备注" href="javascript:;" style="text-decoration:none" class="order-a" onclick="wechatRemarks(this,{$vo.id},1)">修改备注</a>-->
+										<!--</if>-->
 
 										<a title="确定" href="javascript:;" style="text-decoration:none; display: none;" class="sure-a" onclick="wechatSure(this,{$vo.id})">确定</a>
 										<a title="取消" href="javascript:;" style="text-decoration:none;display: none;" class="cancel-a" onclick="wechatCancel(this)">取消</a>
 										<if condition="$_SESSION['user']['role'] == 6 || $_SESSION['user']['role'] == 1">
 											<a title="透支额度" href="javascript:;" onclick="setOverDraft({$vo.id})">透支额度</a>
-											<a title="设置服务费" href="javascript:;" onclick="setService({$vo.id})">设置服务费</a>
+											<!--<a title="设置服务费" href="javascript:;" onclick="setService({$vo.id})">设置服务费</a>-->
 										</if>		
 									</td>
 								</tr>

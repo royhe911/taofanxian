@@ -25,6 +25,7 @@
         const TYPE_APPLY_CASH = 13; // 日志类型 - 申请提现
         const TYPE_APPLY_CASH_PASS = 14; // 日志类型 - 申请提现审核通过
         const TYPE_APPLY_CASH_FAIL = 15; // 日志类型 - 申请提现审核不通过
+        const TYPE_TASK_AUTO_DOWN_ALL = 16;       // 日志类型 - 脚本定时下架
 
         /**
          * 新增日志
