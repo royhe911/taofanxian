@@ -22,7 +22,7 @@
 //
 //      );
         //添加关键字
-        public function addAttr1($data)
+        public function addAttr($data)
         {
            // dump($data);exit;
             //$res=$this->addAll($data);

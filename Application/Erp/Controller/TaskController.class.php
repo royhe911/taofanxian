@@ -786,7 +786,7 @@ class TaskController extends BaseController {
         $cs = 10;
         $h = intval(date('H'));
         if ($h > 12) {
-            $cs = 6;
+            $cs = 7;
         }
         foreach ($list_all as $item_all) {
             $list_all2[$item_all['gid']] = $item_all['c'];
