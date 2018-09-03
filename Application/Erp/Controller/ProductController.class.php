@@ -95,7 +95,7 @@ class ProductController extends BaseController
                 ->join('left join erp_account d on c.tid=d.id')
                 ->where($where)
                 ->limit($page * $page_size, $page_size)
-                ->order('a.id desc')
+                ->order('a.addtime desc')
                 ->select();
             foreach ($data as $key => $value) {
                 if ($value['addtime'] > time()) {
@@ -1401,7 +1401,9 @@ class ProductController extends BaseController
         //开启事务
         M()->startTrans();
         $pub_time = D('product')->where(array('id' => $task['gid']))->getField('pub_time');
-        $money    = cost($price, $user_id, $pub_time) + $price + $task['empty_cost'];
+//        $money    = cost($price, $user_id, $pub_time) + $price + $task['empty_cost'];
+        // 退费 = 任务本金    2018-08-31
+        $money    = $price;
 
 
         $balances_status = save_available($user_id, $money, $gid, 4, 2);
@@ -1438,7 +1440,8 @@ class ProductController extends BaseController
             exit;
         }
         M()->commit();
-        $this->ajaxReturn(array('msg' => 0, 'info' => '退款失败'));
+        addLog(LogModel::TYPE_TASK_REBACK_MONEY, '订单异常退款，退款金额：'.$money);
+        $this->ajaxReturn(array('msg' => 1, 'info' => '退款成功'));
     }
     public function reject()
     {
@@ -1517,6 +1520,11 @@ class ProductController extends BaseController
         $task = D('task')->where('id=' . $id)->find();
         if ($task['xiajia'] != 1) {
             $this->ajaxReturn(array('msg' => 0, 'info' => '信息错误'));
+        }
+
+        // 2018-08-30
+        if (!empty($task['uid'])) {
+            $this->ajaxReturn(array('msg' => 0, 'info' => '该任务被领取无法下架'));
         }
 
         //开启事务
@@ -1751,7 +1759,7 @@ class ProductController extends BaseController
             $this->assign('zz', $zz);
             $yw = D('account')->field('id,info')->where('role = 6')->select();
             $this->assign('yw', $yw);
-            $shopname = trim(I('get.shopname'));
+            $sjname = trim(I('get.sjname'));
             $ordernum = trim(I('get.ordernum'));
             $wangwang = trim(I('get.wangwang'));
             $choicezz = I('get.choicezz', 0, 'intval');
@@ -1847,8 +1855,8 @@ class ProductController extends BaseController
                 $where .= " and a.tb_item='$ordernum'";
             }
 
-            if (!empty($shopname)) {
-                $where .= " and c.shopname like '%$shopname%'";
+            if (!empty($sjname)) {
+                $where .= " and u.shopname like '%$sjname%'";
             }
 
             if (!empty($choicezz)) {
@@ -1862,6 +1870,7 @@ class ProductController extends BaseController
             $count = D('task a')
                 ->field('a.*,b.goods_thumb,b.goods_title,b.goods_url,b.goods_zeng,goods_pic,d.realname as realname_s,c.shopname,e.realname,f.info as f_info')
                 ->join('left join erp_product b on a.gid=b.id left join erp_shop c on b.shop_id=c.id')
+                ->join('left join erp_user u on u.uid=a.user_id')
                 ->join('left join erp_account d on a.uid=d.id left join erp_account e on d.user_id=e.id')
                 ->join('left join erp_account f on a.tid=f.id')
                 ->where($where)
@@ -1870,6 +1879,7 @@ class ProductController extends BaseController
             $task = D('task a')
                 ->field('a.*,b.goods_thumb,b.goods_title,b.goods_url,b.goods_zeng,goods_pic,d.realname as realname_s,d.phone as sd_phone,c.shopname,e.realname,f.info as f_info,IFNULL(if(a.empty_cost>0,a.empty_cost,a.redbag),0) as order_cost')
                 ->join('left join erp_product b on a.gid=b.id left join erp_shop c on b.shop_id=c.id')
+                ->join('left join erp_user u on u.uid=a.user_id')
                 ->join('left join erp_account d on a.uid=d.id left join erp_account e on d.user_id=e.id')
                 ->join('left join erp_account f on a.tid=f.id')
                 ->where($where)
@@ -1881,6 +1891,7 @@ class ProductController extends BaseController
                 $taska = D('task a')
                     ->field('sum(IFNULL(a.actual_price,0)) as totalprice,sum(IFNULL(a.redbag,0)) as totalredbag,sum(IFNULL(a.commision,0)) as totalcommision')
                     ->join('left join erp_product b on a.gid=b.id left join erp_shop c on b.shop_id=c.id')
+                    ->join('left join erp_user u on u.uid=a.user_id')
                     ->join('left join erp_account d on a.uid=d.id left join erp_account e on d.user_id=e.id')
                     ->join('left join erp_account f on a.tid=f.id')
                     ->where($where . " and a.repay = 1")
@@ -1895,6 +1906,7 @@ class ProductController extends BaseController
                     ->field('sum(IFNULL(a.actual_price,0)) as totalprice,sum(IFNULL(a.redbag,0)) as totalredbag,sum(IFNULL(a.commision,0)) as totalcommision')
                     ->join('left join erp_product b on a.gid=b.id left join erp_shop c on b.shop_id=c.id')
                     ->join('left join erp_account d on a.uid=d.id left join erp_account e on d.user_id=e.id')
+                    ->join('left join erp_user u on u.uid=a.user_id')
                     ->join('left join erp_account f on a.tid=f.id')
                     ->where($where)
                     ->select();
@@ -1909,6 +1921,7 @@ class ProductController extends BaseController
                     ->join('left join erp_product b on a.gid=b.id left join erp_shop c on b.shop_id=c.id')
                     ->join('left join erp_account d on a.uid=d.id left join erp_account e on d.user_id=e.id')
                     ->join('left join erp_account f on a.tid=f.id')
+                    ->join('left join erp_user u on u.uid=a.user_id')
                     ->where($where)
                     ->select();
                 $totalprice = f_round($taska[0]['totalprice']);
@@ -1919,7 +1932,7 @@ class ProductController extends BaseController
             }
 
             $this->assign('pagination', Util::getInstance('Pagination')->create($page + 1, $page_size, $count));
-            $this->assign('shopname', $shopname);
+            $this->assign('sjname', $sjname);
             $this->assign('ordernum', $ordernum);
             $this->assign('wangwang', $wangwang);
             $this->assign('search_time', $search_time); //时间搜索
